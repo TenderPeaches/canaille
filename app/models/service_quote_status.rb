@@ -1,0 +1,2 @@
+class ServiceQuoteStatus < ApplicationRecord
+end

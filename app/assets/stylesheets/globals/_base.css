@@ -1,0 +1,104 @@
+/* _base.css => for base HTML element definitions */
+
+/* for all content */
+body {
+    background-color: var(--color-primary-white);           /* light-bg */
+    color: var(--color-primary-black);                      /* dark-fg */ 
+    margin: auto;                                           /* to center content */
+    padding-top: var(--size-xxl);                           /* breathing space */ 
+    text-align: center;                                     /* because the app is meant to be minimalist, default everything to center for a single-column layout */
+}
+
+/* links */
+a {
+    color: var(--color-accent-darkest);                     /* contrast with regular content, dark-fg */
+}
+
+/* common elements */
+div, a {
+    border-radius: var(--default-border-radius);            /* round things off for a smoother, more casual feel */
+}
+
+/* data tables */
+table {
+    width: 100%;                                            /* assume that tables fill their space by default, overwrite if necessary */
+    border-style: var(--default-border-style);              /* standard */
+    border-width: var(--thick-border-width);                /* highlight the content within */ 
+    border-color: var(--color-primary);                     /* mesh with background */
+    border-collapse: collapse;                              /* allows for predictable and consistent border placement */
+    margin: var(--size-m);                                  /* presume that tables need some spacing around them */
+ }
+
+ /* data table data & header cells */
+ table td, table th {
+    padding: var(--size-xs) var(--size-l);                  /* breathing room for data to allow it to pop-out */
+ }
+
+ /* data table header cells */
+ table th {
+    background: var(--color-primary-darkest);               /* slightly lighter to differenciate from the data rows */
+    border-style: var(--thin-border-width);                 /* add column borders */
+    border-color: var(--color-primary-dark);                /* use darker to emphasis header */
+    border-style: var(--default-border-style);              /* standard */
+ }
+
+ /* data table data row */
+ table tr {
+    border-bottom-width: var(--thin-border-width);          /* thin borders to agglomerate the data */     
+    border-bottom-style: var(--default-border-style);       /* standard */
+    border-bottom-color: var(--color-primary-darker);       /* mesh with background, low contrast */           
+ }
+
+ /* data table even row */
+ table tr:nth-child(2n) {
+    background-color: var(--color-sheen);                   /* highlight alternating row to help brain nenorize the data */
+ }
+
+ /* number-style inputs */
+input[type="number"] {
+    width: var(--size-xxl);                                 /* numbers in this website's context are usually limited to 1-2 digits */
+}
+
+/* buttons */ 
+button, input[type="submit"], .button {
+    padding: var(--size-xs) var(--size-m);                  /* keep it tight vertically but give some breathing room to the sides */
+    background: var(--color-primary-darker);                /* mesh with background, but use differnent lighting to hint at interactivity */
+    color: var(--color-primary-white);                      /* mesh with background, buttons are not assumed to be important */
+    border-color: var(--color-primary-white);                    /* mesh with background */
+    border-radius: var(--default-border-radius);            /* more elegant, casual, "fun" */
+    cursor: pointer;                                        /* standard */
+    transition-duration: var(--quick-duration);             /* looks cool and sharp and modern */
+}
+
+/* on button hover */
+button:hover, input[type="submit"]:hover, .button {
+    background: var(--color-primary-dark);                  /* hint at pressed state, without implying that something has happened */
+    transition-duration: var(--quick-duration);             /* looks cool and sharp and modern */
+}
+
+/* on button press */
+button:active, input[type="submit"]:active, .button {
+    transition-duration: var(--quick-duration);             /* looks cool and sharp and modern */
+    background: var(--color-primary-white);                 /* invert colors to show action */
+    color: var(--color-primary-black);                      /* invert colors to show action */
+    border-color: var(--color-primary-black);               /* invert colors to show action*/
+}
+
+/* page header bar */
+header {
+    display: flex;                                          /* display from left-to right */
+    flex-wrap: wrap;                                        /*  */
+    gap: var(--size-xl);                                    /* horizontal spacing between child elements */
+    justify-content: space-around;                          /* place elements by maximizing distance between themselves and the edges */
+    padding: var(--size-l);                                 /* overall spacing */
+    border-bottom: 4px ridge var(--color-primary);          /* thick bottom border to emphasize the header's presence */ 
+}
+
+/* page header bar links */ 
+header a {
+    text-decoration: none;                                  /* underlined links in header are ugly */
+}
+
+/* screen-size dependent considerations */
+@media screen and (min-width: 1080px) {
+ }

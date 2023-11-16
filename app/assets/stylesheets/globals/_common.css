@@ -1,0 +1,96 @@
+/* _common.css => for common classes that aren't tied to one specific page or feature */
+
+/* class added to elements that need to be hidden from the layout */
+.hidden {
+    display: none !important;   /*! maybe only acceptable use of !important, but should still look to see if really necessary */
+}
+
+/* class added to elements that need to clash with the surrounding content */
+.contrast-text {
+    color: var(--color-accent-light);       /* clash with text (by not using secondary color) and background (by not using primary) */
+}
+
+/* fields used within a typical form */
+.form-field {
+    display: grid;                          /* to allow for a uniform display between each field */
+    margin: var(--size-l);                  /* breathing room around */
+    grid-template-columns: 1fr 3fr;         /* 1 frame for the label, 3 frames for the field itself */
+    column-gap: var(--size-m);              /* spacing out the label from the value */
+}
+
+/* form field label, indicating the data represented by the field's value */
+.form-field label {
+    text-align: right;                      /* tug to the right, against the field's value/input, so as to minimize ocular effort required to link label <> value */
+    color: var(--color-secondary-white);    /* data is assumed to be important, so highlight label with a different color */
+}
+
+/* a simple form that lets users input an action mainly through the use of buttons */
+.menu {
+    max-width: 400px;                                   /* doesn't need to take the whole page, so put a max-width that doesn't leave too much space to the side */
+    margin: auto;                                       /* center the menu horizontally */
+    display: flex;                                      /* for an elegant vertical-layout */
+    flex-direction: column;                             /* vertical layout */
+    padding: var(--size-xxxl);                          /* maximum padding for maximum emphasis on content */
+}
+
+.action-bar {
+    display: flex;
+    flex-direction: row;
+    padding: var(--size-xl);
+    justify-content: default;
+    column-gap: var(--size-m);
+}
+
+.menu,
+.action-bar {
+    border-width: var(--thick-border-width);            /* emphasis on content */
+    border-style: double;                               /* emphasis on content, monopolize user's attention */
+    border-color: var(--color-primary-dark);            /* mesh with background */
+
+}
+
+.menu a {
+    margin-bottom: var(--size-m);                       /* gap between each button */
+}
+
+/* menu buttons appear as links */
+.menu a,
+.action-bar a {
+    text-decoration: none;                              /* remove the underline */ 
+    border-width: var(--thick-border-width);            /* border to turn the links into buttons, thick for added texture */
+    border-style: var(--button-border-style-depressed); /* appear as button */
+    border-color: var(--color-secondary-white);         /* use interactive color so as not to mesh with background */
+    padding: var(--size-xxs);                           /* bit of padding to let buttons breathe */
+}
+
+/* on menu button hover */
+.menu a:hover,
+.action-bar a:hover {
+    background: var(--color-secondary-dark);            /* invert colors to highlight */
+    color: var(--color-white);                          /* use raw white for maximum contrast */
+}
+
+/* on a menu button click */
+.menu a:active,
+.action-bar a:active {
+    border-style: var(--button-border-style-pressed);   /* appear as pressed button */
+    background: var(--color-accent-darker);             /* use different color for additional highlight */
+}
+
+
+/* some tables should have predetermined widths; Narrow for 1-2 short columns */ 
+.table--narrow {
+    max-width: calc(var(--size-xxxl) * 6);
+}
+
+/* medium for 3-4 columns */
+.table--medium {
+    max-width: calc(var(--size-xxxl) * 12);
+
+}
+
+/* large for 5-6 columns; tables without classes have no width constraints and will fill the screen, so they can handle cases with 7+ columns */
+.table--large {
+    max-width: calc(var(--size-xxxl) * 18);
+
+}

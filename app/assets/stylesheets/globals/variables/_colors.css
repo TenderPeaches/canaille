@@ -1,0 +1,48 @@
+ /* global colors */ 
+ :root {
+
+
+    /* primary color */
+    /** used for default backgrounds */
+    --color-primary-white: hsl(162, 47%, 91%);
+    --color-primary-lightest: hsl(162, 47%, 80%);
+    --color-primary-lighter: hsl(162, 47%, 69%);
+    --color-primary-light: hsl(162, 47%, 58%);
+    --color-primary: hsl(162, 47%, 49%);
+    --color-primary-dark: hsl(162, 47%, 36%);
+    --color-primary-darker: hsl(162, 47%, 23%);
+    --color-primary-darkest: hsl(162, 47%, 11%);
+    --color-primary-black: hsl(162, 47%, 5%);
+
+    /* secondary color */
+    /** used for default foregrounds */
+    --color-secondary-white: hsl(18, 89%, 91%);
+    --color-secondary-lightest: hsl(18, 89%, 80%);
+    --color-secondary-lighter: hsl(18, 89%, 69%);
+    --color-secondary-light: hsl(18, 89%, 58%);
+    --color-secondary: hsl(18, 89%, 48%);
+    --color-secondary-dark: hsl(18, 89%, 36%);
+    --color-secondary-darker: hsl(18, 89%, 23%);
+    --color-secondary-darkest: hsl(18, 89%, 11%);
+    --color-secondary-black: hsl(18, 89%, 5%);
+
+    /* accent color */
+    /** used to clash with the primary colors */
+    --color-accent-white: hsl(267, 97%, 91%);
+    --color-accent-lightest: hsl(267, 97%, 80%);
+    --color-accent-lighter: hsl(267, 97%, 69%);
+    --color-accent-light: hsl(267, 97%, 58%);
+    --color-accent: hsl(267, 97%, 60%);
+    --color-accent-dark: hsl(267, 97%, 36%);
+    --color-accent-darker: hsl(267, 97%, 23%);
+    --color-accent-darkest: hsl(267, 97%, 11%);
+    --color-accent-black: hsl(267, 97%, 5%);
+
+    /* generic utility colors */
+    --color-success: hsl(130, 100%, 35%);
+    --color-error: hsl(0, 100%, 35%);
+    --color-black: hsl(0, 0%, 0%);
+    --color-white: hsl(0, 0%, 100%);
+    --color-sheen: hsla(0, 0%, 100%, 5%);
+
+ }

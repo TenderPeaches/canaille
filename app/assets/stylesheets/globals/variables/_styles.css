@@ -1,0 +1,11 @@
+/* elements of style that aren't included in the other files, such as border properties */
+:root {
+    --default-border-style: solid;          /* standard */
+    --button-border-style-depressed: outset;/* borders for button-style elements that are not being pressed  */
+    --button-border-style-pressed: inset;   /* borders for button-style elements that are being pressed */
+
+    --thin-border-width: 1px;               /* don't link with var(--size-..) stuff because single pixels make a huge difference with border-width properties */
+    --thick-border-width: 2px;              /* don't link with var(--size-..) stuff because single pixels make a huge difference with border-width properties */
+
+    --default-border-radius: var(--size-xs);
+}

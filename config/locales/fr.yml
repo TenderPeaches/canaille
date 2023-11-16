@@ -1,0 +1,7 @@
+fr:
+  nav:
+    service_request: "J'ai besoin de"
+    service_offer: "Je peux offrir"
+    register: "M'inscrire"
+    log_in: "Me connecter"
+    log_out: "Me déconnecter"

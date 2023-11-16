@@ -1,0 +1,9 @@
+class ServiceProvider < ApplicationRecord
+    has_many :user_service_provider_accesses
+    has_many :users, through: :user_service_provider_accesses
+    has_many :service_offers
+    has_many :services, through: :service_offers
+    has_many :service_quotes
+    has_many :service_requests, through: :service_quotes
+    belongs_to :coordinate, optional: true
+end

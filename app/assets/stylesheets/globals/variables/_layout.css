@@ -1,0 +1,23 @@
+/* units of size that define how tight/loose the layout appears */
+:root {
+    --base-unit: 16px;  /* must be divisible by 4 */ 
+
+    --size-xxxs: calc(var(--base-unit) / 8);
+    --size-xxs: calc(var(--base-unit) / 4);
+    --size-xs: calc(var(--base-unit) / 2);
+    --size-s: calc(var(--base-unit) * 3 / 4);
+    --size-m: var(--base-unit);
+    --size-l: calc(var(--base-unit) * 5 / 4);
+    --size-xl: calc(var(--base-unit) * 3 / 2);
+    --size-xxl: calc(var(--base-unit) * 2);
+    --size-xxxl: calc(var(--base-unit) * 3);
+
+    --font-size-default: 1em;
+    --font-size-lyrics: 1.15em;
+    --font-size-display: 2em;
+    --font-size-bars: 1.25em;
+
+    --bar-tile-size: 40px;
+
+    --max-content-width--large-screen: 1400px;
+}

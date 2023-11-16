@@ -1,0 +1,8 @@
+Service => A service that can be rendered, but that cannot be diy for some reason (lack of knowledge, tools, time, etc.): A tire change, a new deck, a broken fridge
+ServiceCategory => To help categorize services, nests within itself: AutoMechanic > Tires, Woodworking > Doors, etc.
+ServiceRequest => As client, request quotes for a given service: "I need my oil changed"
+User => Anyone who needs to login to use the website: to submit a service request or quotes/offers
+Client => Anyone who needs to request services
+ServiceProvider => Anyone who needs to submit quotes/offers
+ServiceOffer => A service offered by a business: "We offer oil changes for X$"
+ServiceQuote => A serviceProvider's response to a specific ServiceRequest

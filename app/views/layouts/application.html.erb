@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Srvcs</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= content_tag :header, class: "nav" do %>
+      <%= render partial: "layouts/header" %>
+    <% end %>
+    <%= content_tag :div, class: "content" do %>
+      <%= yield %>
+    <% end %>
+    <%= content_tag :footer, class: "" do %>
+    <% end %>
+  </body>
+</html>

@@ -1,5 +1,14 @@
-<%# logo/image title %>
-<%= link_to t('nav.service_request'), service_requests_path %>
-<%= link_to "J'offre", service_offers_path %>
-<%= link_to "Connexion", login_path %>
-<%= link_to "Inscription", signup_path %>
+<%= content_tag :div, class: "header-logo" do %>
+    <%# logo/image title %>
+<% end %>
+<%= content_tag :div, class: "header-nav" do %>
+    <%# link_to t('nav.service_request'), service_requests_path %>
+    <%# link_to t('nav.service_offer'), service_offers_path %>
+    <% if current_user # if logged in %>
+        <%= link_to t('nav.log_out'), login_path %>
+    <% else %>
+        <%= link_to t('nav.log_in'), login_path %>
+        <%= link_to t('nav.register'), signup_path %>
+    <% end %>
+    <%# link_to t('nav.log_out'), signup_path %>
+<% end %>

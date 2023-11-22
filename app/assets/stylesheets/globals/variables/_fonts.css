@@ -1,8 +1,14 @@
 /* global fonts */
 :root, input, select {
 
-    /*! technically this isn't setting variables, but works for our current needs and can be easily changed if necessary */
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    --default-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --font-headers: var(--default-font);
+    --font-content: var(--default-font);
+
+    font-family: var(--font-content);
+    font-size: 1.25rem;
+
+    /*! technically this isn't setting variables, but works for our current needs and can be easily changed if necessary */ 
     /* default VSCode suggested options
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -16,4 +22,8 @@
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-family:'Consolas', 'Courier New', Courier, monospace;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headers);
 }

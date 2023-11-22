@@ -14,6 +14,11 @@
     <%= content_tag :header, class: "nav" do %>
       <%= render partial: "layouts/header" %>
     <% end %>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
     <%= content_tag :div, class: "content" do %>
       <%= yield %>
     <% end %>

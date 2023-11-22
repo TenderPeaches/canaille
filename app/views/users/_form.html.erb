@@ -1,0 +1,51 @@
+<%= form_with model: @user do |form| %>
+    <% if @user.errors.any? %>
+        <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= content_tag :div, class: "user-fields" do %>
+        <%# is client? %>
+        <%= content_tag :div, class: "field field--is-client" do %>
+            <%= form.check_box :is_client %>
+            <%= form.label t('forms.user.is_client') %>
+        <% end %>
+        <%# is service provider? %>
+        <%= content_tag :div, class: "field field--is-service-provider" do %>
+            <%= form.check_box :is_service_provider %>
+            <%= form.label t('forms.user.is_service_provider') %>
+        <% end %>
+
+        <%# user email %>
+        <%= content_tag :div, class: "field field--email" do %>
+            <%= form.label t('forms.user.email') %><br />
+            <%= form.text_field :email %>
+        <% end %>
+        <%# username %>
+        <%= content_tag :div, class: "field field--username" do %>
+            <%= form.label t('forms.user.username') %><br />
+            <%= form.text_field :username %>
+        <% end %>
+        <%# password %>
+        <%= content_tag :div, class: "field field--password" do %>
+            <%= form.label t('forms.user.password') %><br />
+            <%= form.password_field :password %>
+        <% end %>
+        <%# confirm password %>
+        <%= content_tag :div, class: "field field--password-confirm" do %>
+            <%= form.label t('forms.user.password_confirmation') %><br />
+            <%= form.password_field :password_confirmation %>
+        <% end %>
+        <%# submit button %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= form.submit t('forms.register') %>
+        <% end %>
+    <% end %>
+<% end %>
+

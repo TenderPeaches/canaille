@@ -13,6 +13,7 @@
     --color-primary-darker: hsl(162, 47%, 23%);
     --color-primary-darkest: hsl(162, 47%, 11%);
     --color-primary-black: hsl(162, 47%, 5%);
+    --color-primary-sheen: hsla(162, 47%, 80%, 70%);
 
     /* secondary color */
     /** used for default foregrounds */

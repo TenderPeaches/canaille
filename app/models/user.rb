@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    has_one :user
-    has_many :user_service_provider_accesses
+    has_one :client, dependent: :destroy
+    has_many :user_service_provider_accesses, dependent: :destroy
     has_many :service_providers, through: :user_service_provider_accesses
 
     has_secure_password

@@ -1,0 +1,30 @@
+<%= form_with model: @city do |form| %>
+    <% if @city.errors.any? %>
+        <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+                <% @city.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= content_tag :div, class: "city-fields" do %>
+        <%# city name %>
+        <%= content_tag :div, class: "field field--name" do %>
+            <%= form.text_field :name %>
+            <%= form.label t('forms.city.name') %>
+        <% end %>
+        <%# province %>
+        <%= content_tag :div, class: "field field--province-code" do %>
+            <%= form.select :city, :province_code, options_for_select(City.province_codes), { include_blank: true } %>
+            <%= form.label t('forms.city.province_code') %>
+        <% end %>
+        <%# submit button %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= form.submit t('forms.register') %>
+        <% end %>
+    <% end %>
+<% end %>
+

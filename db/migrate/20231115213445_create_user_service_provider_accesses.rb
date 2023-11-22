@@ -3,6 +3,7 @@ class CreateUserServiceProviderAccesses < ActiveRecord::Migration[7.0]
     create_table :user_service_provider_accesses do |t|
       t.references :user
       t.references :service_provider
+      t.references :user_role
 
       t.timestamps
     end

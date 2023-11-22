@@ -1,0 +1,52 @@
+<%= form_with model: @coordinate do |form| %>
+    <% if @coordinate.errors.any? %>
+        <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+                <% @coordinate.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= content_tag :div, class: "coordinate-fields" do %>
+        <%# civic number %>
+        <%= content_tag :div, class: "field field--civic-number" do %>
+            <%= form.text_field :civic_number %>
+            <%= form.label t('forms.coordinate.civic_number') %>
+        <% end %>
+        <%# street name %>
+        <%= content_tag :div, class: "field field--street-name" do %>
+            <%= form.text_fieid :street_name %>
+            <%= form.label t('forms.coordinate.street_name') %>
+        <% end %>
+        <%# door number (appt/office #) %>
+        <%= content_tag :div, class: "field field--door-number" do %>
+            <%= form.text_fieid :door_number %>
+            <%= form.label t('forms.coordinate.door_number') %>
+        <% end %>
+        <%# postal/zip code %>
+        <%= content_tag :div, class: "field field--postal-code" do %>
+            <%= form.text_fieid :postal_code %>
+            <%= form.label t('forms.coordinate.postal_code') %>
+        <% end %>
+        <%# city %>
+        <%= content_tag :div, class: "field field--city" do %>
+            <%= form.text_fieid :city %>
+            <%= form.label t('forms.coordinate.city') %>
+            <%# maybe render partial: "cities/form" ? could still pass @coordinate obj around?%>
+            <%= link_to new_city_path, t('forms.city.create_title') %>
+        <% end %>
+        <%# additional notes %>
+        <%= content_tag :div, class: "field field--notes" do %>
+            <%= form.text_area :notes %>
+            <%= form.label t('forms.coordinate.notes') %>
+        <% end %>
+        <%# submit button %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= form.submit t('forms.register') %>
+        <% end %>
+    <% end %>
+<% end %>
+

@@ -10,18 +10,18 @@
     color: var(--color-accent-light);       /* clash with text (by not using secondary color) and background (by not using primary) */
 }
 
+.content {
+    max-width: 1080px;
+    margin: auto;
+}
+
 /* fields used within a typical form */
-.form-field {
-    display: grid;                          /* to allow for a uniform display between each field */
-    margin: var(--size-l);                  /* breathing room around */
-    grid-template-columns: 1fr 3fr;         /* 1 frame for the label, 3 frames for the field itself */
-    column-gap: var(--size-m);              /* spacing out the label from the value */
+.field {
+    margin: var(--size-m);
 }
 
 /* form field label, indicating the data represented by the field's value */
-.form-field label {
-    text-align: right;                      /* tug to the right, against the field's value/input, so as to minimize ocular effort required to link label <> value */
-    color: var(--color-secondary-white);    /* data is assumed to be important, so highlight label with a different color */
+.field label {
 }
 
 /* a simple form that lets users input an action mainly through the use of buttons */
@@ -93,4 +93,20 @@
 .table--large {
     max-width: calc(var(--size-xxxl) * 18);
 
+}
+
+.header-nav a {
+    display: inline-block;
+    width: calc(5 * var(--size-xxxl));
+    border-radius: 0;
+    margin-left: var(--size-xxxl);
+    border-left: solid 4px var(--color-primary-darker);
+    border-right: solid 4px var(--color-primary-darker);
+    padding: var(--size-xxl) var(--size-xl);
+}
+
+.header-nav a:hover {
+    background: var(--color-primary-sheen);
+    border-left-color: var(--color-primary-dark);
+    border-right-color: var(--color-primary-dark);
 }

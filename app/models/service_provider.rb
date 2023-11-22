@@ -6,4 +6,6 @@ class ServiceProvider < ApplicationRecord
     has_many :service_quotes
     has_many :service_requests, through: :service_quotes
     belongs_to :coordinate, optional: true
+
+    accepts_nested_attributes_for :coordinate
 end

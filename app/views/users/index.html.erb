@@ -1,0 +1,5 @@
+<%= content_tag :h1 do %>
+    Users
+<% end %>
+<%= link_to "New user", new_user_path, class: "button" %>
+<%= render @users %>

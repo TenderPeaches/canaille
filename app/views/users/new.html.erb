@@ -1,4 +1,8 @@
-<%= content_tag :h2 do %>
-    <%= t('forms.user.create_title') %>
+<%= turbo_frame_tag "new_user" do%>
+    <%= content_tag :main, class: "container" do %>
+        <%= content_tag :h2 do %>
+            <%= t('forms.user.create_title') %>
+        <% end %>
+            <%= render 'form', user: @user %>   
+    <% end %>
 <% end %>
-<%= render 'form', user: @user %>

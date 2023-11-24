@@ -1,0 +1,34 @@
+
+button, button:hover, button:active,
+.button, .button:hover, .button:active,
+input[type="submit"], input[type="submit"]:hover, input[type="submit"]:active {
+    transition-duration: var(--quick-duration);             /* quick duration to keep it crisp */
+}
+
+/* buttons */ 
+button, input[type="submit"], .button {
+    display: inline-block;
+    padding: var(--size-xs) var(--size-m);                  /* keep it tight vertically but give some breathing room to the sides */
+    background: var(--color-primary-darker);                /* mesh with background, but use differnent lighting to hint at interactivity */
+    background-origin: border-box;                          /* invisible borders with linear gradients */
+    color: var(--color-primary-white);                      /* mesh with background, buttons are not assumed to be important */
+    border-color: var(--color-primary-white);                    /* mesh with background */
+    border-radius: var(--default-border-radius);            /* more elegant, casual, "fun" */
+    cursor: pointer;                                        /* standard */
+    text-transform: uppercase;                              /* make these interactive features pop out by using caps */
+    text-decoration: none;
+    outline: none;
+    transition: filter var(--slow-duration), color var(--quick-duration)
+}
+
+/* on button hover */
+button:hover, input[type="submit"]:hover, .button:hover {
+    background: var(--color-primary-dark);                  /* hint at pressed state, without implying that something has happened */
+}
+
+/* on button press */
+button:active, input[type="submit"]:active, .button:active {
+    background: var(--color-primary-white);                 /* invert colors to show action */
+    color: var(--color-primary-black);                      /* invert colors to show action */
+    border-color: var(--color-primary-black);               /* invert colors to show action*/
+}

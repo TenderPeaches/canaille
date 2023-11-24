@@ -1,5 +1,15 @@
-<%= content_tag :h1 do %>
-    Users
+<%= content_tag :main, class: "container" do %>
+    <%= content_tag :div, class: "list__header" do %>
+        <%= content_tag :h1 do %>
+            Users
+        <% end %>
+        <%= turbo_frame_tag "new_user" do %>
+        <% end %>
+        <%= link_to "New user", new_user_path, class: "button" %>
+    <% end %>
+    <%= turbo_frame_tag "users" do %>
+        <%= content_tag :div, class: "users" do %>
+            <%= render @users %>
+        <% end %>
+    <% end %>
 <% end %>
-<%= link_to "New user", new_user_path, class: "button" %>
-<%= render @users %>

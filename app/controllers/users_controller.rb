@@ -45,13 +45,17 @@ class UsersController < ApplicationController
         if @user.update(user_params)
             redirect_to users_path, notice: "User updated"
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 
     def destroy
-        @quote.destroy
-        redirect_to users_path, notice: "User deleted"
+        @user.destroy
+        
+        respond_to do |format| 
+            format.html { redirect_to users_path, notice: "User deleted" }
+            format.turbo_stream
+        end
     end
 
     private
@@ -60,6 +64,6 @@ class UsersController < ApplicationController
     end 
 
     def user_params
-        params.require(:user).permit(:email, :username, :password, :password_confirmation, :is_client, :is_service_provider)
+        params.require(:user).permit(:email, :username, :password, :password_confirmation)
     end
 end

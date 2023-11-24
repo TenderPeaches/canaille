@@ -1,0 +1,7 @@
+.action-bar {
+    display: flex;
+    flex-direction: row;
+    padding: var(--size-xl);
+    justify-content: default;
+    column-gap: var(--size-m);
+}

@@ -42,6 +42,7 @@ en:
     register: "Register"
     user:
       create_title: "Register"
+      edit_title: "Modify"
       username: "Username"
       password: "Password"
       password_confirmation: "Confirm password"

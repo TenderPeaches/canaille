@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-xs);
+
+    &__group {
+        flex: 1;
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        padding: var(--size-xs);
+        border: solid var(--thin-border-width) var(--color-primary-darkest);
+        outline: none;
+        transition: box-shadow var(--quick-duration);
+
+        &:focus {
+            box-shadow: 0 0 0 2px var(--color-sheen);
+        }
+
+        &--invalid {
+            border-color: var(--color-error);
+        }
+    }
+}
+

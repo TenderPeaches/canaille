@@ -5,8 +5,14 @@
     --font-headers: var(--default-font);
     --font-content: var(--default-font);
 
-    font-family: var(--font-content);
-    font-size: 1.25rem;
+    --font-size-xs: 0.75rem;   
+    --font-size-s: 0.875rem;   
+    --font-size-m: 1rem;       
+    --font-size-l: 1.125rem;   
+    --font-size-xl: 1.25rem;   
+    --font-size-xxl: 1.5rem;   
+    --font-size-xxxl: 2rem;    
+    --font-size-xxxxl: 2.5rem; 
 
     /*! technically this isn't setting variables, but works for our current needs and can be easily changed if necessary */ 
     /* default VSCode suggested options

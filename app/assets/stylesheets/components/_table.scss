@@ -1,0 +1,15 @@
+/* some tables should have predetermined widths; Narrow for 1-2 short columns */ 
+.table--narrow {
+    max-width: calc(var(--size-xxxl) * 6);
+}
+
+/* medium for 3-4 columns */
+.table--medium {
+    max-width: calc(var(--size-xxxl) * 12);
+
+}
+
+/* large for 5-6 columns; tables without classes have no width constraints and will fill the screen, so they can handle cases with 7+ columns */
+.table--large {
+    max-width: calc(var(--size-xxxl) * 18);
+}

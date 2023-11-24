@@ -1,5 +1,9 @@
 /* units of size that define how tight/loose the layout appears */
 :root {
+
+    --line-height-headers: 1.0;
+    --line-height-body: 1.4;
+    
     --base-unit: 16px;  /* must be divisible by 4 */ 
 
     --size-xxxs: calc(var(--base-unit) / 8);

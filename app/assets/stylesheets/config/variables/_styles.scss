@@ -8,4 +8,10 @@
     --thick-border-width: 2px;              /* don't link with var(--size-..) stuff because single pixels make a huge difference with border-width properties */
 
     --default-border-radius: var(--size-xs);
+
+    --border-primary: var(--default-border-style) var(--thin-border-width) var(--color-primary-dark);
+
+    
+    --shadow-large:  2px 4px 10px hsl(0 0% 0% / 0.1);
+    --shadow-small:  1px 3px 6px hsl(0 0% 0% / 0.1);
 }

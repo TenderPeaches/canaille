@@ -1,0 +1,12 @@
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-s);
+
+    background-color: var(--color-primary-white);
+    box-shadow: var(--shadow-small);
+    margin-bottom: var(--size-m);
+    padding: var(--size-xs);
+    border: var(--border-primary);
+}

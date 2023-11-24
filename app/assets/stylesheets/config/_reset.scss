@@ -1,11 +1,72 @@
-/* _base.css => for base HTML element definitions */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;             /* standardize box-sizing across all elements */
+}
 
-/* for all content */
+* {
+    margin: 0;                          /* ignore default margins */
+    padding: 0;                         /* ignore default padding */
+}
+
+html {
+    overflow-y: scroll;                 /* ensure scrollable page */
+    height: 100%;                       /* fill page regardless of content */
+    color: var(--color-primary-black);                      /* dark-fg */ 
+}
+
 body {
+    display: flex;                      /* body as a vertical stack */
+    flex-direction: column;             /* body as a vertical stack */
+    min-height: 100%;                   /* ensure body fills the page */
+
     background-color: var(--color-primary-white);           /* light-bg */
     color: var(--color-primary-black);                      /* dark-fg */ 
+    line-height: var(--line-height-body);
+    font-family: var(--font-content);
+    
     margin: auto;                                           /* to center content */
     text-align: center;                                     /* because the app is meant to be minimalist, default everything to center for a single-column layout */
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-secondary-dark);
+  line-height: var(--line-height-headers);
+}
+
+h1 {
+    font-size: var(--font-size-xxxl);
+}
+  
+h2 {
+    font-size: var(--font-size-xxl);
+}
+  
+h3 {
+    font-size: var(--font-size-xl);
+}
+  
+h4 {
+    font-size: var(--font-size-l);
 }
 
 /* links */
@@ -18,6 +79,7 @@ div, a {
     border-radius: var(--default-border-radius);            /* round things off for a smoother, more casual feel */
 }
 
+
 /* data tables */
 table {
     width: 100%;                                            /* assume that tables fill their space by default, overwrite if necessary */
@@ -28,8 +90,8 @@ table {
     margin: var(--size-m);                                  /* presume that tables need some spacing around them */
  }
 
- /* data table data & header cells */
- table td, table th {
+  /* data table data & header cells */
+  table td, table th {
     padding: var(--size-xs) var(--size-l);                  /* breathing room for data to allow it to pop-out */
  }
 
@@ -58,55 +120,8 @@ input[type="number"] {
     width: var(--size-xxl);                                 /* numbers in this website's context are usually limited to 1-2 digits */
 }
 
-/* buttons */ 
-button, input[type="submit"], .button {
-    padding: var(--size-xs) var(--size-m);                  /* keep it tight vertically but give some breathing room to the sides */
-    background: var(--color-primary-darker);                /* mesh with background, but use differnent lighting to hint at interactivity */
-    color: var(--color-primary-white);                      /* mesh with background, buttons are not assumed to be important */
-    border-color: var(--color-primary-white);                    /* mesh with background */
-    border-radius: var(--default-border-radius);            /* more elegant, casual, "fun" */
-    cursor: pointer;                                        /* standard */
-}
-
-/* on button hover */
-button:hover, input[type="submit"]:hover, .button:hover {
-    background: var(--color-primary-dark);                  /* hint at pressed state, without implying that something has happened */
-}
-
-/* on button press */
-button:active, input[type="submit"]:active, .button:active {
-    background: var(--color-primary-white);                 /* invert colors to show action */
-    color: var(--color-primary-black);                      /* invert colors to show action */
-    border-color: var(--color-primary-black);               /* invert colors to show action*/
-}
-
-/* all buttons and header links */
-button, .button, input[type="submit"], header a {
-    text-transform: uppercase;                              /* make these interactive features pop out by using caps */
-}
 
 /* add duration transitions */ 
-a, a:hover, a:active,
-button, button:hover, button:active,
-.button, .button:hover, .button:active,
-input[type="submit"], input[type="submit"]:hover, input[type="submit"]:active {
+a, a:hover, a:active {
     transition-duration: var(--quick-duration);             /* quick duration to keep it crisp */
 }
-
-/* page header bar */
-header {
-    display: flex;                                          /* display from left-to right */
-    flex-wrap: wrap;                                        /*  */
-    gap: var(--size-xl);                                    /* horizontal spacing between child elements */
-    justify-content: space-between;                         /* clear the middle, tuck content in the corners */
-    border-bottom: 4px ridge var(--color-primary);          /* thick bottom border to emphasize the header's presence */ 
-}
-
-/* page header bar links */ 
-header a {
-    text-decoration: none;                                  /* underlined links in header are ugly */
-}
-
-/* screen-size dependent considerations */
-@media screen and (min-width: 1080px) {
- }

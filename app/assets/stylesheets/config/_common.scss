@@ -1,0 +1,19 @@
+/* _common.css => for common classes that aren't tied to one specific page or feature */
+/*! not sure if really necessary after CSS Overhaul, could dump in _reset.scss */
+
+/* class added to elements that need to clash with the surrounding content */
+.contrast-text {
+    color: var(--color-accent-light);       /* clash with text (by not using secondary color) and background (by not using primary) */
+}
+
+.content {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    gap: var(--size-xs);
+}

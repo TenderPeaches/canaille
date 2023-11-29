@@ -1,0 +1,16 @@
+<%= content_tag :main, class: "container" do %>
+    <%= content_tag :div, class: "list__header" do %>
+        <%= content_tag :h1 do %>
+            <%= t('models.service_request.list_title') %>
+        <% end %>
+        <%= turbo_frame_tag "new_service_request" do %>
+        <% end %>
+        <%= link_to t('models.service_request.create_title'), new_service_request_path, class: "button"%>
+    <% end %>
+    <%= turbo_frame_tag "service-requests" do %>
+        <%= content_tag :div, class: "service-requests" do %>
+            <%= turbo_frame_tag ServiceRequest.new %>
+            <%= render @service_requests if @service_requests %>
+        <% end %>
+    <% end %>
+<% end %>

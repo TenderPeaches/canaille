@@ -1,17 +1,17 @@
 <%= content_tag :h2 do %>
-    <%= t('forms.session.create_title') %>
+    <%= t('models.session.create_title') %>
 <% end %>
 
 <%= form_tag login_path do %>
   <%= content_tag :div, class: "field" do %>
-        <%= label_tag t('forms.session.username') %>
+        <%= label_tag t('models.session.username') %>
         <%= text_field_tag :email, params[:email] %>
   <% end %>
   <%= content_tag :div, class: "field" do %>
-          <%= label_tag t('forms.session.password') %>
+          <%= label_tag t('models.session.password') %>
           <%= password_field_tag :password %>
   <% end %>
   <%= content_tag :div, class: "actions" do %>
-        <%= submit_tag t('forms.session.log_in') %>
+        <%= submit_tag t('models.session.log_in') %>
   <% end %>
 <% end %>

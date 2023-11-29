@@ -1,3 +1,7 @@
+# t.string :username
+# t.string :email
+# t.string :password_digest
+
 class User < ApplicationRecord
     has_one :client, dependent: :destroy
     has_many :user_service_provider_accesses, dependent: :destroy

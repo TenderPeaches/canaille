@@ -1,3 +1,7 @@
+# t.references :user, null: false, foreign_key: true
+# t.references :coordinate, null: true, foreign_key: true
+# t.string :phone_number
+# t.string :email_address
 class Client < ApplicationRecord
     belongs_to :user
     has_many :service_requests

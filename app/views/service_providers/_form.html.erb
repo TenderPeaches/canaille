@@ -14,31 +14,31 @@
         <%# service provider business name %>
         <%= content_tag :div, class: "field field--name" do %>
             <%= form.text_field :name %>
-            <%= form.label t('forms.service_provider.name') %>
+            <%= form.label t('models.service_provider.name') %>
         <% end %>
         <%# business description / word from the owner %>
         <%= content_tag :div, class: "field field--description" do %>
             <%= form.text_area :description %>
-            <%= form.label t('forms.service_provider.description') %>
+            <%= form.label t('models.service_provider.description') %>
         <% end %>
         <%# schedule: contact hours, business hours, etc. %>
         <%= content_tag :div, class: "field field--schedule" do %>
             <%= form.text_area :schedule %>
-            <%= form.label t('forms.service_provider.schedule') %>
+            <%= form.label t('models.service_provider.schedule') %>
         <% end %>
         <%# contact info: phone %>
         <%= content_tag :div, class: "field field--phone-number" do %>
             <%= form.text_field :phone_number %>
-            <%= form.label t('forms.service_provider.phone_number') %>
+            <%= form.label t('models.service_provider.phone_number') %>
         <% end %>
         <%# contact_info: email %>
         <%= content_tag :div, class: "field field--email-address" do %>
             <%= form.text_field :email_address%>
-            <%= form.label t('forms.service_provider.email_address') %>
+            <%= form.label t('models.service_provider.email_address') %>
         <% end %>
         <%# submit button %>
         <%= content_tag :div, class: "actions" do %>
-            <%= form.submit t('forms.register') %>
+            <%= form.submit t('models.register') %>
         <% end %>
     <% end %>
 <% end %>

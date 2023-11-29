@@ -1,0 +1,8 @@
+.carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: var(--size-m);
+    padding: var(--size-m);
+}

@@ -1,3 +1,9 @@
+# t.string :label
+# t.string :description
+# t.references :service_category, null: true, foreign_key: true
+#
+# t.timestamps
+
 class Service < ApplicationRecord
     belongs_to :service_category
     has_many :service_requests

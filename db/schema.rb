@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
   create_table "coordinates", force: :cascade do |t|
     t.string "civic_number"
     t.string "street_name"
-    t.string "appt_number"
+    t.string "door_number"
     t.string "postal_code"
     t.string "notes"
     t.integer "city_id"
@@ -42,8 +42,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
   end
 
   create_table "service_categories", force: :cascade do |t|
-    t.string "category"
+    t.string "label"
     t.string "description"
+    t.string "icon_path"
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -67,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
     t.string "description"
     t.string "schedule"
     t.string "phone_number"
+    t.string "email_address"
     t.integer "coordinate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -110,19 +112,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
   create_table "services", force: :cascade do |t|
     t.string "label"
     t.string "description"
+    t.integer "service_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["service_category_id"], name: "index_services_on_service_category_id"
   end
 
   create_table "transportation_services", force: :cascade do |t|
     t.integer "departure_city_id", null: false
     t.integer "arrival_city_id", null: false
+    t.integer "service_id", null: false
     t.datetime "departure_time"
     t.datetime "arrival_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["arrival_city_id"], name: "index_transportation_services_on_arrival_city_id"
     t.index ["departure_city_id"], name: "index_transportation_services_on_departure_city_id"
+    t.index ["service_id"], name: "index_transportation_services_on_service_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -133,12 +139,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
   end
 
   create_table "user_service_provider_accesses", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "service_provider_id"
+    t.integer "user_id", null: false
+    t.integer "service_provider_id", null: false
+    t.integer "user_role_id", null: false
+    t.integer "grantor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["grantor_id"], name: "index_user_service_provider_accesses_on_grantor_id"
     t.index ["service_provider_id"], name: "index_user_service_provider_accesses_on_service_provider_id"
     t.index ["user_id"], name: "index_user_service_provider_accesses_on_user_id"
+    t.index ["user_role_id"], name: "index_user_service_provider_accesses_on_user_role_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -152,7 +162,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
   add_foreign_key "clients", "coordinates"
   add_foreign_key "clients", "users"
   add_foreign_key "coordinates", "cities"
-  add_foreign_key "service_categories", "parents"
   add_foreign_key "service_offers", "service_providers"
   add_foreign_key "service_offers", "services"
   add_foreign_key "service_providers", "coordinates"
@@ -162,6 +171,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_232423) do
   add_foreign_key "service_requests", "clients"
   add_foreign_key "service_requests", "coordinates"
   add_foreign_key "service_requests", "services"
+  add_foreign_key "services", "service_categories"
   add_foreign_key "transportation_services", "arrival_cities"
   add_foreign_key "transportation_services", "departure_cities"
+  add_foreign_key "transportation_services", "services"
+  add_foreign_key "user_service_provider_accesses", "grantors"
+  add_foreign_key "user_service_provider_accesses", "service_providers"
+  add_foreign_key "user_service_provider_accesses", "user_roles"
+  add_foreign_key "user_service_provider_accesses", "users"
 end

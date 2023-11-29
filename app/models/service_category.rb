@@ -1,5 +1,22 @@
+# t.string :label
+# t.string :description
+# t.string :icon_path
+# t.references :parent, class_name: "ServiceCategory", null: true, foreign_key: true      # top level categories have nil parent
 class ServiceCategory < ApplicationRecord
-  belongs_to :parent, class_name: "ServiceCategory"
-  has_many :child_categories, class_name: "ServiceCategory"
+  belongs_to :parent, class_name: "ServiceCategory", optional: true
+  has_many :subcategories, class_name: "ServiceCategory"
   has_many :services
+
+  scope :top_level, -> { where(parent: nil) }
+
+  # find all parents + self, in top-down order, to display as breadcrumbs
+  def breadcrumbs
+    current = self
+    crumbs = []
+    while current 
+      crumbs.unshift(current)
+      current = current.parent
+    end
+    crumbs
+  end
 end

@@ -1,0 +1,19 @@
+Core client features:
+    * "I need this done" > service_requests#create|destroy|update
+    * "What did I need done?" > service_requests#index
+    * "Is anyone offering to fulfill one of my service requests?" > service_quote#for_request
+    * "What services are being offered?" > service_offer#index
+
+Core service provider features:
+    * "I can offer this service" > service_offer#create|destroy|update
+    * "I can quote you for this service request" > service_request#quote
+    * "What quotes have I put out" > service_quotes#destroy|update
+    * "What services do I offer" > service_offers#create|destroy|upate
+    * "What is my sevice provider info" > service_providers#update|destroy
+    * "Who can use my service provider page?" > user_service_provider_access#create|update|destroy
+
+
+Complimentary features:
+    * Logging in
+    * Logging out
+    * Signing up

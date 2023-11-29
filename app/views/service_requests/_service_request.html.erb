@@ -1,0 +1,9 @@
+<%= turbo_frame_tag service_request do %>
+    <%= content_tag :div, class: "service-request" do %>
+        <%= link_to service_request.id, service_request_path(service_request), data: { turbo_frame: "_top" } %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= button_to "Delete", service_request_path(service_request), method: :delete %>
+            <%= link_to "Edit", edit_service_request_path(service_request), class: "button" %>
+        <% end %>
+    <% end %>
+<% end %>

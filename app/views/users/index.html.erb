@@ -5,10 +5,11 @@
         <% end %>
         <%= turbo_frame_tag "new_user" do %>
         <% end %>
-        <%= link_to "New user", new_user_path, class: "button" %>
+        <%= link_to "New user", new_user_path, class: "button", data: { turbo_frame: dom_id(User.new) } %>
     <% end %>
     <%= turbo_frame_tag "users" do %>
         <%= content_tag :div, class: "users" do %>
+            <%= turbo_frame_tag User.new %>
             <%= render @users %>
         <% end %>
     <% end %>

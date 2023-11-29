@@ -26,11 +26,11 @@ class UsersController < ApplicationController
             # if user is offering services
             if user_params[:is_service_provider]
                 # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
-                redirect_to new_service_provider_path, notice: I18n.t('forms.user.created_success'), user: @user.id
+                redirect_to new_service_provider_path, notice: I18n.t('models.user.created_success'), user: @user.id
             # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
             else 
                 # redirect to the service requests page
-                redirect_to "user/#{@user.id}/service_requests", notice: I18n.t('forms.user.created_successs')
+                redirect_to root_url, notice: I18n.t('models.user.created_successs')
             end
         else 
             puts @user.inspect << " not saved:" << @user.errors.full_messages.inspect << " with params " << user_params.inspect
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        if @user.update(user_params)
+        if @user.update(model_params)
             redirect_to users_path, notice: "User updated"
         else
             render :edit, status: :unprocessable_entity
@@ -63,7 +63,11 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
     end 
 
+    def model_params
+        params.require(:user).permit(:email, :username, :password, :password_confirmation)        
+    end
+
     def user_params
-        params.require(:user).permit(:email, :username, :password, :password_confirmation)
+        params.require(:user).permit(:email, :username, :password, :password_confirmation, :is_client, :is_service_provider)
     end
 end

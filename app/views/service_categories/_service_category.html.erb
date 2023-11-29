@@ -1,0 +1,8 @@
+<%= content_tag :div, class: "service-category" do %>
+    <%= content_tag :div, class: "service-category__label" do %>
+        <%= service_category.label %>
+    <% end %>
+    <%= content_tag :div, class: "service-category__icon" do %>
+        <%= image_tag service_category.icon_path, size: "16" if service_category.icon_path %>
+    <% end %>
+<% end %>

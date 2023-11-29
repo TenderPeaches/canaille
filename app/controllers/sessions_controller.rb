@@ -18,16 +18,16 @@ class SessionsController < ApplicationController
             # attempt to authenticate
             if @user.authenticate(user_params[:password])
                 #! need to redirect to [wherever user was going]
-                flash[:notice] = I18n.t('forms.sessions.good_auth')
+                flash[:notice] = I18n.t('models.sessions.good_auth')
                 redirect_to root_url
             # bad auth
             else
-                flash[:alert] = I18n.t('forms.session.bad_auth')
+                flash[:alert] = I18n.t('models.session.bad_auth')
                 render :new
             end
         # no user matching username or email
         else
-            flash[:alert] = I18n.t('forms.session.no_user')
+            flash[:alert] = I18n.t('models.session.no_user')
             render :new
         end
     end
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
     # logout
     def destroy
         session[:user_id] = nil
-        flash[:notice] = I18n.t('forms.session.logged_out')
+        flash[:notice] = I18n.t('models.session.logged_out')
         redirect_to root_url
     end
 

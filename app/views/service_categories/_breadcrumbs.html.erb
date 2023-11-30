@@ -1,7 +1,16 @@
-<%= turbo_frame_tag "service-category-breadcrumbs" do %>
-    <% @category.breadcrumbs.each do |category| %>
-        <%= link_to "select-service-category/#{category.id}", class: "button" do %>
-            <%= category %>
+<%= turbo_frame_tag "service-category-picker__breadcrumbs" do %>
+    <%= content_tag :div, class: "service-category-picker__breadcrumbs" do %>
+        <%= content_tag :span do %>
+            <%= link_to t('models.service_category.list_title'), pick_service_category_path(0.to_i), data: { turbo_stream: true }, class: "button" %>
+            <% breadcrumbs_categories ||= [] %>
+            <% breadcrumbs_categories.each_with_index do |category, i| %>
+                <%= content_tag :span, class: "breadcrumb-link" do %>
+                    &gt;
+                <% end %>
+                <%= link_to pick_service_category_path(category.id), class: "button", data: { turbo_stream: true } do %>
+                    <%= render 'service_categories/service_category', service_category: category %>
+                <% end %>
+            <% end %>
         <% end %>
     <% end %>
 <% end %>

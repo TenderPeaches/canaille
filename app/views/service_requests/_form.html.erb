@@ -13,15 +13,8 @@
 
         <%= turbo_frame_tag "service-request-fields" do %>
             <%= content_tag :div, class: "service-request-fields" do %>
-                <%# service category %>
-                <%= content_tag :div, class: "field field--service-category" do %>
-                    <%= render partial: 'service_categories/pick', locals: { carousel_categories: @service_request.service ? @service_request.service.service_category.subcategories : ServiceCategory.top_level, form_object: form.object_name, selected_category_id: @service_request.service ? @service_request.service.service_category.id : 0.to_s } %>
-                <% end %>
-                <%# service %>
-                <% if form.object %>
                 <%= content_tag :div, class: "field field--service" do %>
-                    <%= form.label t('models.service.model_name') %>
-                    <%= form.collection_select :service_id, %>
+                    <%= render partial: "services/form_picker", locals: { service: @service_request.service, form: form } %>
                 <% end %>
                 <%# submit button %>
                 <%= content_tag :div, class: "actions" do %>

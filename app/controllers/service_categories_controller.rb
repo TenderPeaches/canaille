@@ -8,14 +8,18 @@ class ServiceCategoriesController < ApplicationController
         respond_to do |format|
             # if there exists a category with ID params[:id]
             if @category 
-                format.html { render partial: 'pick', locals: { carousel_categories: @subcategories, breadcrumbs_categories: @category.breadcrumbs, form_object: params[:form_object], selected_category_id: @category.id }, status: :ok }
+                format.html { render partial: 'pick', locals: { carousel_categories: @subcategories, breadcrumbs_categories: @category.breadcrumbs, selected_category_id: @category.id }, status: :ok }
+                format.turbo_stream { render 'pick', locals: { service_category: @category }}
             # else, if ID is 0, code for "reset" picker so show top-level categories, empty breadcrumbs
             elsif params[:id] == 0.to_s
-                format.html { render partial: 'pick', locals: { carousel_categories: ServiceCategory.top_level, form_object: params[:form_object] }, status: :ok}
+                format.html { render partial: 'pick', locals: { carousel_categories: ServiceCategory.top_level }, status: :ok}
+                format.turbo_stream { render 'pick', locals: { service_category: nil }}
             # invalid category_id
             else 
-                format.html { render partial: 'pick', locals: { form_object: params[:form_object] }, status: :unprocessable_entity }
+                format.html { render partial: 'pick', locals: {}, status: :unprocessable_entity }
+                format.turbo_stream { render 'pick', locals: { service_category: nil }, status: :unprocessable_entity }
             end
+        
         end
     end
 

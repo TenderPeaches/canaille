@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "service-category-picker__carousel" do %>
+    <%# if no carousel_categories provided, default to top level service categories %>
+    <% carousel_categories ||= ServiceCategory.top_level %>
+    <%= content_tag :div, class: "carousel carousel--service-categories" do %>
+        <% carousel_categories.each do |category| %>
+            <%= link_to pick_service_category_path(id: category.id), class: "button", data: { turbo_stream: true } do %>
+                <%= render 'service_categories/service_category', service_category: category %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

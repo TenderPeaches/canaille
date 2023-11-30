@@ -1,0 +1,9 @@
+<%# services/_form_picker.html.erb > form input to select a category, 'form' %>
+<%= turbo_frame_tag "service-picker" do %>
+    <%= render partial: 'service_categories/pick', locals: { category: service ? service.service_category : nil } %>
+
+    <%= form.label :service_id %>
+    <%= turbo_frame_tag "services-picker-select" do %>
+        <%# form.collection_select :service_id, service ? service.service_categories : [], :id, :label, {}, { id: 'service-picker' }%>
+    <% end %>
+<% end %>

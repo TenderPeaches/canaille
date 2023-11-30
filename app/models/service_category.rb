@@ -4,7 +4,7 @@
 # t.references :parent, class_name: "ServiceCategory", null: true, foreign_key: true      # top level categories have nil parent
 class ServiceCategory < ApplicationRecord
   belongs_to :parent, class_name: "ServiceCategory", optional: true
-  has_many :subcategories, class_name: "ServiceCategory"
+  has_many :subcategories, class_name: "ServiceCategory", inverse_of: :parent, foreign_key: :parent_id
   has_many :services
 
   scope :top_level, -> { where(parent: nil) }

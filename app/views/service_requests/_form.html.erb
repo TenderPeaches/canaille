@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @service_request do %>
-    <%= form_with model: @service_request do |form| %>
+    <%= form_with model: @service_request, class: "form" do |form| %>
         <% if @service_request.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
@@ -13,12 +13,45 @@
 
         <%= turbo_frame_tag "service-request-fields" do %>
             <%= content_tag :div, class: "service-request-fields" do %>
+                <%# service %>
                 <%= content_tag :div, class: "field field--service" do %>
                     <%= render partial: "services/form_picker", locals: { service: @service_request.service, form: form } %>
                 <% end %>
+                <%# coordinate %>
+                <%= content_tag :div, class: "form__section" do %>
+                    <%= content_tag :div, class: "form__group" do %>
+                        <%#<!> need authenticate as client to pass that address ID along directly %>
+                        <%= link_to t('models.service_request.use_client_address'), use_client_address_service_request_path, class: "button", data: { turbo_stream: true } %>
+                        <%= link_to t('models.service_request.use_unique_address'), use_unique_address_service_request_path, class: "button", data: { turbo_stream: true } %>
+                    <% end %>
+                    <%= turbo_frame_tag "service-request-coordinate" do %>
+                        <% if @service_request.coordinate %>
+                            <%= service_request.coordinate %>
+                        <% elsif @service_request.client&.coordinate %>
+                            <%= service_request.coordinate %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <%= content_tag :div, class: "form__group" do %>
+                    <%# notes %>
+                    <%= content_tag :div, class: "field field--notes" do %>
+                        <%= form.label :notes %>
+                        <%= form.text_area :notes %>
+                    <% end %>
+                    <%# price range %>
+                    <%= content_tag :div, class: "field field--price-range" do %>
+                        <%= form.label t('models.service_request.expected_price_range') %>
+                        <%= content_tag :div, class: "range-picker" do %>
+                            <%= form.number_field :min_price, min: 0, step: 1, class: "monetary-picker" %>
+                            <%= content_tag :div, class: "range-picker__guide" do %>
+                            <% end %>
+                            <%= form.number_field :max_price, min: 0, step: 1, class: "monetary-picker" %>
+                        <% end %>
+                    <% end %>
+                <% end %>
                 <%# submit button %>
                 <%= content_tag :div, class: "actions" do %>
-                    <%= form.submit t('models.register') %>
+                    <%= form.submit t('models.create') %>
                 <% end %>
             <% end %>
         <% end %>

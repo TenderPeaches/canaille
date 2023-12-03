@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   resources :users
-  resources :service_requests
+  resources :service_requests 
+  resource :service_request do
+    member do 
+      get :use_client_address, as: :use_client_address
+      get :use_unique_address, as: :use_unique_address
+    end
+  end 
   scope '/user' do 
     resource :client
     resources :user_service_provider_accesses
@@ -16,6 +22,8 @@ Rails.application.routes.draw do
     resources :service_requests
     resources :service_quotes
   end
+
+  resources :coordinates
 
   resources :service_categories do
     member do 

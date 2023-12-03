@@ -1,4 +1,8 @@
-<%= content_tag :h2 do %>
-    <%= t('models.coordinate.create_title') %>
+<%= content_tag :main, class: "container" do %>
+    <%= content_tag :h2 do %>
+        <%= t('models.coordinate.create_title') %>
+    <% end %>
+    <%= turbo_frame_tag @coordinate do%>
+        <%= render 'form', coordinate: @coordinate %>  
+    <% end %>
 <% end %>
-<%= render partial: 'form' %>

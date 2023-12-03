@@ -48,6 +48,29 @@ class ServiceRequestsController < ApplicationController
         end
     end
 
+    def use_client_address
+        @client = Client.find_by_id(params[:id])
+        #! @authorize
+        if @client
+            coordinate = @client.coordinate
+        else 
+            coordinate = "Random address, need to get from logged in user/client"
+        end
+        respond_to do |format|
+            format.html 
+            format.turbo_stream { render 'use_client_address', locals: { coordinate: coordinate }}
+        end
+    end
+
+    def use_unique_address
+        @coordinate = Coordinate.new 
+        
+        respond_to do |format|
+            format.html
+            format.turbo_stream { render 'use_unique_address' }
+        end
+    end
+
     private 
     def set_service_request 
         @service_request = ServiceRequest.find(params[:id])

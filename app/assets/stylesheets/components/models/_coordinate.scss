@@ -1,0 +1,17 @@
+.coordinate-fields {
+    display: flex;                          /* display coordinates over 3 lines, like postal coordinates */
+    flex-direction: column;                 /* each line is a flex-row */
+}
+
+.coordinate-fields .form__group {
+    display: flex;
+    flex-direction: row;
+}
+
+.field--civic-number input {
+    width: calc(5 * var(--size-m));
+}
+
+.field--door-number input {
+    width: calc(5 * var(--size-m));
+}

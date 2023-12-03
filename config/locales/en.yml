@@ -40,6 +40,7 @@ en:
     update: "Update"
     submit: "Submit"
     register: "Register"
+    create: "Create"
     user:
       create_title: "Register"
       edit_title: "Modify"
@@ -108,6 +109,8 @@ en:
       notes: "Notes, specifications, etc."
       min_price: "Minimum expected price"
       max_price: "Maximum expected price"
+      expected_price_range: "Expected price range"
+      use_client_address: "Use client address"
     service_offer: 
       model_name: "Service offer"
       list_title: "Service offers"
@@ -140,7 +143,8 @@ en:
       destroy_success: "Coordinates successfully destroyed"
       civic_number: "Civic number"
       street_name: "Street"
-      appt_number: "Appartment/Office #"
+      door_number: "Appartment/Office #"
+      city: "City"
       postal_code: "Postal/ZIP Code"
       notes: "Any notes to help with reaching this location"
     city:

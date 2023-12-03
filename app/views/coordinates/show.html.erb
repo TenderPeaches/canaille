@@ -1,0 +1,18 @@
+<%= content_tag :h3 do %>
+    <%= "#{t('models.coordinate.model_name')} ##{@coordinate.id}, #{@service.label}" %>
+    <%= content_tag :div, class: "coordinate-line" do %>
+        <%= "#{coordinate.civic_number} #{coordinate.street_name}" %> 
+        <% if coordinate.door_number %>
+            <%= "##{coordinate.door_number}" %>
+        <% end %>
+    <% end %>
+    <%= content_tag :div, class: "coordinate-line" do %>
+        <%= "#{coordinate.city.name}, #{coordinate.city.province_code}" %>
+    <% end %>
+    <%= content_tag :div, class: "coordinate-line" do %>
+        <%= coordinate.postal_code %>
+    <% end %>
+    <%= content_tag :div, class: "coordinate-line" do %>
+        <%= coordinate.notes %>
+    <% end %>
+<% end %>

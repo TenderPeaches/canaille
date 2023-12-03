@@ -4,3 +4,10 @@
 <%= turbo_stream.replace "service-category-picker__breadcrumbs" do %>
     <%= render partial: 'service_categories/breadcrumbs', locals: { breadcrumbs_categories: service_category ? service_category.breadcrumbs : [] } %>
 <% end %>
+<%= turbo_stream.update_all "#services-picker-select select" do %>
+    <% if service_category && service_category.services %>
+        <% service_category.services.each do |service| %>
+            <option value="<%= service.id %>"><%= service.label %></option>
+        <% end %>
+    <% end %>
+<% end %>

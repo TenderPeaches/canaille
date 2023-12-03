@@ -11,41 +11,45 @@
     <% end %>
 
     <%= content_tag :div, class: "coordinate-fields" do %>
-        <%# civic number %>
-        <%= content_tag :div, class: "field field--civic-number" do %>
-            <%= form.text_field :civic_number %>
-            <%= form.label t('models.coordinate.civic_number') %>
+        <%= content_tag :div, class: "form__group" do %>
+            <%# civic number %>
+            <%= content_tag :div, class: "field field--civic-number" do %>
+                <%= form.label t('models.coordinate.civic_number') %>
+                <%= form.text_field :civic_number %>                
+            <% end %>
+            <%# street name %>
+            <%= content_tag :div, class: "field field--street-name" do %>
+                <%= form.label t('models.coordinate.street_name') %>
+                <%= form.text_field :street_name %>                
+            <% end %>
+            <%# door number (appt/office #) %>
+            <%= content_tag :div, class: "field field--door-number" do %>
+                <%= form.label t('models.coordinate.door_number') %>
+                <%= form.text_field :door_number %>                
+            <% end %>
         <% end %>
-        <%# street name %>
-        <%= content_tag :div, class: "field field--street-name" do %>
-            <%= form.text_fieid :street_name %>
-            <%= form.label t('models.coordinate.street_name') %>
+        <%= content_tag :div, class: "form__group" do %>
+            <%# postal/zip code %>
+            <%= content_tag :div, class: "field field--postal-code" do %>
+                <%= form.label t('models.coordinate.postal_code') %>
+                <%= form.text_field :postal_code %>                
+            <% end %>
+            <%# city %>
+            <%= content_tag :div, class: "field field--city" do %>
+                <%# search field %>
+                <%= form.label t('models.coordinate.city') %>
+                <%= form.text_field :city %>                
+                <%# maybe render partial: "cities/form" ? could still pass @coordinate obj around?%>
+            <% end %>
         <% end %>
-        <%# door number (appt/office #) %>
-        <%= content_tag :div, class: "field field--door-number" do %>
-            <%= form.text_fieid :door_number %>
-            <%= form.label t('models.coordinate.door_number') %>
-        <% end %>
-        <%# postal/zip code %>
-        <%= content_tag :div, class: "field field--postal-code" do %>
-            <%= form.text_fieid :postal_code %>
-            <%= form.label t('models.coordinate.postal_code') %>
-        <% end %>
-        <%# city %>
-        <%= content_tag :div, class: "field field--city" do %>
-            <%= form.text_fieid :city %>
-            <%= form.label t('models.coordinate.city') %>
-            <%# maybe render partial: "cities/form" ? could still pass @coordinate obj around?%>
-            <%= link_to new_city_path, t('models.city.create_title') %>
-        <% end %>
-        <%# additional notes %>
-        <%= content_tag :div, class: "field field--notes" do %>
-            <%= form.text_area :notes %>
-            <%= form.label t('models.coordinate.notes') %>
-        <% end %>
-        <%# submit button %>
-        <%= content_tag :div, class: "actions" do %>
-            <%= form.submit t('models.register') %>
+        <%= content_tag :div, class: "form__group" do %>
+            <%# additional notes %>
+            <%= content_tag :div, class: "field field--notes" do %>
+                <%= form.label t('models.coordinate.notes') %>
+                <%= form.text_area :notes %>
+            <% end %>
+            <%# submit button %>
+                <%= form.submit t('models.create') %>
         <% end %>
     <% end %>
 <% end %>

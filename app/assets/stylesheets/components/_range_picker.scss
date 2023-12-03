@@ -1,0 +1,18 @@
+
+.range-picker {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    column-gap: var(--size-l);
+}
+
+.range-picker__guide {
+    display: flex;                                      /* needs to be a block so as to take up a gien width */
+    width: calc(2 * var(--size-xxl));                           /* arbitrary width, used only to visually suggest the notion of a range */ 
+    height: 0;                                                  /* no height, using only border */
+    border: var(--size-xxxs) solid var(--color-primary-dark);   /* use border to make element visible */
+    vertical-align: middle;                                     /* align with the rest of the line */
+    padding-left: var(--size-m);
+    padding-right: var(--size-m);
+}

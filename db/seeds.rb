@@ -5,7 +5,7 @@ category__mechanic = ServiceCategory.create(label: "Mechanic", description: "", 
 category__mechanic__car_maintenance = ServiceCategory.create(label: "Car maintenance", description: "", parent: category__mechanic)
 category__mechanic__appliance_maintenance = ServiceCategory.create(label: "Appliance maintenance", description: "", parent: category__mechanic)
 category__mechanic__hvac_maintenance = ServiceCategory.create(label: "HVAC maintenance", description: "", parent: category__mechanic)
-category__mechanic__bicylcle_maintenance = ServiceCategory.create(label: "Bicycle maintenance", description: "", parent: category__mechanic)
+category__mechanic__bicycle_maintenance = ServiceCategory.create(label: "Bicycle maintenance", description: "", parent: category__mechanic)
 category__mechanic__electronics_maintenance = ServiceCategory.create(label: "Electronics maintenance", description: "", parent: category__mechanic)
 category__construction = ServiceCategory.create(label: "Construction", description: "", parent: nil)
 category__construction__carpentry = ServiceCategory.create(label: "Carpentry", description: "", parent: category__construction)
@@ -25,3 +25,30 @@ category__food = ServiceCategory.create(label: "Food", description: "", parent: 
 category__catering = ServiceCategory.create(label: "Catering", description: "", parent: category__food)
 category__leftovers = ServiceCategory.create(label: "Leftovers", description: "", parent: category__food)
 category__other = ServiceCategory.create(label: "Other", description: "", parent: nil)
+
+Service.create(label: "Car inspection", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Tire change", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Oil change", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Exterior wash", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Interior wash", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Headlight change", description: "", service_category: category__mechanic__car_maintenance)
+
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__appliance_maintenance)
+Service.create(label: "Fridge repair", description: "", service_category: category__mechanic__appliance_maintenance)
+Service.create(label: "Washing machine repair", description: "", service_category: category__mechanic__appliance_maintenance)
+Service.create(label: "Drying machine repair", description: "", service_category: category__mechanic__appliance_maintenance)
+Service.create(label: "Stove repair", description: "", service_category: category__mechanic__appliance_maintenance)
+Service.create(label: "Dishwasher repair", description: "", service_category: category__mechanic__appliance_maintenance)
+
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__hvac_maintenance)
+Service.create(label: "AC repair", description: "", service_category: category__mechanic__hvac_maintenance)
+
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__bicycle_maintenance)
+Service.create(label: "Yearly check-up", description: "", service_category: category__mechanic__bicycle_maintenance)
+Service.create(label: "Flat tire fix", description: "", service_category: category__mechanic__bicycle_maintenance)
+Service.create(label: "Tire change", description: "", service_category: category__mechanic__bicycle_maintenance)
+Service.create(label: "Hub overhaul", description: "", service_category: category__mechanic__bicycle_maintenance)
+
+
+

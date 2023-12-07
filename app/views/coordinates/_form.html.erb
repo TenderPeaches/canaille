@@ -1,4 +1,4 @@
-<%= form_with model: @coordinate do |form| %>
+<%= form_with model: @coordinate, class: "form" do |form| %>
     <% if @coordinate.errors.any? %>
         <div class="error_messages">
             <h2>Form is invalid</h2>
@@ -34,12 +34,35 @@
                 <%= form.label t('models.coordinate.postal_code') %>
                 <%= form.text_field :postal_code %>                
             <% end %>
-            <%# city %>
             <%= content_tag :div, class: "field field--city" do %>
                 <%# search field %>
                 <%= form.label t('models.coordinate.city') %>
-                <%= form.text_field :city %>                
-                <%# maybe render partial: "cities/form" ? could still pass @coordinate obj around?%>
+                <%= form.collection_select :city_id, City.all, :id, :name %>                
+            <% end %>
+        <% end %>
+            <%= form.submit t('models.city.create_title'), data: { turbo_frame: "city-picker" }, name: :new_city %>
+        <%= content_tag :div, class: "form__group" do %>
+            <%= turbo_frame_tag "city-picker" do %>
+                <%# city %>
+                <%= form.fields_for :city do |city_form| %>
+                    <%= tag.div class: "city-form" do %>         
+                        <%= content_tag :h3, class: "form__header" do %>
+                            <%= t('models.city.create_title') %>
+                        <% end %>
+                        <%= content_tag :div, class: "form__group" do %>
+                            <%# city name %>
+                            <%= content_tag :div, class: "field field--name" do %>
+                                <%= city_form.label t('models.city.name') %>
+                                <%= city_form.text_field :name %>
+                            <% end %>
+                            <%# province %>
+                            <%= content_tag :div, class: "field field--province-code" do %>
+                                <%= city_form.label t('models.city.province_code') %>
+                                <%= city_form.select :province_code, options_for_select(City.province_codes_for_select) %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                <% end %>
             <% end %>
         <% end %>
         <%= content_tag :div, class: "form__group" do %>

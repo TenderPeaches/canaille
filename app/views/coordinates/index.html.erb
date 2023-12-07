@@ -3,13 +3,12 @@
         <%= content_tag :h1 do %>
             <%= t('models.coordinate.list_title') %>
         <% end %>
-        <%= turbo_frame_tag "new_coordinate" do %>
-        <% end %>
         <%= link_to "New coordinate", new_coordinate_path, class: "button", data: { turbo_frame: dom_id(Coordinate.new) } %>
     <% end %>
     <%= turbo_frame_tag "coordinates" do %>
+        <%= turbo_frame_tag "new_coordinate" do %><% end %>
         <%= content_tag :div, class: "coordinates" do %>
-            <%= turbo_frame_tag coordinate.new %>
+            <%= turbo_frame_tag Coordinate.new %>
             <%= render @coordinates if @coordinates %>
         <% end %>
     <% end %>

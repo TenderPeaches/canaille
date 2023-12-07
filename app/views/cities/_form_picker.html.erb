@@ -5,8 +5,20 @@
             <%= form.label t('models.coordinate.city') %>
             <%= form.collection_select :city_id, City.all, :id, :name %>                
         <% end %>
+        <%= link_to t('models.city.create_title'), new_city_path, class: "button", data: { turbo_frame: "new_city" } %>
         <%= turbo_frame_tag "new_city" do %>
-            <%= link_to t('models.city.create_title'), new_city_path, class: "button" %>
         <% end %>
     <% end %>
 <% end %>
+
+    <!!!>
+            <%= turbo_frame_tag "form_field--city" do %>
+                <%= content_tag :div, class: "field field--city" do %>
+                    <%# search field %>
+                    <%= form.label t('models.coordinate.city') %>
+                    <%= form.collection_select :city_id, City.all, :id, :name %>                
+                <% end %>
+                <%= turbo_frame_tag "new_city" do %>
+                    <%= link_to t('models.city.create_title'), new_city_path, class: "button" %>
+                <% end %>
+            <% end %>

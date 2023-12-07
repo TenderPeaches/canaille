@@ -1,0 +1,9 @@
+<%= turbo_frame_tag city do %>
+    <%= content_tag :div, class: "city" do %>
+        <%= link_to "#{city.name}, #{city.province_code}", city_path(city), data: { turbo_frame: "_top" } %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= button_to "Delete", city_path(city), method: :delete %>
+            <%= link_to "Edit", edit_city_path(city), class: "button" %>
+        <% end %>
+    <% end %>
+<% end %>

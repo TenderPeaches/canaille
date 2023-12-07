@@ -1,8 +1,14 @@
 class City < ApplicationRecord
     has_many :coordinates
 
-    #! provinces should be a table/model but can't be bothered to deal with this until we start doing business in MB/NL/etc
     def self.province_codes
-        [{'QC' => '1'}, { 'ON' => '2' }, { 'NB' => '3' }, { 'NS' => '4' }, { 'PEI' => '5' }]
+        ["QC", "ON", "NB", "NS", "PEI"]
+    end
+
+    def self.province_codes_for_select
+        codes_for_select = {}
+        City.province_codes.each_with_index do |code, i|
+            codes_for_select[code] = (i + 1).to_s
+        end
     end
 end

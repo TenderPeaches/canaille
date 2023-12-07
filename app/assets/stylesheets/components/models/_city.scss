@@ -1,0 +1,9 @@
+.city {
+    display: flex;
+    gap: var(--size-xl);
+    align-items: center;
+}
+
+.cities .city {
+    margin: var(--size-m);
+}

@@ -1,6 +1,6 @@
 <%= content_tag :h2 do %>
     <%= t('models.city.create_title') %>
 <% end %>
-<%= turbo_frame_tag "new_city" do %>
-    <%= render partial: 'form' %>
+<%= turbo_frame_tag @city do %>
+    <%= render 'form', city: @city %>
 <% end %>

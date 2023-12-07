@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :service_requests 
+  resources :cities
   resource :service_request do
     member do 
       get :use_client_address, as: :use_client_address

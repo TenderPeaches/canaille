@@ -1,0 +1,16 @@
+<%= content_tag :main, class: "container" do %>
+    <%= content_tag :div, class: "list__header" do %>
+        <%= content_tag :h1 do %>
+            <%= t('models.city.list_title') %>
+        <% end %>
+        <%= turbo_frame_tag "new_city" do %>
+        <% end %>
+        <%= link_to "New city", new_city_path, class: "button", data: { turbo_frame: dom_id(City.new) } %>
+    <% end %>
+    <%= turbo_frame_tag "cities" do %>
+        <%= content_tag :div, class: "cities" do %>
+            <%= turbo_frame_tag City.new %>
+            <%= render @cities if @cities %>
+        <% end %>
+    <% end %>
+<% end %>

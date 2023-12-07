@@ -1,0 +1,6 @@
+<%= content_tag :h3 do %>
+    <%= "#{t('models.city.model_name')} ##{@city.id}, #{@city.name}" %>
+    <%= content_tag :div, class: "city-line" do %>
+        <%= "#{city.name}, #{city.province_code}" %> 
+    <% end %>
+<% end %>

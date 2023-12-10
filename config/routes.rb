@@ -24,7 +24,10 @@ Rails.application.routes.draw do
     resources :service_quotes
   end
 
-  resources :coordinates
+  resources :coordinates do
+    post :use_new_city, on: :collection
+    post :use_existing_city, on: :collection
+  end 
 
   resources :service_categories do
     member do 

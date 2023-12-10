@@ -1,1 +1,5 @@
-<%= turbo_stream.replace "%>
+<%= turbo_stream.update "city-select" do %>
+    <%= @form.label t('models.coordinate.city') %>
+    <%= @form.collection_select :city_id, City.all, :id, :name %>   
+<% end %>
+<%= turbo_stream.update "city-form" %>

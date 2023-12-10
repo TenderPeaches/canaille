@@ -147,6 +147,7 @@ en:
       city: "City"
       postal_code: "Postal/ZIP Code"
       notes: "Any notes to help with reaching this location"
+      use_new_city: "The city is not in the list"
     city:
       model_name: "City"
       list_title: "Cities"

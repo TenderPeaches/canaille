@@ -17,6 +17,15 @@
         justify-content: space-between;
     }
 
+    /* checkboxes need to be displayed with their label to the side */
+    &__checkbox {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        column-gap: var(--size-s);
+        margin-left: var(--size-l);
+    }
+
     &__header {
         text-align: left;
     }

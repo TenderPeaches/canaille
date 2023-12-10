@@ -169,6 +169,8 @@ GEM
     regexp_parser (2.8.2)
     reline (0.4.0)
       io-console (~> 0.5)
+    requestjs-rails (0.0.11)
+      railties (>= 6.1.0)
     rexml (3.2.6)
     rubyzip (2.3.2)
     sassc (2.4.0)
@@ -233,6 +235,7 @@ DEPENDENCIES
   jbuilder
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  requestjs-rails
   sassc-rails
   selenium-webdriver
   sprockets-rails

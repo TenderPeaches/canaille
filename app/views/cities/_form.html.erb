@@ -11,18 +11,7 @@
     <% end %>
 
     <%= content_tag :div, class: "city-fields" do %>
-        <%= content_tag :div, class: "form__group" do %>
-            <%# city name %>
-            <%= content_tag :div, class: "field field--name" do %>
-                <%= form.text_field :name %>
-                <%= form.label t('models.city.name') %>
-            <% end %>
-            <%# province %>
-            <%= content_tag :div, class: "field field--province-code" do %>
-                <%= form.select :province_code, options_for_select(City.province_codes_for_select) %>
-                <%= form.label t('models.city.province_code') %>
-            <% end %>
-        <% end %>
+        <%= render partial: "cities/fields", locals: { form: form } %>
         <%# submit button %>
         <%= content_tag :div, class: "actions" do %>
             <%= form.submit t('models.register') %>

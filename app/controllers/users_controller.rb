@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_or_new_user, only: [:is_service_provider, :is_not_service_provider]
+    before_action :form_is_client, only: [:is_service_provider]
 
     def index 
         @users = User.all 
@@ -15,6 +17,8 @@ class UsersController < ApplicationController
 
     def create 
         @user = User.new(user_params.slice(:email, :username, :password))
+
+        puts 'the params:' << params.inspect
 
         if @user.save
             # if user checked is_client, create a client for them
@@ -42,7 +46,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        if @user.update(model_params)
+        if @user.update(user_params)
             redirect_to users_path, notice: "User updated"
         else
             render :edit, status: :unprocessable_entity
@@ -58,13 +62,36 @@ class UsersController < ApplicationController
         end
     end
 
+    def is_service_provider
+        
+        ActionController::Base.helpers.fields model: @user do |form|
+            respond_to do |format|
+                format.html { render partial: "service_provider/fields", locals: { form: form } }
+                @form = form
+                format.turbo_stream
+            end
+        end
+    end
+
+    def is_not_service_provider
+        respond_to do |format|
+            format.turbo_stream
+        end
+    end
+
     private
     def set_user 
-        @user = User.find(params[:id])
+        @user = User.find_by_id(params[:id])
     end 
 
-    def model_params
-        params.require(:user).permit(:email, :username, :password, :password_confirmation)        
+    def set_or_new_user
+        unless set_user
+            @user = User.new
+        end
+    end
+
+    def form_is_client
+        @is_client = params[:is_client]
     end
 
     def user_params

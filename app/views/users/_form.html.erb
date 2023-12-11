@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @user do %>
-    <%= form_with model: @user do |form| %>
+    <%= form_with model: @user, url: url ||= user_registration_path, class: "form", data: { controller: "users", turbo: false } do |form| %>
         <% if @user.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
@@ -11,31 +11,18 @@
             </div>
         <% end %>
 
-        <%= content_tag :div, class: "user-fields" do %>
-            <%# user email %>
-            <%= content_tag :div, class: "field field--email" do %>
-                <%= form.label t('models.user.email') %><br />
-                <%= form.text_field :email %>
-            <% end %>
-            <%# username %>
-            <%= content_tag :div, class: "field field--username" do %>
-                <%= form.label t('models.user.username') %><br />
-                <%= form.text_field :username %>
-            <% end %>
-            <%# password %>
-            <%= content_tag :div, class: "field field--password" do %>
-                <%= form.label t('models.user.password') %><br />
-                <%= form.password_field :password %>
-            <% end %>
-            <%# confirm password %>
-            <%= content_tag :div, class: "field field--password-confirm" do %>
-                <%= form.label t('models.user.password_confirmation') %><br />
-                <%= form.password_field :password_confirmation %>
-            <% end %>
+        <%= render partial: "users/fields", locals: { form: form } %>
+        <%= tag.div class: "form__checkbox", id: "is-client-checkbox" do %>
+            <%= check_box_tag :is_client, 1, true, { id: "is-client", disabled: true, name: "user[is_client]" } %>
+            <%= form.label t('models.user.is_client') %>
+        <% end %>
+        <%= tag.div class: "form__checkbox", id: "is-service-provider-checkbox" do %>
+            <%= check_box_tag :is_service_provider, 1, 0, { id: "is-service-provider", name: "user[is_service_provider]" } %>
+            <%= form.label t('models.user.is_service_provider') %>
+        <% end %>
+        <%= tag.div class: "form__actions" do %>
             <%# submit button %>
-            <%= content_tag :div, class: "actions" do %>
-                <%= form.submit t('models.register') %>
-            <% end %>
+            <%= form.submit t('models.register') %>
         <% end %>
     <% end %>
 <% end %>

@@ -4,12 +4,11 @@
 <%= content_tag :div, class: "header-nav" do %>
     <%= link_to t('models.service_request.list_title'), service_requests_path %>
     <%# link_to t('nav.service_offer'), service_offers_path %>
-    <%= link_to "Users", users_path %>
     <% if current_user # if logged in %>
-        <%= link_to t('nav.log_out'), login_path %>
+        <%= link_to t('nav.log_out'), destroy_user_session_path %>
     <% else %>
-        <%= link_to t('nav.log_in'), login_path %>
-        <%= link_to t('nav.register'), signup_path %>
+        <%= link_to t('nav.log_in'), new_user_session_path %>
+        <%= link_to t('nav.register'), new_user_registration_path %>
     <% end %>
     <%# link_to t('nav.log_out'), signup_path %>
 <% end %>

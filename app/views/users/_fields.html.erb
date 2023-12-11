@@ -1,0 +1,26 @@
+<%= content_tag :div, class: "user-fields" do %>
+    <%= tag.div class: "form__group" do %>
+        <%# user email %>
+        <%= content_tag :div, class: "field field--email" do %>
+            <%= form.label t('models.user.email') %><br />
+            <%= form.text_field :email %>
+        <% end %>
+        <%# username %>
+        <%= content_tag :div, class: "field field--username" do %>
+            <%= form.label t('models.user.username') %><br />
+            <%= form.text_field :username %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "form__group" do %>
+        <%# password %>
+        <%= content_tag :div, class: "field field--password" do %>
+            <%= form.label t('models.user.password') %><br />
+            <%= form.password_field :password %>
+        <% end %>
+        <%# confirm password %>
+        <%= content_tag :div, class: "field field--password-confirm" do %>
+            <%= form.label t('models.user.password_confirmation') %><br />
+            <%= form.password_field :password_confirmation %>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,5 +1,6 @@
 .form {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: var(--size-xs);
 
@@ -46,6 +47,10 @@
         &--invalid {
             border-color: var(--color-error);
         }
+    }
+
+    &__actions {
+
     }
 
     .field {

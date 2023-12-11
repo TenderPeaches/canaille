@@ -17,3 +17,4 @@ Complimentary features:
     * Logging in
     * Logging out
     * Signing up
+    * Editing user features

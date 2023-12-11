@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   root "application#index"
 
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  post 'login', to: 'sessions#create'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
-
-  resources :users
+  resources :users do
+    post :is_service_provider, on: :collection
+    post :is_not_service_provider, on: :collection
+  end
   resources :service_requests 
   resources :cities
   resource :service_request do
@@ -15,10 +14,6 @@ Rails.application.routes.draw do
       get :use_unique_address, as: :use_unique_address
     end
   end 
-  scope '/user' do 
-    resource :client
-    resources :user_service_provider_accesses
-  end
   resources :clients do 
     resources :service_requests
     resources :service_quotes

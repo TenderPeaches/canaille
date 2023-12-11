@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "is-client" do %>
+    <%# force is_client to true if not a service provider, because then why sign up? %>
+    <%= check_box_tag :is_client, 1, 1, { id: "is-client", disabled: true, name: "user[is_client]" } %>
+<% end %>

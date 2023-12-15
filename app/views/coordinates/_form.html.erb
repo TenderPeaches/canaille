@@ -11,60 +11,9 @@
     <% end %>
 
     <%= content_tag :div, class: "coordinate-fields" do %>
-        <%= content_tag :div, class: "form__group" do %>
-            <%# civic number %>
-            <%= content_tag :div, class: "field field--civic-number" do %>
-                <%= form.label t('models.coordinate.civic_number') %>
-                <%= form.text_field :civic_number %>                
-            <% end %>
-            <%# street name %>
-            <%= content_tag :div, class: "field field--street-name" do %>
-                <%= form.label t('models.coordinate.street_name') %>
-                <%= form.text_field :street_name %>                
-            <% end %>
-            <%# door number (appt/office #) %>
-            <%= content_tag :div, class: "field field--door-number" do %>
-                <%= form.label t('models.coordinate.door_number') %>
-                <%= form.text_field :door_number %>                
-            <% end %>
-        <% end %>
-        <%= content_tag :div, class: "form__group" do %>
-            <%# postal/zip code %>
-            <%= content_tag :div, class: "field field--postal-code" do %>
-                <%= form.label t('models.coordinate.postal_code') %>
-                <%= form.text_field :postal_code %>                
-            <% end %>
-            <%= content_tag :div, class: "field field--city", id: "city-select" do %>
-                <%# search field %>
-                <%= form.label t('models.coordinate.city') %>
-                <%= form.collection_select :city_id, City.all, :id, :name %>                
-            <% end %>
-        <% end %>
-        <%# link_to t('models.city.create_title'), use_new_city_coordinates_path, class: "button", data: { turbo_method: :post } %>
-        <%= content_tag :div, class: "form__checkbox" do %>
-            <%= check_box_tag :use_new_city, 1, 0 %>
-            <%= form.label t('models.coordinate.use_new_city') %>
-        <% end %>
-        <%= content_tag :div, class: "form__group", id: "city-form" do %>
-            <%# city %>
-            <%= form.fields_for :city do |city_form| %>
-                <%= tag.div class: "city-form" do %>         
-                    <%= content_tag :h3, class: "form__header" do %>
-                        <%= t('models.city.create_title') %>
-                    <% end %>
-                    <%= render partial: "cities/fields", form: city_form %>
-                <% end %>
-            <% end %>
-        <% end %>
-        <%= content_tag :div, class: "form__group" do %>
-            <%# additional notes %>
-            <%= content_tag :div, class: "field field--notes" do %>
-                <%= form.label t('models.coordinate.notes') %>
-                <%= form.text_area :notes %>
-            <% end %>
-            <%# submit button %>
-                <%= form.submit t('models.create') %>
-        <% end %>
+        <%= render partial: "coordinates/fields", locals: { form: form } %>
+        <%# submit button %>
+        <%= form.submit t('models.create') %>
     <% end %>
 <% end %>
 

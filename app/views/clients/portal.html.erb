@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "service-requests" do %>
+    <%= tag.div class: "service-requests-list" do %>
+        <% @user.client.pending_service_requests %>
+    <% end %>
+<% end %>

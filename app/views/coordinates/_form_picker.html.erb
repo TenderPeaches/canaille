@@ -3,6 +3,6 @@
 
     <%= form.label :coordinate_id %>
     <%= link_to t('models.coordinate.create_title'), new_coordinate_path, class: "button" %>
-    <%= turbo_frame_tag Service.new %>
+    <%= turbo_frame_tag Coordinate.new %>
 
 <% end %>

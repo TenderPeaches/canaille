@@ -34,7 +34,7 @@ class UsersController < ApplicationController
             # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
             else 
                 # redirect to the service requests page
-                redirect_to root_url, notice: I18n.t('models.user.created_successs')
+                redirect_to root_url, notice: I18n.t('models.user.created_success')
             end
         else 
             puts @user.inspect << " not saved:" << @user.errors.full_messages.inspect << " with params " << user_params.inspect

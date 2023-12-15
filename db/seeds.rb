@@ -1,6 +1,11 @@
 UserRole.create(name: "Admin")
 UserRole.create(name: "Employee")
 
+ServiceRequestStatus.create(label: "Open", description: "No quote has been approved for this service request")
+ServiceRequestStatus.create(label: "Cancelled", description: "The client has cancelled this service request")
+ServiceRequestStatus.create(label: "Quote Accepted", description: "The client has accepted a quote for this service request; No more quotes can be submitted")
+ServiceRequestStatus.create(label: "Closed", description: "The requested service has been provided")
+
 category__mechanic = ServiceCategory.create(label: "Mechanic", description: "", parent: nil)
 category__mechanic__car_maintenance = ServiceCategory.create(label: "Car maintenance", description: "", parent: category__mechanic)
 category__mechanic__appliance_maintenance = ServiceCategory.create(label: "Appliance maintenance", description: "", parent: category__mechanic)
@@ -50,5 +55,5 @@ Service.create(label: "Flat tire fix", description: "", service_category: catego
 Service.create(label: "Tire change", description: "", service_category: category__mechanic__bicycle_maintenance)
 Service.create(label: "Hub overhaul", description: "", service_category: category__mechanic__bicycle_maintenance)
 
-
+ServiceProvider.create(name: "Garage chez Bob", description: "Un garage imaginaire", schedule: "non", phone_number: "555-151-5151", email_address: "garage.bob@gmail.com")
 

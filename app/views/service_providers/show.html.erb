@@ -1,0 +1,18 @@
+<%= content_tag :h3 do %>
+    <%= "#{t('models.service_provider.model_name')} ##{@service_provider.id}, #{@service_provider.name}" %>
+    <%= content_tag :div, class: "service_provider-line" do %>
+        <%= "#{service_provider.description}" %>
+    <% end %>
+    <%= content_tag :div, class: "service_provider-line" do %>
+        <%= "#{service_provider.schedule}" %>
+    <% end %>
+    <%= content_tag :div, class: "service_provider-line" do %>
+        <%= service_provider.phone_number %>
+    <% end %>
+    <%= content_tag :div, class: "service_provider-line" do %>
+        <%= service_provider.email_address %>
+    <% end %>
+    <%= content_tag :div, class: "service_provider-line" do %>
+        <%= service_provider.coordinate %>
+    <% end %>
+<% end %>

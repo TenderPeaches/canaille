@@ -4,6 +4,7 @@ class CreateServiceRequests < ActiveRecord::Migration[7.0]
       t.references :service, null: false, foreign_key: true
       t.references :client, null: false, foreign_key: true
       t.references :coordinate, null: true, foreign_key: true
+      t.references :service_request_status, null: false, foreign_key: true
 
       t.string :notes
       t.decimal :min_price

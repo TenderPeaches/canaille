@@ -12,6 +12,7 @@ class ServiceRequest < ApplicationRecord
     belongs_to :service
     belongs_to :client
     belongs_to :coordinate, optional: true
+    belongs_to :service_request_status
 
     accepts_nested_attributes_for :coordinate
     accepts_nested_attributes_for :service, reject_if: :all_blank

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_11_052047) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_13_210246) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "province_code"
@@ -95,10 +95,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_052047) do
     t.index ["user_id"], name: "index_service_quotes_on_user_id"
   end
 
+  create_table "service_request_statuses", force: :cascade do |t|
+    t.string "label"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "service_requests", force: :cascade do |t|
     t.integer "service_id", null: false
     t.integer "client_id", null: false
     t.integer "coordinate_id"
+    t.integer "service_request_status_id", null: false
     t.string "notes"
     t.decimal "min_price"
     t.decimal "max_price"
@@ -107,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_052047) do
     t.index ["client_id"], name: "index_service_requests_on_client_id"
     t.index ["coordinate_id"], name: "index_service_requests_on_coordinate_id"
     t.index ["service_id"], name: "index_service_requests_on_service_id"
+    t.index ["service_request_status_id"], name: "index_service_requests_on_service_request_status_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -154,7 +163,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_052047) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -166,6 +174,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_052047) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -181,13 +196,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_052047) do
   add_foreign_key "service_quotes", "users"
   add_foreign_key "service_requests", "clients"
   add_foreign_key "service_requests", "coordinates"
+  add_foreign_key "service_requests", "service_request_statuses"
   add_foreign_key "service_requests", "services"
   add_foreign_key "services", "service_categories"
   add_foreign_key "transportation_services", "arrival_cities"
   add_foreign_key "transportation_services", "departure_cities"
   add_foreign_key "transportation_services", "services"
-  add_foreign_key "user_service_provider_accesses", "grantors"
   add_foreign_key "user_service_provider_accesses", "service_providers"
   add_foreign_key "user_service_provider_accesses", "user_roles"
   add_foreign_key "user_service_provider_accesses", "users"
+  add_foreign_key "user_service_provider_accesses", "users", column: "grantor_id"
 end

@@ -4,7 +4,7 @@ class CreateUserServiceProviderAccesses < ActiveRecord::Migration[7.0]
       t.references :user, null: false, foreign_key: true
       t.references :service_provider, null: false, foreign_key: true
       t.references :user_role, null: false, foreign_key: true
-      t.references :grantor, null: true, foreign_key: true
+      t.references :grantor, null: true, foreign_key: { to_table: :users }
 
       t.timestamps
     end

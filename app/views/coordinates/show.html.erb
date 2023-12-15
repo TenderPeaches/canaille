@@ -1,5 +1,5 @@
 <%= content_tag :h3 do %>
-    <%= "#{t('models.coordinate.model_name')} ##{@coordinate.id}, #{@service.label}" %>
+    <%= "#{t('models.coordinate.model_name')} ##{@coordinate.id}" %>
     <%= content_tag :div, class: "coordinate-line" do %>
         <%= "#{coordinate.civic_number} #{coordinate.street_name}" %> 
         <% if coordinate.door_number %>

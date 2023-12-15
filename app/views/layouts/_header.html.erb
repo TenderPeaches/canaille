@@ -2,8 +2,6 @@
     <%# logo/image title %>
 <% end %>
 <%= content_tag :div, class: "header-nav" do %>
-    <%= link_to t('models.service_request.list_title'), service_requests_path %>
-    <%# link_to t('nav.service_offer'), service_offers_path %>
     <% if current_user # if logged in %>
         <%= link_to t('nav.log_out'), destroy_user_session_path %>
     <% else %>

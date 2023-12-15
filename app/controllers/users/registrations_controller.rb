@@ -23,11 +23,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         # if user is offering services
         if sign_up_params[:is_service_provider]
             # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
-            redirect_to new_service_provider_path, notice: I18n.t('models.user.created_success'), user: @user.id
+            redirect_to new_user_service_provider_path(@user.id), notice: I18n.t('models.user.created_success'), user: @user
         # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
         else 
             # redirect to the service requests page
-            redirect_to root_url, notice: I18n.t('models.user.created_successs')
+            redirect_to root_url, notice: I18n.t('models.user.created_success')
         end
     else 
         puts @user.errors.full_messages.inspect

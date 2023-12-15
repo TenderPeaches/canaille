@@ -1,0 +1,2 @@
+class ServiceRequestStatus < ApplicationRecord
+end

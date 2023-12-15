@@ -17,7 +17,7 @@
             <%= form.label t('models.user.is_client') %>
         <% end %>
         <%= tag.div class: "form__checkbox", id: "is-service-provider-checkbox" do %>
-            <%= check_box_tag :is_service_provider, 1, 0, { id: "is-service-provider", name: "user[is_service_provider]" } %>
+            <%= check_box_tag :is_service_provider, 1, false, { id: "is-service-provider", name: "user[is_service_provider]" } %>
             <%= form.label t('models.user.is_service_provider') %>
         <% end %>
         <%= tag.div class: "form__actions" do %>

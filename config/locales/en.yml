@@ -36,6 +36,8 @@ en:
     register: "Sign Up"
     log_in: "Log in"
     log_out: "Log out"
+  keywords:
+    optional: "Optional"
   models:
     update: "Update"
     submit: "Submit"
@@ -84,7 +86,7 @@ en:
     service_provider:
       model_name: "Service provider"
       list_title: "Service providers"
-      create_title: "New pervice provider"
+      create_title: "New service provider"
       create_success: "Service provider %{id} successfully created"
       update_title: "Update service provider"
       update_success: "Service provider %{id} successfully updated"

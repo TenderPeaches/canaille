@@ -1,16 +1,18 @@
 class ServiceProvidersController < ApplicationController
-    before_action :set_service_provider, only: %i[ show edit update destroy ]
+    before_action :set_service_provider, only: %i[ show edit update destroy ask_quote service_offers ]
     before_action :set_user, only: %i[ new create update index_for_user destroy ]
     
-    def show
-    end
+    # maybe should be moved to another namespace
 
-    def index
-        @service_providers = ServiceProvider.all
+    def show
     end
 
     def index_for_user
         @service_providers = @user.service_providers
+    end
+
+    def index_for_client
+        @service_providers = ServiceProvider.all
     end
 
     def new
@@ -47,6 +49,26 @@ class ServiceProvidersController < ApplicationController
             format.html { redirect_to service_providers_path, notice: I18n.t('models.service_provider.destroy_success') }
             format.turbo_stream
         end
+    end
+
+    # actual service_provider params
+
+    def index
+        @service_providers = ServiceProvider.all
+    end
+
+    #!! ?
+    def service_ask_quote
+        @service = params(:service_id)
+    end
+
+    def portal 
+        @service_providers = current_user.service_providers
+    end
+    
+    # p2
+    def offer_help
+        @user = current_user
     end
 
     private

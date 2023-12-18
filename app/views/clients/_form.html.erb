@@ -1,0 +1,19 @@
+<%= form_with model: @client, class: "form", data: { controller: "clients", turbo: "false" } do |form| %>
+    <% if @client.errors.any? %>
+        <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+                <% @client.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= content_tag :div, class: "client-fields" do %>
+        <%= render partial: "clients/fields", locals: { form: form } %>
+        <%# submit button %>
+        <%= form.submit t('models.create') %>
+    <% end %>
+<% end %>
+

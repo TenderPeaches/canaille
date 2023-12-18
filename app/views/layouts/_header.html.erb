@@ -1,12 +1,19 @@
 <%= content_tag :div, class: "header-logo" do %>
+    <%= link_to 'Home', root_path %>
     <%# logo/image title %>
 <% end %>
 <%= content_tag :div, class: "header-nav" do %>
-    <% if current_user # if logged in %>
-        <%= link_to t('nav.log_out'), destroy_user_session_path %>
+    <% if user_signed_in? # if logged in %>
+        <% if current_user.client %>
+            <%= link_to t('models.client.model_name'), clients_portal_path(current_user.client.id) %>
+        <% end %>
+        <% if current_user.has_service_provider_access? %>
+            <%= link_to t('models.service_provider.model_name'), service_provider_portal_path %>
+        <% end %>
+        <%= link_to t('cta.log_out'), destroy_user_session_path %>
     <% else %>
-        <%= link_to t('nav.log_in'), new_user_session_path %>
-        <%= link_to t('nav.register'), new_user_registration_path %>
+        <%= link_to t('cta.log_in'), new_user_session_path %>
+        <%= link_to t('cta.register'), new_user_registration_path %>
     <% end %>
-    <%# link_to t('nav.log_out'), signup_path %>
+    <%# link_to t('cta.log_out'), signup_path %>
 <% end %>

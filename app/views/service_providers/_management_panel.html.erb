@@ -1,0 +1,12 @@
+<%= turbo_frame_tag 'services' do %>
+    <%= @service_provider.services %>
+<% end %>
+<%= turbo_frame_tag 'user-accesses' do %>
+    <%= @service_provider.user_service_provider_accesses%>
+<% end %>
+<%= turbo_frame_tag 'service-provider-form' do %>
+    <%= render 'form', service_provider: @service_provider %>
+<% end %>
+<%= turbo_frame_tag 'quotes-list' do %>
+    <%= link_to t('models.service_provider.quote_history'), service_provider_quote_history_path(@service_provider) %>
+<% end %>

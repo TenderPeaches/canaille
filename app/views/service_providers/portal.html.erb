@@ -1,0 +1,9 @@
+<%= turbo_frame_tag 'active-service-quotes' do %>
+    <%= @service_provider.service_quotes %>
+<% end %>
+<%= turbo_frame_tag 'browse-service-requests' do %>
+    <%= link_to t('model.service_request.list_title'), service_provider_browse_service_requests_path(@service_provider) %>
+<% end %>
+<%#! if user.service_provider_access.is_admin? %>
+    <%= render :partial 'service_providers/management_panel', locals: { service_provider: @service_provider } %>
+<%#! end %>

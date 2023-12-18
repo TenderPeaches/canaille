@@ -1,18 +1,41 @@
 <%= content_tag :h3 do %>
-    <%= "#{t('models.service_provider.model_name')} ##{@service_provider.id}, #{@service_provider.name}" %>
-    <%= content_tag :div, class: "service_provider-line" do %>
-        <%= "#{service_provider.description}" %>
+    <%= "#{@service_provider.name}" %>
+<% end %>
+<%= tag.div do %>
+    <%= tag.div class: "line" do %>
+        <%= content_tag :div, class: "service_provider-line" do %>
+            <%= "#{@service_provider.description}" %>
+        <% end %>
     <% end %>
-    <%= content_tag :div, class: "service_provider-line" do %>
-        <%= "#{service_provider.schedule}" %>
+    <%= tag.div class: "line" do %>
+        <%= tag.div do %>
+            <%= "#{t('models.service_provider.schedule')}:" %>
+        <% end %>
+        <%= content_tag :div, class: "service_provider-line" do %>
+            <%= "#{@service_provider.schedule}" %>
+        <% end %>
     <% end %>
-    <%= content_tag :div, class: "service_provider-line" do %>
-        <%= service_provider.phone_number %>
+    <%= tag.div class: "line" do %>
+        <%= content_tag :div, class: "service_provider-line" do %>
+            <%= @service_provider.phone_number %>
+        <% end %>
     <% end %>
-    <%= content_tag :div, class: "service_provider-line" do %>
-        <%= service_provider.email_address %>
+    <%= tag.div class: "line" do %>
+        <%= content_tag :div, class: "service_provider-line" do %>
+            <%= @service_provider.email_address %>
+        <% end %>
     <% end %>
-    <%= content_tag :div, class: "service_provider-line" do %>
-        <%= service_provider.coordinate %>
+    <%= tag.div class: "line" do %>
+        <%= content_tag :div, class: "service_provider-line" do %>
+            <%= @service_provider.coordinate %>
+        <% end %>
+    <% end %>
+<% end %>
+<%= turbo_frame_tag "service-provider-services" do %>
+    <%= tag.div class: "service-provider-services" do %>
+        <%= content_tag :h3 do %>
+            <%= t('models.service.list_title') %>
+        <% end %>
+        <%= @service_provider.service_offers %>
     <% end %>
 <% end %>

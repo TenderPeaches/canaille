@@ -1,19 +1,12 @@
 /* a simple form that lets users input an action mainly through the use of buttons */
 .menu {
-    max-width: 400px;                                   /* doesn't need to take the whole page, so put a max-width that doesn't leave too much space to the side */
     margin: auto;                                       /* center the menu horizontally */
     display: flex;                                      /* for an elegant vertical-layout */
     flex-direction: column;                             /* vertical layout */
+    align-items: stretch;                               /* maximize content size for easy clicking */
+    width: 100%;                                        /* maximize content size for easy clicking */
     padding: var(--size-xxxl);                          /* maximum padding for maximum emphasis on content */
-}
-
-
-.menu,
-.action-bar {
-    border-width: var(--thick-border-width);            /* emphasis on content */
-    border-style: double;                               /* emphasis on content, monopolize user's attention */
-    border-color: var(--color-primary-dark);            /* mesh with background */
-
+    font-size: 2rem;
 }
 
 .menu a {
@@ -27,7 +20,7 @@
     border-width: var(--thick-border-width);            /* border to turn the links into buttons, thick for added texture */
     border-style: var(--button-border-style-depressed); /* appear as button */
     border-color: var(--color-secondary-white);         /* use interactive color so as not to mesh with background */
-    padding: var(--size-xxs);                           /* bit of padding to let buttons breathe */
+    padding: var(--size-xxl);                           /* bit of padding to let buttons breathe */
 }
 
 /* on menu button hover */

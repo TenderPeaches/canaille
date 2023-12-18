@@ -53,10 +53,23 @@ else
     redirect_to :sign_up_as_service_provider
 end
 
-# service_provider/quote
-
+# user/service_providers/quote
 show :service_request
 service_quote.form
 on_submit do 
     redirect_to list_services(service_request.service)
 end
+
+# service_providers
+show :service_providers.relevant_to_client_or_user
+on_click do
+    show service_provider.services
+    cta "offer help" # p2 
+end
+
+# service_provider/:id/services
+show service_provider.services 
+    cta "ask for a quote"
+    cta "offer help" # p2
+
+# service_provider/portal

@@ -30,14 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  nav:
-    service_request: "I need"
-    service_offer: "I can offer"
+  cta:
     register: "Sign Up"
     log_in: "Log in"
     log_out: "Log out"
+    need_service: "I need a service"
+    can_offer_service: "I can offer services"
   keywords:
     optional: "Optional"
+  alerts:
+    need_log_in: "Log in or sign up in order to continue"
+    need_create_client: "Create your client account to post a service request"
   models:
     update: "Update"
     submit: "Submit"
@@ -97,6 +100,9 @@ en:
       phone_number: "Phone"
       email_address: "Email"
       contact_info: "Contact info"
+      ask_quote: "Ask quote"
+      portal: "Business portal"
+      quote_history: "Quote hisotry"
     service_request:
       model_name: "Service request"
       list_title: "Service requests"
@@ -160,3 +166,12 @@ en:
       destroy_success: "City successfully destroyed" 
       name: "Name"
       province_code: "Province"
+    client:
+      model_name: "Client"
+      list_title: "Clients"
+      create_title: "New client"
+      create_success: "Client %{id} successfully created"
+      update_title: "Update client"
+      update_success: "Client %{id} successfully updated"     
+      destroy_success: "Client successfully destroyed" 
+      portal: "Client Space"

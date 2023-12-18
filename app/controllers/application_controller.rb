@@ -1,15 +1,11 @@
-class ApplicationController < ActionController::Base
-
-    def index 
-        if authorize
-            if current_user
-            render "/index"
-    end    
+class ApplicationController < ActionController::Base 
     
     # for features that require login
     def authorize 
-        redirect_to login_url, alert: "Not authorized, login first" if current_user.nil?
+        log_in_required if current_user.nil?
     end
 
-    private 
+    def log_in_required
+        redirect_to new_user_session_path, alert: t('alerts.need_log_in')
+    end
 end

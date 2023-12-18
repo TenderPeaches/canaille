@@ -3,6 +3,24 @@ class UsersController < ApplicationController
     before_action :set_or_new_user, only: [:is_service_provider, :is_not_service_provider]
     before_action :form_is_client, only: [:is_service_provider]
 
+    def landing
+        if user_signed_in?
+            # if user is registered to both request services and offer them
+            if user.client && user.has_service_provider_access?
+                # give them a choice 
+                render "/user_menu"
+            # otherwise if user is only registered as client
+            elsif user.client
+                render "clients/portal"
+            # otherwise, user is not a client, only a service_provider
+            else
+                render "service_providers/portal"
+            end
+        else
+            render "/index"
+        end
+    end
+
     def index 
         @users = User.all 
     end 

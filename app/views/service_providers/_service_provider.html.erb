@@ -1,9 +1,5 @@
 <%= turbo_frame_tag service_provider do %>
-    <%= content_tag :div, class: "service_provider" do %>
-        <%= link_to "#{t('models.service_provider.model_name')} #{service_provider.id}: #{service_provider.name}", service_provider_path(service_provider), data: { turbo_frame: "_top" } %>
-        <%= content_tag :div, class: "actions" do %>
-            <%= button_to "Delete", service_provider_path(service_provider), method: :delete %>
-            <%= link_to "Edit", edit_service_provider_path(service_provider), class: "button" %>
-        <% end %>
+    <%= content_tag :div, class: "service-provider" do %>
+        <%= link_to "#{service_provider.name}", service_provider_path(service_provider), data: { turbo_frame: "_top" }, class: "text--big" %>
     <% end %>
 <% end %>

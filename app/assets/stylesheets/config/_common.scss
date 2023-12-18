@@ -7,8 +7,12 @@
 }
 
 .content {
-    max-width: 1080px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: calc(min(100vw, var(--max-content-width--screen)));
+    /* max-width: var(--max-content-width--phone); for now design everything as if for phone */
 }
 
 .actions {
@@ -16,4 +20,15 @@
     flex: 0 0 auto;
     align-self: flex-start;
     gap: var(--size-xs);
+}
+
+.text--big {
+    font-size: 1.5rem;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

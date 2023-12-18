@@ -1,0 +1,8 @@
+<%= turbo_frame_tag service_offer do %>
+    <%= content_tag :div, class: "service_offer" do %>
+        <%= link_to "#{t('models.service.model_name')} #{service_offer.service.label}", service_path(service_offer.service) %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= link_to t("models.service_provider.ask_quote"), service_provider_service_offer_ask_quote(service_offer) %>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,3 +1,4 @@
-<%= content_tag :div do %>
-
+<%= content_tag :div, class: "menu" do %>
+    <%= link_to t("cta.need_service"), new_service_request_path, class: "button" %>
+    <%= link_to t("cta.can_offer_service"), new_service_provider_path, class: "button" %>
 <% end %>

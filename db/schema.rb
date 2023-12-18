@@ -84,12 +84,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_210246) do
 
   create_table "service_quotes", force: :cascade do |t|
     t.integer "service_request_id", null: false
+    t.integer "service_provider_id", null: false
     t.integer "user_id", null: false
     t.integer "status_id", null: false
     t.decimal "price"
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["service_provider_id"], name: "index_service_quotes_on_service_provider_id"
     t.index ["service_request_id"], name: "index_service_quotes_on_service_request_id"
     t.index ["status_id"], name: "index_service_quotes_on_status_id"
     t.index ["user_id"], name: "index_service_quotes_on_user_id"
@@ -104,7 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_210246) do
 
   create_table "service_requests", force: :cascade do |t|
     t.integer "service_id", null: false
-    t.integer "client_id", null: false
+    t.integer "client_id"
     t.integer "coordinate_id"
     t.integer "service_request_status_id", null: false
     t.string "notes"
@@ -152,6 +154,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_210246) do
     t.integer "service_provider_id", null: false
     t.integer "user_role_id", null: false
     t.integer "grantor_id"
+    t.datetime "active_from", null: false
+    t.datetime "inactive_from"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["grantor_id"], name: "index_user_service_provider_accesses_on_grantor_id"
@@ -191,6 +195,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_210246) do
   add_foreign_key "service_offers", "service_providers"
   add_foreign_key "service_offers", "services"
   add_foreign_key "service_providers", "coordinates"
+  add_foreign_key "service_quotes", "service_providers"
   add_foreign_key "service_quotes", "service_requests"
   add_foreign_key "service_quotes", "statuses"
   add_foreign_key "service_quotes", "users"

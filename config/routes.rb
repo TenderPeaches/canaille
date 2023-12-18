@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
-  root "application#index"
+  root "users#landing"
 
   # /service_providers
   resources :service_providers do
-    # /service_providers/[:service_provider_id]/accesses
-    resources :user_service_provider_accesses, as: :accesses
-    # /service_providers/[:service_provider_id]/quotes
-    resources :service_quotes, as: :quotes
-    # /service_providers/[:service_provider_id]/service_offers
-    resources :service_offers
+    member do 
+      post :ask_quote, as: :ask_service_offer_quote
+      # post :offer_help, as: :offer_help
+    end
+    collection do
+      get :portal, as: :portal
+    end
   end
 
   # /users 
@@ -37,6 +38,9 @@ Rails.application.routes.draw do
 
   # /clients
   resources :clients do 
+    member do
+      get :portal, as: :portal
+    end
     # clients/[:client_id]/service_requests (new/create/index)
     resources :service_requests, shallow: true
     # clients/[:client_id]/service_quotes (new/create/index)

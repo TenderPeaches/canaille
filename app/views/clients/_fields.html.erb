@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "coordinate-fields" do %>
+    <%= render partial "coordinates/fields", locals: { form: form } %>
+<% end %>
+<%= tag.div "form form--phone-number" do %>
+    <%= form.label :phone_number %>
+    <%= form.phone_field :phone_number %>
+<% end %>
+<%= tag.div "form form--email" do %>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+<% end %>

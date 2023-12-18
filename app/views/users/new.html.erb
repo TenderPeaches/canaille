@@ -1,8 +1,7 @@
-<%= content_tag :main, class: "container" do %>
-    <%= content_tag :h2 do %>
-        <%= t('models.user.create_title') %>
-    <% end %>
-    <%= turbo_frame_tag @user do%>
-        <%= render 'form', user: @user %>  
-    <% end %>
+<%= link_to t('cta.log_in'), new_user_session_path %>
+<%= content_tag :h2 do %>
+    <%= t('models.user.create_title') %>
+<% end %>
+<%= turbo_frame_tag @user do%>
+    <%= render 'form', user: @user %>  
 <% end %>

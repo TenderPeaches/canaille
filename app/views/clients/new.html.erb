@@ -1,0 +1,8 @@
+<%= content_tag :main, class: "container" do %>
+    <%= content_tag :h2 do %>
+        <%= t('models.client.create_title') %>
+    <% end %>
+    <%= turbo_frame_tag @client do%>
+        <%= render 'form', client: @client %>  
+    <% end %>
+<% end %>

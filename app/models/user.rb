@@ -16,7 +16,11 @@ class User < ApplicationRecord
 
     validates_uniqueness_of :email
 
-    def has_service_provider?
-        
+    def admin_service_provider_accesses
+        user_service_provider_accesses.where(user_role: UserRole.find_by_name('Admin'))
+    end
+
+    def has_service_provider_access?
+        user_service_provider_accesses.size > 0
     end
 end

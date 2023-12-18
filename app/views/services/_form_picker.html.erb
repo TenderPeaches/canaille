@@ -5,6 +5,8 @@
 
     <%= form.label :service_id %>
     <%= turbo_frame_tag "services-picker-select" do %>
-        <% form.collection_select :service_id, service ? service.service_category.services : [], :id, :label, {}, { id: 'service-picker' }%>
+        <% if service %>
+            <% form.collection_select :service_id, service.service_category.services, :id, :label, {}, { id: 'service-picker' }%>
+        <% end %>
     <% end %>
 <% end %>

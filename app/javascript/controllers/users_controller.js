@@ -17,6 +17,7 @@ export default class extends Controller {
     // document.querySelector('#is_client').addEventListener('change', async (event) => {});
   }
 
+  // listen on checkbox change
   listen__is_service_provider() {
     document.querySelector('#is-service-provider').addEventListener('change', async (event) => {
       const url = document.querySelector('#is-service-provider').checked ? 'is_service_provider' : 'is_not_service_provider';

@@ -13,31 +13,36 @@
 
         <%= turbo_frame_tag "service-request-fields" do %>
             <%= content_tag :div, class: "service-request-fields" do %>
-                <%# service %>
-                <%= content_tag :div, class: "field field--service" do %>
-                    <%= render partial: "services/form_picker", locals: { service: @service_request.service, form: form } %>
+                <%= render partial: "service_requests/fields", locals: { form: form } %>
+            <% end %>
+        <% end %>
+        
+        <%= content_tag :h2 do %>
+            <%= t('models.service_request.coordinate') %>
+        <% end %>
+        <%= turbo_frame_tag "clients-fields" do %>
+            <% if !user_signed_in? %>
+                <%= tag.div class: "hint" do %>
+                    <%= t('alerts.need_log_in') %>
                 <% end %>
-                <%= content_tag :div, class: "form__group" do %>
-                    <%# notes %>
-                    <%= content_tag :div, class: "field field--notes" do %>
-                        <%= form.label :notes %>
-                        <%= form.text_area :notes %>
-                    <% end %>
-                    <%# price range %>
-                    <%= content_tag :div, class: "field field--price-range" do %>
-                        <%= form.label t('models.service_request.expected_price_range') %>
-                        <%= content_tag :div, class: "range-picker" do %>
-                            <%= form.number_field :min_price, min: 0, step: 1, class: "monetary-picker" %>
-                            <%= content_tag :div, class: "range-picker__guide" do %>
-                            <% end %>
-                            <%= form.number_field :max_price, min: 0, step: 1, class: "monetary-picker" %>
-                        <% end %>
-                    <% end %>
+                <%= tag.div class: "actions" do %>
+                    <%= link_to t('cta.log_in'), new_user_session_path, class: "button", data: { turbo: false } %>
+                    <%= link_to t('cta.sign_up'), new_user_registration_path, class: "button", data: { turbo: false } %>
                 <% end %>
-                <%# submit button %>
-                <%= content_tag :div, class: "actions" do %>
-                    <%= form.submit t('models.create') %>
+            <% elsif user_signed_in? && current_user.client.nil? %>
+                <%= tag.div class: "hint" do %>
+                    <%= t('alerts.need_create_client') %>
                 <% end %>
+                <%= render partial: "clients/fields", locals: { form: form } %>
+            <% else %>
+                <%= render partial: "service_requests/coordinates" %>
+            <% end %>
+        <% end %>
+        
+        <%# submit button %>
+        <%= content_tag :div, class: "actions" do %>
+            <% if user_signed_in? && current_user.client %>
+                <%= form.submit t('models.create') %>
             <% end %>
         <% end %>
     <% end %>

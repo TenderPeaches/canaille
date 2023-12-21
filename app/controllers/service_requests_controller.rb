@@ -95,6 +95,6 @@ class ServiceRequestsController < ApplicationController
     end
 
     def service_request_params
-        params.require(:service_request).permit(:service_id, :coordinate_id, :service_id, :notes, :min_price, :max_price, :coordinate_attributes => [ :civic_number, :street_name, :door_number, :postal_code, :notes, :city_id ], :service_attributes => [:label, :description])
+        params.require(:service_request).permit(:service_id, :coordinate_id, :service_id, :notes, :min_price, :max_price, :coordinate_attributes => [ :civic_number, :street_name, :door_number, :postal_code, :notes, :city_id ], :service_attributes => [:label, :description], :client_attributes => [ :phone_number, :email_address ])
     end
 end

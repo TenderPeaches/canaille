@@ -1,17 +1,20 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, only: [:show, :edit, :update, :destroy, :landing]
     before_action :set_or_new_user, only: [:is_service_provider, :is_not_service_provider]
     before_action :form_is_client, only: [:is_service_provider]
 
     def landing
         if user_signed_in?
             # if user is registered to both request services and offer them
-            if user.client && user.has_service_provider_access?
+            if current_user.client && current_user.has_service_provider_access?
                 # give them a choice 
                 render "/user_menu"
             # otherwise if user is only registered as client
-            elsif user.client
+            elsif current_user.client
                 render "clients/portal"
+            #! shouldn't be a final route, just here to debug
+            elsif current_user.client.nil?
+                render "/index"
             # otherwise, user is not a client, only a service_provider
             else
                 render "service_providers/portal"

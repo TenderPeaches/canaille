@@ -3,10 +3,15 @@
     <%# using a service-category picker to filter down services %>
     <%= render partial: 'service_categories/pick', locals: { category: service ? service.service_category : nil } %>
 
-    <%= form.label :service_id %>
     <%= turbo_frame_tag "services-picker-select" do %>
         <% if service %>
-            <% form.collection_select :service_id, service.service_category.services, :id, :label, {}, { id: 'service-picker' }%>
+            <%= tag.label do %>
+                <%= t('models.service.model_name') %>
+            <% end %>
+            <%= form.collection_select :service_id, service.service_category.services, :id, :label, {}, { id: 'service-picker' }%>
+        <% else %>
+            <%= tag.label %>
+            <%= form.collection_select :service_id, [], :id, :label, {}, { id: 'service-picker' } %>
         <% end %>
     <% end %>
 <% end %>

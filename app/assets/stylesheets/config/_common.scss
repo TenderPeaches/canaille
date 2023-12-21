@@ -15,6 +15,10 @@
     /* max-width: var(--max-content-width--phone); for now design everything as if for phone */
 }
 
+.hidden {
+    display: none;
+}
+
 .actions {
     display: flex;
     flex: 0 0 auto;

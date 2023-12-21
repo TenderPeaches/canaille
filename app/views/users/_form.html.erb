@@ -13,8 +13,10 @@
 
         <%= render partial: "users/fields", locals: { form: form } %>
         <%= tag.div class: "form__checkbox", id: "is-client-checkbox" do %>
-            <%= check_box_tag :is_client, 1, true, { id: "is-client", disabled: true, name: "user[is_client]" } %>
+            <%= check_box_tag :is_client, 1, true, { id: "is-client", disabled: true } %>
             <%= form.label t('models.user.is_client') %>
+            <%#! this hidden field *must* appear whenever #is-client checkbox is disabled, otherwise value won't get submitted along with form %>
+            <%= form.hidden_field :is_client, { name: "user[is_client]", id: "user-is-client", value: true } %>
         <% end %>
         <%= tag.div class: "form__checkbox", id: "is-service-provider-checkbox" do %>
             <%= check_box_tag :is_service_provider, 1, false, { id: "is-service-provider", name: "user[is_service_provider]" } %>

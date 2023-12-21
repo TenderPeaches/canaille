@@ -5,6 +5,7 @@ header {
     display: flex;                                          /* display from left-to right */
     flex-wrap: wrap;                                        /*  */
     gap: var(--size-xl);                                    /* horizontal spacing between child elements */
+    margin-bottom: var(--size-l);                           /* space out the header from the content */ 
     justify-content: space-between;                         /* clear the middle, tuck content in the corners */
     border-bottom: 4px ridge var(--color-primary);          /* thick bottom border to emphasize the header's presence */ 
 }

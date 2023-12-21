@@ -1,3 +1,6 @@
 <%= turbo_stream.replace "is-client" do %>
     <%= check_box_tag :is_client, 1, @is_client, { id: "is-client", name: "user[is_client]" }%>
 <% end %>
+<%= turbo_stream.replace "user-is-client" do %>
+    <%= tag.div id: "user-is-client" %>
+<% end %>

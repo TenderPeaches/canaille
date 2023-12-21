@@ -1,0 +1,21 @@
+<%# service %>
+<%= content_tag :div, class: "field field--service" do %>
+    <%= render partial: "services/form_picker", locals: { service: @service_request.service, form: form } %>
+<% end %>
+<%= content_tag :div, class: "form__group" do %>
+    <%# notes %>
+    <%= content_tag :div, class: "field field--notes" do %>
+        <%= form.label :notes %>
+        <%= form.text_area :notes %>
+    <% end %>
+    <%# price range %>
+    <%= content_tag :div, class: "field field--price-range" do %>
+        <%= form.label t('models.service_request.expected_price_range') %>
+        <%= content_tag :div, class: "range-picker" do %>
+            <%= form.number_field :min_price, min: 0, step: 1, class: "monetary-picker" %>
+            <%= content_tag :div, class: "range-picker__guide" do %>
+            <% end %>
+            <%= form.number_field :max_price, min: 0, step: 1, class: "monetary-picker" %>
+        <% end %>
+    <% end %>
+<% end %>

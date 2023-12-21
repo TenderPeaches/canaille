@@ -39,8 +39,8 @@ en:
   keywords:
     optional: "Optional"
   alerts:
-    need_log_in: "Log in or sign up in order to continue"
-    need_create_client: "Create your client account to post a service request"
+    need_log_in: "Log in or sign up in order to proceed"
+    need_create_client: "Please create your client account in order to proceed"
   models:
     update: "Update"
     submit: "Submit"
@@ -175,3 +175,5 @@ en:
       update_success: "Client %{id} successfully updated"     
       destroy_success: "Client successfully destroyed" 
       portal: "Client Space"
+      coordinate: "Delivery coordinates"
+      coordinate_tip: "Where the services should be rendered"

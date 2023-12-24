@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
     def landing
         if user_signed_in?
+            @user = current_user
             # if user is registered to both request services and offer them
             if current_user.client && current_user.has_service_provider_access?
                 # give them a choice 

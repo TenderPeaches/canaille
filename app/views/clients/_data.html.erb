@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "clients-data" do %>
+    <% if client %>
+        <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate, allow_edit: allow_edit } %>
+    <% else %>  
+        <%= t('keyword.no_blank', t('models.client.model_name')) %>
+    <% end %>
+<% end %>

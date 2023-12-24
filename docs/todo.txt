@@ -1,0 +1,1 @@
+* Add coordinates to user => Focus on all instances where user might add coordinates, harmonize them so that they all just fill up some turbo_frame_tag

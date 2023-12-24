@@ -34,7 +34,7 @@ class ServiceRequestsController < ApplicationController
                 else
                     # redirect to portal
                     #? could do service_providers that offer services matching this request's service
-                    format.html { redirect_to portal_client_path, notice: I18n.t('models.service_request.create_success')}
+                    format.html { redirect_to client_portal_path, notice: I18n.t('models.service_request.create_success')}
                 end
                 format.turbo_stream
             else

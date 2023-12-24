@@ -38,6 +38,9 @@ en:
     can_offer_service: "I can offer services"
   keywords:
     optional: "Optional"
+    welcome: "Welcome, %{name}"
+    no_blank: "No %{thing}"
+    add_blank: "Add %{thing}"
   alerts:
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"
@@ -118,7 +121,8 @@ en:
       min_price: "Minimum expected price"
       max_price: "Maximum expected price"
       expected_price_range: "Expected price range"
-      use_client_address: "Use client address"
+      use_client_address: "Use my address"
+      use_unique_address: "Use another address"
     service_offer: 
       model_name: "Service offer"
       list_title: "Service offers"

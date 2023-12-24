@@ -14,6 +14,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user = User.new(sign_up_params)
 
       if @user.save
+        # log the user in
+        sign_in @user
         # if user checked is_client, create a client for them
         if sign_up_params[:is_client]
             @user.client = Client.create

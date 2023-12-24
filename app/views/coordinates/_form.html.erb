@@ -12,8 +12,8 @@
 
     <%= content_tag :div, class: "coordinate-fields" do %>
         <%= render partial: "coordinates/fields", locals: { form: form } %>
-        <%# submit button %>
-        <%= form.submit t('models.create') %>
     <% end %>
+    <%# submit button %>
+    <%= form.submit t('models.create') %>
 <% end %>
 

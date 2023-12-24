@@ -1,4 +1,5 @@
-class ClientsController < ApplicationControllerbefore_action :set_client, only: %i[ show edit update destroy ]
+class ClientsController < ApplicationController
+    before_action :set_client, only: %i[ show edit update destroy ]
 
     def show 
 
@@ -11,13 +12,17 @@ class ClientsController < ApplicationControllerbefore_action :set_client, only: 
     def new
         if user_signed_in?
             if current_user.client
-                redirect_to { portal_client_path }
+                redirect_to { client_portal_path }
             else
                 @client = Client.new
             end
         else
             log_in_required
         end
+    end
+
+    def new_coordinates
+
     end
     
     # creates a new client for the current user, or updates it if that user's client has already been set
@@ -32,7 +37,7 @@ class ClientsController < ApplicationControllerbefore_action :set_client, only: 
 
         respond_to do |format|
             if @client.save
-                format.html { redirect_to portal_client_path, notice: t('models.clients.create_success')}
+                format.html { redirect_to client_portal_path, notice: t('models.clients.create_success')}
             else
                 format.html { redirect_to :new, status: :unprocessable_entity }
             end
@@ -42,7 +47,7 @@ class ClientsController < ApplicationControllerbefore_action :set_client, only: 
     def update
         respond_to do |format|
             if @client.save
-                format.html { redirect_to portal_client_path, notice: I18n.t('models.client.update_success', @client.id.to_s) }
+                format.html { redirect_to client_portal_path, notice: I18n.t('models.client.update_success', @client.id.to_s) }
                 format.turbo_stream
             else
                 format.html { render :edit, status: :unprocessable_entity }
@@ -66,7 +71,7 @@ class ClientsController < ApplicationControllerbefore_action :set_client, only: 
             unless @user.client
                 format.html { redirect_to new_client_path }
             else
-                format.html { redirect_to portal_client_path }
+                format.html { render "clients/portal" }
             end
         end            
     end

@@ -11,6 +11,7 @@
 
 .menu a {
     margin-bottom: var(--size-m);                       /* gap between each button */
+    width: 100%;                                        /* fill in whatever space is available */ 
 }
 
 /* menu buttons appear as links */

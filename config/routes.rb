@@ -36,6 +36,11 @@ Rails.application.routes.draw do
     end
   end 
 
+  scope "/portal" do
+    get :client, to: "clients#portal", as: :client_portal
+    get :service_provider, to: "service_provider#portal", as: :service_provider_portal
+  end
+
   # /clients
   resources :clients do 
     member do

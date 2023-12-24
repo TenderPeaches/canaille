@@ -1,11 +1,21 @@
-<%= turbo_frame_tag "service-requests" do %>
-    <%= tag.div class: "service-requests-list" do %>
-        <% @user.client.active_service_requests %>
+<%= tag.div class: "portal" do %>
+    <%= content_tag :h1 do %>
+        <%= t('keywords.welcome', name: @user.username) %>
     <% end %>
-<% end %>
-<%= turbo_frame_tag "new-service-request" %>
-    <%= link_to t('models.service_request.create_title'), new_service_request_path %>
-<% end %>
-<%= turbo_frame_tag "new-service-provider" %>
-    <%= link_to t('models.service_provider.create_title'), new_service_provider_path %>
+    <%= content_tag :div, class: "client-data" do %>
+        <%= render partial: "clients/data", locals: { client: @user.client, allow_edit: true } %>
+    <% end %>
+    <%= turbo_frame_tag "service-requests" do %>
+        <%= tag.div class: "service-requests-list" do %>
+            <% @user.client.active_service_requests %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "menu" do %>
+        <%= turbo_frame_tag "new-service-request" do %>
+            <%= link_to t('models.service_request.create_title'), new_service_request_path, class: "button", data: { turbo: false } %>
+        <% end %>
+        <%= turbo_frame_tag "new-service-provider" do %>
+            <%= link_to t('models.service_provider.create_title'), new_service_provider_path, class: "button", data: { turbo: false } %>
+        <% end %>
+    <% end %>
 <% end %>

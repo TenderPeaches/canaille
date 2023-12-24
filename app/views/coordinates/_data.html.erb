@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "coordinate-data" do %>
+    <% if coordinate %>
+        <%= content_tag :h6, class: "data-header" do %>
+            <%= t('models.clients.coordinate') %>
+        <% end %>
+        <%= content_tag :div, class: "data-line" do %>
+            <%= coordinate.address_line %>
+        <% end %>
+        <%= content_tag :div, class: "data-line" do %>
+            <%= coordinate.city_line %>
+        <% end %>
+        <%= content_tag :div, class: "data-line" do %>
+            <%= coordinate.postal_code_line %>
+        <% end %>
+    <% else %>
+        <% if allow_edit %>
+            <%= link_to t('keywords.add_blank', thing: t('models.coordinate.model_name')), new_coordinate_path, class: "button" %>
+        <% else %>
+            <%= t('keywords.no_blank', thing: t('models.coordinate.model_name').downcase) %>
+        <% end %>
+    <% end %>
+<% end %>

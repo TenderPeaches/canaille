@@ -10,4 +10,19 @@ class Coordinate < ApplicationRecord
     
     accepts_nested_attributes_for :city
 
+    def address_line
+        line = "#{civic_number} #{street_name}"
+        if door_number
+            line << " ##{door_number}"
+        end
+    end
+
+    def city_line
+        "#{city.name}, #{city.province_code}"
+    end
+
+    def postal_code_line
+        "#{postal_code}"
+    end
+
 end

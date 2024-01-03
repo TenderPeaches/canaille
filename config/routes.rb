@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end 
   
   # /service_request
-  resource :service_request do
+  resources :service_requests do
     # service request form actions
     member do 
       # /service_request/use_client_address

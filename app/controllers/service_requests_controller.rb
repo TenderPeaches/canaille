@@ -1,6 +1,7 @@
 class ServiceRequestsController < ApplicationController
     before_action :set_service_request, only: %i[ show edit update destroy ]
-    before_action :authorize, only: %i[ show edit update destroy use_client_address ]
+    before_action :set_or_new_service_request, only: %i[ use_client_address]
+    before_action :authorize, only: %i[ show create edit update destroy use_client_address ]
 
     def show 
 
@@ -18,28 +19,50 @@ class ServiceRequestsController < ApplicationController
     def create
         @service_request = ServiceRequest.new(service_request_params)
 
-        respond_to do |format|
+        # set service request client
+        if current_user.client.nil?
+            current_user.client = Client.create()
+        end
+
+        # in case client exists but coordinates have not been set, make sure they are instanciated
+        if service_request_params[:client_attributes] && current_user.client.coordinate.nil?
+            # if the attributes array exists, the user checked "use new city"
+            if service_request_params[:client_attributes][:coordinate_attributes][:city_attributes]
+                # create the city before the coordinate
+                #! shouldn't this happen on Coordinate.create? look into, could cut this entire block
+                client_coordinate_city = City.create(service_request_params[:client_attributes][:coordinate_attributes][:city_attributes])
+            end
+            # instantiate the client coordinates
+            client_coordinate = Coordinate.new(service_request_params[:client_attributes][:coordinate_attributes])
+            # if city_id wasn't outright picked by the user, it's assumed that they are inputting a new city
+            client_coordinate.city_id ||= client_coordinate_city
+            # save the client coordinates
+            if client_coordinate.save
+                # if valid
+                current_user.client.update(coordinate: client_coordinate) 
+            # invalid coordinates, maybe warn the user or something
+            else 
+            end
+        end
+
+        # link the service request with the user's client account
+        @service_request.client = current_user.client
+
+        # set service request status
+        @service_request.service_request_status = ServiceRequestStatus.default
+        
+        # set service request 
+        @service_request.service ||= Service.unknown
+
+        respond_to do |format| 
             if @service_request.save
-                # if user is not signed in
-                if !user_signed_in
-                    # the request is created, but the user should still be prompted to create an account
-                    # if the account isn't created, the service_request is devalued accordingly but can still exist as a "well that's what it is"
-                    log_in_required
-                # if user is signed in, but does not have a client account
-                elsif current_user.client.nil? 
-                    # prompt them to create a client
-                    #! since the service_request expects a client_id, might need to make it user_id instead? so that it doesn't get lost if user does not create client here
-                    format.html { redirect_to new_client_path, alert: I18n.t('alerts.need_create_client') }
-                # otherwise, user is signed in and has a client account
-                else
-                    # redirect to portal
-                    #? could do service_providers that offer services matching this request's service
-                    format.html { redirect_to client_portal_path, notice: I18n.t('models.service_request.create_success')}
-                end
+                # redirect to portal
+                #? could do service_providers that offer services matching this request's service
+                format.html { redirect_to client_portal_path, notice: I18n.t('models.service_request.create_success', id: @service_request.id )}
                 format.turbo_stream
             else
                 puts @service_request.errors.inspect
-                format.html { render :new, status: :unprocessable_entity }
+                format.html { render :new, status: :unprocessable_entity, alert: @service_request.errors.full_messages }
                 format.turbo_stream
             end
         end
@@ -67,16 +90,40 @@ class ServiceRequestsController < ApplicationController
     end
 
     def use_client_address
-        @client = current_user.client
-        #! @authorize
-        if @client
-            coordinate = @client.coordinate
-        else 
-            coordinate = "Random address, need to get from logged in user/client"
+        
+        # if the user doesn't already have a client account
+        unless current_user.client
+            # create their client account
+            current_user.client = Client.create(user: current_user)
         end
-        respond_to do |format|
-            format.html 
-            format.turbo_stream { render 'use_client_address', locals: { coordinate: coordinate }}
+
+        # set client to the user's client account
+        @client = current_user.client
+
+        # if the client's account has no coordinates set to it
+        unless @client.coordinate
+            # initialize the coordinate so fields_for can at least display the fields
+            @client.coordinate = Coordinate.new
+        end 
+        # use the user's client account's coordinates as the service_request coordinates
+        @coordinate = @client.coordinate
+
+        # set the service request's client to be the user's client account
+        @service_request.client = @client        
+
+        # simulate the form in order to properly print out the fields
+        #! to test
+        ActionController::Base.helpers.fields model: @service_request do |form|
+            form.fields_for :client do |client_form|
+                client_form.fields_for :coordinate do |client_coordinate_form|
+                    @form = client_coordinate_form
+
+                    respond_to do |format|
+                        format.html 
+                        format.turbo_stream
+                    end
+                end
+            end
         end
     end
 
@@ -90,11 +137,17 @@ class ServiceRequestsController < ApplicationController
     end
 
     private 
+    def set_or_new_service_request
+        unless set_service_request
+            @service_request = ServiceRequest.new
+        end
+    end
+
     def set_service_request 
-        @service_request = ServiceRequest.find(params[:id])
+        @service_request = ServiceRequest.find_by_id(params[:id])
     end
 
     def service_request_params
-        params.require(:service_request).permit(:service_id, :coordinate_id, :service_id, :notes, :min_price, :max_price, :coordinate_attributes => [ :civic_number, :street_name, :door_number, :postal_code, :notes, :city_id ], :service_attributes => [:label, :description], :client_attributes => [ :phone_number, :email_address ])
+        params.require(:service_request).permit(:coordinate_id, :service_id, :notes, :min_price, :max_price, :coordinate_attributes => [ :civic_number, :street_name, :door_number, :postal_code, :notes ], :service_attributes => [:label, :description], :client_attributes => [ :phone_number, :email_address, :coordinate_attributes => [ :civic_number, :street_name, :door_number, :postal_code, :notes, :use_new_city, :city_attributes  => [ :name, :province_code ]]])
     end
 end

@@ -1,3 +1,16 @@
-<%= turbo_stream.replace "service-request-coordinate" do %>
-    <%= coordinate %>
+<%= turbo_stream.update "service-request-coordinate" do %>
+    <% if @coordinate.nil? || @coordinate.id.nil? %>
+        <%= tag.div class: "hint" do %>
+            <%= t('alerts.need_set_client_coordinates') %>
+        <% end %>
+        <%= turbo_frame_tag "client-coordinates" do %>
+            <% if @form %>
+                <%= render partial: "coordinates/fields", locals: { form: @form } %>
+            <% else %>
+                <%= "form error: #{@form.inspect}" %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <%= render partial: "coordinates/data", locals: { coordinate: @coordinate } %>
+    <% end %>
 <% end %>

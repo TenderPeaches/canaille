@@ -1,6 +1,9 @@
 <%= turbo_frame_tag "clients-data" do %>
     <% if client %>
-        <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate, allow_edit: allow_edit } %>
+        <%= content_tag :div, class: "card" do %>  
+            <%= content_tag :h4, t('models.client.coordinate') %>
+            <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate, allow_edit: allow_edit } %>
+        <% end %>
     <% else %>  
         <%= t('keyword.no_blank', t('models.client.model_name')) %>
     <% end %>

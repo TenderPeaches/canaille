@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @service_request do %>
-    <%= form_with model: @service_request, url: service_request_url, class: "form", data: { turbo_stream: false } do |form| %>
+    <%= form_with model: @service_request, url: service_request_url, class: "form", data: { turbo_stream: true } do |form| %>
         <% if @service_request.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
@@ -21,19 +21,18 @@
             <%= t('models.service_request.coordinate') %>
         <% end %>
         <%= turbo_frame_tag "clients-fields" do %>
+            <%# if user is not signed in %>
             <% if !user_signed_in? %>
+                <% # request a login %>
                 <%= tag.div class: "hint" do %>
                     <%= t('alerts.need_log_in') %>
                 <% end %>
+                <%#! try inline form so as to not lose the rest of the form %>
                 <%= tag.div class: "actions" do %>
                     <%= link_to t('cta.log_in'), new_user_session_path, class: "button", data: { turbo: false } %>
                     <%= link_to t('cta.sign_up'), new_user_registration_path, class: "button", data: { turbo: false } %>
                 <% end %>
-            <% elsif user_signed_in? && current_user.client.nil? %>
-                <%= tag.div class: "hint" do %>
-                    <%= t('alerts.need_create_client') %>
-                <% end %>
-                <%= render partial: "clients/fields", locals: { form: form } %>
+            <%# otherwise, user is signed in so give them a choice between using their client coordinates or setting up a new coordinate for this service request specifically %>
             <% else %>
                 <%= render partial: "service_requests/coordinates" %>
             <% end %>
@@ -42,7 +41,7 @@
         <%# submit button %>
         <%= content_tag :div, class: "actions" do %>
             <% if user_signed_in? && current_user.client %>
-                <%= form.submit t('models.create') %>
+                <%= form.submit t('models.create'), data: { turbo: false } %>
             <% end %>
         <% end %>
     <% end %>

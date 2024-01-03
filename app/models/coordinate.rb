@@ -7,6 +7,8 @@
 
 class Coordinate < ApplicationRecord
     belongs_to :city
+
+    attr_accessor :use_new_city
     
     accepts_nested_attributes_for :city
 
@@ -18,11 +20,18 @@ class Coordinate < ApplicationRecord
     end
 
     def city_line
-        "#{city.name}, #{city.province_code}"
+        if city
+            "#{city.name}, #{city.province_code}"
+        end
     end
 
     def postal_code_line
         "#{postal_code}"
+    end
+
+    def self.none
+        # first coordinate should be a special coordinate instanciated in the seed files
+        Coordinate.first
     end
 
 end

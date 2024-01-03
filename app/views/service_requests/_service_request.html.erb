@@ -1,9 +1,12 @@
 <%= turbo_frame_tag service_request do %>
-    <%= content_tag :div, class: "service-request" do %>
-        <%= link_to service_request.id, service_request_path(service_request), data: { turbo_frame: "_top" } %>
-        <%= content_tag :div, class: "actions" do %>
-            <%= button_to "Delete", service_request_path(service_request), method: :delete %>
-            <%= link_to "Edit", edit_service_request_path(service_request), class: "button" %>
+    <%= content_tag :tr, class: "service-request" do %>
+        <%= content_tag :td do %>
+            <%= link_to service_request.service.label, service_request_path(service_request), data: { turbo_frame: "_top" } %>
+        <% end %>
+        <%= content_tag :td, service_request.service_request_status.label %>
+        <%= content_tag :td, service_request.created_at.strftime(Settings::Time::Format) %>
+        <%= content_tag :td, class: "actions" do %>
+            <%= button_to "Delete", service_request_path(service_request.id), method: :delete %>
         <% end %>
     <% end %>
 <% end %>

@@ -8,6 +8,8 @@ class Client < ApplicationRecord
     has_many :service_quotes, through: :service_requests
     belongs_to :coordinate, optional: true
 
+    accepts_nested_attributes_for :coordinate
+
     def active_service_requests
         service_requests
     end

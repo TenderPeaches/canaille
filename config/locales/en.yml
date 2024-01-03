@@ -44,11 +44,17 @@ en:
   alerts:
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"
+    need_set_client_coordinates: "You have must assign coordinates to your client account in order to proceed"
+  feedback:
+    client:
+      no_active_service_request: "No active service request"
   models:
     update: "Update"
     submit: "Submit"
     register: "Register"
     create: "Create"
+    created_dt: "Created on"
+    updated_dt: "Modified on"
     user:
       create_title: "Register"
       edit_title: "Modify"
@@ -110,9 +116,9 @@ en:
       model_name: "Service request"
       list_title: "Service requests"
       create_title: "New service request"
-      create_success: "Service request %{id} successfully created"
+      create_success: "Service request #%{id} successfully created"
       update_title: "Update service request"
-      update_success: "Service request %{id} successfully updated"
+      update_success: "Service request #%{id} successfully updated"
       destroy_success: "Service request successfully destroyed"
       service: "Service to perform"
       client: "Client for whom the service is performed"
@@ -181,3 +187,5 @@ en:
       portal: "Client Space"
       coordinate: "Delivery coordinates"
       coordinate_tip: "Where the services should be rendered"
+    service_request_status:
+      model_name: "Request status"

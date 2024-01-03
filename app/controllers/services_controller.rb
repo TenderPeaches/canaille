@@ -2,7 +2,6 @@ class ServicesController < ApplicationController
     before_action :set_service, only: %i[ show edit update destroy ]=
 
     def show 
-
     end 
 
     def new

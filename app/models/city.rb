@@ -11,4 +11,8 @@ class City < ApplicationRecord
             codes_for_select[code] = (i + 1).to_s
         end
     end
+
+    def self.none
+        City.find_by_name("N/A")
+    end
 end

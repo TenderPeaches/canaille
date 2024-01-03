@@ -29,7 +29,7 @@
         <% end %>
     <% end %>
     <%= content_tag :div, class: "form__checkbox" do %>
-        <%= check_box_tag :use_new_city, 1, false %>
+        <%= form.check_box :use_new_city, { class: "use-new-city" }, 1, false %>
         <%= form.label t('models.coordinate.use_new_city') %>
     <% end %>
     <%= content_tag :div, class: "form__group", id: "city-form" do %>

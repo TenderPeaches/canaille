@@ -1,6 +1,6 @@
 <%= turbo_frame_tag coordinate do %>
     <%= content_tag :div, class: "coordinate" do %>
-        <%= link_to "#{t('models.coordinate.model_name')} #{coordinate.id}: #{coordinate.civic_number} #{coordinate.street_name}, #{coordinate.city.name}, #{coordinate.city.province_code}", coordinate_path(coordinate), data: { turbo_frame: "_top" } %>
+        <%= link_to "#{t('models.coordinate.model_name')} #{coordinate.id}: #{coordinate.civic_number} #{coordinate.street_name}, #{coordinate.city&.name}, #{coordinate.city&.province_code}", coordinate_path(coordinate), data: { turbo_frame: "_top" } %>
         <%= content_tag :div, class: "actions" do %>
             <%= button_to "Delete", coordinate_path(coordinate), method: :delete %>
             <%= link_to "Edit", edit_coordinate_path(coordinate), class: "button" %>

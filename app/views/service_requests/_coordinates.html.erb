@@ -2,13 +2,16 @@
 <%= content_tag :div, class: "form__section" do %>
     <%= content_tag :div, class: "form__group" do %>
         <%= link_to t('models.service_request.use_client_address'), use_client_address_service_request_path, class: "button", data: { turbo_stream: true } %>
-        <%= link_to t('models.service_request.use_unique_address'), use_unique_address_service_request_path, class: "button", data: { turbo_stream: true } %>
+        <%= link_to t('models.service_request.use_unique_address'), use_unique_address_service_request_path, class: "button" %>
     <% end %>
     <%= turbo_frame_tag "service-request-coordinate" do %>
         <% if @service_request.coordinate %>
-            <%= service_request.coordinate %>
+            <% coordinate = @service_request.coordinate %>
         <% elsif @service_request.client&.coordinate %>
-            <%= service_request.coordinate %>
+            <% coordinate = @service_request.client.coordinate %>
+        <% end %>
+        <% if coordinate %>
+            <%= render partial: "coordinates/coordinate", locals: { coordinate: coordinate } %>
         <% end %>
     <% end %>
 <% end %>

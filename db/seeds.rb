@@ -1,10 +1,14 @@
 UserRole.create(name: "Admin")
 UserRole.create(name: "Employee")
 
-ServiceRequestStatus.create(label: "Open", description: "No quote has been approved for this service request")
+ServiceRequestStauts.create(label: "Created", description: "The request has been created but has not been published yet")
+ServiceRequestStatus.create(label: "Posted", description: "The request has been published but no quote has been approved for this service request")
 ServiceRequestStatus.create(label: "Cancelled", description: "The client has cancelled this service request")
 ServiceRequestStatus.create(label: "Quote Accepted", description: "The client has accepted a quote for this service request; No more quotes can be submitted")
 ServiceRequestStatus.create(label: "Closed", description: "The requested service has been provided")
+
+City.create(name: "N/A", province_code: "N/A")
+Coordinate.create(civic_number: "No location")
 
 category__mechanic = ServiceCategory.create(label: "Mechanic", description: "", parent: nil)
 category__mechanic__car_maintenance = ServiceCategory.create(label: "Car maintenance", description: "", parent: category__mechanic)
@@ -30,6 +34,9 @@ category__food = ServiceCategory.create(label: "Food", description: "", parent: 
 category__catering = ServiceCategory.create(label: "Catering", description: "", parent: category__food)
 category__leftovers = ServiceCategory.create(label: "Leftovers", description: "", parent: category__food)
 category__other = ServiceCategory.create(label: "Other", description: "", parent: nil)
+
+Service.create(label: "Custom", description: "Catch-all service", category__custom)
+Service.create(label: "Unknown", description: "Unknown service", category__custom)
 
 Service.create(label: "Car inspection", description: "", service_category: category__mechanic__car_maintenance)
 Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__car_maintenance)

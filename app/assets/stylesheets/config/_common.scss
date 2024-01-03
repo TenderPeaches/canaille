@@ -6,33 +6,57 @@
     color: var(--color-accent-light);       /* clash with text (by not using secondary color) and background (by not using primary) */
 }
 
+/* content is whatever content is the central piece of the display  */ 
 .content {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    width: calc(min(100vw, var(--max-content-width--screen)));
+    margin: auto;                                                   /* auto center */
+    display: flex;                                                  /* vertical flex */
+    flex-direction: column;                                         /* vertical flex */
+    align-content: center;                                          /* align items along center axis */
+    width: calc(min(100vw, var(--max-content-width--screen)));      /* set upper boundary on content width */ 
     /* max-width: var(--max-content-width--phone); for now design everything as if for phone */
 }
 
+/* force-hidden elements */
 .hidden {
     display: none;
 }
 
+/* actions are usually buttons/CTAs located within a row or form */
 .actions {
-    display: flex;
-    flex: 0 0 auto;
-    align-self: flex-start;
-    gap: var(--size-xs);
+    display: flex;                                                  /* display in a even row/column */
+    flex: 0 0 auto;                                                 /* harmonize if part of a flex dispaly */
+    align-self: flex-start;                                         /* ? */
+    gap: var(--size-xs);                                            /* internal spacing */
+    justify-content: center;                                        /* spread buttons evenly */
 }
 
+/* bigger text */
 .text--big {
     font-size: 1.5rem;
 }
 
+/* displays stuff in a line, usually for multiple bits of data that are meant to be displayed as a single block/line */ 
 .line {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+/* uses same style as tables, but for displaying elements in a non-table layout */
+.card {
+    width: 100%;                                            /* assume that cards fill their space by default, overwrite if necessary */
+    border-style: var(--default-border-style);              /* standard */
+    border-width: var(--thick-border-width);                /* highlight the content within */ 
+    border-color: var(--color-primary);                     /* mesh with background */
+    margin: var(--size-m);                                  /* presume that cards could use some spacing around them */
+    padding: var(--size-m);                                 /* internal spacing */ 
+
+    h1, h2, h3 {
+        margin-bottom: var(--size-xl);                      /* large spacing below for large card headers */
+    }
+
+    h4, h5, h6 {
+        margin-bottom: var(--size-m);                       /* medium spacing below for small card headers */
+    }
 }

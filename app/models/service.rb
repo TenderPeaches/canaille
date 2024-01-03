@@ -9,4 +9,8 @@ class Service < ApplicationRecord
     has_many :service_requests
     has_many :service_offers
     has_many :service_quotes, through: :service_requests
+
+    def self.unknown
+        Service.find_by_label("Unknown") || Service.first
+    end
 end

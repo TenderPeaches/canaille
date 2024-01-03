@@ -1,0 +1,15 @@
+<%= content_tag :table do %>
+    <%= content_tag :thead do %>
+        <%= content_tag :tr do %>
+            <%= content_tag :th, t('models.service.model_name') %>
+            <%= content_tag :th, t('models.service_request_status.model_name') %>
+            <%= content_tag :th, t('models.created_at') %>
+            <%= content_tag :th %> <%# for the actions cell %>
+        <% end %>
+    <% end %>
+    <%= content_tag :tbody do %>
+        <% service_requests.each do |request| %>
+            <%= render partial: "service_requests/service_request", locals: { service_request: request } %>
+        <% end %>
+    <% end %>
+<% end %>

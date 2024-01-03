@@ -98,6 +98,7 @@ table {
  /* data table header cells */
  table th {
     background: var(--color-primary-darkest);               /* slightly lighter to differenciate from the data rows */
+    color: var(--color-primary-white);                      /* light color to contrast with dark background */
     border-style: var(--thin-border-width);                 /* add column borders */
     border-color: var(--color-primary-dark);                /* use darker to emphasis header */
     border-style: var(--default-border-style);              /* standard */

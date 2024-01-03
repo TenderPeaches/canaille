@@ -7,7 +7,11 @@
     <% end %>
     <%= turbo_frame_tag "service-requests" do %>
         <%= tag.div class: "service-requests-list" do %>
-            <% @user.client.active_service_requests %>
+            <% if @user.client.active_service_requests %>
+                <%= render partial: "clients/service_requests_list", locals: { service_requests: @user.client.active_service_requests } %>
+            <% else %>
+                <%= t('feedback.client.no_active_service_request') %>
+            <% end %>
         <% end %>
     <% end %>
     <%= tag.div class: "menu" do %>

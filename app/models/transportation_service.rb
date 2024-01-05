@@ -9,5 +9,5 @@ class TransportationService < ApplicationRecord
     belongs_to :departure_city, class_name: "City"
     belongs_to :arrival_city, class_name: "City"
 
-    validates :arrival_time, comparison: { greater_than_or_equal_to: departure_time }
+    validates :arrival_time, comparison: { greater_than_or_equal_to: :departure_time }
 end

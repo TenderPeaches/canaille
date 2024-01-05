@@ -1,6 +1,6 @@
 class ServiceRequestsController < ApplicationController
     before_action :set_service_request, only: %i[ show edit update destroy ]
-    before_action :set_or_new_service_request, only: %i[ use_client_address]
+    before_action :set_or_new_service_request, only: %i[ use_client_address use_unique_address ]
     before_action :authorize, only: %i[ show create edit update destroy use_client_address ]
 
     def show 
@@ -52,7 +52,7 @@ class ServiceRequestsController < ApplicationController
         @service_request.service_request_status = ServiceRequestStatus.default
         
         # set service request 
-        @service_request.service ||= Service.unknown
+        @service_request.service ||= Service.unknown   
 
         respond_to do |format| 
             if @service_request.save
@@ -109,33 +109,23 @@ class ServiceRequestsController < ApplicationController
         end 
         # use the user's client account's coordinates as the service_request coordinates
         @coordinate = @client.coordinate
-
+        
         # set the service request's client to be the user's client account
-        @service_request.client = @client        
+        @service_request.client = @client     
 
-        # simulate the form in order to properly print out the fields
-        #! to test
-        ActionController::Base.helpers.fields model: @service_request do |form|
-            form.fields_for :client do |client_form|
-                client_form.fields_for :coordinate do |client_coordinate_form|
-                    @form = client_coordinate_form
-
-                    respond_to do |format|
-                        format.html 
-                        format.turbo_stream
-                    end
-                end
-            end
+        respond_to do |format|
+            format.html 
+            format.turbo_stream
         end
     end
 
     def use_unique_address
-        @coordinate = Coordinate.new 
-        
+        @service_request.coordinate ||= Coordinate.new
         respond_to do |format|
             format.html
             format.turbo_stream { render 'use_unique_address' }
         end
+        
     end
 
     private 

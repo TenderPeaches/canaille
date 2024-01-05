@@ -55,36 +55,9 @@ class CoordinatesController < ApplicationController
 
     def use_new_city
         # need to discriminate depending on which form called this action, not very pretty but iiwii T.T
-        source = params[:source]
-        # from the coordinate form when creating/updating service requests
-        if source.include? "service_request"
-            @service_request = ServiceRequest.new
-            ActionController::Base.helpers.fields model: @service_request do |form|
-                @service_request.client = Client.new
-                form.fields_for :client do |client_form|
-                    @service_request.client.coordinate = Coordinate.new
-                    client_form.fields_for :coordinate do |client_coordinate_form|
-                        @service_request.client.coordinate.city = City.new
-                        client_coordinate_form.fields_for :city do |client_coordinate_city_form|     
-                            respond_to do |format|
-                                @form = client_coordinate_city_form
-                                format.turbo_stream
-                            end
-                        end
-                    end
-                end
-            end
-        # by default, use a coordinate form (probably should never happen, as coordinates on their own don't serve any purpose so most requests should be coming through other forms, is just leftover from initial tinkering)
-        else 
-            ActionController::Base.helpers.fields model: @coordinate do |form|
-                form.fields_for :city, City.new do |city_form|
-                    respond_to do |format|
-                        format.html { render partial: "cities/fields", form: city_form }
-                        @form = city_form           # cannot pass locals to stream, so use instance variable instead
-                        format.turbo_stream
-                    end
-                end
-            end
+        @source = params[:source]   
+        respond_to do |format|
+            format.turbo_stream
         end
     end
 

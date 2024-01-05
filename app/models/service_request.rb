@@ -18,10 +18,8 @@ class ServiceRequest < ApplicationRecord
     accepts_nested_attributes_for :client
     accepts_nested_attributes_for :service, reject_if: :all_blank
 
-    validates_associated :client
-
-    validates :min_price, comparison: { greater_than_or_equal_to: 0, less_than_or_equal_to: max_price }
-    validates :max_price, comparison: { greater_than_or_equal_to: min_price }
+    validates :min_price, comparison: { greater_than_or_equal_to: 0, less_than_or_equal_to: :max_price }, unless: -> { min_price.blank? }
+    validates :max_price, comparison: { greater_than_or_equal_to: :min_price }, unless: -> { max_price.blank? }
 
     def used_coordinate
         if coordinate

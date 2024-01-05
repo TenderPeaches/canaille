@@ -48,6 +48,8 @@ en:
   feedback:
     client:
       no_active_service_request: "No active service request"
+    service_category:
+      no_services: "No services for this service category"
   models:
     update: "Update"
     submit: "Submit"

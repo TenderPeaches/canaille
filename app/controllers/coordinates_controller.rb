@@ -54,10 +54,14 @@ class CoordinatesController < ApplicationController
     end
 
     def use_new_city
-        # need to discriminate depending on which form called this action, not very pretty but iiwii T.T
-        @source = params[:source]   
+        @coordinate.city = City.new 
+
         respond_to do |format|
-            format.turbo_stream
+            if (params[:source] == "service_request_coordinate_attributes_use_new_city")
+                format.turbo_stream { render "service_requests/use_new_city" }
+            elsif (params[:source] == "service_request_client_attributes_coordinate_attributes_use_new_city")
+                format.turbo_stream { render "clients/use_new_city" }
+            end
         end
     end
 

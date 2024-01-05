@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     collection do 
       get :use_client_address, as: :use_client_address
       get :use_unique_address, as: :use_unique_address
+      post :use_new_city, as: :use_new_city
+      post :use_existing_city, as: :use_existing_city
     end
   end
 

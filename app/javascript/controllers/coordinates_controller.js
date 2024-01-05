@@ -14,8 +14,9 @@ export default class extends Controller {
   listen__use_new_city_checkbox() {
     // "use new city" checkbox submit request on change
     document.querySelector('.use-new-city').addEventListener('change', async (event) => {
-      const url = document.querySelector('.use-new-city').checked ? '/coordinates/use_new_city' : '/coordinates/use_existing_city';
-      const request = new FetchRequest('post', url, { responseKind: "turbo-stream", query: { source: window.location.pathname } });
+      const url = document.querySelector('.use-new-city').checked ? '/service_requests/use_new_city' : '/coordinates/use_existing_city';
+      // pass along event target ID so that the controller can discriminate and point to the proper response, depending on which form the event was triggered from
+      const request = new FetchRequest('post', url, { responseKind: "turbo-stream", query: { source: event.target.id } });
       const response = await request.perform();
     });
   }

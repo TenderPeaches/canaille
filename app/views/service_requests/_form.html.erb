@@ -20,7 +20,7 @@
         <%= content_tag :h2 do %>
             <%= t('models.service_request.coordinate') %>
         <% end %>
-        <%= turbo_frame_tag "clients-fields" do %>
+        <%= turbo_frame_tag "coordinates-fields" do %>
             <%# if user is not signed in %>
             <% if !user_signed_in? %>
                 <% # request a login %>

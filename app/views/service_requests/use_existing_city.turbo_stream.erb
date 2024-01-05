@@ -1,0 +1,9 @@
+<%= turbo_stream.update "city-select" do %>
+    <% form_for @service_request do |form| %>
+        <%= form.fields_for :coordinate do |coordinate_form| %>
+            <%= coordinate_form.label t('models.coordinate.city') %>
+            <%= coordinate_form.collection_select :city_id, City.all, :id, :name %>   
+        <% end %>
+    <% end %>
+<% end %>
+<%= turbo_stream.update "city-form" %>

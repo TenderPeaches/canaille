@@ -1,6 +1,7 @@
 class ServiceRequestsController < ApplicationController
     before_action :set_service_request, only: %i[ show edit update destroy ]
-    before_action :set_or_new_service_request, only: %i[ use_client_address use_unique_address ]
+    before_action :set_or_new_service_request, only: %i[ use_client_address use_unique_address use_new_city use_existing_city ]
+    before_action :set_or_new_city, only: %i[ use_new_city use_existing_city ]
     before_action :authorize, only: %i[ show create edit update destroy use_client_address ]
 
     def show 
@@ -125,7 +126,17 @@ class ServiceRequestsController < ApplicationController
             format.html
             format.turbo_stream { render 'use_unique_address' }
         end
-        
+    end
+
+    def use_new_city
+
+        respond_to do |format|
+            if (params[:source] == "service_request_coordinate_attributes_use_new_city")
+                format.turbo_stream { render "service_requests/use_new_city" }
+            elsif (params[:source] == "service_request_client_attributes_coordinate_attributes_use_new_city")
+                format.turbo_stream { render "clients/use_new_city" }
+            end
+        end
     end
 
     private 
@@ -133,6 +144,12 @@ class ServiceRequestsController < ApplicationController
         unless set_service_request
             @service_request = ServiceRequest.new
         end
+    end
+
+    def set_or_new_city 
+        @service_request.coordinate ||= Coordinate.new
+        @service_request.coordinate.city ||= City.new
+
     end
 
     def set_service_request 

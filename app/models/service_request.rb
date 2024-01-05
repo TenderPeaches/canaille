@@ -20,6 +20,9 @@ class ServiceRequest < ApplicationRecord
 
     validates_associated :client
 
+    validates :min_price, comparison: { greater_than_or_equal_to: 0, less_than_or_equal_to: max_price }
+    validates :max_price, comparison: { greater_than_or_equal_to: min_price }
+
     def used_coordinate
         if coordinate
             coordinate

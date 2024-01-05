@@ -10,6 +10,8 @@ class Client < ApplicationRecord
 
     accepts_nested_attributes_for :coordinate
 
+    validates :email_address, presence: true
+
     def active_service_requests
         service_requests
     end

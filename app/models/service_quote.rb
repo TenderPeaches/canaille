@@ -9,4 +9,6 @@ class ServiceQuote < ApplicationRecord
     belongs_to :service_provider
     belongs_to :user
     belongs_to :status, class_name: "ServiceQuoteStatus"
+
+    validates :price, comparison: { greater_than_or_equal_to: 0 }
 end

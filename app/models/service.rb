@@ -10,6 +10,8 @@ class Service < ApplicationRecord
     has_many :service_offers
     has_many :service_quotes, through: :service_requests
 
+    validates :label, uniqueness: true
+
     def self.unknown
         Service.find_by_label("Unknown") || Service.first
     end

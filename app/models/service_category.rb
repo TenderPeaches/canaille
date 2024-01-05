@@ -9,6 +9,8 @@ class ServiceCategory < ApplicationRecord
 
   scope :top_level, -> { where(parent: nil) }
 
+  validates :label, uniqueness: true
+
   # find all parents + self, in top-down order, to display as breadcrumbs
   def breadcrumbs
     current = self

@@ -1,5 +1,10 @@
+# t.name
+# t.province_code
 class City < ApplicationRecord
     has_many :coordinates
+
+    validates :name, presence: true 
+    validates :province_code, inclusion: { in: province_codes }
 
     def self.province_codes
         ["QC", "ON", "NB", "NS", "PEI"]

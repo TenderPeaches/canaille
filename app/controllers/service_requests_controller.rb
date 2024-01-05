@@ -83,8 +83,10 @@ class ServiceRequestsController < ApplicationController
     def destroy
         @service_request.destroy
 
+        @remaining_requests_count = current_user.client.active_service_requests
+
         respond_to do |format|
-            format.html { redirect_to user_service_requests_path(@user.id), notice: I18n.t('models.service_request.destroy_success') }
+            format.html { redirect_to client_portal_path(current_user.id), notice: I18n.t('models.service_request.destroy_success') }
             format.turbo_stream
         end
     end

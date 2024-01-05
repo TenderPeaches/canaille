@@ -1,4 +1,4 @@
 x Delete service_requst
-* Feedback on service_request delete
+x Feedback on service_request delete
 * Show/Edit service_request
 * Service_Provider stuff

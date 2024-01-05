@@ -1,1 +1,5 @@
 <%= turbo_stream.remove @service_request %>
+
+<% if @remaining_requests_count == 0 %>
+    <%= turbo_stream.update "service-requests-list" %>
+<% end %>

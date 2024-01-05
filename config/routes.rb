@@ -24,17 +24,21 @@ Rails.application.routes.draw do
     # user/[:user_id]/service_provider_accesses (new/create/index)
     resources :user_service_provider_accesses, as: :service_provider_accesses, shallow: true
   end 
-  
+=begin
   # /service_request
-  resources :service_requests do
-    # service request form actions
-    member do 
+  resource :service_request do
       # /service_request/use_client_address
       get :use_client_address, as: :use_client_address
       # /service_request/use_unique_address
       get :use_unique_address, as: :use_unique_address
-    end
   end 
+=end
+  resources :service_requests do 
+    collection do 
+      get :use_client_address, as: :use_client_address
+      get :use_unique_address, as: :use_unique_address
+    end
+  end
 
   scope "/portal" do
     get :client, to: "clients#portal", as: :client_portal
@@ -47,7 +51,7 @@ Rails.application.routes.draw do
       get :portal, as: :portal
     end
     # clients/[:client_id]/service_requests (new/create/index)
-    resources :service_requests, shallow: true
+    #resources :service_requests, shallow: true
     # clients/[:client_id]/service_quotes (new/create/index)
     resources :service_quotes, shallow: true
   end

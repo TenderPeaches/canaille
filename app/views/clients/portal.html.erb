@@ -5,13 +5,11 @@
     <%= content_tag :div, class: "client-data" do %>
         <%= render partial: "clients/data", locals: { client: @user.client, allow_edit: true } %>
     <% end %>
-    <%= turbo_frame_tag "service-requests" do %>
-        <%= tag.div class: "service-requests-list" do %>
-            <% if @user.client.active_service_requests %>
-                <%= render partial: "clients/service_requests_list", locals: { service_requests: @user.client.active_service_requests } %>
-            <% else %>
-                <%= t('feedback.client.no_active_service_request') %>
-            <% end %>
+    <%= tag.div id: "service-requests-list" do %>
+        <% if not @user.client.active_service_requests.empty? %>
+            <%= render partial: "clients/service_requests_list", locals: { service_requests: @user.client.active_service_requests } %>
+        <% else %>
+            <%= t('feedback.client.no_active_service_request') %>
         <% end %>
     <% end %>
     <%= tag.div class: "menu" do %>

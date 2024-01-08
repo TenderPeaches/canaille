@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   scope module: :clients do
     get "client/service_request/:id", to: "service_requests#show", as: :client_service_request
     get "client/service_request/:id/service_providers", to: "service_requests#find_providers", as: :find_service_request_providers
+    post "client/service_request/:id/cancel", to: "service_requests#cancel", as: :cancel_service_request
+    post "client/service_request/:id/activate", to: "service_requests#activate", as: :activate_service_request
   end
 
 

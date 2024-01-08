@@ -37,17 +37,20 @@ en:
     need_service: "I need a service"
     can_offer_service: "I can offer services"
     find_service_providers: "Find service providers"
+    back_to_portal: "Back to portal"
   keywords:
     optional: "Optional"
     welcome: "Welcome, %{name}"
     no_blank: "No %{thing}"
     add_blank: "Add %{thing}"
     cancel_blank: "Cancel %{cancelled}"
+    activate_blank: "Actiate %{activated}"
     unspecified: "not specified"
   alerts:
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"
     need_set_client_coordinates: "You have must assign coordinates to your client account in order to proceed"
+    wrong_client: "You are not authorized to view other clients' data"
   feedback:
     confirm_delete: "Are you sure you wish to delete %{deleted}"
     client:

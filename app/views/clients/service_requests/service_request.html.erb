@@ -37,6 +37,11 @@
     <% end %>
     <%= tag.div class: "menu" do %>
         <%= link_to t('cta.find_service_providers'), find_service_request_providers_path(@service_request), class: "button" %>
-        <%= link_to t('keywords.cancel_blank', cancelled: t('models.service_request.model_name')), service_requests_path(@service_request), method: :post, class: "button" %>
+        <% if @service_request.cancellable %>
+            <%= link_to t('keywords.cancel_blank', cancelled: t('models.service_request.model_name')), cancel_service_request_path(@service_request), method: :post, class: "button", method: :post %>
+        <% elsif @service_request.activable %>
+            <%= link_to t('keywords.activate_blank', activated: t('models.service_request.model_name')), activate_service_request_path(@service_request), method: :post %>
+        <% end %>
+        <%= link_to t('cta.back_to_portal'), client_portal_path, class: "button" %>
     <% end %>
 <% end %>

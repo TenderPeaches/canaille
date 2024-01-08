@@ -39,4 +39,12 @@ class ServiceRequest < ApplicationRecord
     def quotes
         service_quotes.where(status: [ServiceQuoteStatus.open, ServiceQuoteStatus.closed])
     end
+
+    def cancellable 
+        [ServiceRequestStatus.created, ServiceRequestStatus.posted, ServiceRequestStatus.accepted].include? service_request_status
+    end
+
+    def activable
+        service_request_status == ServiceRequestStatus.cancelled
+    end
 end

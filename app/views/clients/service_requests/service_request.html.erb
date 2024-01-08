@@ -1,0 +1,42 @@
+<%= content_tag :h2, t('models.service_request.model_name') %>
+<%= content_tag :div, class: "card service-request" do %>
+    <%= tag.div class: "binome" do %>
+        <%= content_tag :div, class: "field" do %>
+            <%= tag.span "#{t('models.service_request.service')}", class: "label" %>
+            <%= tag.span @service_request.service.label %>
+        <% end %>
+        <%= content_tag :div, class: "field" do %>
+            <%= tag.span "#{t('models.service_request.coordinate')}", class: "label" %>
+            <%= render partial: "coordinates/data", locals: { coordinate: @service_request.used_coordinate } %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "binome" do %>
+        <%= content_tag :div, class: "field" do %>
+            <%= tag.span "#{t('models.service_request.min_price')}", class: "label" %>
+            <%= @service_request.min_price || t('keywords.unspecified') %>
+        <% end %>
+        <%= content_tag :div, class: "field" do %>
+            <%= tag.span "#{t('models.service_request.max_price')}", class: "label" %>
+            <%= @service_request.max_price || t('keywords.unspecified') %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "binome" do %>
+        <%= tag.div class: "field" do %>
+            <%= tag.span "#{t('models.service_request.service_request_status')}", class: "label" %>
+            <%= @service_request.status %>
+        <% end %>
+        <%= tag.div class: "field" do %>
+            <%= tag.span "#{t('models.service_request.notes')}", class: "label" %>
+            <% if !@service_request.notes.empty? %>
+                <%= @service_request.notes %>
+            <% end %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "pending-quotes" do %>
+        <%= render partial: "clients/service_requests/pending_quotes", locals: { service_request: @service_request } %>
+    <% end %>
+    <%= tag.div class: "menu" do %>
+        <%= link_to t('cta.find_service_providers'), find_service_request_providers_path(@service_request), class: "button" %>
+        <%= link_to t('keywords.cancel_blank', cancelled: t('models.service_request.model_name')), service_requests_path(@service_request), method: :post, class: "button" %>
+    <% end %>
+<% end %>

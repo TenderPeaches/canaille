@@ -1,0 +1,17 @@
+<% unless service_request.quotes.empty? %>
+    <%= tag.table do %>
+        <%= tag.thead do %>
+            <%= tag.tr do %>
+                <%= tag.th t('models.service_provider.model_name') %>
+                <%= tag.th t('models.service_quote.price') %>
+                <%= tag.th t('models.service_quote.notes') %>
+                <%= tag.th t('models.service_quote.created_dt') %>
+            <% end %>
+        <% end %>
+        <% service_request.quotes.each do |quote| %>
+            <%= render partial: "clients/service_requests/service_quote", locals: { service_quote: quote } %>
+        <% end %>
+    <% end %>
+<% else %>
+    <%= tag.div t('feedback.service_request.no_service_quote'), class: "alert" %>
+<% end %>

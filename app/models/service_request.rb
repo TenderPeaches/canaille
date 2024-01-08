@@ -13,6 +13,7 @@ class ServiceRequest < ApplicationRecord
     belongs_to :client
     belongs_to :coordinate, optional: true
     belongs_to :service_request_status
+    has_many :service_quotes
 
     accepts_nested_attributes_for :coordinate
     accepts_nested_attributes_for :client
@@ -29,5 +30,13 @@ class ServiceRequest < ApplicationRecord
         else
             Coordinate.none
         end
+    end
+
+    def status
+        service_request_status&.label
+    end
+
+    def quotes
+        service_quotes.where(status: [ServiceQuoteStatus.open, ServiceQuoteStatus.closed])
     end
 end

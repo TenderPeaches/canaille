@@ -9,7 +9,7 @@
     <% end %>
     <%= content_tag :tbody do %>
         <% service_requests.each do |request| %>
-            <%= render partial: "service_requests/service_request", locals: { service_request: request } %>
+            <%= render partial: "service_requests/client_service_request", locals: { service_request: request } %>
         <% end %>
     <% end %>
 <% end %>

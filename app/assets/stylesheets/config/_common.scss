@@ -8,6 +8,7 @@
 
 /* content is whatever content is the central piece of the display  */ 
 .content {
+    position: relative;
     margin: auto;                                                   /* auto center */
     display: flex;                                                  /* vertical flex */
     flex-direction: column;                                         /* vertical flex */
@@ -43,20 +44,34 @@
     align-items: center;
 }
 
-/* uses same style as tables, but for displaying elements in a non-table layout */
-.card {
-    width: 100%;                                            /* assume that cards fill their space by default, overwrite if necessary */
-    border-style: var(--default-border-style);              /* standard */
-    border-width: var(--thick-border-width);                /* highlight the content within */ 
-    border-color: var(--color-primary);                     /* mesh with background */
-    margin: var(--size-m);                                  /* presume that cards could use some spacing around them */
-    padding: var(--size-m);                                 /* internal spacing */ 
-
-    h1, h2, h3 {
-        margin-bottom: var(--size-xl);                      /* large spacing below for large card headers */
+/* for stuff that is displayed as a pair of elements, tucked alongside the edges */
+.binome {
+    display: flex;                                      /* horizontal flex */
+    flex-direction: row;                                /* horizontal flex */
+    justify-content: space-between;                     /* space between the elements, none between the edges */
+    
+    & > * {
+        flex: 1 1 50%;
     }
 
-    h4, h5, h6 {
-        margin-bottom: var(--size-m);                       /* medium spacing below for small card headers */
+    /* tuck the left-most element to the left */
+    & > *:first-child {
+        text-align: left;
     }
+
+    /* tuck the right-most element to the right */
+    & > *:last-child {
+        text-align: right;
+    }
+}
+
+/* typically involves a label and a data bit, display can vary depending on device width */ 
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+/* labels present data, but contain none */
+.label {
+    color: var(--color-primary-dark);                     /* use a different color than regular text, but one that meshes with background */
 }

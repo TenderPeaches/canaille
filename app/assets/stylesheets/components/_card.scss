@@ -1,0 +1,27 @@
+
+
+/* uses a similar style as tables, but for displaying elements in a non-table layout */
+.card, .alert {
+    width: 100%;                                            /* assume that cards fill their space by default, overwrite if necessary */
+    border-style: var(--default-border-style);              /* standard */
+    border-width: var(--thick-border-width);                /* highlight the content within */ 
+    border-color: var(--color-primary);                     /* mesh with background */
+    margin: var(--size-m) 0;                                /* cards should have some spacing above and under them, to space out the borders */
+    padding: var(--size-m);                                 /* internal spacing */ 
+
+    h1, h2, h3 {
+        margin-bottom: var(--size-xl);                      /* large spacing below for large card headers */
+    }
+
+    h4, h5, h6 {
+        margin-bottom: var(--size-m);                       /* medium spacing below for small card headers */
+    }
+    
+    & > div {
+        margin: var(--size-m);                              /* default spacing between inner card elements */
+    }
+}
+
+.alert {
+    border-color: var(--color-error);
+}

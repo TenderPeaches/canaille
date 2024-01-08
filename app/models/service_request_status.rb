@@ -8,4 +8,9 @@ class ServiceRequestStatus < ApplicationRecord
     def self.default
         ServiceRequestStatus.first # refer to the seed file, whichever service request status is first declare will be default
     end
+
+    def self.cancelled
+        ServiceRequestStatus.where(label: "Cancelled").first
+    end
+
 end

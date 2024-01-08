@@ -36,20 +36,26 @@ en:
     log_out: "Log out"
     need_service: "I need a service"
     can_offer_service: "I can offer services"
+    find_service_providers: "Find service providers"
   keywords:
     optional: "Optional"
     welcome: "Welcome, %{name}"
     no_blank: "No %{thing}"
     add_blank: "Add %{thing}"
+    cancel_blank: "Cancel %{cancelled}"
+    unspecified: "not specified"
   alerts:
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"
     need_set_client_coordinates: "You have must assign coordinates to your client account in order to proceed"
   feedback:
+    confirm_delete: "Are you sure you wish to delete %{deleted}"
     client:
       no_active_service_request: "No active service request"
     service_category:
       no_services: "No services for this service category"
+    service_request:
+      no_service_quote: "No quotes have yet been submitted for this service request"
   models:
     update: "Update"
     submit: "Submit"
@@ -131,6 +137,7 @@ en:
       expected_price_range: "Expected price range"
       use_client_address: "Use my address"
       use_unique_address: "Use another address"
+      service_request_status: "Status"
     service_offer: 
       model_name: "Service offer"
       list_title: "Service offers"
@@ -153,6 +160,7 @@ en:
       price: "Quoted price"
       notes: "Service provider notes"
       status: "Quote status"
+      created_dt: "Date submitted"
     coordinate:
       model_name: "Coordinates"
       list_title: "Coordinates"

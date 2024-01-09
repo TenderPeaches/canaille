@@ -14,5 +14,4 @@ class ServiceProvider < ApplicationRecord
     belongs_to :coordinate, optional: true
 
     accepts_nested_attributes_for :coordinate
-
 end

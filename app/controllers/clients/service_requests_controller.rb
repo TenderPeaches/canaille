@@ -7,11 +7,21 @@ class Clients::ServiceRequestsController < ApplicationController
     end
 
     def cancel
-        @service_request.service_request_status = ServiceRequestStatus.cancelled if assert_user
+        if assert_user
+            @service_request.service_request_status = ServiceRequestStatus.cancelled
+        end
     end
 
     def activate 
-        @service_request.service_request_status = ServiceRequestStatus.created if assert_user
+        if assert_user
+            @service_request.service_request_status = ServiceRequestStatus.created
+        end
+    end
+
+    def find_providers
+        if assert_user
+            render 'clients/service_requests/find_service_providers'
+        end
     end
 
     private

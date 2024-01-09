@@ -38,6 +38,7 @@ en:
     can_offer_service: "I can offer services"
     find_service_providers: "Find service providers"
     back_to_portal: "Back to portal"
+    back: "Back"
   keywords:
     optional: "Optional"
     welcome: "Welcome, %{name}"
@@ -152,6 +153,7 @@ en:
       description: "Description"
       min_price: "Minimum price"
       max_price: "Maximum price"
+      price_range: "Price"
     service_quotes: 
       model_name: "Service quote"
       list_title: "Service quotes"

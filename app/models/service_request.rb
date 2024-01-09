@@ -47,4 +47,10 @@ class ServiceRequest < ApplicationRecord
     def activable
         service_request_status == ServiceRequestStatus.cancelled
     end
+
+    # returns a list of service providers who could fulfill this request, depending on the client's preferences
+    def find_service_offers
+        #! need to add geography-related factors, so closer service providers show up first
+        ServiceOffer.where(service_id: service_id).includes(:service_provider)
+    end
 end

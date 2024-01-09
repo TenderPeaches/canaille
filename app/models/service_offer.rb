@@ -11,4 +11,8 @@ class ServiceOffer < ApplicationRecord
 
     validates :min_price, comparison: { greater_than_or_equal_to: 0, less_than_or_equal_to: :max_price }
     validates :max_price, comparison: { greater_than_or_equal_to: :min_price }
+
+    def price_range
+        "#{'%.2f' % min_price}$ - #{'%.2f' % max_price}$"
+    end
 end

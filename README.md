@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A web app that seeks to link up people who need some kind of services with people who can provide them. 
 
-Things you may want to cover:
+For someone seeking services, their options are two-fold: they can create a public service request which service providers can quote them for or they can browse service providers that offer the given service and contact them directly. 
 
-* Ruby version
+For someone - or a business - offering services, their options mirror the clients'. They can browse public service requests to offer individual quotes or they can offer a list of services with baked-in prices for the clients' to browse. 
 
-* System dependencies
+The goal is to help bridge the gap between customers and businesses without defining how transactions are concluded, leaving it up to the involved parties. This removes the application from having to implement transactional features and to prevent liability in case of payment disputes, as the transactions occur directly between the clients and the service providers.
 
-* Configuration
+Ruby v3.1.3
+Rails v7.0.4
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run bin/rails s
+Access 127.0.0.1:3000 on your browser

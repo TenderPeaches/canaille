@@ -1,41 +1,57 @@
-<%= content_tag :h3 do %>
-    <%= "#{@service_provider.name}" %>
-<% end %>
-<%= tag.div do %>
-    <%= tag.div class: "line" do %>
-        <%= content_tag :div, class: "service_provider-line" do %>
+<%= content_tag :h2, @service_provider.name %>
+<%= tag.div class: "card service-provider" do %>
+    <%= tag.div class: "binome" do %>
+        <%= content_tag :div do %>
             <%= "#{@service_provider.description}" %>
         <% end %>
-    <% end %>
-    <%= tag.div class: "line" do %>
-        <%= tag.div do %>
-            <%= "#{t('models.service_provider.schedule')}:" %>
-        <% end %>
-        <%= content_tag :div, class: "service_provider-line" do %>
+        <%= tag.div class: "field" do %>
+            <%= tag.span "#{t('models.service_provider.schedule')}:", class: "label" %>
             <%= "#{@service_provider.schedule}" %>
         <% end %>
     <% end %>
-    <%= tag.div class: "line" do %>
-        <%= content_tag :div, class: "service_provider-line" do %>
+    <%= tag.div class: "binome" do %>
+        <%= content_tag :div, class: "field" do %>
+            <%= tag.span t('models.service_provider.phone_number'), class: "label" %>
             <%= @service_provider.phone_number %>
         <% end %>
-    <% end %>
-    <%= tag.div class: "line" do %>
-        <%= content_tag :div, class: "service_provider-line" do %>
+        <%= content_tag :div, class: "field" do %>
+            <%= tag.span t('models.service_provider.email_address'), class: "label" %>
             <%= @service_provider.email_address %>
         <% end %>
     <% end %>
-    <%= tag.div class: "line" do %>
-        <%= content_tag :div, class: "service_provider-line" do %>
+    <%= tag.div class: "field" do %>
+        <%= content_tag :div do %>
+            <%= tag.span t('models.service_provider.coordinate'), class: "label" %>
             <%= @service_provider.coordinate %>
         <% end %>
     <% end %>
 <% end %>
 <%= turbo_frame_tag "service-provider-services" do %>
     <%= tag.div class: "service-provider-services" do %>
-        <%= content_tag :h3 do %>
-            <%= t('models.service.list_title') %>
+        <% if @service_provider.service_offers %>
+            <%= content_tag :h3, t('models.service.list_title') %>
+            <%= tag.table do %>
+                <%= tag.thead do %>
+                    <%= tag.tr do %>
+                        <%= tag.th t('models.service_category.model_name') %>
+                        <%= tag.th t('models.service.model_name') %>
+                        <%= tag.th t('models.service_offer.price_range') %>
+                        <%= tag.th t('models.service_offer.description') %>
+                    <% end %>
+                <% end %>
+                <%= tag.tbody do %>
+                    <% @service_provider.service_offers.each do |service_offer| %>
+                        <%= tag.tr do %>
+                            <%= tag.td service_offer.service.service_category.label %>
+                            <%= tag.td service_offer.service.label %>
+                            <%= tag.td service_offer.price_range %>
+                            <%= tag.td service_offer.description %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% else %>
+            <%= t('feedback.service_provider.no_service_offers') %>
         <% end %>
-        <%= @service_provider.service_offers %>
     <% end %>
 <% end %>

@@ -60,6 +60,8 @@ en:
       no_services: "No services for this service category"
     service_request:
       no_service_quote: "No quotes have yet been submitted for this service request"
+    serice_provider:
+      no_service_offers: "Contact the service provider directly for more information on the services they offer"
   models:
     update: "Update"
     submit: "Submit"
@@ -118,6 +120,7 @@ en:
       name: "Business name"
       description: "Description"
       schedule: "Availabilities"
+      coordinate: "Coordinates"
       phone_number: "Phone"
       email_address: "Email"
       contact_info: "Contact info"

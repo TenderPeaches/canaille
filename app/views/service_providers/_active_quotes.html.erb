@@ -1,0 +1,26 @@
+<%= turbo_frame_tag 'active-service-quotes' do %>
+    <% unless service_provider.active_quotes.empty? %>
+        <%= tag.table do %>
+            <%= tag.thead do %>
+                <%= tag.tr do %>
+                    <%= tag.th t('models.service.model_name') %>
+                    <%= tag.th t('models.service_quote.price') %>
+                    <%= tag.th t('models.service_quote.notes') %>
+                <% end %>
+            <% end %>
+            <%= tag.tbody do %>
+                <% service_provider.active_quotes.each do |quote| %>
+                    <%= tag.tr do %>
+                        <%= tag.td do %>
+                            <%= link_to quote.service_request.service.label, service_request_path(quote.service_request.id), class: "button" %>
+                        <% end %>
+                        <%= tag.td "#{number_with_precision(quote.price, precision: 2)}$" %>
+                        <%= tag.td quote.notes %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <%= t('feedback.service_provider.no_active_quotes') %>
+    <% end %>
+<% end %>

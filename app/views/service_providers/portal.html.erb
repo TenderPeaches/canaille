@@ -1,9 +1,7 @@
-<%= turbo_frame_tag 'active-service-quotes' do %>
-    <%= @service_provider.service_quotes %>
-<% end %>
+<%= render partial: "service_providers/active_quotes", locals: { service_provider: @service_provider } %>
 <%= turbo_frame_tag 'browse-service-requests' do %>
-    <%= link_to t('model.service_request.list_title'), service_provider_browse_service_requests_path(@service_provider) %>
+    <%= link_to t('models.service_request.list_title'), browse_service_requests_as_service_provider_path(@service_provider) %>
 <% end %>
-<%#! if user.service_provider_access.is_admin? %>
-    <%= render partial: 'service_providers/management_panel', locals: { service_provider: @service_provider } %>
-<%#! end %>
+<% if current_user.is_service_provider_admin? @service_provider %>
+    <%= render partial: 'service_providers/management_panel/management_panel', locals: { service_provider: @service_provider } %>
+<% end %>

@@ -1,14 +1,10 @@
 class ServiceProvidersController < ApplicationController
     before_action :set_service_provider, only: %i[ show edit update destroy ask_quote service_offers ]
-    before_action :set_user, only: %i[ new create update index_for_user destroy ]
+    before_action :set_user, only: %i[ new create updates destroy ]
     
     # maybe should be moved to another namespace
 
     def show
-    end
-
-    def index_for_user
-        @service_providers = @user.service_providers
     end
 
     def index_for_client
@@ -24,9 +20,14 @@ class ServiceProvidersController < ApplicationController
         @service_provider = ServiceProvider.new(service_provider_params)
 
         if @service_provider.save
-            redirect_to root_path
+
+            # assume whoever created the service provider is the admin, so create the user's access
+            if UserServiceProviderAccess.new(user_id: current_user.id, service_provider_id: @service_provider.id, user_role: UserRole.admin, grantor_id: current_user.id, active_from: Time.now)
+                redirect_to service_provider_portal_path
+            end
+            render 'new', status: :unprocessable_entity
         else
-            render 'new'
+            render 'new', status: :unprocessable_entity
         end
     end
 

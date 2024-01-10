@@ -37,6 +37,15 @@ class UsersController < ApplicationController
         @user = User.new
     end
 
+    def service_providers
+        @service_providers = ServiceProvider.joins(:user_service_provider_accesses).where(user_service_provider_accesses: { user: current_user })
+
+        if @service_providers.count == 1
+            @service_provider = @service_providers.first
+            render 'service_providers/portal'
+        end
+    end
+
     def create 
         @user = User.new(user_params.slice(:email, :username, :password))
 

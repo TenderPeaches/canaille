@@ -19,11 +19,13 @@ Rails.application.routes.draw do
     # users form actions 
     post :is_service_provider, on: :collection
     post :is_not_service_provider, on: :collection
-    # user/[:user_id]/service_providers (new/create/index)
-    resources :service_providers, shallow: true
     # user/[:user_id]/service_provider_accesses (new/create/index)
     resources :user_service_provider_accesses, as: :service_provider_accesses, shallow: true
   end 
+
+  scope :user do 
+    get :service_providers, controller: :users, action: :service_providers, as: :user_service_providers
+  end
   
   resources :service_requests do 
     collection do 
@@ -36,7 +38,7 @@ Rails.application.routes.draw do
 
   scope "/portal" do
     get :client, to: "clients#portal", as: :client_portal
-    get :service_provider, to: "service_provider#portal", as: :service_provider_portal
+    get :service_provider, to: "service_providers#portal", as: :service_provider_portal
   end
 
   # /clients
@@ -53,7 +55,11 @@ Rails.application.routes.draw do
     post "client/service_request/:id/activate", to: "service_requests#activate", as: :activate_service_request
   end
 
-
+  # /service_providers
+  scope :service_provider do 
+    get :browse_service_requests, to: "service_providers#browse_service_requests", as: :browse_service_requests_as_service_provider
+    get :quote_history, to: "service_providers#quote_history", as: :service_provider_quote_history
+  end
 
   # /cities
   resources :cities

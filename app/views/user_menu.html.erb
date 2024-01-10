@@ -1,4 +1,4 @@
 <%= content_tag :div, class: "menu" do %>
-    <%= link_to t("models.service_request.list_title"), clients_portal_path %>
-    <%= link_to t("models.service_provider.list_title"), service_providers_portal_path %>
+    <%= link_to t("models.service_request.list_title"), client_portal_path, class: "button" %>
+    <%= link_to t("models.service_provider.list_title"), user_service_providers_path, class: "button" %>
 <% end %>

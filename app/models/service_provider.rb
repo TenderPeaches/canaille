@@ -14,4 +14,8 @@ class ServiceProvider < ApplicationRecord
     belongs_to :coordinate, optional: true
 
     accepts_nested_attributes_for :coordinate
+
+    def active_quotes
+        service_quotes.where(status: ServiceQuoteStatus.open)
+    end
 end

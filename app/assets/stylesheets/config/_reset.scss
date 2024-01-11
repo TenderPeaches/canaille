@@ -87,7 +87,7 @@ table {
     border-width: var(--thick-border-width);                /* highlight the content within */ 
     border-color: var(--color-primary);                     /* mesh with background */
     border-collapse: collapse;                              /* allows for predictable and consistent border placement */
-    margin: var(--size-m);                                  /* presume that tables need some spacing around them */
+    margin: var(--size-m) 0;                                /* add external spacing above, below */
  }
 
   /* data table data & header cells */

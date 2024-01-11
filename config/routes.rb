@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     collection do
       get :portal, as: :portal
     end
+    resources :service_offers
   end
 
   # /users 

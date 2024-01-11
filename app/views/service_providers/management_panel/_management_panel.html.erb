@@ -1,12 +1,9 @@
-<%= turbo_frame_tag 'services' do %>
-    <%= @service_provider.services %>
+<%= render partial: "service_providers/management_panel/service_offers", locals: { service_provider: service_provider } %>
+<%= render partial: "service_providers/management_panel/accesses", locals: { service_provider: service_provider } %>
+<%= turbo_frame_tag 'service-provider-form', class: "card" do %>
+    <%= tag.h3 t('keywords.edit_blank', edited: t('models.service_provider.model_name')) %>
+    <%= form_with model: service_provider do |form| %>
+        <%= render partial: 'service_providers/fields', locals: { service_provider: service_provider, form: form } %>
+    <% end %>
 <% end %>
-<%= turbo_frame_tag 'user-accesses' do %>
-    <%= @service_provider.user_service_provider_accesses%>
-<% end %>
-<%= turbo_frame_tag 'service-provider-form' do %>
-    <%= render 'service_providers/form', service_provider: @service_provider %>
-<% end %>
-<%= turbo_frame_tag 'quotes-list' do %>
-    <%= link_to t('models.service_provider.quote_history'), service_provider_quote_history_path(@service_provider) %>
-<% end %>
+<%= render partial: "service_providers/management_panel/quotes_history", locals: { service_provider: service_provider } %>

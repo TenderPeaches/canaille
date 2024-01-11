@@ -8,7 +8,7 @@
             <%= link_to t('models.client.model_name'), client_portal_path %>
         <% end %>
         <% if current_user.has_service_provider_access? %>
-            <%= link_to "#{t('keywords.my_blank', mine: t('models.service_provider.list_title'))}", user_service_providers_path(current_user.id) %>
+            <%= link_to "#{t('keywords.my_blank', mine: t('models.service_provider.list_title'))}", user_service_providers_path %>
         <% end %>
         <%= link_to t('cta.log_out'), destroy_user_session_path, data: { turbo_method: :delete } %>
     <% else %>

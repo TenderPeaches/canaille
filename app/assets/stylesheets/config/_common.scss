@@ -26,9 +26,9 @@
 .actions {
     display: flex;                                                  /* display in a even row/column */
     flex: 0 0 auto;                                                 /* harmonize if part of a flex dispaly */
-    align-self: flex-start;                                         /* ? */
+    align-items: center;                                            /* center vertically */
     gap: var(--size-xs);                                            /* internal spacing */
-    justify-content: center;                                        /* spread buttons evenly */
+    justify-content: space-around;                                  /* spread buttons evenly */
 }
 
 /* bigger text */

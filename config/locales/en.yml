@@ -80,8 +80,8 @@ en:
     submit: "Submit"
     register: "Register"
     create: "Create"
-    created_dt: "Created on"
-    updated_dt: "Modified on"
+    created_at: "Created on"
+    updated_at: "Modified on"
     user:
       model_name: "User"
       create_title: "Register"
@@ -157,7 +157,7 @@ en:
       contact_info: "Contact info"
       ask_quote: "Ask quote"
       portal: "Business portal"
-      quote_history: "Quote hisotry"
+      quote_history: "Quote history"
     service_request:
       model_name: "Service request"
       list_title: "Service requests"
@@ -199,7 +199,7 @@ en:
       price: "Quoted price"
       notes: "Service provider notes"
       status: "Quote status"
-      created_dt: "Date submitted"
+      created_at: "Date submitted"
     coordinate:
       model_name: "Coordinates"
       list_title: "Coordinates"
@@ -238,3 +238,5 @@ en:
       coordinate_tip: "Where the services should be rendered"
     service_request_status:
       model_name: "Request status"
+    service_quote_status:
+      model_name: "Status"

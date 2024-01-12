@@ -23,4 +23,9 @@ class ServiceProvider < ApplicationRecord
         # accesses are active until they're not - if an "inactive_from" time is specified, access is assumed to be revoked (or role changed)
         user_service_provider_accesses.where(inactive_from: nil)
     end
+
+    def quote_history
+        # reverse chronological order
+        service_quotes.order(created_at: :desc)
+    end
 end

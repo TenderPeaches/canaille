@@ -16,7 +16,7 @@
                 <% end %>
                 <%= tag.td service_offer.service_provider.phone_number %>
                 <%= tag.td service_offer.service_provider.email_address %>
-                <%= tag.td service_offer.price_range %>
+                <%= tag.td price_range(service_offer.min_price, service_offer.max_price) %>
             <% end %>
         <% end %>
     <% end %>

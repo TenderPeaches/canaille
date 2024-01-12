@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get :portal, as: :portal
     end
     resources :service_offers
+    resources :user_service_provider_accesses, as: :accesses
   end
 
   # /users 
@@ -20,8 +21,6 @@ Rails.application.routes.draw do
     # users form actions 
     post :is_service_provider, on: :collection
     post :is_not_service_provider, on: :collection
-    # user/[:user_id]/service_provider_accesses (new/create/index)
-    resources :user_service_provider_accesses, as: :service_provider_accesses, shallow: true
   end 
 
   scope :user do 

@@ -71,6 +71,12 @@
     flex-direction: column;
 }
 
+/* layout helper */
+.v-flex {
+    display: flex;
+    flex-direction: column;
+}
+
 /* labels present data, but contain none */
 .label {
     color: var(--color-primary-dark);                     /* use a different color than regular text, but one that meshes with background */

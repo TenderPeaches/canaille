@@ -1,7 +1,10 @@
 <%= tag.h2 @service_provider.name %>
-<%= render partial: "service_providers/active_quotes", locals: { service_provider: @service_provider } %>
-<%= turbo_frame_tag 'browse-service-requests' do %>
-    <%= link_to t('cta.find_service_requests'), browse_service_requests_as_service_provider_path(@service_provider), class: "button" %>
+<%= tag.div class: "card v-flex" do %>
+    <%= tag.h3 t('models.service_quote.list_title') %>
+    <%= render partial: "service_providers/active_quotes", locals: { service_provider: @service_provider } %>
+    <%= turbo_frame_tag 'browse-service-requests' do %>
+        <%= link_to t('cta.find_service_requests'), browse_service_requests_as_service_provider_path(@service_provider), class: "button" %>
+    <% end %>
 <% end %>
 <% if current_user.is_service_provider_admin? @service_provider %>
     <%= render partial: 'service_providers/management_panel/management_panel', locals: { service_provider: @service_provider } %>

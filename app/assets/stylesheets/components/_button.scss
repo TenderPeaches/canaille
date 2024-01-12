@@ -9,10 +9,11 @@ input[type="submit"], input[type="submit"]:hover, input[type="submit"]:active {
 button, input[type="submit"], .button {
     display: inline-block;
     padding: var(--size-xs) var(--size-m);                  /* keep it tight vertically but give some breathing room to the sides */
+    margin: var(--size-m);                                  /* external spacing to make the button pop */
     background: var(--color-primary-darker);                /* mesh with background, but use differnent lighting to hint at interactivity */
     background-origin: border-box;                          /* invisible borders with linear gradients */
     color: var(--color-primary-white);                      /* mesh with background, buttons are not assumed to be important */
-    border-color: var(--color-primary-white);                    /* mesh with background */
+    border-color: var(--color-primary-white);               /* mesh with background */
     border-radius: var(--default-border-radius);            /* more elegant, casual, "fun" */
     cursor: pointer;                                        /* standard */
     text-transform: uppercase;                              /* make these interactive features pop out by using caps */

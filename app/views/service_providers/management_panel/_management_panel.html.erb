@@ -4,6 +4,7 @@
     <%= tag.h3 t('keywords.edit_blank', edited: t('models.service_provider.model_name')) %>
     <%= form_with model: service_provider do |form| %>
         <%= render partial: 'service_providers/fields', locals: { service_provider: service_provider, form: form } %>
+        <%= form.submit t('keywords.update') %>
     <% end %>
 <% end %>
 <%= render partial: "service_providers/management_panel/quotes_history", locals: { service_provider: service_provider } %>

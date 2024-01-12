@@ -56,6 +56,9 @@ en:
     save: "Save"
     cancel: "Cancel"
     delete: "Delete"
+    update: "Update"
+    remove_access: "Remove access"
+    change_role: "Change role"
   alerts:
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"
@@ -95,6 +98,18 @@ en:
       list_title: "User roles"
       name: "Role"
       description: "Description"
+    user_service_provider_access:
+      model_name: "Service provider access"
+      list_title: "Users with service provider access"
+      create_title: "New access"
+      create_success: "User service provider access %{id} successfully granted"
+      edit_title: "Modify access"
+      update_title: "Update access"
+      update_success: "User service provider %{id} successfully updated"
+      destroy_success: "Service provider access successfully removed from user %{id}"
+      grantor: "Access granted by"
+      active_from: "Access activation date"
+      inactive_from: "Access removal date"
     session:
       create_title: "Login"
       username: "Username"
@@ -173,7 +188,7 @@ en:
       min_price: "Minimum price"
       max_price: "Maximum price"
       price_range: "Price"
-    service_quotes: 
+    service_quote: 
       model_name: "Service quote"
       list_title: "Service quotes"
       create_title: "New service quote"

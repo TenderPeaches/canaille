@@ -18,4 +18,9 @@ class ServiceProvider < ApplicationRecord
     def active_quotes
         service_quotes.where(status: ServiceQuoteStatus.open)
     end
+
+    def active_accesses
+        # accesses are active until they're not - if an "inactive_from" time is specified, access is assumed to be revoked (or role changed)
+        user_service_provider_accesses.where(inactive_from: nil)
+    end
 end

@@ -1,4 +1,35 @@
-
 <%= turbo_frame_tag 'user-accesses' do %>
-    <%= @service_provider.user_service_provider_accesses%>
+    <%= tag.h3 t('models.user_service_provider_access.list_title') %>
+    <%= tag.table do %>
+        <%= tag.thead do %>
+            <%= tag.tr do %>
+                <%= tag.th t('models.user.username') %>
+                <%= tag.th t('models.user.email') %>
+                <%= tag.th t('models.user_role.name') %>
+                <%= tag.th %>
+            <% end %>
+        <% end %>
+        <%= tag.tbody do %>
+            <% service_provider.active_accesses.each do |access| %>
+                <%= tag.tr id: dom_id(access) do %>
+                    <%= tag.td access.user.username %>
+                    <%= tag.td access.user.email %>
+                    <%= tag.td access.user_role.name %>
+                    <%= tag.td do %>
+                        <%= tag.div class: "actions" do %>
+                            <%= link_to t('keywords.change_role'), edit_service_provider_access_path(service_provider, access), class: "button" %>
+                            <%= link_to t('keywords.remove_access'), service_provider_access_path(service_provider, access), class: "button", method: :delete %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+            <%= turbo_frame_tag "new-user-service-provider-acccess" do %>
+                <%= tag.tr do %>
+                    <%= tag.td colspan: 4 do %>
+                        <%= link_to t('models.user_service_provider_access.create_title'), new_service_provider_access_path(service_provider), class: "button" %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
 <% end %>

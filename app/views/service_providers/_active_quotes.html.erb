@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'active-service-quotes', class: "card" do %>    
+<%= turbo_frame_tag 'active-service-quotes' do %>    
     <% unless service_provider.active_quotes.empty? %>
         <%= tag.table do %>
             <%= tag.thead do %>

@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "client-coordinate" do %>
+    <%= form_with model: @coordinate do |form| %>
+        <%= render partial: "coordinates/fields", locals: { form: form } %>
+        <%= form.submit t('keywords.edit_blank', edited: t('models.coordinate.model_name')) %>
+        <%= link_to t('keywords.cancel'), cancel_coordinate_edit_client(@client.id), class: "button" %>
+    <% end %>
+<% end %>

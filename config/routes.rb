@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   resources :clients do 
     member do
       get :portal, as: :portal
+      get :edit_coordinate, to: "clients#edit_coordinate", as: :edit_coordinate
+      get :cancel_edit_coordinate, to: "clients#cancel_edit_coordinate", as: :cancel_edit_coordinate
     end
   end
 

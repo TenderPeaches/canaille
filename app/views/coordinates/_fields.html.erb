@@ -29,7 +29,9 @@
         <% end %>
     <% end %>
     <%= content_tag :div, class: "form__checkbox" do %>
-        <%= form.check_box :use_new_city, { class: "use-new-city" }, 1, false %>
+        <%# add in the form object name, so that the stimulus controller can redirect it to the proper Rails controller %>
+        <%#! see if really necessary - could just all point to coordinate controller? %>
+        <%= form.check_box :use_new_city, { class: "use-new-city", data: { form: form.object.class.to_s.pluralize.underscore } }, 1, false %>
         <%= form.label t('models.coordinate.use_new_city') %>
     <% end %>
     <%= content_tag :div, class: "form__group", id: "city-form" do %>

@@ -3,11 +3,11 @@
         <%= t('keywords.welcome', name: @user.username) %>
     <% end %>
     <%= content_tag :div, class: "client-data" do %>
-        <%= render partial: "clients/data", locals: { client: @user.client, allow_edit: true } %>
+        <%= render partial: "clients/portal/data", locals: { client: @user.client, allow_edit: true } %>
     <% end %>
     <%= tag.div id: "service-requests-list" do %>
         <% if not @user.client.active_service_requests.empty? %>
-            <%= render partial: "clients/service_requests_list", locals: { service_requests: @user.client.active_service_requests } %>
+            <%= render partial: "clients/portal/service_requests_list", locals: { service_requests: @user.client.active_service_requests } %>
         <% else %>
             <%= t('feedback.client.no_active_service_request') %>
         <% end %>

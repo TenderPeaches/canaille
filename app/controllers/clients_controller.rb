@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-    before_action :set_client, only: %i[ show edit update destroy ]
+    before_action :set_client, only: %i[ show edit update destroy edit_coordinate cancel_edit_coordinate]
 
     def show 
 
@@ -21,8 +21,21 @@ class ClientsController < ApplicationController
         end
     end
 
-    def new_coordinates
+    def new_coordinate
 
+    end
+
+    def edit_coordinate
+        @coordinate = @client.coordinate || Coordinate.new
+        respond_to do |format|
+            format.turbo_stream { render 'clients/portal/edit_coordinate' }
+        end
+    end
+
+    def cancel_edit_coordinate
+        respond_to do |format|
+            format.turbo_stream { render 'clients/portal/cancel_edit_coordinate' }
+        end
     end
     
     # creates a new client for the current user, or updates it if that user's client has already been set

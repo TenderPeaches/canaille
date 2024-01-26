@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       get :portal, as: :portal
       get :edit_coordinate, to: "clients#edit_coordinate", as: :edit_coordinate
       get :cancel_edit_coordinate, to: "clients#cancel_edit_coordinate", as: :cancel_edit_coordinate
+      patch :edit_coordinate, to: "clients#update_coordinate", as: :update_coordinate
     end
   end
 

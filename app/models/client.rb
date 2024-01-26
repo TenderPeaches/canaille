@@ -1,7 +1,6 @@
 # t.references :user, null: false, foreign_key: true
 # t.references :coordinate, null: true, foreign_key: true
 # t.string :phone_number
-# t.string :email_address
 class Client < ApplicationRecord
     belongs_to :user
     has_many :service_requests
@@ -9,8 +8,6 @@ class Client < ApplicationRecord
     belongs_to :coordinate, optional: true
 
     accepts_nested_attributes_for :coordinate
-
-    validates :email_address, presence: true
 
     def active_service_requests
         service_requests

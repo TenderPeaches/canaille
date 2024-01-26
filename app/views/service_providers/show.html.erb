@@ -44,7 +44,7 @@
                         <%= tag.tr do %>
                             <%= tag.td service_offer.service.service_category.label %>
                             <%= tag.td service_offer.service.label %>
-                            <%= tag.td service_offer.price_range %>
+                            <%= tag.td price_range(service_offer.min_price, service_offer.max_price) %>
                             <%= tag.td service_offer.description %>
                         <% end %>
                     <% end %>

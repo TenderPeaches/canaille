@@ -1,0 +1,23 @@
+I am using turbo to dynamically modify parts of a form. For instance, when a user clicks a given checkbox, the form will alternate between a drop-down list of existing instances of a City model and a drop-down list to add a new City. I am using turbo-stream to accomplish this. Here is an example:
+
+`<%= turbo_stream.update "city-form" do %>  
+    <%= form_with model: @client do |form| %>
+        <%= form.fields_for :coordinate do |coordinate_form| %>
+            <%= coordinate_form.fields_for :city do |coordinate_city_form| %>
+                <%= render partial: "cities/fields", locals: { form: coordinate_city_form } %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>`
+
+The issue stems form having the coordinate/city fields appearing in various, unrelated forms, and I would rather not rely on `..._tag` helpers in partials if I can avoid it. Instead, I just pass a `form` local variable that the partial uses to generate the appropriate input fields.
+
+What I **want** to accomplish is to simulate the `form` tag, without actually creating a new `<form>` HTML element. I have tried removing the `=` from `form_with`, ergo `<% form_with [...] do |form| %>` but this still prints out a new <form>, which means the data isn't submitted along the original, parent form. My workaround is to simulate a form in the controller through helpers: 
+
+`ActionController::Base.helpers.fields model: @client do |form|
+       form.fields_for :coordinate do |coordinate_form|
+              coordinate_form.fields_for :city do |coordinate_city_form|
+               @form = coordinate_city_form
+               format.turbo_stream [...]`
+
+Basically, I declare/simulate a form in the controller, set it as an instance variable and use that instance variable in the turbo_stream template. Is there any way to do this in the turbo_stream response *without* generating a superfluous `<form>` tag? Is my solution bad practice for something that can be achieved more efficiently? I feel like it is bloating the Controller for no good reason, but hey, if it works it works. 

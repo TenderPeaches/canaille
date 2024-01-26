@@ -48,6 +48,7 @@ en:
     cancel_blank: "Cancel %{cancelled}"
     activate_blank: "Activate %{activated}"
     edit_blank: "Edit %{edited}"
+    update_blank: "Update %{updated}"
     unspecified: "not specified"
     my_blank: "My %{mine}"
     new: "New"

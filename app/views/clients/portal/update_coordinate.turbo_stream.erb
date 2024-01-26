@@ -1,0 +1,4 @@
+<%= turbo_stream.update "client-coordinate" do %>
+    <%= render partial: "coordinates/data", locals: { coordinate: @client.coordinate, allow_edit: true } %>
+    <%= link_to t("keywords.edit"), edit_coordinate_client_path(@client.id), class: "button", data: { turbo_stream: true } %>
+<% end %>

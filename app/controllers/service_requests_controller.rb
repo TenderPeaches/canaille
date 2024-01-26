@@ -128,6 +128,7 @@ class ServiceRequestsController < ApplicationController
         end
     end
 
+    #(!) this needs to be a coordinates#use_new_city
     def use_new_city
 
         respond_to do |format|
@@ -149,7 +150,6 @@ class ServiceRequestsController < ApplicationController
     def set_or_new_city 
         @service_request.coordinate ||= Coordinate.new
         @service_request.coordinate.city ||= City.new
-
     end
 
     def set_service_request 

@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-    before_action :set_client, only: %i[ show edit update destroy edit_coordinate cancel_edit_coordinate]
+    before_action :set_client, only: %i[ show edit update destroy edit_coordinate cancel_edit_coordinate update_coordinate ]
 
     def show 
 
@@ -60,14 +60,28 @@ class ClientsController < ApplicationController
     def update
         respond_to do |format|
             if @client.save
+                puts "success: #{@client.coordinate.inspect}"
                 format.html { redirect_to client_portal_path, notice: I18n.t('models.client.update_success', @client.id.to_s) }
                 format.turbo_stream
             else
+                puts @client.errors.full_messages.inspect
                 format.html { render :edit, status: :unprocessable_entity }
                 format.turbo_stream
             end
         end
     end
+
+    def update_coordinate
+        @client.coordinate.update(client_params[:coordinate_attributes])
+        if params[:coordinate_attributes][:use_new_city]
+            @client.coordinate.city = City.create(name: client_params[:coordinate_attributes][:city_attributes][:name], province_code: client_params[:coordinate_attributes][:city_attributes][:province_code])
+        end
+        respond_to do |format|
+            if @client.save
+                format.turbo_stream 
+            end
+        end
+    end 
 
     def destroy
         @client.destroy
@@ -95,6 +109,6 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-        params.require(:client).permit(:name, :province_code)
+        params.require(:client).permit(coordinate_attributes: [ :civic_number, :street_name, :door_number, :postal_code, :use_new_city, :city_id, city_attributes: [:name, :province_code ]])
     end
 end

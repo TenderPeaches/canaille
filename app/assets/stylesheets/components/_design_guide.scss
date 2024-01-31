@@ -1,0 +1,36 @@
+.size__sample {
+    border-color: var(--color-primary-black);
+    border-style: solid;
+    border-width: 1px;
+}
+
+.doc__section .samples {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.font-size__sample {
+    margin: var(--size-m);
+}
+
+.color__palette {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    gap: 0px;
+}
+
+.color__sample {
+    width: var(--size-xxxl);
+    height: var(--size-m);
+    border-radius: 0px;
+}
+
+.doc__section--colors .samples {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+}

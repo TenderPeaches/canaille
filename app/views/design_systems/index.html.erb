@@ -1,0 +1,47 @@
+<%= tag.section class: "doc" do %>
+    <%= tag.h1 do %>
+        <%= t('documents.design_system.title') %>
+        <%= tag.nav class: "doc__sections" do %>
+            <%= link_to t('documents.design_system.font_sizes'), '#font-sizes' %>
+            <%= link_to t('documents.design_system.sizes'), '#sizes' %>
+            <%= link_to t('documents.design_system.colors'), '#colors' %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "doc__section doc__section--font-sizes" do %>
+        <%= tag.a name: "font-sizes" %>
+        <%= tag.h2 t('documents.design_system.font_sizes') %>
+        <%= tag.div class: "samples" do %>
+            <% @design_system.font_sizes.each do |font_size| %>
+                <%= tag.div class: "font-size__sample", style: "font-size: var(--font-size-#{font_size}" do %>
+                    <%= "#{t('documents.design_system.font_size')}: #{font_size}" %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "doc__section doc__section--sizes" do %>
+        <%= tag.a name: "sizes" %>
+        <%= tag.h2 t('documents.design_system.sizes') %>
+        <%= tag.div class: "samples" do %>
+            <% @design_system.sizes.each do |size| %>
+                <%= tag.div class: "size__sample", style: "padding: var(--size-#{size}); margin: var(--size-#{size});" do %>
+                    <%= "#{t('documents.design_system.size')}: #{size}" %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    <%= tag.div class: "doc__section doc__section--colors" do %>
+        <%= tag.a name: "colors" %>
+        <%= tag.h2 t('documents.design_system.colors') %>
+        <%= tag.div class: "samples" do %>
+            <% @design_system.colors.each do |color| %>
+                <%= tag.div class: "color__palette" do %>
+                    <%= tag.h3 "#{t('documents.design_system.color')}: #{color}" %>
+                    <% @design_system.color_tints.each do |tint| %>
+                        <%# trying to build var(--color-primary)-like string, if modifier is absent need to not add the dash in the variable name %>
+                        <%= tag.div class: "color__sample", style: "background: var(--color-#{color}#{tint == '' ? '' : "-#{tint}"});" %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

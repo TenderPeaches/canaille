@@ -241,3 +241,12 @@ en:
       model_name: "Request status"
     service_quote_status:
       model_name: "Status"
+  documents:
+    design_system:
+      title: "Design System Document"
+      font_size: "Font size"
+      font_sizes: "Font sizes"
+      size: "Size"
+      sizes: "Sizes"
+      color: "Color"
+      colors: "Colors"

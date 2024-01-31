@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
-  root "users#landing"
 
   # /service_providers
   resources :service_providers do
@@ -15,6 +14,8 @@ Rails.application.routes.draw do
     resources :service_offers
     resources :user_service_provider_accesses, as: :accesses
   end
+
+  resources :quote_requests
 
   # /users 
   resources :users do
@@ -88,4 +89,11 @@ Rails.application.routes.draw do
 
   # /transportation_services
   resources :transportation_services
+
+  root "users#landing"
+
+  # Developement resources
+  if Rails.env.development?
+    resources :design_systems, only: [ :index ]
+  end
 end

@@ -52,6 +52,10 @@ class ServiceProvidersController < ApplicationController
         end
     end
 
+    def browse_service_requests
+        
+    end
+
     # actual service_provider params
 
     def index

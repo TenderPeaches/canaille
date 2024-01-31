@@ -19,10 +19,10 @@
         <%= msg %>
       </div>
     <% end %>
-    <%= content_tag :div, class: "content" do %>
+    <%= content_tag :main, class: "content" do %>
       <%= yield %>
     <% end %>
-    <%= content_tag :footer, class: "" do %>
+    <%= content_tag :footer do %>
     <% end %>
   </body>
 </html>

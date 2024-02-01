@@ -1,5 +1,7 @@
 <%= content_tag :div, class: "header-logo" do %>
-    <%= link_to 'Home', root_path %>
+    <% unless request.path == root_path %>
+        <%= link_to 'Home', root_path %>
+    <% end %>
     <%# logo/image title %>
 <% end %>
 <%= content_tag :div, class: "header-nav" do %>

@@ -5,6 +5,8 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'webdrivers'
+require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -29,6 +31,7 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
@@ -37,6 +40,16 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # Use rack_test for quick tests when no JavaScript is involved
+  config.before(:each, type: :system) do 
+    driven_by :rack_test
+  end
+
+  # When JavaScript is involved, use headless chrome
+  config.before(:each, type: :system, js: true) do 
+    driven_by :selenium_chrome_headless
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -60,4 +73,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Include Devise test helpers for login method
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+  # Include Warden test helpers for auth
+  config.include Warden::Test::Helpers
 end

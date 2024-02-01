@@ -226,6 +226,8 @@ en:
       destroy_success: "City successfully destroyed" 
       name: "Name"
       province_code: "Province"
+      errors:
+        invalid_province_code: "Wrong province code, must be among accepted values"
     client:
       model_name: "Client"
       list_title: "Clients"

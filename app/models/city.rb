@@ -4,7 +4,6 @@ class City < ApplicationRecord
     has_many :coordinates
 
     validates :name, presence: true 
-    validates :province_code, inclusion: { in: :province_codes }
 
     def self.province_codes
         ["QC", "ON", "NB", "NS", "PEI"]
@@ -19,5 +18,12 @@ class City < ApplicationRecord
 
     def self.none
         City.find_by_name("N/A")
+    end
+
+    private 
+    def validate_province_code
+        if !province_code.in? province_codes
+            errors.add(:province_code, t('models.city.errors.invalid_province_code'))
+        end
     end
 end

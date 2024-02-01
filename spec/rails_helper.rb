@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'webdrivers'
 require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'support/database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -39,7 +40,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # Use rack_test for quick tests when no JavaScript is involved
   config.before(:each, type: :system) do 
@@ -75,7 +76,10 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # Include Devise test helpers for login method
-  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::IntegrationHelpers, :type => :system
   # Include Warden test helpers for auth
   config.include Warden::Test::Helpers
+
+  # Include FactoryBot methods by default to reduce clutter when invoking FactoryBot.create
+  config.include FactoryBot::Syntax::Methods
 end

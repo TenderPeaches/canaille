@@ -3,15 +3,21 @@ module SpecTestHelper
     # utility auth functions
     def login(user)
         user = User.where(username: user.to_s).first if user.is_a? Symbol
-        request.session[:user] = user.id
+        login_as(user, scope: :user)
     end
 
     def logout
-        request.session[:user] = nil
+        logout(:user)
     end
 
     def current_user
         User.find(request.session[:user])
+    end
+
+    # Login as a random user
+    def login_any
+        user = create(:user)
+        login_as(user, scope: :user)
     end
 
     # specific user login helpers, must match usernames defined in seeds

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
+  resource :home, only: %i[ index ]
+
   # /service_providers
   resources :service_providers do
     member do 
@@ -63,7 +65,7 @@ Rails.application.routes.draw do
 
   namespace :client do
     resource :coordinate, only: %i[new create edit update destroy]
-    resources :service_requests
+    # resources :service_requests
     resources :service_request_activations, only: %i[ new destroy ]
     resource :service_provider_search
   end
@@ -110,7 +112,7 @@ Rails.application.routes.draw do
   # todo 
   # resources :transportation_services
 
-  root "users#landing"
+  root "home#index"
 
   # Developement resources
   if Rails.env.development?

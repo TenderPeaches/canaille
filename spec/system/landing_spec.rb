@@ -38,7 +38,7 @@ RSpec.describe "Landing", type: :system do
         end
     end
 
-    context 'logged in as client, no service provider' do 
+    context 'logged in as client (no service provider access)' do 
         before(:context) do
             login_client
         end
@@ -49,7 +49,7 @@ RSpec.describe "Landing", type: :system do
         end
     end
 
-    context 'logged in as a service provider, no client' do 
+    context 'logged in as a single service provider user (no client)' do 
         before(:context) do
             login_service_provider
         end
@@ -74,12 +74,14 @@ RSpec.describe "Landing", type: :system do
 
     context 'logged in as a user with multiple service providers' do 
         before(:context) do
-            login_multi_service_provider
+            @user = login_multi_service_provider
         end
 
         # Logged in service providers are redirected to their respective portal
         it 'shows a list of service providers to access' do
-            expect(page).to have_selector(dom "user-service-provider-accesses")
+            @user.user_service_provider_accesses.active.each do |access|
+                expect(page).to have_link(access.service_provider.name)
+            end
         end
     end
 end

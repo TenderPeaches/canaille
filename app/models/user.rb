@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
     def is_service_provider_admin?(for_service_provider)
         access = user_service_provider_accesses.where(service_provider: for_service_provider, user_role: UserRole.admin).includes(:user_role)
-
+        
         if access 
             return access.first.user_role == UserRole.admin
         end

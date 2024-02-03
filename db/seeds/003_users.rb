@@ -4,6 +4,7 @@
 city__sherbrooke = City.create(name: "Sherbrooke", province_code: "QC")
 
 # Users 
+user = User.create! username: "user", email: "some_user@gmail.com", password: 1234, password_confirmation: 1234
 user__client = User.create! username: "client", email: "some_client@gmail.com", password: "1234", password_confirmation: "1234"
 user__sp = User.create! username: "bdns", email: "some_bdns@gmail.com", password: "1234", password_confirmation: "1234"
 user__bigwig = User.create! username: "bigwig", email: "ceo@gmail.com", password: "1234", password_confirmation: "1234"

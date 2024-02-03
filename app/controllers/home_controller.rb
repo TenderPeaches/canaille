@@ -8,13 +8,18 @@ class HomeController < ApplicationController
                 render "home/user_menu"
             # otherwise if user is only registered as client
             elsif current_user.client
-                render "clients/portal"
-            #! shouldn't be a final route, just here to debug
-            elsif current_user.client.nil?
-                render "home/index"
-            # otherwise, user is not a client, only a service_provider
+                # show client portal
+                redirect_to client_portal_path
+            # otherwise if user has more than one "business" assigned to
+            elsif current_user.user_service_provider_accesses.active.count > 1
+                # offer a choice of businesses
+                redirect_to user_service_provider_accesses_path
+            # otherwise if user has just one business
+            elsif current_user.user_service_provider_accesses.active.count == 1
+                redirect_to service_provider_portal_path
+            # otherwise, user is not yet client and has no service provider access
             else
-                render "service_providers/portal"
+                render "home/index"
             end
         else
             render "home/index"

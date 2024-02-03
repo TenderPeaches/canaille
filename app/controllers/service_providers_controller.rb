@@ -1,6 +1,7 @@
 class ServiceProvidersController < ApplicationController
     before_action :set_service_provider, only: %i[ show edit update destroy ask_quote service_offers ]
     before_action :set_user, only: %i[ new create updates destroy ]
+    before_action :authorize, only: %i[ :portal ]
     
     # maybe should be moved to another namespace
 
@@ -68,7 +69,15 @@ class ServiceProvidersController < ApplicationController
     end
 
     def portal 
-        @service_providers = current_user.service_providers
+        # if provided a service provided ID
+        if params[:service_provider_id]
+            # open the portal for that service provider
+            @service_provider = ServiceProvider.find_by_id(:service_provider_id)
+        # otherwise
+        else
+            # default to the user's first service provider
+            @service_provider = current_user.service_providers.first
+        end
     end
     
     # p2

@@ -11,6 +11,8 @@ class UserServiceProviderAccess < ApplicationRecord
     belongs_to :user_role
     belongs_to :grantor, class_name: "User", optional: true
 
+    scope :active, -> { where(inactive_from: nil) }
+
     before_validation :set_active_from
     
     # set :active_from to now if it hasn't been explicitly set
@@ -18,5 +20,9 @@ class UserServiceProviderAccess < ApplicationRecord
         if active_from.nil? || active_from.blank?
             self.active_from = Time.now
         end
+    end
+
+    def active?
+        inactive_from.nil?
     end
 end

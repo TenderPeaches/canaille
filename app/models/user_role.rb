@@ -6,7 +6,7 @@ class UserRole < ApplicationRecord
     validates :name, uniqueness: true
 
     def self.admin
-        UserRole.find_by_name('Admin')
+        UserRole.find_by_name('Admin') || UserRole.find_by_name(:admin)
     end
 
     def self.employee

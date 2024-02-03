@@ -10,6 +10,14 @@ FactoryBot.define do
                 user.user_service_provider_accesses << build(:user_service_provider_access, service_provider: create(:service_provider), user: user, user_role: UserRole.find_by_name("Admin") || create(:user_role, { name: :admin.to_s }))
             end
         end
+
+        factory :user_with_multiple_service_provider do
+
+            after(:build) do |user|
+                accesses = 2.times { build(:user_service_provider_access, service_provider: create(:service_provider), user: user, user_role: UserRole.find_by_name("Admin") || create(:user_role, { name: :admin.to_s })) }
+                user.user_service_provider_accesses = accesses
+            end
+        end
     end
 
     factory :user_service_provider_access do

@@ -19,7 +19,9 @@ RSpec.configure do |config|
   # include custom helpers
   config.include SpecTestHelper, type: :system
   config.disable_monkey_patching!
-  config.order = :random
+
+  #! Activate for comprehensive tests
+  #config.order = :random
 
   # This allows you to limit a spec run to individual examples or groups
   # you care about by tagging them with `:focus` metadata. When nothing

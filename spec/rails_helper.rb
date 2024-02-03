@@ -78,7 +78,7 @@ RSpec.configure do |config|
   # Include Devise test helpers for login method
   config.include Devise::Test::IntegrationHelpers, :type => :system
   # Include Warden test helpers for auth
-  config.include Warden::Test::Helpers
+  config.include Warden::Test::Helpers, :type => :system
 
   # Include FactoryBot methods by default to reduce clutter when invoking FactoryBot.create
   config.include FactoryBot::Syntax::Methods

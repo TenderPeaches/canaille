@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Landing", type: :system do 
-    context 'Logged out' do
+    
+    context 'logged out' do
+        
         # Logged out users should be able to login or register from the home page
         it 'shows auth options if logged out' do
             logout
@@ -21,21 +23,50 @@ RSpec.describe "Landing", type: :system do
         end
     end
 
-    context 'Logged in' do 
-        # Logged in users should have an option to log out
-        it 'shows log out link if logged in' do
-            login_any
-            #visit root_path
-            #puts "current_user: #{current_user}"
-            #puts User.all.count
-            expect(page).to have_link(I18n.t('cta.log_out'))
+    context 'logged in as user (no client/service provider)' do 
+        before(:context) do
+            login
         end
 
-        # Users with both a client account and a service provider access should have a link towards either portal
-        it 'shows links for service provider and client portals if user has access to both' do
-            login_both
+        # Logged in users should have an option to log out
+        it 'shows log out link' do
             visit root_path
-            puts "current_user: #{current_user}"
+            expect(page).to have_link(I18n.t('cta.log_out'))
+        end
+    end
+
+    context 'logged in as client, no service provider' do 
+        before(:context) do
+            login_client
+        end
+
+        # Logged in clients are redirected to the client portal
+        it 'shows a link to the client portal' do
+            visit root_path
+            expect(page).to have_selector('*.[data-test-id=client-portal]')
+        end
+    end
+
+    context 'logged in as a service provider, no client' do 
+        before(:context) do
+            login_service_provider
+        end
+
+        # Logged in service providers need a link to the service provider portal
+        it 'shows a link to the service provider portal' do
+            visit root_path
+            expect(page).to have_link(I18n.t('models.service_provider.list_title'))
+        end
+    end
+
+    context 'logged in as both a client and service provider' do
+        before(:context) do 
+            login_both
+        end
+
+        # Users with both a client account and a service provider access have a link towards either portal
+        it 'shows links for service provider and client portals if user has access to both' do
+            visit root_path
             expect(page).to have_link(I18n.t('models.service_request.list_title'))
             expect(page).to have_link(I18n.t('models.service_provider.list_title'))
         end

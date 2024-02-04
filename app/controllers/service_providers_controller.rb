@@ -76,7 +76,7 @@ class ServiceProvidersController < ApplicationController
         # otherwise
         else
             # default to the user's first service provider
-            @service_provider = current_user.service_providers.first
+            @service_provider = current_user.service_provider
         end
     end
     

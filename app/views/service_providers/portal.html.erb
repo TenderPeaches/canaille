@@ -1,5 +1,5 @@
 <%= tag.section class: "portal portal--service-provider", data: { test_id: 'service-provider-portal' } do %>
-    <%= tag.h2 @service_provider.name %>
+    <%= tag.h1 @service_provider.name %>
     <%= tag.div class: "card v-flex" do %>
         <%= tag.h3 t('models.service_quote.list_title') %>
         <%= render partial: "service_providers/active_quotes", locals: { service_provider: @service_provider } %>

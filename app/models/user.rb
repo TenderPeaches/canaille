@@ -17,17 +17,27 @@ class User < ApplicationRecord
     validates_uniqueness_of :email
 
     def admin_service_provider_accesses
-        user_service_provider_accesses.where(user_role: UserRole.find_by_name('Admin'))
+        user_service_provider_accesses.where(user_role: UserRole.admin)
     end
 
     def has_service_provider_access?
         user_service_provider_accesses.size > 0
     end
 
+    # return a service provider that this user manages, if any
+    # if user has many providers, only returns the first that comes up 
+    def service_provider
+        if has_service_provider_access?
+            user_service_provider_accesses.active.first.service_provider
+        else 
+            nil
+        end
+    end
+
     def is_service_provider_admin?(for_service_provider)
         access = user_service_provider_accesses.where(service_provider: for_service_provider, user_role: UserRole.admin).includes(:user_role)
         
-        if access 
+        if access.any?
             return access.first.user_role == UserRole.admin
         end
 

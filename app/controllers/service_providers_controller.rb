@@ -67,18 +67,6 @@ class ServiceProvidersController < ApplicationController
     def service_ask_quote
         @service = params(:service_id)
     end
-
-    def portal 
-        # if provided a service provided ID
-        if params[:service_provider_id]
-            # open the portal for that service provider
-            @service_provider = ServiceProvider.find_by_id(:service_provider_id)
-        # otherwise
-        else
-            # default to the user's first service provider
-            @service_provider = current_user.service_provider
-        end
-    end
     
     # p2
     def offer_help

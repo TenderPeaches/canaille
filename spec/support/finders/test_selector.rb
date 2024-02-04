@@ -10,6 +10,10 @@ module TestSelectorFinders
     def within_test_selector(value, &block)
         within(test_selector(value), &block)
     end
+
+    def have_test_id(value)
+        have_css(test_selector(value))
+    end
 end
     
 RSpec.configure do |config|

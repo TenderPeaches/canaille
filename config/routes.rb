@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'service_provider_portal/index'
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
     end
     #! to be obsoleted
     collection do
-      get :portal, as: :portal
+      #get :portal, as: :portal
     end
     resources :service_offers
     resources :user_service_provider_accesses, as: :accesses
@@ -50,8 +51,10 @@ Rails.application.routes.draw do
   #! to be obsoleted
   scope "/portal" do
     get :client, to: "clients#portal", as: :client_portal
-    get :service_provider, to: "service_providers#portal", as: :service_provider_portal
+   # get :service_provider, to: "service_providers#portal", as: :service_provider_portal
   end
+
+  resources :service_provider_portals, only: %i[ show ]
 
   # /clients
   resources :clients do 

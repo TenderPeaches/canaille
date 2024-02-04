@@ -9,6 +9,8 @@ require 'webdrivers'
 require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/database_cleaner'
+require 'support/capybara'
+require 'support/finders/test_selector.rb'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -82,4 +84,6 @@ RSpec.configure do |config|
 
   # Include FactoryBot methods by default to reduce clutter when invoking FactoryBot.create
   config.include FactoryBot::Syntax::Methods
+
+  config.include Capybara::DSL, :type => :system
 end

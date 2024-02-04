@@ -1,5 +1,5 @@
 <%= tag.section class: "menu", data: { test_id: "user-service-provider-accesses-menu" } do %>
     <% @accesses.each do |access| %>
-        <%= link_to access.service_provider.name, service_provider_path(access.service_provider), class: "button" %>
+        <%= link_to access.service_provider.name, service_provider_portal_path(access.service_provider), class: "button" %>
     <% end %>
 <% end %>

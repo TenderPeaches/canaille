@@ -116,7 +116,8 @@ RSpec.describe "Landing", type: :system do
             expect(page).to have_link(@user.user_service_provider_accesses.active.first.service_provider.name)
             # click on the link for any of the user's service provider accesses
             click_link @user.user_service_provider_accesses.active.first.service_provider.name
-            # expect to 
+            # clicking the link leads to the portal
+            expect(page).to show_portal(:service_provider)
         end
     end
 end

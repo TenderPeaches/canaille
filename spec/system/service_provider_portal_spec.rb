@@ -24,8 +24,9 @@ RSpec.describe "Service provider portal", type: :system do
             expect(page).to have_css('h1', text: @service_provider.name)
         end
 
-        #it "shows service provider coordinates" do
-            #expect(page).to have_text @service_provider.
-        #end
+        it "shows active service quotes" do
+            # the active-quotes section is displayed
+            expect(page).to have_css(test_selector('active-quotes')))
+        end
     end
 end

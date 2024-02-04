@@ -1,6 +1,6 @@
-<%= tag.section class: "portal portal--service-provider", data: { test_id: 'service-provider-portal' } do %>
+<%= tag.main class: "portal portal--service-provider", data: { test_id: 'service-provider-portal' } do %>
     <%= tag.h1 @service_provider.name %>
-    <%= tag.div class: "card v-flex" do %>
+    <%= tag.section class: "card v-flex", data: { test_id: "active-quotes"} do %>
         <%= tag.h3 t('models.service_quote.list_title') %>
         <%= render partial: "service_providers/active_quotes", locals: { service_provider: @service_provider } %>
         <%= turbo_frame_tag 'browse-service-requests' do %>

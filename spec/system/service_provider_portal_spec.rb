@@ -23,14 +23,15 @@ RSpec.describe "Service provider portal", type: :system do
 
     # service provider has one active quote
     before(:each, :one_quote => true) do
-        @service_provider.service_quotes << create(:service_quote, service_provider: @service_provider, status: ServiceQuoteStatus.open || create(:service_quote_status_open), user: @service_provider.user_service_provider_accesses.where(user_role: UserRole.admin).first.user)        
+        @service_provider.service_quotes << create(:service_quote, service_provider: @service_provider, status: ServiceQuoteStatus.open || create(:service_quote_status_open), user: @service_provider.user_service_provider_accesses.first.user)        
     end
 
     before do
         visit_portal
     end
 
-    context "employee-level features", logged_in: true do 
+    # features for employee (non-admin) level users with service provider access
+    context "employee-level features", logged_in_not_admin: true do 
 
         it "shows service provider name prominently" do
             expect(page).to have_css('h1', text: @service_provider.name)
@@ -42,7 +43,7 @@ RSpec.describe "Service provider portal", type: :system do
         end
 
         # employee should see coordinates & schedule
-        it "shows service provider coordinates, basic info", logged_in_not_admin: true do
+        it "shows service provider coordinates, basic info" do
             expect(page).to have_text(@service_provider.coordinate.address_line)
             expect(page).to have_text(@service_provider.coordinate.city_line)
             expect(page).to have_text(@service_provider.phone_number)
@@ -50,7 +51,7 @@ RSpec.describe "Service provider portal", type: :system do
         end
 
         # employee should see service offers
-        it "shows service offers", logged_in_not_admin: true do 
+        it "shows service offers" do 
             within_test_selector('service-offers') do
                 expect(page).to have_text(@service_provider.service_offers.first.service.label)
             end
@@ -67,7 +68,7 @@ RSpec.describe "Service provider portal", type: :system do
                 within_test_selector('active-quotes') do
                     # should link to the service request for which the first quote was made 
                     # assume if first quote is found, the rest are there too  
-                    expect(page).to have_link('', href: service_request_path(@service_provider.active_quotes.first.service_request))
+                    expect(page).to have_link_to(service_request_path(@service_provider.active_quotes.first.service_request))
                 end
             else
                 raise 'ServiceProvider should have active_quotes'
@@ -75,7 +76,20 @@ RSpec.describe "Service provider portal", type: :system do
         end
     end
 
+    # features for users with admin UserRole access to service provider
     context "admin-level features", logged_in: true do 
+        it "manages user accesses" do 
 
+            print page.html
+            expect(page).to have_test_id('service-provider-user-accesses')
+
+            # test that at least one user's access appears within the feature
+            some_access = @service_provider.user_service_provider_accesses.first
+            within_test_selector('service-provider-user-accesses') do 
+                expect(page).to have_text(some_access.user.email)
+                expect(page).to have_text(some_access.user_role.name)
+                expect(page).to have_link_to(edit_service_provider_access_path(@service_provider, some_access))
+            end
+        end
     end
 end

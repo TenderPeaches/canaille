@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'user-accesses' do %>
+<%= tag.section class: 'user-accesses', data: { test_id: "service-provider-user-accesses"} do %>
     <%= tag.h3 t('models.user_service_provider_access.list_title') %>
     <%= tag.table do %>
         <%= tag.thead do %>

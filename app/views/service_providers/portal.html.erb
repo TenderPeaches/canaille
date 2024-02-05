@@ -10,6 +10,7 @@
 
     <%= tag.section class: "card", data: { test_id: "info" } do %>
         <%= @service_provider.schedule %>
+        <%= @service_provider.phone_number %>
         <%= render partial: "coordinates/card", locals: { coordinate: @service_provider.coordinate } %>
     <% end %>
     <%= tag.section class: "card", data: { test_id: "service-offers" } do %>

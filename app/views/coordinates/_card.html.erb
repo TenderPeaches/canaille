@@ -1,0 +1,8 @@
+<%= tag.address class: "card" do %>
+    <%= coordinate.address_line %>
+    <%= coordinate.city_line %>
+    <%= coordinate.postal_code_line %>
+    <% if local_assigns[:no_notes] %>
+        <%= coordinate.notes %>
+    <% end %>
+<% end %>

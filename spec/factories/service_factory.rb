@@ -1,6 +1,7 @@
 FactoryBot.define do 
     factory :service do
-        name { ["Oil change", "Tire change", "Fridge repair"] } 
+        sequence(:label) { |n| "Service #{n}"}
+        service_category
     end
     
     factory :service_category do

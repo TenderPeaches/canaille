@@ -7,6 +7,11 @@
             <%= link_to t('cta.find_service_requests'), browse_service_requests_as_service_provider_path(@service_provider), class: "button" %>
         <% end %>
     <% end %>
+
+    <%= tag.section class: "card", data: { test_id: "info" } do %>
+        <%= @service_provider.schedule %>
+        <%= render partial: "coordinates/card", locals: { coordinate: @service_provider.coordinate } %>
+    <% end %>
     <% if current_user.is_service_provider_admin? @service_provider %>
         <%= render partial: 'service_providers/management_panel/management_panel', locals: { service_provider: @service_provider } %>
     <% end %>

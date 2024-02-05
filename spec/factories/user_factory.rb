@@ -12,6 +12,13 @@ FactoryBot.define do
             end
         end
 
+        factory :user_with_service_provider_not_admin do 
+
+            after(:build) do |user|
+                user.user_service_provider_accesses << build(:user_service_provider_access, service_provider: create(:service_provider), user: user, user_role: create(:user_role))
+            end
+        end
+
         factory :user_with_multiple_service_providers do
 
             after(:build) do |user|

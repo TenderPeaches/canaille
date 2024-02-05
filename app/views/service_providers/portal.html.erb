@@ -12,6 +12,9 @@
         <%= @service_provider.schedule %>
         <%= render partial: "coordinates/card", locals: { coordinate: @service_provider.coordinate } %>
     <% end %>
+    <%= tag.section class: "card", data: { test_id: "service-offers" } do %>
+        <%= render partial: "service_providers/service_offers", locals: { service_provider: @service_provider } %>
+    <% end %>
     <% if current_user.is_service_provider_admin? @service_provider %>
         <%= render partial: 'service_providers/management_panel/management_panel', locals: { service_provider: @service_provider } %>
     <% end %>

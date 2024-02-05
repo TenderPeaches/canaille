@@ -41,11 +41,19 @@ RSpec.describe "Service provider portal", type: :system do
             expect(page).to have_test_id('active-quotes')
         end
 
+        # employee should see coordinates & schedule
         it "shows service provider coordinates, basic info", logged_in_not_admin: true do
             expect(page).to have_text(@service_provider.coordinate.address_line)
             expect(page).to have_text(@service_provider.coordinate.city_line)
             expect(page).to have_text(@service_provider.phone_number)
             expect(page).to have_text(@service_provider.schedule)
+        end
+
+        # employee should see service offers
+        it "shows service offers", logged_in_not_admin: true do 
+            within_test_selector('service-offers') do
+                expect(page).to have_text(@service_provider.service_offers.first.service.label)
+            end
         end
 
         it "no active quotes: show feedback and link to prospective service requests", no_quotes: true do 
@@ -59,7 +67,7 @@ RSpec.describe "Service provider portal", type: :system do
                 within_test_selector('active-quotes') do
                     # should link to the service request for which the first quote was made 
                     # assume if first quote is found, the rest are there too  
-                    expect(page).to have_link(nil, href: service_request_path(@service_provider.active_quotes.first.service_request))
+                    expect(page).to have_link('', href: service_request_path(@service_provider.active_quotes.first.service_request))
                 end
             else
                 raise 'ServiceProvider should have active_quotes'

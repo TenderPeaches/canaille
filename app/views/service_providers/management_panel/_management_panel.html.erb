@@ -1,4 +1,3 @@
-<%= render partial: "service_providers/management_panel/service_offers", locals: { service_provider: service_provider } %>
 <%= render partial: "service_providers/management_panel/accesses", locals: { service_provider: service_provider } %>
 <%= turbo_frame_tag 'service-provider-form', class: "card" do %>
     <%= tag.h3 t('keywords.edit_blank', edited: t('models.service_provider.model_name')) %>

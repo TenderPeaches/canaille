@@ -29,4 +29,8 @@ class ServiceRequestStatus < ApplicationRecord
         ServiceRequestStatus.where(label: "Closed").first
     end
 
+    def self.actives
+        [self.posted, self.accepted]
+    end
+
 end

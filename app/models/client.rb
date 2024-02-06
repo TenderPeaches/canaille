@@ -9,7 +9,8 @@ class Client < ApplicationRecord
 
     accepts_nested_attributes_for :coordinate
 
+    #! business logic
     def active_service_requests
-        service_requests
+        service_requests.where(service_request_status: ServiceRequestStatus.actives)
     end
 end

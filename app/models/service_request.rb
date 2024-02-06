@@ -48,6 +48,11 @@ class ServiceRequest < ApplicationRecord
         service_request_status == ServiceRequestStatus.cancelled
     end
 
+    #! business logic
+    def active?
+        ServiceRequestStatus.actives.include? service_request_status
+    end
+
     # returns a list of service providers who could fulfill this request, depending on the client's preferences
     def find_service_offers
         #! need to add geography-related factors, so closer service providers show up first

@@ -94,10 +94,41 @@ RSpec.describe "Service provider portal", type: :system do
         it "allows to edit the service provider's information: coordinate, schedule, etc." do
             # somewhere on the page, there has to be a link to edit_service_provider
             expect(page).to have_link_to(edit_service_provider_path(@service_provider))
+
+            # click > edit service provider
+            click_link I18n.t('keywords.edit'), href: edit_service_provider_path(@service_provider)
+
+            # the fields such as name, schedule, description should be editable
+            expect(page).to have_field('name')
+            expect(page).to have_field('schedule')
+            expect(page).to have_field('description')
+            expect(page).to have_css('input[type=submit]')
+
+            # try changing the values
+            fill_in(:name, with: "A new name")
+            fill_in(:street_name, with: "A new street")
+
+            # if submit the edit_srevice_provider form 
+            click_button('Save')
+
+            # the changes should now reflect on the page
+            expect(page).to have_text("A new name")
+            expect(page).to have_text("A new street")
         end
 
         it "links to the service provider's quote history" do
             expect(page).to have_link_to(service_quotes_history_path(@service_provider))
+            
+            visit service_quotes_history_path(@service_provider)
+
+            # quote history should show all of service provider's quotes, regardless of status
+            within_test_selector('service-provider-quotes-history') do
+                # should have some filters: per year, last x months, per status
+                #! ?
+
+                # accepted quotes should have a link to the quote to show info on the request
+                expect(page).to have_link_to(service_request_path(@service_provider.service_quotes.last.service_request))
+            end
         end
     end
 end

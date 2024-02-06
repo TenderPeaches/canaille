@@ -29,6 +29,11 @@ class Coordinate < ApplicationRecord
         "#{postal_code}"
     end
 
+    # if empty?, set to nil
+    def empty?
+        civic_number.empty? && street_name.empty? && door_number.empty? && postal_code.empty? && (city.nil? || city == City.none)
+    end
+
     def self.none
         # first coordinate should be a special coordinate instanciated in the seed files
         Coordinate.first

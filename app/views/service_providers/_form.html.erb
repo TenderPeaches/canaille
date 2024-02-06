@@ -1,9 +1,9 @@
-<%= form_with model: @service_provider, class: "form" do |form| %>
-    <% if @service_provider.errors.any? %>
+<%= form_with model: service_provider, class: "form" do |form| %>
+    <% if service_provider.errors.any? %>
         <div class="error_messages">
             <h2>Form is invalid</h2>
             <ul>
-                <% @service_provider.errors.full_messages.each do |message| %>
+                <% service_provider.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
                 <% end %>
             </ul>
@@ -14,7 +14,11 @@
         <%= render partial: "service_providers/fields", locals: { form: form } %>
         <%# submit button %>
         <%= content_tag :div, class: "actions" do %>
-            <%= form.submit t('models.register') %>
+            <% if service_provider.new_record? %>
+                <%= form.submit "#{t('models.register')} #{t('models.service_provider.model_name')}" %>
+            <% else %>
+                <%= form.submit "#{t('models.update')} #{t('models.service_provider.model_name')}" %>
+            <% end %>
         <% end %>
     <% end %>
 <% end %>

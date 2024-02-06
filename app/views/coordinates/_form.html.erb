@@ -1,9 +1,9 @@
-<%= form_with model: @coordinate, class: "form", data: { controller: "coordinates", turbo: "false" } do |form| %>
-    <% if @coordinate.errors.any? %>
+<%= form_with model: coordinate, class: "form", data: { controller: "coordinates", turbo: "false" } do |form| %>
+    <% if coordinate.errors.any? %>
         <div class="error_messages">
             <h2>Form is invalid</h2>
             <ul>
-                <% @coordinate.errors.full_messages.each do |message| %>
+                <% coordinate.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
                 <% end %>
             </ul>
@@ -14,6 +14,6 @@
         <%= render partial: "coordinates/fields", locals: { form: form } %>
     <% end %>
     <%# submit button %>
-    <%= form.submit t('models.create') %>
+    <%= form.submit "#{coordinate.new_record? ? t('models.create') : t('models.update')} #{t('models.coordinate.model_name')}" %>
 <% end %>
 

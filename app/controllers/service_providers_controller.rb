@@ -1,12 +1,17 @@
 class ServiceProvidersController < ApplicationController
-    before_action :set_service_provider, only: %i[ show edit update destroy ask_quote service_offers ]
+    before_action :set_service_provider, only: %i[ show edit destroy update ask_quote service_offers ]
     before_action :set_user, only: %i[ new create updates destroy ]
     before_action :authorize, only: %i[ :portal ]
-    
     # maybe should be moved to another namespace
 
     def show
     end
+
+    # admin can edit service providers, use turbo to turn the info panel into the service_provider form
+    def edit 
+        # prepare the coordinate field if it doesn't exist
+        @service_provider.coordinate = Coordinate.new if @service_provider.coordinate.nil?
+    end 
 
     def index_for_client
         @service_providers = ServiceProvider.all
@@ -32,14 +37,16 @@ class ServiceProvidersController < ApplicationController
         end
     end
 
-    def update 
+    def update
+        puts @service_provider.inspect
+
         respond_to do |format|
-            if @service_provider.save
-                format.html { redirect_to service_providers_path, notice: I18n.t('models.service_provider.update_success', @service_provider.id.to_s) }
+            if @service_provider.update(service_provider_params)
+                format.html { redirect_to service_provider_portal_path(@service_provider) }
                 format.turbo_stream
             else
-                format.html { render :edit, status: :unprocessable_entity }
-                format.turbo_stream
+                format.html { redirect_to service_provider_portal_path(@service_provider) }
+                puts @service_provider.errors.full_messages
             end
         end
     end
@@ -58,10 +65,6 @@ class ServiceProvidersController < ApplicationController
     end
 
     # actual service_provider params
-
-    def index
-        @service_providers = ServiceProvider.all
-    end
 
     #!! ?
     def service_ask_quote
@@ -89,6 +92,6 @@ class ServiceProvidersController < ApplicationController
     end
 
     def service_provider_params
-        params.require(:service_provider).permit(:name, :description, :schedule, :phone_number, :email_address, coordinate_attributes: [ :civic_number, :street_name, :door_number, :postal_code, :notes, :city_id, city_attributes: [ :id, :name, :province_code ] ])
+        params.require(:service_provider).permit(:id, :name, :description, :schedule, :phone_number, :email_address, :coordinate_id, coordinate_attributes: [ :id, :civic_number, :street_name, :door_number, :postal_code, :notes, :city_id, city_attributes: [ :id, :name, :province_code ] ])
     end
 end

@@ -1,0 +1,9 @@
+<%# return the form back to an info panel %>
+<%= turbo_stream.update "#{dom_id(@service_provider)}-info" do %>
+    <%= render partial: "service_providers/portal/info", locals: { service_provider: @service_provider } %>
+<% end %>
+
+<%# update the portal title in case the business name was changed %>
+<%= turbo_stream.update "h1" do %>
+    <%= @service_provider.name %>
+<% end %>

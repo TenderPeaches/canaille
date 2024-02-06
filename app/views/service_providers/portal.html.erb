@@ -7,11 +7,8 @@
             <%= link_to t('cta.find_service_requests'), browse_service_requests_as_service_provider_path(@service_provider), class: "button" %>
         <% end %>
     <% end %>
-
-    <%= tag.section class: "card", data: { test_id: "info" } do %>
-        <%= @service_provider.schedule %>
-        <%= @service_provider.phone_number %>
-        <%= render partial: "coordinates/card", locals: { coordinate: @service_provider.coordinate } %>
+    <%= tag.section class: "card service-provider-info", id: "#{dom_id(@service_provider)}-info", data: { test_id: "info" } do %>
+        <%= render partial: "service_providers/portal/info", locals: { service_provider: @service_provider} %>
     <% end %>
     <%= tag.section class: "card", data: { test_id: "service-offers" } do %>
         <%= render partial: "service_providers/service_offers", locals: { service_provider: @service_provider } %>

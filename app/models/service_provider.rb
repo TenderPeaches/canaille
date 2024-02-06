@@ -14,6 +14,24 @@ class ServiceProvider < ApplicationRecord
     belongs_to :coordinate, optional: true
 
     accepts_nested_attributes_for :coordinate
+    
+    before_save :destroy_coordinate_if_empty
+
+    def destroy_coordinate_if_empty
+        puts "empty coord?: #{coordinate.empty?}"
+        if coordinate.empty?
+            old_coord = coordinate
+            puts 'is empty lol'
+            self.coordinate_id = nil
+            # puts self.inspect
+            begin
+                old_coord.destroy
+            rescue ActiveRecord::InvalidForeignKey
+
+            end
+            puts self.inspect
+        end 
+    end
 
     def active_quotes
         service_quotes.where(status: ServiceQuoteStatus.open)

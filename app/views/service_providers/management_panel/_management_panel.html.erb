@@ -6,4 +6,4 @@
         <%= form.submit t('keywords.update') %>
     <% end %>
 <% end %>
-<%= render partial: "service_providers/management_panel/quotes_history", locals: { service_provider: service_provider } %>
+<%= link_to t('models.service_provider.quote_history'), service_quotes_history_path %>

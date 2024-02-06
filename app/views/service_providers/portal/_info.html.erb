@@ -1,0 +1,10 @@
+<%= service_provider.schedule %>
+<%= service_provider.phone_number %>
+<% if service_provider.coordinate %>
+    <%= render partial: "coordinates/card", locals: { coordinate: service_provider.coordinate } %>
+<% elsif current_user.is_service_provider_admin? service_provider %>
+    <%= render partial: "coordinates/form", locals: { coordinate: Coordinate.new } %>
+<% end %>
+<% if current_user.is_service_provider_admin? service_provider %>
+    <%= link_to "#{t('keywords.edit')} #{t('models.service_provider.model_name')}", edit_service_provider_path(service_provider), class: "button", data: { turbo_stream: true } %>
+<% end %>

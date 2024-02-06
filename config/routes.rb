@@ -44,10 +44,12 @@ Rails.application.routes.draw do
     end
   end
 
-  # todo resouces :prospective_service_requests # for when a service_provider interacts with a service_request to consider making a quote
+  # todo resouces :prospective_service_requests # for when a service_provider interacts with a service_request to consider making a quote > unless this branches off at the controller? 
 
   resources :service_provider_portals, only: %i[ show ]
   resources :client_portals, only: %i[ show ]
+
+  resources :service_quotes_histories, only: %i[ show ]
 
   # /clients
   resources :clients do 

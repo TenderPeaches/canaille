@@ -1,0 +1,4 @@
+<%# turn the "info" panel into a proper form %>
+<%= turbo_stream.update "#{dom_id(@service_provider)}-info" do %>
+    <%= render partial: "service_providers/form", locals: { service_provider: @service_provider } %>
+<% end %>

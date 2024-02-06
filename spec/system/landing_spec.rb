@@ -4,7 +4,7 @@ RSpec.describe "Landing", type: :system do
 
     # portals are identified by a data_type_id="client-portal" or some such
     def show_portal(type)
-        have_selector(dom "#{type.to_s.kebabcase}-portal")
+        have_test_id("#{type.to_s.kebabcase}-portal")
     end
 
     def visit_root
@@ -77,7 +77,7 @@ RSpec.describe "Landing", type: :system do
 
         # Logged in service providers are redirected to their respective portal
         it 'shows the service provider portal' do
-            expect(page).to have_selector(dom "service-provider-portal")
+            expect(page).to show_portal(:service_provider)
         end
     end
 

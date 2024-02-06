@@ -1,9 +1,5 @@
 module SpecTestHelper
 
-    # when accessing markup, use data-test-id instead of IDs/classes so as to not couple these attributes with test targets
-    def dom(id)
-        "*[data-test-id=#{id}]"
-    end
     # utility auth functions
     # https://github.com/heartcombo/devise/wiki/How-To:-Test-with-Capybara
     def login(user = create(:user))
@@ -39,5 +35,10 @@ module SpecTestHelper
     def login_multi_service_provider
         user = create(:user_with_multiple_service_providers)
         login(user)
+    end
+
+    ## identfy the log in required page
+    def be_login
+        have_test_id('log-in')
     end
 end

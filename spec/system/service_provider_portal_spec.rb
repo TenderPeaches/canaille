@@ -79,8 +79,7 @@ RSpec.describe "Service provider portal", type: :system do
     # features for users with admin UserRole access to service provider
     context "admin-level features", logged_in: true do 
         it "manages user accesses" do 
-
-            print page.html
+            # feature must at least appear
             expect(page).to have_test_id('service-provider-user-accesses')
 
             # test that at least one user's access appears within the feature
@@ -90,6 +89,15 @@ RSpec.describe "Service provider portal", type: :system do
                 expect(page).to have_text(some_access.user_role.name)
                 expect(page).to have_link_to(edit_service_provider_access_path(@service_provider, some_access))
             end
+        end
+
+        it "allows to edit the service provider's information: coordinate, schedule, etc." do
+            # somewhere on the page, there has to be a link to edit_service_provider
+            expect(page).to have_link_to(edit_service_provider_path(@service_provider))
+        end
+
+        it "links to the service provider's quote history" do
+            expect(page).to have_link_to(service_quotes_history_path(@service_provider))
         end
     end
 end

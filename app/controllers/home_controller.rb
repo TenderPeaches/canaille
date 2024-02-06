@@ -16,7 +16,7 @@ class HomeController < ApplicationController
                 redirect_to user_service_provider_accesses_path
             # otherwise if user has just one business
             elsif current_user.user_service_provider_accesses.active.count == 1
-                redirect_to service_provider_portal_path
+                redirect_to service_provider_portal_path(current_user.service_provider)
             # otherwise, user is not yet client and has no service provider access
             else
                 render "home/index"

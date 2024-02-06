@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'service_provider_portal/index'
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
@@ -22,9 +21,6 @@ Rails.application.routes.draw do
 
   # todo replaces :ask_quote
   #resources :quote_requests
-  # todo replaces /service_providers/portal
-  #resources :service_provider_portal
-  
 
 
   # /users 
@@ -39,7 +35,7 @@ Rails.application.routes.draw do
     get :service_providers, controller: :users, action: :service_providers, as: :user_service_providers
   end
   
-  resources :service_requests do 
+  resources :service_requests do  # for when a client interacts with a service_request they have made
     collection do 
       get :use_client_address, as: :use_client_address
       get :use_unique_address, as: :use_unique_address
@@ -48,18 +44,14 @@ Rails.application.routes.draw do
     end
   end
 
-  #! to be obsoleted
-  scope "/portal" do
-    get :client, to: "clients#portal", as: :client_portal
-   # get :service_provider, to: "service_providers#portal", as: :service_provider_portal
-  end
+  # todo resouces :prospective_service_requests # for when a service_provider interacts with a service_request to consider making a quote
 
   resources :service_provider_portals, only: %i[ show ]
+  resources :client_portals, only: %i[ show ]
 
   # /clients
   resources :clients do 
     member do
-      get :portal, as: :portal
       #! to be obsoleted x3
       get :edit_coordinate, to: "clients#edit_coordinate", as: :edit_coordinate
       get :cancel_edit_coordinate, to: "clients#cancel_edit_coordinate", as: :cancel_edit_coordinate

@@ -2,27 +2,29 @@
     <%= t('models.session.create_title') %>
 <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |form| %>
-  <div class="field">
-    <%= form.label :email %><br />
-    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<%= tag.section data: { test_id: "log-in" } do %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |form| %>
+    <div class="field">
+      <%= form.label :email %><br />
+      <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :password %><br />
-    <%= form.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <div class="field">
+      <%= form.label :password %><br />
+      <%= form.password_field :password, autocomplete: "current-password" %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="form__checkbox">
-      <%= form.check_box :remember_me %>
-      <%= form.label :remember_me %>
+    <% if devise_mapping.rememberable? %>
+      <div class="form__checkbox">
+        <%= form.check_box :remember_me %>
+        <%= form.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="form__actions">
+      <%= form.submit t('models.session.create_title') %>
     </div>
   <% end %>
 
-  <div class="form__actions">
-    <%= form.submit t('models.session.create_title') %>
-  </div>
+  <%= render "devise/shared/links" %>
 <% end %>
-
-<%= render "devise/shared/links" %>

@@ -87,7 +87,7 @@ class ServiceProvidersController < ApplicationController
 
     def set_or_new_service_provider
         unless set_service_provider
-            @service_provder = ServiceProvider.new
+            @service_provider = ServiceProvider.new
         end
     end
 

@@ -6,26 +6,17 @@ Rails.application.routes.draw do
 
   # /service_providers
   resources :service_providers do
-    member do 
-      #! to be obsoleted
-      post :ask_quote, as: :ask_service_offer_quote
-      # post :offer_help, as: :offer_help
-    end
-    #! to be obsoleted
-    collection do
-      #get :portal, as: :portal
-    end
     resources :service_offers
     resources :user_service_provider_accesses, as: :accesses
+    resources :quote_requests, only: %i[ show index ]
   end
 
   # todo replaces :ask_quote
-  #resources :quote_requests
 
 
   # /users 
   resources :users do
-    # users form actions 
+    # users form actions #? turn into resource somehow? 
     post :is_service_provider, on: :collection
     post :is_not_service_provider, on: :collection
   end 
@@ -53,6 +44,7 @@ Rails.application.routes.draw do
 
   # /clients
   resources :clients do 
+    resources :quote_requests, only: %i[ new create index ]
     member do
       #! to be obsoleted x3
       get :edit_coordinate, to: "clients#edit_coordinate", as: :edit_coordinate

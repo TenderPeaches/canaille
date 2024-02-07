@@ -18,18 +18,14 @@ class ServiceProvider < ApplicationRecord
     before_save :destroy_coordinate_if_empty
 
     def destroy_coordinate_if_empty
-        puts "empty coord?: #{coordinate.empty?}"
         if coordinate.empty?
             old_coord = coordinate
-            puts 'is empty lol'
             self.coordinate_id = nil
-            # puts self.inspect
             begin
                 old_coord.destroy
             rescue ActiveRecord::InvalidForeignKey
-
+                #todo if coordinate has other objects tied to it somehow, their coordinate_id should also be set to nil, but it's edge case with super low priority that has marginal benefits so wtv
             end
-            puts self.inspect
         end 
     end
 

@@ -1,5 +1,5 @@
 class ServiceQuoteHistoriesController < ApplicationController
-    def show 
+    def index 
         set_service_provider
         render "service_quotes/history"
     end

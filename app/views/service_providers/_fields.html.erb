@@ -1,27 +1,27 @@
 <%# service provider business name %>
 <%= content_tag :div, class: "field field--name" do %>
+    <%= form.label :name, t('models.service_provider.name') %>
     <%= form.text_field :name %>
-    <%= form.label t('models.service_provider.name') %>
 <% end %>
 <%# business description / word from the owner %>
 <%= content_tag :div, class: "field field--description" do %>
+    <%= form.label :description, t('models.service_provider.description') %>
     <%= form.text_area :description %>
-    <%= form.label t('models.service_provider.description') %>
 <% end %>
 <%# schedule: contact hours, business hours, etc. %>
 <%= content_tag :div, class: "field field--schedule" do %>
+    <%= form.label :schedule, t('models.service_provider.schedule') %>
     <%= form.text_area :schedule %>
-    <%= form.label t('models.service_provider.schedule') %>
 <% end %>
 <%# contact info: phone %>
 <%= content_tag :div, class: "field field--phone-number" do %>
+    <%= form.label :phone_number, t('models.service_provider.phone_number') %>
     <%= form.text_field :phone_number %>
-    <%= form.label t('models.service_provider.phone_number') %>
 <% end %>
 <%# contact_info: email %>
 <%= content_tag :div, class: "field field--email-address" do %>
+    <%= form.label :email_address, t('models.service_provider.email_address') %>
     <%= form.text_field :email_address %>
-    <%= form.label t('models.service_provider.email_address') %>
 <% end %>
 <%# coordinates (optional) %>
 <%= content_tag :div, id: "coordinate-form" do %>

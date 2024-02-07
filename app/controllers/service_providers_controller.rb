@@ -38,7 +38,6 @@ class ServiceProvidersController < ApplicationController
     end
 
     def update
-        puts @service_provider.inspect
 
         respond_to do |format|
             if @service_provider.update(service_provider_params)

@@ -3,7 +3,7 @@ module TestSelectorFinders
       "[#{Capybara.test_id.to_s.kebabcase}=\"#{value}\"]"
     end
 
-    def find_test_selector(value)
+    def find_test_id(value)
         find(test_selector(value))
     end
 

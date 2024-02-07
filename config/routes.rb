@@ -9,9 +9,8 @@ Rails.application.routes.draw do
     resources :service_offers
     resources :user_service_provider_accesses, as: :accesses
     resources :quote_requests, only: %i[ show index ]
+    resource :quote_history, controller: "service_providers/quote_history", only: %i[ index ]
   end
-
-  # todo replaces :ask_quote
 
 
   # /users 
@@ -39,8 +38,6 @@ Rails.application.routes.draw do
 
   resources :service_provider_portals, only: %i[ show ]
   resources :client_portals, only: %i[ show ]
-
-  resources :service_quotes_histories, only: %i[ show ]
 
   # /clients
   resources :clients do 

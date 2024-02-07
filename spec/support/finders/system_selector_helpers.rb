@@ -3,6 +3,10 @@ module SystemSelectorHelpers
         have_link('', href: href)
     end
 
+    def click_link_to(href)
+        click_link('', href: href)
+    end
+
     def find_submit_button(form_action)
         find('.form[action="' + form_action.to_s + '"]').find('input[name="commit"]')
     end

@@ -94,27 +94,29 @@ RSpec.describe "Service provider portal", type: :system do
         it "allows to edit the service provider's information: coordinate, schedule, etc.", js: true do
             # somewhere on the page, there has to be a link to edit_service_provider
             expect(page).to have_link_to(edit_service_provider_path(@service_provider))
-
+            
             # click > edit service provider
-            click_link I18n.t('keywords.edit'), href: edit_service_provider_path(@service_provider)
-
-            # the fields such as name, schedule, description should be editable
-            expect(page).to have_field('name')
-            expect(page).to have_field('schedule')
-            expect(page).to have_field('description')
-            expect(page).to have_css('input[type=submit]')
+            click_link_to edit_service_provider_path(@service_provider)
+            
+            # service-provider info panel to display the main information & allow changes if admin
+            within_test_selector('info') do 
+                # the fields such as name, schedule, description should be editable
+                expect(page).to have_field('service_provider[name]')
+                expect(page).to have_field('service_provider[schedule]')
+                expect(page).to have_field('service_provider[description]')
+                # should be a "submit changes" button somewhere
+                expect(page).to have_css('input[type=submit]')
+            end 
 
             # try changing the values
-            fill_in(:name, with: "A new name")
-            fill_in(:street_name, with: "A new street")
+            fill_in('service_provider[name]', with: "A new name")
+            fill_in('service_provider[coordinate_attributes][street_name]', with: "A new street")
 
             # when the service provider default form is submitted
             find_submit_button(service_provider_path(@service_provider)).click
             # the page's data sohuld reflect these changes
             expect(page).to have_css('h1', text: @service_provider.name)
             expect(page).to have_text(@service_provider.coordinate.street_name)
-=begin
-=end
         end
 
         it "links to the service provider's quote history" do
@@ -129,6 +131,38 @@ RSpec.describe "Service provider portal", type: :system do
 
                 # accepted quotes should have a link to the quote to show info on the request
                 expect(page).to have_link_to(service_request_path(@service_provider.service_quotes.last.service_request))
+            end
+        end
+
+        it "allows to edit the service provider's service offers" do
+
+            first_offer = @service_provider.service_offers.first
+            last_offer = @service_provider.service_offers.last
+            
+            # should be able to edit each service offer individually
+            within_test_selector('service-offers') do
+                # test that all service offers are there by testing first and last: this list is important, and should not be paginated until a custom system is designed
+                expect(page).to have_link_to(edit_service_offer_path(first_offer))
+                expect(page).to have_link_to(edit_service_offer_path(last_offer))
+            end
+
+            # when clicking on edit service_offer
+            click_link_to edit_service_offer_path(first_offer)
+
+            # should have forms to edit the service:
+            expect(page).to have_field('service_offer[service_min_price]')
+            expect(page).to have_field('service_offer[description]')
+
+            # edit the description
+            new_description = first_offer.description.to_s + " some text "
+            fill_in('service_offer[description]', with: new_description)
+
+            # click the submit button
+            find_submit_button(service_offer_path(first_offer))
+
+            # new description should appear in the list of service offers
+            within_test_selector('service-offers') do
+                expect(page).to have_text(new_description)
             end
         end
     end

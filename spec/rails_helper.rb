@@ -44,7 +44,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = false
+  config.use_transactional_fixtures = true
 
   # Use rack_test for quick tests when no JavaScript is involved
   config.before(:each, type: :system) do 
@@ -53,7 +53,8 @@ RSpec.configure do |config|
 
   # When JavaScript is involved, use headless chrome
   config.before(:each, type: :system, js: true) do 
-    driven_by :selenium_chrome_headless
+    config.use_transactional_fixtures = false
+    driven_by :selenium_headless
   end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.

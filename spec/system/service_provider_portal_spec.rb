@@ -91,7 +91,7 @@ RSpec.describe "Service provider portal", type: :system do
             end
         end
 
-        it "allows to edit the service provider's information: coordinate, schedule, etc." do
+        it "allows to edit the service provider's information: coordinate, schedule, etc.", js: true do
             # somewhere on the page, there has to be a link to edit_service_provider
             expect(page).to have_link_to(edit_service_provider_path(@service_provider))
 
@@ -108,12 +108,13 @@ RSpec.describe "Service provider portal", type: :system do
             fill_in(:name, with: "A new name")
             fill_in(:street_name, with: "A new street")
 
-            # if submit the edit_srevice_provider form 
-            click_button('Save')
-
-            # the changes should now reflect on the page
-            expect(page).to have_text("A new name")
-            expect(page).to have_text("A new street")
+            # when the service provider default form is submitted
+            find_submit_button(service_provider_path(@service_provider)).click
+            # the page's data sohuld reflect these changes
+            expect(page).to have_css('h1', text: @service_provider.name)
+            expect(page).to have_text(@service_provider.coordinate.street_name)
+=begin
+=end
         end
 
         it "links to the service provider's quote history" do

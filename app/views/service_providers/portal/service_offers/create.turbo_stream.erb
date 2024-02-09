@@ -1,0 +1,9 @@
+<%# add created row to the list %>
+<%= turbo_stream.before "service-offer-form" %>
+    <%= render partial: "service_offers/row", locals: { service_provider: @service_provider, service_offer: @service_offer } %>
+<% end %>
+<%# replace the form back with the invite %>
+<%# todo have an option to create more so the form stays %>
+<%= turbo_stream.update "service-offer-form" %>
+    <%= render partial: "service_offers/row_new", locals: { service_provider: service_provider } %>
+<% end %>

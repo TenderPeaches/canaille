@@ -1,0 +1,6 @@
+<%= turbo_stream.update @service_offer %>
+    <%= render partial: "service_offers/row", locals: { service_provider: @service_offer.service_provider, service_offer: @service_offer } %>
+<% end %>
+<%= turbo_stream.update "service-offer-form" %>
+    <%= render partial: "service_offers/row_new", locals: { service_provider: @service_offer.service_provider } %>
+<% end %>

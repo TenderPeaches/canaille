@@ -1,0 +1,24 @@
+<%= tag.h3 t('models.service_offer.list_title') %>
+<%= form_with model: service_provider, url: service_provider_path(service_provider) do |form| %>
+    <%= tag.table do %>
+        <%= tag.thead do %>
+            <%= tag.tr do %>
+                <%= tag.th t('models.service.model_name') %>
+                <%= tag.th t('models.service_offer.price_range') %>
+                <%= tag.th %>
+            <% end %>
+        <% end %>
+        <%= tag.tbody do %>
+            <% service_provider.service_offers.each do |service_offer| %>
+                <%= form.fields_for service_offer do |service_offer_form| %>
+                    <%= tag.tr id: dom_id(service_offer) do %>
+                        <%= render partial: "service_offers/row", locals: { service_offer: service_offer, is_admin: (current_user.is_service_provider_admin? service_provider) } %>
+                    <% end %>
+                <% end %>
+            <% end %>
+            <%= turbo_frame_tag "service-offer-form" do %>
+                <%= render partial: "service_offers/row_new", locals: { service_provider: service_provider } %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

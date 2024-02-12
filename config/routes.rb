@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # /service_providers
   resources :service_providers do
-    resources :service_offers
+    resources :service_offers, controller: "service_providers/service_offers"
     resources :user_service_provider_accesses, as: :accesses
     resources :quote_requests, only: %i[ show index ]
     resource :quote_history, controller: "service_providers/quote_history", only: %i[ index ]

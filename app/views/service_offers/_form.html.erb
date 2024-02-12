@@ -1,4 +1,4 @@
-<%= form_with model: service_offer, do |form| %>
+<%= form_with model: service_offer, url: service_provider_service_offers_path(service_offer.service_provider) do |form| %>
     <%= render partial: 'service_offers/fields', locals: { form: form } %>
     <%= form.submit service_offer.new_record? ? t('models.create') : t('models.update') %>
 <% end %>

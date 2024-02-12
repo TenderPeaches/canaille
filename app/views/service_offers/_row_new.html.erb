@@ -1,5 +1,5 @@
 <%= tag.tr do %>
     <%= tag.td colspan: 3 do %>
-        <%= link_to t('models.service_offer.create_title'), new_service_provider_service_offer_path(service_provider), class: "button" %>
+        <%= link_to t('models.service_offer.create_title'), new_service_provider_service_offer_path(service_provider), class: "button", data: { turbo_stream: true } %>
     <% end %>
 <% end %>

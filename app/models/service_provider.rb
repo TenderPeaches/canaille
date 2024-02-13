@@ -18,7 +18,7 @@ class ServiceProvider < ApplicationRecord
     before_save :destroy_coordinate_if_empty
 
     def destroy_coordinate_if_empty
-        if coordinate.empty?
+        if coordinate && coordinate.empty?
             old_coord = coordinate
             self.coordinate_id = nil
             begin

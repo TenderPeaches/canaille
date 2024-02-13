@@ -1,10 +1,13 @@
 <%= tag.div class: "field field--service" do %>
     <%= form.label :service, t('models.service.model_name') %>
-    <%= service_picker(form) %>
+    <%= service_picker(form, form.object&.service) %>
 <% end %>
 <%= tag.div class: "field field--min-price" do %>
     <%= form.label :min_price, t('models.service_offer.min_price') %>
-    <%= form.number_field :min_price, min: 0, step: 1 %> $
+    <%= tag.span class: "form__group" do %>
+        <%= form.number_field :min_price, min: 0, step: 1 %>
+        <%= tag.span class:"field__suffix" do %>$<% end %>
+    <% end %>
 <% end %>
 <%= tag.div class: "field field--description" do %>
     <%= form.label :description, t('models.service_offer.description') %>

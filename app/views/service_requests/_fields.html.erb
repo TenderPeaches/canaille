@@ -1,6 +1,6 @@
 <%# service %>
 <%= content_tag :div, class: "field field--service" do %>
-    <%= render partial: "services/form_picker", locals: { service: @service_request.service, form: form } %>
+    <%= service_picker(form, @service_request.service) %>
 <% end %>
 <%= content_tag :div, class: "form__group" do %>
     <%# notes %>

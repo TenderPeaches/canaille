@@ -54,7 +54,7 @@ class ServiceProviders::ServiceOffersController < ApplicationController
     end
 
     def service_offer_params
-        params.require(:service_offer).permit(:service_provider_id)
+        params.require(:service_offer).permit(:service_provider_id, :service_id, :min_price, :description)
     end
 
     def filepath(view)

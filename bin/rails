@@ -2,3 +2,6 @@
 APP_PATH = File.expand_path("../config/application", __dir__)
 require_relative "../config/boot"
 require "rails/commands"
+
+# source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/chruby.sh
+# chruby 3.1.3

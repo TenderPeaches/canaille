@@ -1,3 +1,4 @@
+/*! should be on basic <form> tag, so any form uses this */
 .form {
     display: flex;
     flex-direction: column;
@@ -5,11 +6,13 @@
     align-content: center;
     gap: var(--size-xs);
 
+    /* form section holds many loosely related input or input groups */
     &__section {
         display: flex;
         flex-direction: column;
     }
 
+    /* form group holds a few tightly related inputs - must fit in 1 line on a phone */ 
     &__group {
         display: flex;
         flex-direction: row;
@@ -26,10 +29,13 @@
         margin-left: var(--size-l);
     }
 
+    /* form header labels */
     &__header {
         text-align: left;
     }
 
+    /*(!) not used... form__input on each input...  */
+    /*
     &__input {
         display: block;
         width: 100%;
@@ -46,7 +52,7 @@
         &--invalid {
             border-color: var(--color-error);
         }
-    }
+    }*/
 
     &__actions {
 

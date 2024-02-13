@@ -1,4 +1,6 @@
 class ServiceProviderPortalsController < ApplicationController
+  before_action :authorize 
+
   def show
     set_service_provider
     render "service_providers/portal"

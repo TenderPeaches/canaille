@@ -10,5 +10,5 @@ class ServiceOffer < ApplicationRecord
     belongs_to :service
     belongs_to :service_provider 
 
-    validates :min_price, comparison: { greater_than_or_equal_to: 0 }
+    validates :min_price, numericality: { allow_nil: true, greater_than_or_equal_to: 0 }
 end

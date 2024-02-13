@@ -29,6 +29,7 @@ en:
     update: "Update"
     remove_access: "Remove access"
     change_role: "Change role"
+    free: "Free"
   alerts:
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"

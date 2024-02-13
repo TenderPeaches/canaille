@@ -1,9 +1,15 @@
+<%#! if adding/removing <td>s here, adjust _row_new colspan %>
 <%= tag.td service_offer.service.label %>
-<%= tag.td number_to_currency(service_offer.min_price) %>
+<% if service_offer.min_price.nil? || service_offer.min_price == 0 %>
+    <%= tag.td t('keywords.free') %>
+<% else %>
+    <%= tag.td number_to_currency(service_offer.min_price) %>
+<% end %>
+<%= tag.td service_offer.description %>
 <%= tag.td do %>
     <%= tag.div class: "actions" do %>
         <% if is_admin %>
-            <%= link_to t('keywords.edit'), edit_service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button" %>
+            <%= link_to t('keywords.edit'), edit_service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_stream: true } %>
             <%= link_to t('keywords.delete'), service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_method: :delete } %>
         <% end %>
     <% end %>

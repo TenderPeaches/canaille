@@ -11,7 +11,7 @@
             <%= form.collection_select :service_id, service.service_category.services, :id, :label, {}, { id: 'service-picker' }%>
         <% else %>
             <%= tag.label %>
-            <%= form.collection_select :service_id, [], :id, :label, {}, { id: 'service-picker' } %>
+            <%= form.collection_select :service_id, Service.all, :id, :label, {}, { id: 'service-picker' } %>
         <% end %>
     <% end %>
 <% end %>

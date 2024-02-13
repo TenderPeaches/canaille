@@ -18,8 +18,9 @@ class ServiceProviders::ServiceOffersController < ApplicationController
 
         respond_to do |format|
             if @service_offer.save 
-                render filepath(:create)
+                format.turbo_stream { render filepath(:create) }
             else
+                puts @service_offer.errors.full_messages
                 format.html { render 'service_providers/portal', status: :unprocessable_entity}
             end
         end

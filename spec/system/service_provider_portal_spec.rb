@@ -142,12 +142,12 @@ RSpec.describe "Service provider portal", type: :system do
             # should be able to edit each service offer individually
             within_test_selector('service-offers') do
                 # test that all service offers are there by testing first and last: this list is important, and should not be paginated until a custom system is designed
-                expect(page).to have_link_to(edit_service_offer_path(first_offer))
-                expect(page).to have_link_to(edit_service_offer_path(last_offer))
+                expect(page).to have_link_to(edit_service_provider_service_offer_path(@service_provider, first_offer))
+                expect(page).to have_link_to(edit_service_provider_service_offer_path(@service_provider, last_offer))
             end
 
             # when clicking on edit service_offer
-            click_link_to edit_service_offer_path(first_offer)
+            click_link_to edit_service_provider_service_offer_path(@service_provider, first_offer)
 
             # should have forms to edit the service:
             expect(page).to have_field('service_offer[service_min_price]')
@@ -158,7 +158,7 @@ RSpec.describe "Service provider portal", type: :system do
             fill_in('service_offer[description]', with: new_description)
 
             # click the submit button
-            find_submit_button(service_offer_path(first_offer))
+            find_submit_button(service_provider_service_offer_path(first_offer))
 
             # new description should appear in the list of service offers
             within_test_selector('service-offers') do

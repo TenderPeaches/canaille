@@ -6,7 +6,7 @@ class CreateServiceOffers < ActiveRecord::Migration[7.0]
 
       t.string :description, default: "", comment: "Sales pitch from the service provider for this particular service"
 
-      t.decimal :min_price, default: 0, precision: 7, scale: 2, comment: "Minimum price the service provider is willing to accept for this service"
+      t.decimal :min_price, null: true, default: 0, precision: 7, scale: 2, comment: "Minimum price the service provider is willing to accept for this service"
 
       t.timestamps
     end

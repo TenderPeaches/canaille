@@ -1,5 +1,4 @@
 <%= tag.div class: "field field--service" do %>
-    <%= form.label :service, t('models.service.model_name') %>
     <%= service_picker(form, form.object&.service) %>
 <% end %>
 <%= tag.div class: "field field--min-price" do %>

@@ -19,5 +19,8 @@ FileUtils.chdir APP_ROOT do
     puts "Re-seeding"
     system! "rails db:seed"
 
+    puts "Re-migrating test"
+    system! "rails db:migrate RAILS_ENV=test"
+
     puts "DB has been reset"
 end

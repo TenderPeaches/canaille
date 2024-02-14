@@ -134,7 +134,7 @@ RSpec.describe "Service provider portal", type: :system do
             end
         end
 
-        it "allows to edit the service provider's service offers" do
+        it "allows to edit the service provider's service offers", js: true do
 
             first_offer = @service_provider.service_offers.first
             last_offer = @service_provider.service_offers.last
@@ -150,19 +150,18 @@ RSpec.describe "Service provider portal", type: :system do
             click_link_to edit_service_provider_service_offer_path(@service_provider, first_offer)
 
             # should have forms to edit the service:
-            expect(page).to have_field('service_offer[service_min_price]')
+            expect(page).to have_field('service_offer[min_price]')
             expect(page).to have_field('service_offer[description]')
 
             # edit the description
-            new_description = first_offer.description.to_s + " some text "
-            fill_in('service_offer[description]', with: new_description)
+            fill_in('service_offer[description]', with: " some text ")
 
             # click the submit button
-            find_submit_button(service_provider_service_offer_path(first_offer))
+            find_submit_button(service_provider_service_offer_path(@service_provider, first_offer)).click
 
             # new description should appear in the list of service offers
             within_test_selector('service-offers') do
-                expect(page).to have_text(new_description)
+                expect(page).to have_text("some text")
             end
         end
     end

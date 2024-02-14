@@ -79,6 +79,8 @@ en:
       update_success: "User service provider %{id} successfully updated"
       destroy_success: "Service provider access successfully removed from user %{id}"
       grantor: "Access granted by"
+      user: "User with access"
+      role: "Role"
       active_from: "Access activation date"
       inactive_from: "Access removal date"
     session:

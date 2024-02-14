@@ -14,6 +14,6 @@
         <%= render partial: "service_providers/portal/service_offers", locals: { service_provider: @service_provider } %>
     <% end %>
     <% if current_user.is_service_provider_admin? @service_provider %>
-        <%= render partial: 'service_providers/management_panel/management_panel', locals: { service_provider: @service_provider } %>
+        <%= render partial: 'service_providers/portal/admin_panel/admin_panel', locals: { service_provider: @service_provider } %>
     <% end %>
 <% end %>

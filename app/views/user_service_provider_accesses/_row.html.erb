@@ -1,0 +1,9 @@
+<%= tag.td access.user.username %>
+<%= tag.td access.user.email %>
+<%= tag.td access.user_role.name %>
+<%= tag.td do %>
+    <%= tag.div class: "actions" do %>
+        <%= link_to t('keywords.change_role'), edit_user_service_provider_access_path(service_provider, access), class: "button" %>
+        <%= link_to t('keywords.remove_access'), user_service_provider_access_path(service_provider, access), class: "button", method: :delete %>
+    <% end %>
+<% end %>

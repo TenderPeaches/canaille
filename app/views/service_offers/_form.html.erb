@@ -1,6 +1,5 @@
-<% is_create = service_offer.new_record? %>
-<% form_path = is_create ? service_provider_service_offers_path(service_offer.service_provider) : service_provider_service_offer_path(service_offer) %>
+<% form_path = must_create?(service_offer) ? service_provider_service_offers_path(service_offer.service_provider) : service_provider_service_offer_path(service_offer) %>
 <%= form_with model: service_offer, url: form_path, class: "form" do |form| %>
     <%= render partial: 'service_offers/fields', locals: { form: form } %>
-    <%= form.submit is_create ? t('models.create') : t('models.update') %>
+    <%= form.submit must_create?(service_offer) ? t('models.create') : t('models.update') %>
 <% end %>

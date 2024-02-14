@@ -20,7 +20,8 @@ Rails.application.routes.draw do
     post :is_not_service_provider, on: :collection
   end 
 
-  resources :user_service_provider_accesses, only: %i[ index ]
+  resources :user_service_provider_accesses
+  #?
   scope :user do 
     get :service_providers, controller: :users, action: :service_providers, as: :user_service_providers
   end

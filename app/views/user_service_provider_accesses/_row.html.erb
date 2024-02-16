@@ -3,7 +3,7 @@
 <%= tag.td access.user_role.name %>
 <%= tag.td do %>
     <%= tag.div class: "actions" do %>
-        <%= link_to t('keywords.change_role'), edit_user_service_provider_access_path(service_provider, access), class: "button" %>
-        <%= link_to t('keywords.remove_access'), user_service_provider_access_path(service_provider, access), class: "button", method: :delete %>
+        <%= link_to t('keywords.change_role'), edit_user_service_provider_access_path(access), class: "button", data: { turbo_stream: true } %>
+        <%= link_to t('keywords.remove_access'), user_service_provider_access_path(access), class: "button", data: { turbo_method: :delete } %>
     <% end %>
 <% end %>

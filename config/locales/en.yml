@@ -31,10 +31,12 @@ en:
     change_role: "Change role"
     free: "Free"
   alerts:
+    generic_error: "The request did not succeed"
     need_log_in: "Log in or sign up in order to proceed"
     need_create_client: "Please create your client account in order to proceed"
     need_set_client_coordinates: "You have must assign coordinates to your client account in order to proceed"
     wrong_client: "You are not authorized to view other clients' data"
+    no_user_found: "No user has been found for %{user}"
   feedback:
     confirm_delete: "Are you sure you wish to delete %{deleted}"
     client:

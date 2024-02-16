@@ -1,4 +1,4 @@
 <%= form_with model: user_service_provider_access do |form| %>
-    <%= render partial: "user_service_provider_access/fields", locals: { form: form } %>
+    <%= render partial: "user_service_provider_accesses/fields", locals: { form: form } %>
     <%= form.submit must_create?(user_service_provider_access) ? t('models.create') : t('models.update') %>
 <% end %>

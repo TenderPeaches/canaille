@@ -1,0 +1,7 @@
+<%= turbo_stream.append "alerts" do %>
+    <% if @model %>
+        <%= render partial: "errors/model_error", locals: { model: @model } %>
+    <% else %>
+        <%= render partial: "errors/error" %>
+    <% end %>
+<% end %>

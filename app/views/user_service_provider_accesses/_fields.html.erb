@@ -2,13 +2,13 @@
 <% if form.object.new_record? %>
     <%= tag.div class: "field field--user" do %>
         <%= form.label :user, t('models.user_service_provider_access.user') %>
-        <%= form.text_field :user %>
+        <%= form.text_field :user_id %>
     <% end %>
 <% end %>
 
 <%= tag.div class: "field field--role" do %>
     <%= form.label :user_role, t('models.user_service_provider.access.role') %>
-    <%= form.collection_select :user_role_id, UserRole.all, :id, :name, 1 %>
+    <%= form.collection_select :user_role_id, UserRole.order(id: :asc), :id, :name, selected: 2 %>
 <% end %>
 
 <%= form.hidden_field :grantor_id %>

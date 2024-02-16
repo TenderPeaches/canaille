@@ -6,6 +6,12 @@ module ApplicationHelper
 
     # checks if a record is created or needs to be updated
     def must_create?(record)
-        record.new_record?   
+        record.new_record?
+    end
+
+    # when errors, do nothing and return error feedback
+    def render_error(model = nil)
+        @model = model
+        render :error, status: :unprocessable_entity
     end
 end

@@ -4,12 +4,12 @@ class HomeController < ApplicationController
             @user = current_user
             # if user is registered to both request services and offer them
             if current_user.client && current_user.has_service_provider_access?
-                # give them a choice 
+                # give them a choice
                 render "home/user_menu"
             # otherwise if user is only registered as client
             elsif current_user.client
                 # show client portal
-                redirect_to client_portal_path
+                redirect_to client_portal_path(current_user.client.id)
             # otherwise if user has more than one "business" assigned to
             elsif current_user.user_service_provider_accesses.active.count > 1
                 # offer a choice of businesses

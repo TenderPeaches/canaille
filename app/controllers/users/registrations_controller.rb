@@ -20,22 +20,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
         if sign_up_params[:is_client]
             @user.client = Client.create
             # don't care about setting client attributes right away - more important to let user start using the site, then ask for client info after posting first request, especially since it involves sensitive information (phone number/email contact)
-        end 
+        end
 
         # if user is offering services
         if sign_up_params[:is_service_provider]
             # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
-            redirect_to new_user_service_provider_path(@user.id), notice: I18n.t('models.user.created_success'), user: @user
+            redirect_to new_service_provider_path(@user.id), notice: I18n.t('models.user.created_success'), user: @user
         # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
-        else 
+        else
             # redirect to the service requests page
             redirect_to root_url, notice: I18n.t('models.user.created_success')
         end
-    else 
+    else
         puts @user.errors.full_messages.inspect
         render :new, status: :unprocessable_entity
     end
-      
+
   end
 
   # GET /resource/edit

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @service_request do %>
-    <%= form_with model: @service_request, url: service_requests_url, class: "form", data: { turbo_stream: true } do |form| %>
+    <%= form_with model: @service_request, url: service_requests_url, class: "form", data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
         <% if @service_request.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>

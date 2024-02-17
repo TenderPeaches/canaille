@@ -79,6 +79,11 @@ div, a {
     border-radius: var(--default-border-radius);            /* round things off for a smoother, more casual feel */
 }
 
+/* sections */
+section {
+    margin: var(--size-l);
+}
+
  /* number-style inputs */
 input[type="number"] {
     width: var(--size-xxl);                                 /* numbers in this website's context are usually limited to 1-2 digits */
@@ -89,3 +94,4 @@ input[type="number"] {
 a, a:hover, a:active {
     transition-duration: var(--quick-duration);             /* quick duration to keep it crisp */
 }
+

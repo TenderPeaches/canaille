@@ -14,4 +14,12 @@ module ApplicationHelper
         @model = model
         render :error, status: :unprocessable_entity
     end
+
+    def devise_mapping
+      Devise.mappings[:user]
+    end
+
+    def raise_hell
+      raise 'hell'
+    end
 end

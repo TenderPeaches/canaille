@@ -1,5 +1,6 @@
-<%= turbo_frame_tag service_request do %>
+<%= tag.section service_request do %>
     <%= form_with model: service_request, url: service_requests_path, class: "form", data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
+        <%# error messages %>
         <% if service_request.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
@@ -11,29 +12,19 @@
             </div>
         <% end %>
 
+        <%# service request-specific fields %>
         <%= turbo_frame_tag "service-request-fields" do %>
             <%= content_tag :div, class: "service-request-fields" do %>
                 <%= render partial: "service_requests/fields", locals: { form: form } %>
             <% end %>
         <% end %>
         
-        <%= content_tag :h2 do %>
+        <%# service request coordinate %>
+        <%= content_tag :h4 do %>
             <%= t('models.service_request.coordinate') %>
         <% end %>
         <%= turbo_frame_tag "coordinates-fields" do %>
-            <%= render "service_requests/coordinates" %>
-        <% end %>
-
-        <% unless user_signed_in? %>
-            <%= tag.section 'log-in' do %>
-                <%= tag.h2 t('models.session.create_title') %>
-                <%= render "devise/sessions/form" %>
-            <% end %>
-
-            <%= tag.section 'sign-up' do %> 
-                <%= tag.h2 t('models.user.create_title') %>
-                <%= render "users/form", user: User.new %>
-            <% end %>
+            <%= render "service_requests/coordinates", form: form %>
         <% end %>
         
         <%# submit button %>
@@ -42,5 +33,12 @@
                 <%= form.submit t('models.create'), data: { turbo: false } %>
             <% end %>
         <% end %>
+    <% end %>
+<% end %>
+<%# allow the user to log_in/sign_up here directly %>
+<%# other options included redirecting when submitting the service_request, but this implies either creating the service_request without a user or storing the service request in the session, both of which don't seem ideal. Instead, we choose to streamline the process so that if anything goes wrong, at least it will be simple to retain the service_request information without having to deal with redirections and concurrency %>
+<% unless user_signed_in? %>
+    <%= tag.section id: "auth" do %>
+        <%= render "service_requests/auth" %>
     <% end %>
 <% end %>

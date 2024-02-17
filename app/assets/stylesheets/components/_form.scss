@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     align-content: center;
     gap: var(--size-xs);
+    accent-color: var(--color-primary-dark);
 
     /* form section holds many loosely related input or input groups */
     &__section {

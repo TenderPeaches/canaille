@@ -1,0 +1,6 @@
+Client vs ServiceProvider:
+    Avec une classe ServiceProvider distincte, ça permet de:
+        Regrouper des individus au sein d'un seul "ServiceProvider", permettant le partâge des tâches
+
+De quoi aurait l'air une classe User alone?
+    Y'aurait encore des UserServiceProviderAccess

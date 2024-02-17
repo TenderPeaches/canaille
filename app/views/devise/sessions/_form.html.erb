@@ -1,8 +1,6 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }, data: { test_id: "log-in" }) do |form| %>
     <%= render "devise/sessions/fields", form: form %>
-
     <%= tag.div class: "form__actions" do %>
-        <%= form.submit t('models.session.create_title') %>
-        <%= render "devise/shared/links" %>
+        <%= render "devise/shared/links", resource_name: resource_name %>
     <% end %>
 <% end %>

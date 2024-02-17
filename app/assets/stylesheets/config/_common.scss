@@ -25,10 +25,15 @@
 /* actions are usually buttons/CTAs located within a row or form */
 .actions {
     display: flex;                                                  /* display in a even row/column */
-    flex: 0 0 auto;                                                 /* harmonize if part of a flex dispaly */
-    align-items: center;                                            /* center vertically */
-    gap: var(--size-xs);                                            /* internal spacing */
+    flex: 0 0 auto;                                                 /* harmonize if part of a flex display */
+    flex-direction: column;
+    align-items: stretch;                                            /* center vertically */
+    gap: var(--size-xxxs);                                            /* internal spacing */
     justify-content: space-around;                                  /* spread buttons evenly */
+}
+
+.actions .button {
+    margin: var(--size-xxs);
 }
 
 /* bigger text */

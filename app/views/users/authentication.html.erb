@@ -1,0 +1,8 @@
+<%= tag.section "log-in" do %>
+    <%= tag.h2 t('models.session.create_title') %>
+    <%= render "devise/sessions/form" %>
+<% end %>
+<%= tag.section "sign-up" do %>
+    <%= tag.h2 t('models.user.create_title') %>
+    <%= render "users/form", user: User.new %>
+<% end %>   

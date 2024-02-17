@@ -6,11 +6,11 @@ class UsersController < ApplicationController
     def landing
     end
 
-    def index 
-        @users = User.all 
-    end 
+    def index
+        @users = User.all
+    end
 
-    def show 
+    def show
 
     end
 
@@ -27,28 +27,39 @@ class UsersController < ApplicationController
         end
     end
 
-    def create 
+    def create
         @user = User.new(user_params.slice(:email, :username, :password))
 
-        puts 'the params:' << params.inspect
 
         if @user.save
             # if user checked is_client, create a client for them
             if user_params[:is_client]
                 @user.client = Client.create
                 # don't care about setting client attributes right away - more important to let user start using the site, then ask for client info after posting first request, especially since it involves sensitive information (phone number/email contact)
-            end 
+
+                # if session contains a service request
+                if (session[:service_request])
+                    # create the service request
+                    service_request_create = ServiceRequests::Creator.new(@user).create(JSON.parse(session[:service_request]))
+
+                    if service_request_create.created?
+                        redirect_to root_url
+                    else
+                        redirect_to new_service_request_path
+                    end
+                end
+            end
 
             # if user is offering services
             if user_params[:is_service_provider]
                 # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
                 redirect_to new_service_provider_path, notice: I18n.t('models.user.created_success'), user: @user.id
             # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
-            else 
+            else
                 # redirect to the service requests page
                 redirect_to root_url, notice: I18n.t('models.user.created_success')
             end
-        else 
+        else
             puts @user.inspect << " not saved:" << @user.errors.full_messages.inspect << " with params " << user_params.inspect
             render :new, status: :unprocessable_entity
         end
@@ -67,15 +78,15 @@ class UsersController < ApplicationController
 
     def destroy
         @user.destroy
-        
-        respond_to do |format| 
+
+        respond_to do |format|
             format.html { redirect_to users_path, notice: "User deleted" }
             format.turbo_stream
         end
     end
 
     def is_service_provider
-        
+
         ActionController::Base.helpers.fields model: @user do |form|
             respond_to do |format|
                 format.html { render partial: "service_provider/fields", locals: { form: form } }
@@ -92,9 +103,9 @@ class UsersController < ApplicationController
     end
 
     private
-    def set_user 
+    def set_user
         @user = User.find_by_id(params[:id])
-    end 
+    end
 
     def set_or_new_user
         unless set_user

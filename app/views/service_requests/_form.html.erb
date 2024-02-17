@@ -1,10 +1,10 @@
-<%= turbo_frame_tag @service_request do %>
-    <%= form_with model: @service_request, url: service_requests_url, class: "form", data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
-        <% if @service_request.errors.any? %>
+<%= turbo_frame_tag service_request do %>
+    <%= form_with model: service_request, url: service_requests_path, class: "form", data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
+        <% if service_request.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
                 <ul>
-                    <% @service_request.errors.full_messages.each do |message| %>
+                    <% service_request.errors.full_messages.each do |message| %>
                         <li><%= message %></li>
                     <% end %>
                 </ul>
@@ -21,20 +21,18 @@
             <%= t('models.service_request.coordinate') %>
         <% end %>
         <%= turbo_frame_tag "coordinates-fields" do %>
-            <%# if user is not signed in %>
-            <% if !user_signed_in? %>
-                <% # request a login %>
-                <%= tag.div class: "hint" do %>
-                    <%= t('alerts.need_log_in') %>
-                <% end %>
-                <%#! try inline form so as to not lose the rest of the form %>
-                <%= tag.div class: "actions" do %>
-                    <%= link_to t('cta.log_in'), new_user_session_path, class: "button", data: { turbo: false } %>
-                    <%= link_to t('cta.sign_up'), new_user_registration_path, class: "button", data: { turbo: false } %>
-                <% end %>
-            <%# otherwise, user is signed in so give them a choice between using their client coordinates or setting up a new coordinate for this service request specifically %>
-            <% else %>
-                <%= render partial: "service_requests/coordinates" %>
+            <%= render "service_requests/coordinates" %>
+        <% end %>
+
+        <% unless user_signed_in? %>
+            <%= tag.section 'log-in' do %>
+                <%= tag.h2 t('models.session.create_title') %>
+                <%= render "devise/sessions/form" %>
+            <% end %>
+
+            <%= tag.section 'sign-up' do %> 
+                <%= tag.h2 t('models.user.create_title') %>
+                <%= render "users/form", user: User.new %>
             <% end %>
         <% end %>
         

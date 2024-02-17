@@ -38,9 +38,9 @@ module ServiceRequests
     class Result
       attr_reader :service_request
 
-      def initialize(service_request = nil, in_session = false)
+      def initialize(service_request = nil, no_user = false)
         @service_request = service_request
-        @in_session = in_session
+        @no_user = no_user
       end
 
       def created?
@@ -51,8 +51,12 @@ module ServiceRequests
         @service_request
       end
 
-      def in_session?
-        @in_session
+      def no_user?
+        @no_user
+      end
+
+      def as_json
+        @service_request.to_json
       end
     end
 

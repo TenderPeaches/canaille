@@ -1,0 +1,16 @@
+<%= tag.div class: "field" do %>
+    <%= form.label :email %>
+    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+<% end %>
+
+<%= tag.div class: "field" do %>
+    <%= form.label :password %>
+    <%= form.password_field :password, autocomplete: "current-password" %>
+<% end %>
+
+<% if devise_mapping.rememberable? %>
+    <%= tag.div class: "form__checkbox" do %>
+        <%= form.check_box :remember_me %>
+        <%= form.label :remember_me %>
+    <% end %>
+<% end %>

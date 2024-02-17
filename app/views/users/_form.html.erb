@@ -1,10 +1,10 @@
-<%= turbo_frame_tag @user do %>
-    <%= form_with model: @user, url: url ||= user_registration_path, class: "form", data: { controller: "users", turbo: false } do |form| %>
-        <% if @user.errors.any? %>
+<%= turbo_frame_tag user do %>
+    <%= form_with model: user, url: user_registration_path, class: "form", data: { controller: "users", turbo: false } do |form| %>
+        <% if user.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
                 <ul>
-                    <% @user.errors.full_messages.each do |message| %>
+                    <% user.errors.full_messages.each do |message| %>
                         <li><%= message %></li>
                     <% end %>
                 </ul>

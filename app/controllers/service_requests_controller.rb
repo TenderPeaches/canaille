@@ -20,6 +20,12 @@ class ServiceRequestsController < ApplicationController
     def create
         create_result = ServiceRequests::Creator.new(current_user).create(service_request_params)
 
+        # if service request was created without a user assigned to it, the user wasn't logged in
+        if create_result.no_user?
+            # store the service request info in session
+            session[:service_request] = create_result.to_json
+        end
+
         respond_to do |format|
             if create_result.created?
                 # redirect to portal

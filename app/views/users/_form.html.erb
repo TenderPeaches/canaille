@@ -1,5 +1,6 @@
 <%= turbo_frame_tag user do %>
-    <%= form_with model: user, url: user_registration_path, class: "form", data: { controller: "users", turbo: false, turbo_stream: local_assigns[:embedded] } do |form| %>
+    <%= local_assigns.inspect %>
+    <%= form_with model: user, url: user_registration_path, class: "form", data: { controller: "users", test_id: "sign-up", turbo_stream: local_assigns[:embedded] } do |form| %>
         <% if user.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
@@ -12,15 +13,21 @@
         <% end %>
 
         <%= render partial: "users/fields", locals: { form: form } %>
-        <%= tag.div class: "form__checkbox", id: "is-client-checkbox" do %>
-            <%= check_box_tag :is_client, 1, true, { id: "is-client", disabled: true } %>
-            <%= form.label t('models.user.is_client') %>
-            <%#! this hidden field *must* appear whenever #is-client checkbox is disabled, otherwise value won't get submitted along with form %>
+
+        <%# use is_client local when the user type is implicitly a client %>
+        <% if local_assigns[:is_client] %>
             <%= form.hidden_field :is_client, { name: "user[is_client]", id: "user-is-client", value: true } %>
-        <% end %>
-        <%= tag.div class: "form__checkbox", id: "is-service-provider-checkbox" do %>
-            <%= check_box_tag :is_service_provider, 1, false, { id: "is-service-provider", name: "user[is_service_provider]" } %>
-            <%= form.label t('models.user.is_service_provider') %>
+        <% else %>
+            <%= tag.div class: "form__checkbox", id: "is-client-checkbox" do %>
+                <%= check_box_tag :is_client, 1, true, { id: "is-client", disabled: true } %>
+                <%= form.label t('models.user.is_client') %>
+                <%#! this hidden field *must* appear whenever #is-client checkbox is disabled, otherwise value won't get submitted along with form %>
+                <%= form.hidden_field :is_client, { name: "user[is_client]", id: "user-is-client", value: true } %>
+            <% end %>
+            <%= tag.div class: "form__checkbox", id: "is-service-provider-checkbox" do %>
+                <%= check_box_tag :is_service_provider, 1, false, { id: "is-service-provider", name: "user[is_service_provider]" } %>
+                <%= form.label t('models.user.is_service_provider') %>
+            <% end %>
         <% end %>
         <%= tag.div class: "form__actions" do %>
             <%# submit button %>

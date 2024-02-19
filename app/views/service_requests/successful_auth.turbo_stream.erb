@@ -1,2 +1,6 @@
 <%= turbo_stream.remove 'log-in' %>
 <%= turbo_stream.remove 'sign-up' %>
+
+<%= turbo_stream.update_all "header" do %>
+    <%= render "layouts/header" %>
+<% end %>

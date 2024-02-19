@@ -24,7 +24,7 @@ class Users::SessionsController < Devise::SessionsController
 
     respond_to do |format|
       # turbo_stream-type requests are embedded in a page, so the response depends on the page which generated the request
-      format.turbo_stream { render embedded_request_response_path }
+      format.turbo_stream { render embedded_auth_request_response_path }
       # html-type requests get redirected to the root
       format.html { redirect_to root_path }
     end
@@ -41,14 +41,5 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-
-  private
-  # use the user's last location to assess where the embedded log-in request was made and return the appropriate response
-  def embedded_request_response_path
-    # logins embedded within new service request path
-    if stored_location_for(:user) == new_service_request_path
-      "service_requests/successful_auth"
-    end
-  end
 
 end

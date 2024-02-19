@@ -19,7 +19,7 @@ export default class extends Controller {
 
   // listen on checkbox change
   listen__is_service_provider() {
-    document.querySelector('#is-service-provider').addEventListener('change', async (event) => {
+    document.querySelector('#is-service-provider')?.addEventListener('change', async (event) => {
       const url = document.querySelector('#is-service-provider').checked ? 'is_service_provider' : 'is_not_service_provider';
       const request = new FetchRequest('post', url, { query: { is_client: document.querySelector('#is-client').checked ? 1 : 0 }, responseKind: "turbo-stream" });
       const response = await request.perform();

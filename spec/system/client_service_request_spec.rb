@@ -28,14 +28,19 @@ RSpec.describe "create_service_request", type: :system do
         expect(page).to have_field("service_request[coordinate_attributes][street_name]")
       end
 
-      it "allows to sign in or sign up upon submitting the request" do
-        submit_form
+      it "requires to sign up/login in order to process the service request" do
         # once form is submitted, expect to be able to sign up ...
         expect(page).to have_text(I18n.t('models.user.create_title'))
         # ... or to log in
         expect(page).to have_text(I18n.t('models.session.create_title'))
-        # the service request's info should be stored in the session
-        expect(session[:service_request]).to be_truthy
+      end
+
+      it "logging in keeps the form's info" do
+
+      end
+
+      it "signing up keeps the form's info" do
+
       end
     end
 

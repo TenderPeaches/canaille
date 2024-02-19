@@ -15,9 +15,12 @@
       <%= render partial: "layouts/header" %>
     <% end %>
     <% flash.each do |type, msg| %>
-      <div>
+      <%= tag.div id: "flash-#{type}" do %>
         <%= msg %>
-      </div>
+      <% end %>
+    <% end %>
+    <%= tag.aside id: "alerts" do %>
+      
     <% end %>
     <%= content_tag :div, class: "content" do %>
       <%= yield %>

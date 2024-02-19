@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if @user.save
         # log the user in
         sign_in @user
+
         # if user checked is_client, create a client for them
         if sign_up_params[:is_client]
             @user.client = Client.create
@@ -24,16 +25,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
         # if user is offering services
         if sign_up_params[:is_service_provider]
-            # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
-            redirect_to new_service_provider_path(@user.id), notice: I18n.t('models.user.created_success'), user: @user
+            respond_to do |format|
+              # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
+              format.html { redirect_to new_service_provider_path(@user.id), notice: I18n.t('models.user.created_success'), user: @user }
+              format.turbo_stream { render embedded_auth_request_response_path }
+            end
         # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
         else
-            # redirect to the service requests page
-            redirect_to root_url, notice: I18n.t('models.user.created_success')
+            respond_to do |format|
+              # redirect to the service requests page
+              format.html { redirect_to root_url, notice: I18n.t('models.user.created_success')}
+              format.turbo_stream { render embedded_auth_request_response_path }
+            end
         end
     else
         puts @user.errors.full_messages.inspect
-        render :new, status: :unprocessable_entity
+        respond_to do |format|
+          format.html { render json: @user.errors, status: :unprocessable_entity }
+          format.turbo_stream { add_alert(@user.errors.full_messages) }
+        end
     end
 
   end

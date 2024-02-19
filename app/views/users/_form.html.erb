@@ -1,5 +1,5 @@
 <%= turbo_frame_tag user do %>
-    <%= form_with model: user, url: user_registration_path, class: "form", data: { controller: "users", turbo: false } do |form| %>
+    <%= form_with model: user, url: user_registration_path, class: "form", data: { controller: "users", turbo: false, turbo_stream: local_assigns[:embedded] } do |form| %>
         <% if user.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>

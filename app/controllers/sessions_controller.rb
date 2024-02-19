@@ -1,3 +1,4 @@
+#(!) whole class not in use lol
 class SessionsController < ApplicationController
     # login screen
     def new

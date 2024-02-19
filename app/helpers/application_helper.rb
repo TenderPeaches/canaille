@@ -15,10 +15,24 @@ module ApplicationHelper
         render :error, status: :unprocessable_entity
     end
 
+    # devise helpers
     def devise_mapping
       Devise.mappings[:user]
     end
 
+    def link_to_login
+      link_to t('models.session.create_title'), new_session_path(:user), class: "button"
+    end
+
+    def link_to_sign_up
+      link_to t('models.user.create_title'), new_registration_path(:user), class: "button"
+    end
+
+    def link_to_forgot_password
+      link_to "Forgot your password?", new_password_path(:user), class: "button"
+    end
+
+    # debugging
     def raise_hell
       raise 'hell'
     end

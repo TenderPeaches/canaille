@@ -1,9 +1,9 @@
 <%= tag.section id: 'log-in' do %>
     <%= tag.h2 t('models.session.create_title') %>
-    <%= render "devise/sessions/form", resource: User.new, resource_name: :user %>
+    <%= render "devise/sessions/form", resource: User.new, resource_name: :user, embedded: true %>
 <% end %>
 
 <%= tag.section id: 'sign-up' do %> 
     <%= tag.h2 t('models.user.create_title') %>
-    <%= render "users/form", user: User.new %>
+    <%= render "users/form", user: User.new, embedded: true %>
 <% end %>

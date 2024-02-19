@@ -1,6 +1,7 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }, data: { test_id: "log-in" }) do |form| %>
+<%= form_for(resource, as: resource_name, url: url ||= session_path(resource_name), html: { class: "form" }, data: { test_id: "log-in", turbo_stream: local_assigns[:embedded] }) do |form| %>
     <%= render "devise/sessions/fields", form: form %>
     <%= tag.div class: "form__actions" do %>
-        <%= render "devise/shared/links", resource_name: resource_name %>
+        <%= form.submit t('models.session.create_title') %>
+        <%= link_to_forgot_password %>
     <% end %>
 <% end %>

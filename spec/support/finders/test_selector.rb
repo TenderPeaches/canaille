@@ -7,7 +7,7 @@ module TestSelectorFinders
         find(test_selector(value))
     end
 
-    def within_test_selector(value, &block)
+    def within_test_id(value, &block)
         within(test_selector(value), &block)
     end
 
@@ -15,7 +15,7 @@ module TestSelectorFinders
         have_css(test_selector(value))
     end
 end
-    
+
 RSpec.configure do |config|
     Capybara::Session.include(TestSelectorFinders)
     Capybara::DSL.extend(TestSelectorFinders)

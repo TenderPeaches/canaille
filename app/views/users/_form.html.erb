@@ -1,5 +1,4 @@
 <%= turbo_frame_tag user do %>
-    <%= local_assigns.inspect %>
     <%= form_with model: user, url: user_registration_path, class: "form", data: { controller: "users", test_id: "sign-up", turbo_stream: local_assigns[:embedded] } do |form| %>
         <% if user.errors.any? %>
             <div class="error_messages">

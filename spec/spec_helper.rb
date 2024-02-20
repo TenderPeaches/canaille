@@ -13,7 +13,7 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
-  
+
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   # include custom helpers
@@ -22,6 +22,8 @@ RSpec.configure do |config|
 
   #! Activate for comprehensive tests
   #config.order = :random
+
+  config.failure_color = :bold_red
 
   # This allows you to limit a spec run to individual examples or groups
   # you care about by tagging them with `:focus` metadata. When nothing

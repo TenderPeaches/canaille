@@ -16,3 +16,6 @@
         <%= render partial: "coordinates/data", locals: { coordinate: @coordinate } %>
     <% end %>
 <% end %>
+<%= turbo_stream.update "coordinate-choice-label" do %>
+    <%= t('feedback.service_request.using_client_address') %>
+<% end %>

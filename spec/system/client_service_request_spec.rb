@@ -11,12 +11,34 @@ RSpec.describe "create_service_request", type: :system do
       find_submit_button(service_request_path).click
     end
 
+    def log_in_from_embedded_form
+      # create dummy user for UI login
+      user = create(:user)
+      # log in using the embedded form
+      within_test_id 'log-in' do
+        fill_in "user[email]", with: "#{user.email}"
+        fill_in "user[password]", with: "#{user.password}"
+      end
+      find_submit_button(user_session_path).click
+    end
+
+    def sign_up_from_embedded_form
+      within_test_id 'sign-up' do
+        fill_in "user[email]", with: "sr_test_2@gmail.com"
+        fill_in "user[username]", with: "sr_test2"
+        fill_in "user[password]", with: "123"
+        fill_in "user[password_confirmation]", with: "123"
+
+      end
+      find_submit_button(user_registration_path).click
+    end
+
     before(:each) do
       visit new_service_request_path
     end
 
     before(logged_in: true) do
-      login_client
+      @user = login_client
     end
 
     context "logged out" do
@@ -37,17 +59,10 @@ RSpec.describe "create_service_request", type: :system do
 
       # auth process is embedded in the page so once completed, the page should remain as is, minus the auth part
       it "logging in keeps the form's info", js: true do
-        # create dummy user for UI login
-        user = create(:user)
         # fill in some service request field
         fill_in 'service_request[notes]', with: 'super duper test notes'
 
-        # log in using the embedded form
-        within_test_id 'log-in' do
-          fill_in "user[email]", with: "#{user.email}"
-          fill_in "user[password]", with: "#{user.password}"
-        end
-        find_submit_button(user_session_path).click
+        log_in_from_embedded_form
 
         # must not redirect elsewhere
         expect(page).to have_current_path(new_service_request_path)
@@ -59,21 +74,39 @@ RSpec.describe "create_service_request", type: :system do
       it "signing up keeps the form's info", js: true do
         fill_in 'service_request[notes]', with: 'super duper more test notes'
 
-        within_test_id 'sign-up' do
-          fill_in "user[email]", with: "sr_test_2@gmail.com"
-          fill_in "user[username]", with: "sr_test2"
-          fill_in "user[password]", with: "123"
-          fill_in "user[password_confirmation]", with: "123"
-
-        end
-        find_submit_button(user_registration_path).click
+        sign_up_from_embedded_form
 
         expect(page).to have_current_path(new_service_request_path)
         expect(page).to have_field("service_request[notes]", with: "super duper more test notes")
+      end
+
+      it "offers to use unique or client coordinates" do
+        # force login from embedded form to make sure the reactive components are working without needing to reload the page
+        log_in_from_embedded_form
+
+        expect(page).to have_link(I18n.t('models.service_request.use_client_address'))
+        expect(page).to have_link(I18n.t('models.service_request.use_unique_address'))
       end
     end
 
     context "logged in", logged_in: true do
 
+      it "uses client coordinates by default" do
+        expect(page).to have_text(@user.client.coordinate.street_name)
+        expect(page).to have_text(@user.client.coordinate.postal_code)
+      end
+
+      it "shows a coordinate form for client coordinates if they aren't set" do
+        @user.client.coordinate = nil
+        visit new_service_request_path
+
+        expect(page).to have_field(I18n.t('models.coordinate.street_name'))
+      end
+
+      it "switches to service request-specific coordinates when prompted by user" do
+        click_link(I18n.t('models.use_unique_address'))
+
+        expect(page).to have_field("service_request[coordinate][street_name]")
+      end
     end
 end

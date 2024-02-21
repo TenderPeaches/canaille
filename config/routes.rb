@@ -13,35 +13,35 @@ Rails.application.routes.draw do
   end
 
 
-  # /users 
+  # /users
   resources :users do
-    # users form actions #? turn into resource somehow? 
+    # users form actions #? turn into resource somehow?
     post :is_service_provider, on: :collection
     post :is_not_service_provider, on: :collection
-  end 
+  end
 
   resources :user_service_provider_accesses
   #?
-  scope :user do 
+  scope :user do
     get :service_providers, controller: :users, action: :service_providers, as: :user_service_providers
   end
-  
+
   resources :service_requests do  # for when a client interacts with a service_request they have made
-    collection do 
-      get :use_client_address, as: :use_client_address
-      get :use_unique_address, as: :use_unique_address
+    collection do
       post :use_new_city, as: :use_new_city
       post :use_existing_city, as: :use_existing_city
     end
   end
 
-  # todo resouces :prospective_service_requests # for when a service_provider interacts with a service_request to consider making a quote > unless this branches off at the controller? 
+  resource :service_request_coordinate_choice, only: %i[ new ]
+
+  # todo resouces :prospective_service_requests # for when a service_provider interacts with a service_request to consider making a quote > unless this branches off at the controller?
 
   resources :service_provider_portals, only: %i[ show ]
   resources :client_portals, only: %i[ show ]
 
   # /clients
-  resources :clients do 
+  resources :clients do
     resources :quote_requests, only: %i[ new create index ]
     member do
       #! to be obsoleted x3
@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   end
 
   # /service_providers
-  scope :service_provider do 
+  scope :service_provider do
     get :browse_service_requests, to: "service_providers#browse_service_requests", as: :browse_service_requests_as_service_provider
     get :quote_history, to: "service_providers#quote_history", as: :service_provider_quote_history
   end
@@ -83,11 +83,11 @@ Rails.application.routes.draw do
     post :use_new_city, on: :collection
     # /coordinates/use_existing_city
     post :use_existing_city, on: :collection
-  end 
+  end
 
   # /service_categories
   resources :service_categories do
-    member do 
+    member do
       # picker actions
       # todo how to turn into resource?
       get :pick, as: :pick
@@ -97,7 +97,7 @@ Rails.application.routes.draw do
   end
 
   # /transportation_services
-  # todo 
+  # todo
   # resources :transportation_services
 
   root "home#index"

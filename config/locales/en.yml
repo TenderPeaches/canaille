@@ -31,11 +31,11 @@ en:
     change_role: "Change role"
     free: "Free"
   alerts:
-    generic_error: "The request did not succeed"
-    need_log_in: "Log in or sign up in order to proceed"
-    need_create_client: "Please create your client account in order to proceed"
-    need_set_client_coordinates: "You have must assign coordinates to your client account in order to proceed"
-    wrong_client: "You are not authorized to view other clients' data"
+    generic_error: "The request failed"
+    need_log_in: "Log in or sign up to proceed"
+    need_create_client: "Ccreate your client account to proceed"
+    need_set_client_coordinates: "Set your client address to proceed"
+    wrong_client: "You are not authorized to view this clients' data"
     no_user_found: "No user has been found for %{user}"
   feedback:
     confirm_delete: "Are you sure you wish to delete %{deleted}"
@@ -45,6 +45,10 @@ en:
       no_services: "No services for this service category"
     service_request:
       no_service_quote: "No quotes have yet been submitted for this service request"
+      no_client_address: "Your client address has not yet been set"
+      no_user_address: "Log in to use your client address"
+      using_client_address: "Client address"
+      using_unique_address: "Unique address"
     service_provider:
       no_service_offers: "Contact the service provider directly for more information on the services they offer"
       no_active_quotes: "No active quotes. Browse open service requests in order to submit new quotes."

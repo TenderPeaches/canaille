@@ -1,0 +1,2 @@
+module ServiceRequestCoordinateChoicesHelper
+end

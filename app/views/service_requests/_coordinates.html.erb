@@ -1,11 +1,10 @@
 <%# coordinate %>
 <%= content_tag :div, class: "form__section" do %>
     <%# if client exists %>
-    <% if current_user && current_user&.client %>
-        <%= content_tag :div, class: "form__group" do %>
-            <%= link_to t('models.service_request.use_client_address'), use_client_address_service_requests_path, class: "button", data: { turbo_stream: true } %>
-            <%= link_to t('models.service_request.use_unique_address'), use_unique_address_service_requests_path, class: "button", data: { turbo_stream: true } %>
-        <% end %>
+    <% if user_signed_in? %>
+        <%= render "service_requests/coordinates_choice", service_request_id: @service_request.id %>
+    <% else %>
+        <%= hint t('feedback.service_request.no_user_address') %>
     <% end %>
     <%= turbo_frame_tag "service-request-coordinate" do %>
         <% if @service_request.coordinate %>

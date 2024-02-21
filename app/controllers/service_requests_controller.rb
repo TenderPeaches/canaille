@@ -1,8 +1,8 @@
 class ServiceRequestsController < ApplicationController
     before_action :set_service_request, only: %i[ show edit update destroy ]
-    before_action :set_or_new_service_request, only: %i[ use_client_address use_unique_address use_new_city use_existing_city ]
+    before_action :set_or_new_service_request, only: %i[ use_new_city use_existing_city ]
     before_action :set_or_new_city, only: %i[ use_new_city use_existing_city ]
-    before_action :authorize, only: %i[ show create edit update destroy use_client_address ]
+    before_action :authorize, only: %i[ show create edit update destroy ]
 
     def show
 
@@ -59,44 +59,6 @@ class ServiceRequestsController < ApplicationController
         respond_to do |format|
             format.html { redirect_to client_portal_path(current_user.id), notice: I18n.t('models.service_request.destroy_success') }
             format.turbo_stream
-        end
-    end
-
-    # form action
-    def use_client_address
-
-        # if the user doesn't already have a client account
-        unless current_user.client
-            # create their client account
-            current_user.client = Client.create(user: current_user)
-        end
-
-        # set client to the user's client account
-        @client = current_user.client
-
-        # if the client's account has no coordinates set to it
-        unless @client.coordinate
-            # initialize the coordinate so fields_for can at least display the fields
-            @client.coordinate = Coordinate.new
-        end
-        # use the user's client account's coordinates as the service_request coordinates
-        @coordinate = @client.coordinate
-
-        # set the service request's client to be the user's client account
-        @service_request.client = @client
-
-        respond_to do |format|
-            format.html
-            format.turbo_stream
-        end
-    end
-
-    # form action
-    def use_unique_address
-        @service_request.coordinate ||= Coordinate.new
-        respond_to do |format|
-            format.html
-            format.turbo_stream { render 'use_unique_address' }
         end
     end
 

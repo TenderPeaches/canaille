@@ -20,6 +20,7 @@ module ApplicationHelper
       Devise.mappings[:user]
     end
 
+    ## devise auth links
     def link_to_login
       link_to t('models.session.create_title'), new_session_path(:user), class: "button"
     end
@@ -30,6 +31,13 @@ module ApplicationHelper
 
     def link_to_forgot_password
       link_to "Forgot your password?", new_password_path(:user), class: "button"
+    end
+
+    # hint to give direct, immediate feedback to user
+    def hint(text)
+      tag.div class: "hint" do
+        text
+      end
     end
 
     # debugging

@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: url ||= session_path(resource_name), html: { class: "form" }, data: { test_id: "log-in", turbo_stream: local_assigns[:embedded] }) do |form| %>
+<%= form_for(resource, as: resource_name, url: url ||= session_path(resource_name), html: { class: "form" }, data: { test_id: "log-in", turbo: !local_assigns[:embedded].nil? }) do |form| %>
     <%= render "devise/sessions/fields", form: form %>
     <%= tag.div class: "form__actions" do %>
         <%= form.submit t('models.session.create_title') %>

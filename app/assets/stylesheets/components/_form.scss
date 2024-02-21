@@ -2,10 +2,13 @@
 .form {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
+    align-content: stretch;
     gap: var(--size-xs);
     accent-color: var(--color-primary-dark);
+
+    @include media(tabletAndUp) {
+        align-content: center;
+    }
 
     /* form section holds many loosely related input or input groups */
     &__section {
@@ -13,12 +16,18 @@
         flex-direction: column;
     }
 
-    /* form group holds a few tightly related inputs - must fit in 1 line on a phone */ 
+    /* form group holds a few tightly related inputs */ 
     &__group {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex: 1;
         justify-content: space-between;
+        margin: var(--size-m);
+
+        @include media(tabletAndUp) {
+            flex-direction: row;
+            margin: var(--size-s);
+        }
     }
 
     /* checkboxes need to be displayed with their label to the side */
@@ -32,39 +41,33 @@
 
     /* form header labels */
     &__header {
-        text-align: left;
+        text-align: center;                 /* center the header label on mobile */
+        margin-top: var(--size-m);
+        margin-bottom: var(--size-l);
+        @include media(tabletAndUp) {
+            text-align: left;               /* because eyes go there first on large screens */
+        }
     }
 
-    /*(!) not used... form__input on each input...  */
-    /*
-    &__input {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        padding: var(--size-xs);
-        border: solid var(--thin-border-width) var(--color-primary-darkest);
-        outline: none;
-        transition: box-shadow var(--quick-duration);
-
-        &:focus {
-            box-shadow: 0 0 0 2px var(--color-sheen);
-        }
-
-        &--invalid {
-            border-color: var(--color-error);
-        }
-    }*/
-
     &__actions {
-
+        /* used */
     }
 
     .field {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         justify-content: space-between;
         margin: var(--size-m) var(--size-l);
+
+        @include media(tabletAndUp) {
+            align-items: flex-start;
+        }
+    }
+
+    select {
+        padding: var(--size-s);                 /* make it easier to tap on */
+        margin: var(--size-m);                  /* fat-finger proof */
     }
 
     input[type="number"]::-webkit-outer-spin-button,
@@ -81,7 +84,6 @@
     }
 
 }
-
 
 .monetary-picker::after {
     content: "$";

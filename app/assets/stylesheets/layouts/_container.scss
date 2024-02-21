@@ -4,11 +4,4 @@
     padding-left: (--size-xs);      /* oustide spacing next to */
     margin-left: auto;              /* automatic centering where applicable */
     margin-right: auto;             /* automatic centering where applicable */
-/*
-    @include media(tabletAndUp) {
-        padding-right: (--size-m);
-        padding-left: (--size-m);
-        max-width: 60rem;
-    }
-*/
 }

@@ -20,7 +20,7 @@
         <% end %>
         
         <%# service request coordinate %>
-        <%= content_tag :h4 do %>
+        <%= content_tag :h4, class: "form__header" do %>
             <%= t('models.service_request.coordinate') %>
         <% end %>
         <%= turbo_frame_tag "coordinates-fields" do %>

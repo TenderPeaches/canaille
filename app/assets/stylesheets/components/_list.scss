@@ -1,0 +1,10 @@
+
+
+.list__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-s);
+    justify-content: space-between;
+    margin-top: var(--size-m);
+    margin-bottom: var(--size-l);
+}

@@ -2,12 +2,29 @@
 
 /* page header bar */
 header {
-    display: flex;                                          /* display from left-to right */
-    flex-wrap: wrap;                                        /*  */
+    display: flex;                                          /* display items one next to another */
+    flex-direction: column;                                 /* use vertical layout for small devices */
     gap: var(--size-xl);                                    /* horizontal spacing between child elements */
-    margin-bottom: var(--size-l);                           /* space out the header from the content */ 
+    margin-bottom: var(--size-m);                           /* space out the header from the content */ 
     justify-content: space-between;                         /* clear the middle, tuck content in the corners */
     border-bottom: 4px ridge var(--color-primary);          /* thick bottom border to emphasize the header's presence */ 
+
+    @include media(tabletAndUp) {
+        flex-wrap: wrap;                                    /* ? */
+        flex-direction: row;                                /* larger devices can view the header as a banner */ 
+        margin-bottom: var(--size-l);                       /* space out the header from the content */ 
+    }
+}
+
+/* header navigation section  */
+header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media(tabletAndUp) {
+        flex-direction: row;
+    }
 }
 
 /* page header bar links */ 
@@ -16,27 +33,17 @@ header a {
     text-transform: uppercase;                              /* make these interactive features pop out by using caps */
 }
 
-.header-nav a {
-    display: inline-block;
-    width: calc(5 * var(--size-xxxl));
-    border-radius: 0;
-    margin-left: var(--size-xxxl);
-    border-left: solid 4px var(--color-primary-darker);
-    border-right: solid 4px var(--color-primary-darker);
-    padding: var(--size-xxl) var(--size-xl);
+/* links within a header's navigational section */ 
+header nav a {
+    padding: var(--size-xs);                                /* smaller padding on mobile */
+
+    @include media(tabletAndUp) {
+        padding: var(--size-m);                             /* larger padding */
+        margin: var(--size-s) var(--size-m);                /* external spacing between links */ 
+    }
 }
 
-.header-nav a:hover {
-    background: var(--color-primary-sheen);
-    border-left-color: var(--color-primary-dark);
-    border-right-color: var(--color-primary-dark);
-}
-
-.list__header {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--size-s);
-    justify-content: space-between;
-    margin-top: var(--size-m);
-    margin-bottom: var(--size-l);
+/* hover on header's nav links */ 
+header nav a:hover {
+    background: var(--color-primary-sheen);                 /* subtle shading */
 }

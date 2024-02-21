@@ -1,4 +1,6 @@
 
+
+/* set transition for all button types and states */
 button, button:hover, button:active,
 .button, .button:hover, .button:active,
 input[type="submit"], input[type="submit"]:hover, input[type="submit"]:active {
@@ -7,9 +9,7 @@ input[type="submit"], input[type="submit"]:hover, input[type="submit"]:active {
 
 /* buttons */ 
 button, input[type="submit"], .button {
-    display: inline-block;
-    padding: var(--size-xs) var(--size-m);                  /* keep it tight vertically but give some breathing room to the sides */
-    margin: var(--size-m);                                  /* external spacing to make the button pop */
+    display: inline-block;                                  /* standardize to inline-block as <a class="button"> elements would be inline */
     background: var(--color-primary-darker);                /* mesh with background, but use differnent lighting to hint at interactivity */
     background-origin: border-box;                          /* invisible borders with linear gradients */
     color: var(--color-primary-white);                      /* mesh with background, buttons are not assumed to be important */
@@ -17,9 +17,16 @@ button, input[type="submit"], .button {
     border-radius: var(--default-border-radius);            /* more elegant, casual, "fun" */
     cursor: pointer;                                        /* standard */
     text-transform: uppercase;                              /* make these interactive features pop out by using caps */
-    text-decoration: none;
-    outline: none;
-    transition: filter var(--slow-duration), color var(--quick-duration)
+    text-decoration: none;                                  /* remove underlines from button links */
+    outline: none;                                          /* remove non-standard borders from input type buttons */ 
+    padding: var(--size-xs) var(--size-s);                                /* small internal spacing for small devices */
+    margin: var(--size-xxs);                               /* just enough spacing to avoid fat fingering */ 
+    transition: filter var(--slow-duration), color var(--quick-duration);   /* enforce transitions */
+
+    @include media(tabletAndUp) {
+        padding: var(--size-s) var(--size-m);                  /* keep it tight vertically but give some breathing room to the sides */
+        margin: var(--size-m);                                  /* external spacing to make the button pop */
+    }
 }
 
 /* on button hover */

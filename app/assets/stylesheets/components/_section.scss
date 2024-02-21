@@ -1,8 +1,12 @@
 .section__actions {
     display: flex;
-    flex-direction: row;
-    justify-items: start;
+    flex-direction: column;
     align-items: center;
+
+    @include media(tabletAndUp) {
+        flex-direction: row;
+        justify-items: start;
+    }
 }
 
 .section__form {

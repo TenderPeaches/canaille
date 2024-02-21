@@ -4,14 +4,18 @@
     display: flex;                                      /* for an elegant vertical-layout */
     flex-direction: column;                             /* vertical layout */
     align-items: stretch;                               /* maximize content size for easy clicking */
-    width: 100%;                                        /* maximize content size for easy clicking */
-    padding: var(--size-xxxl);                          /* maximum padding for maximum emphasis on content */
-    font-size: 2rem;
+    font-size: var(--font-size-xl);                     /* oversize font to draw attention */
+
+    @include media(tabletAndUp) {
+        font-size: var(--font-size-xxxl);                    /* can afford dramatic oversize */
+        padding: var(--size-xxxl);          /* can afford more padding */
+    }
 }
 
 .menu a {
-    margin-bottom: var(--size-m);                       /* gap between each button */
-    width: 100%;                                        /* fill in whatever space is available */ 
+    @include media(tabletAndUp) {
+        margin-bottom: var(--size-m);    
+    }
 }
 
 /* menu buttons appear as links */
@@ -21,7 +25,10 @@
     border-width: var(--thick-border-width);            /* border to turn the links into buttons, thick for added texture */
     border-style: var(--button-border-style-depressed); /* appear as button */
     border-color: var(--color-secondary-white);         /* use interactive color so as not to mesh with background */
-    padding: var(--size-xxl);                           /* bit of padding to let buttons breathe */
+
+    @include media(tabletAndUp) {
+        padding: var(--size-xxl);                           /* bit of padding to let buttons breathe */
+    }
 }
 
 /* on menu button hover */

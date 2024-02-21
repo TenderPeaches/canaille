@@ -1,10 +1,10 @@
 
 
-/* uses a similar style as tables, but for displaying elements in a non-table layout */
-.card, .alert {
+/* groups related features together */
+.card {
     width: 100%;                                            /* assume that cards fill their space by default, overwrite if necessary */
     border-style: var(--default-border-style);              /* standard */
-    border-width: var(--thick-border-width);                /* highlight the content within */ 
+    border-width: var(--thick-border-width) 0;                /* highlight the content within */ 
     border-color: var(--color-primary);                     /* mesh with background */
     margin: var(--size-m) 0;                                /* cards should have some spacing above and under them, to space out the borders */
     padding: var(--size-m);                                 /* internal spacing */ 
@@ -20,8 +20,8 @@
     & > div {
         margin: var(--size-m);                              /* default spacing between inner card elements */
     }
-}
 
-.alert {
-    border-color: var(--color-error);
+    @include media(tabletAndUp) {
+        border-width: var(--thick-border-width);
+    }
 }

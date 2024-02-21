@@ -1,8 +1,15 @@
+
+
 .carousel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    gap: var(--size-m);
-    padding: var(--size-m);
+    display: flex;                      /* layout each item next to the other */
+    flex-direction: column;             /* vertical layout for mobile */
+    align-items: stretch;               /* have same width for all items, maximize it */
+
+    @include media(tabletAndUp) {
+
+        flex-direction: row;            /* horizontal layout for large screens */
+        justify-content: space-around;  /* spread the options while centering them */
+        gap: var(--size-m);             /* can afford more spacing on a larger screen */
+        padding: var(--size-m);         /* can afford more spacing on a larger screen */
+    }
 }

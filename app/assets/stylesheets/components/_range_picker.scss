@@ -2,9 +2,13 @@
 .range-picker {
     display: flex;
     flex-direction: row; 
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    column-gap: var(--size-l);
+    column-gap: var(--size-xxs);
+
+    @include media(tabletAndUp) {
+        column-gap: var(--size-l);
+    }
 }
 
 .range-picker__guide {

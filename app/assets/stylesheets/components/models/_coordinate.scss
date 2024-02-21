@@ -5,7 +5,10 @@
 
 .coordinate-fields .form__group {
     display: flex;
-    flex-direction: row;
+
+    @include media(tabletAndUp) {
+        flex-direction: row;
+    }
 }
 
 .field--civic-number input {

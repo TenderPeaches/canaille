@@ -1,7 +1,5 @@
 <%# service %>
-<%= content_tag :div, class: "field field--service" do %>
-    <%= service_picker(form, @service_request.service) %>
-<% end %>
+<%= service_picker(form, @service_request.service) %>
 <%= content_tag :div, class: "form__group" do %>
     <%# notes %>
     <%= content_tag :div, class: "field field--notes" do %>

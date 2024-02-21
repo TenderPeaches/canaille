@@ -1,5 +1,5 @@
 /* _common.css => for common classes that aren't tied to one specific page or feature */
-/*! not sure if really necessary after CSS Overhaul, could dump in _reset.scss */
+
 
 /* class added to elements that need to clash with the surrounding content */
 .contrast-text {
@@ -9,12 +9,10 @@
 /* content is whatever content is the central piece of the display  */ 
 .content {
     position: relative;
-    margin: auto;                                                   /* auto center */
     display: flex;                                                  /* vertical flex */
     flex-direction: column;                                         /* vertical flex */
     align-content: center;                                          /* align items along center axis */
     width: calc(min(100vw, var(--max-content-width--screen)));      /* set upper boundary on content width */ 
-    /* max-width: var(--max-content-width--phone); for now design everything as if for phone */
 }
 
 /* force-hidden elements */
@@ -47,7 +45,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    @include media(tabletAndUp) {
+        
+    }
 }
+
 
 /* for stuff that is displayed as a pair of elements, tucked alongside the edges */
 .binome {
@@ -68,12 +71,20 @@
     & > *:last-child {
         text-align: right;
     }
+
+    @include media(tabletAndUp) {
+        
+    }
 }
 
 /* typically involves a label and a data bit, display can vary depending on device width */ 
 .field {
     display: flex;
     flex-direction: column;
+
+    @include media(tabletAndUp) {
+        
+    }
 }
 
 /* layout helper */

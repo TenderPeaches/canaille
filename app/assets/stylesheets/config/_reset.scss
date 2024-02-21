@@ -1,3 +1,5 @@
+
+
 *,
 *::before,
 *::after {
@@ -87,6 +89,9 @@ section {
  /* number-style inputs */
 input[type="number"] {
     width: var(--size-xxl);                                 /* numbers in this website's context are usually limited to 1-2 digits */
+    @include media(tabletAndUp) {
+        
+    }
 }
 
 

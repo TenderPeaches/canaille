@@ -1,10 +1,10 @@
 <%= content_tag :div, class: "header-logo" do %>
+    <%# logo/image title %>
+<% end %>
+<%= content_tag :nav do %>
     <% unless request.path == root_path %>
         <%= link_to 'Home', root_path %>
     <% end %>
-    <%# logo/image title %>
-<% end %>
-<%= content_tag :div, class: "header-nav" do %>
     <% if user_signed_in? # if logged in %>
         <% if current_user.client %>
             <%= link_to t('models.client.model_name'), client_portal_path(current_user.client) %>

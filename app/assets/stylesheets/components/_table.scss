@@ -1,38 +1,88 @@
-
+/*!
+    Issue: tables suck in mobile
+    Proposed solutions:
+        Use Grid instead of table (iffy with variable/unknown number of columns
+        Use a table and a custom component, and display only one depending on screen width
+        Use custom components to replace tables
+        Try to replicate table behavior with something else - flex?
+    So far all tables have 4 columns or fewer... I think at this point the best solution would be to disregard tables altogether and use custom partials for each
+*/
 
 /* data table */
-.table, table {
-    width: 100%;                                            /* assume that tables fill their space by default, overwrite if necessary */
+.table, table {                      
     border-style: var(--default-border-style);              /* standard */
     border-width: var(--thick-border-width);                /* highlight the content within */ 
     border-color: var(--color-primary);                     /* mesh with background */
+    border-radius: 0px;                                     /* square corners */
     border-collapse: collapse;                              /* allows for predictable and consistent border placement */
-    margin: var(--size-m) 0;                                /* add external spacing above, below */
+    margin: 0px;                                            /* hug the edges to maximize space */
+
+    @include media(tabletAndUp) {
+        margin: var(--size-m) 0;                                /* add external spacing above, below */
+    }
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-content: center;
+}
+
+.table__head {
+    display: none;
+
+    @include media(tabletAndUp) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(1fr, calc(2 * var(--size-xxl))));
+    }
 }
 
 /* data table row */ 
-.table .tr, table tr {
-    margin: 0;                                              /* pull everything around */
-    border-bottom-width: var(--thin-border-width);          /* thin borders to agglomerate the data */     
-    border-bottom-style: var(--default-border-style);       /* standard */
-    border-bottom-color: var(--color-primary-darker);       /* mesh with background, low contrast */        
+.table .table__row, table tr {
+    margin: 0;                                              /* pull everything around */    
 }
 
-.table .th, .table .td,
+/* data table header */
+.table .table__th, .table .table__td,
 table th, table td {
     padding: var(--size-xs) var(--size-l);                  /* breathing room for data to allow it to pop-out */
 }
 
-.table .th, table th {
+.table__th, table th {
+    display: none;                                          /* hide table headers in mobile */
     background: var(--color-primary-darkest);               /* slightly lighter to differenciate from the data rows */
     color: var(--color-primary-white);                      /* light color to contrast with dark background */
     border-style: var(--thin-border-width);                 /* add column borders */
     border-color: var(--color-primary-dark);                /* use darker to emphasis header */
     border-style: var(--default-border-style);              /* standard */
+    border-radius: 0px;                                     /* square border corners */
+
+    @include media(tabletAndUp) {
+        display: initial;                                   /* show table headers on tablet+ */
+    }
 }
 
+.table__th--inline {
+    display: initial;           /* on mobile, show labels (data type) for each data point */
+    margin: calc(var(--thick-border-width) * -1);   /* collapse the border, match border-style value of .table */
+
+    @include media(tabletAndUp) {
+        display: none;          /* hide on tablet+, instead the columns are labeled in <thead> */
+    }
+}
+
+/* pairs a key with its value, for display on mobile devices *//*
+.table__pair {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+
+}*/
+
 /* data table even row */
-.table .tr:nth-child(2n),
+.table .table__row:nth-child(2n),
 table tr:nth-child(2n) {
     background-color: var(--color-primary-lightest);                   /* highlight alternating row to help brain nenorize the data, sync with body/section background color  */
 }

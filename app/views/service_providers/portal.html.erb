@@ -10,7 +10,7 @@
     <%= tag.section class: "card service-provider-info", id: "#{dom_id(@service_provider)}-info", data: { test_id: "info" } do %>
         <%= render partial: "service_providers/portal/info", locals: { service_provider: @service_provider} %>
     <% end %>
-    <%= tag.section class: "card", data: { test_id: "service-offers" } do %>
+    <%= tag.section data: { test_id: "service-offers" } do %>
         <%= render partial: "service_providers/portal/service_offers", locals: { service_provider: @service_provider } %>
     <% end %>
     <% if current_user.is_service_provider_admin? @service_provider %>

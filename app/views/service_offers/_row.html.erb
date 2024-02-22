@@ -1,16 +1,13 @@
-<%#! if adding/removing <td>s here, adjust _row_new colspan %>
-<%= tag.td service_offer.service.label %>
-<% if service_offer.min_price.nil? || service_offer.min_price == 0 %>
-    <%= tag.td t('keywords.free') %>
-<% else %>
-    <%= tag.td number_to_currency(service_offer.min_price) %>
-<% end %>
-<%= tag.td service_offer.description %>
-<%= tag.td do %>
-    <%= tag.div class: "actions" do %>
-        <% if is_admin %>
-            <%= link_to t('keywords.edit'), edit_service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_stream: true } %>
-            <%= link_to t('keywords.delete'), service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_method: :delete } %>
-        <% end %>
+<%= table_td t('models.service.model_name'), service_offer.service.label %>
+
+<% price_is_free = service_offer.min_price.nil? || service_offer.min_price == 0 %>
+<%= table_td t('models.service_offer.min_price'), price_is_free ? t('keywords.free') : number_to_currency(service_offer.min_price) %>
+
+<%= table_td t('models.service_offer.description'), service_offer.description %>
+
+<%= tag.div class: "table__row-actions" do %>
+    <% if is_admin %>
+        <%= link_to t('keywords.edit'), edit_service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_stream: true } %>
+        <%= link_to t('keywords.delete'), service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_method: :delete } %>
     <% end %>
 <% end %>

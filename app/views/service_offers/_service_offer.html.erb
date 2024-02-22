@@ -1,7 +1,17 @@
-<%= turbo_frame_tag service_offer do %>
-    <%= content_tag :div, class: "service_offer" do %>
-        <%= link_to "#{t('models.service.model_name')} #{service_offer.service.label}", service_path(service_offer.service) %>
-        <%= content_tag :div, class: "actions" do %>
+<%= tag.div class: "service-offer", id: service_offer do %>
+    <%= tag.div class: "service-offer__service", service_offer.service.label %>
+
+    <% price_is_free = service_offer.min_price.nil? || service_offer.min_price == 0 %>
+    <%= tag.div class: "service-offer__min-price", price_is_free ? t('keywords.free') : number_to_currency(service_offer.min_price) %>
+
+    <%= tag.div class: "service-offer__description", service_offer.description %>
+
+    <%= tag.div class: "actions" do %>
+        <% if local_assigns[:can_edit] %>
+            <%= link_to t('keywords.edit'), edit_service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_stream: true } %>
+            <%= link_to t('keywords.delete'), service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_method: :delete } %>
+        <% end %>
+        <% if local_assigns[:can_request_quotes] %>
             <%= link_to t("models.service_provider.ask_quote"), service_provider_service_offer_ask_quote(service_offer) %>
         <% end %>
     <% end %>

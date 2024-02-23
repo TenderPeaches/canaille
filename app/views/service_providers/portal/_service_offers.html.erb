@@ -4,17 +4,8 @@
     <%= link_to t('models.service_offer.create_title'), new_service_provider_service_offer_path(service_provider), class: "button", data: { turbo_stream: true } %>
 <% end %>
 <%= tag.div id: "service-offer-form", class: "section__form" %>
-<%= tag.div class: "table" do %>
-    <%= tag.div class: "table__head" do %>
-            <%= table_th t('models.service.model_name') %>            
-            <%= table_th t('models.service_offer.price_range') %>            
-            <%= table_th t('models.service_offer.description') %>            
-    <% end %>
-    <%= tag.div class: "table__body", id: "service-offers" do %>
-        <% service_provider.service_offers.each do |service_offer| %>
-            <%= tag.div class: "table__row", id: dom_id(service_offer) do %>
-                <%= render partial: "service_offers/row", locals: { service_offer: service_offer, is_admin: (current_user.is_service_provider_admin? service_provider) } %>
-            <% end %>
-        <% end %>
+<%= tag.div id: "service-offers" do %>
+    <% service_provider.service_offers.each do |service_offer| %>
+        <%= render service_offer, can_edit: (current_user.is_service_provider_admin? service_provider) %>
     <% end %>
 <% end %>

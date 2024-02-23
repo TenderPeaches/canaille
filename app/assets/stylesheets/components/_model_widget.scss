@@ -1,0 +1,31 @@
+.model-widget {
+
+    border-style: var(--default-border-style);              /* standard */
+    border-width: var(--thick-border-width);                /* highlight the content within */ 
+    border-color: var(--color-primary);                     /* mesh with background */
+    border-radius: 0px;                                     /* square corners */
+
+    padding: var(--size-xs);
+    row-gap: var(--size-xs);
+
+    @include media(tabletAndUp) {
+        padding: var(--size-m);
+        row-gap: var(--size-s);
+    }
+
+    .actions {
+        grid-column: 3;                 /* default for 2-column grids, overwrite in individual widgets if needed */
+        grid-row: 1 / 3;                /* default for 2-row grids, overwrite in individual widgets if needed */ 
+        display: flex;                  /* display in a column */
+        flex-direction: column;         /* display in a column */
+
+        a {
+            flex-grow: 1;               /* stretch the items so no justify is needed on the flex-containter */
+        }
+    }
+}
+
+/* any model widget that immediately follows another */
+.model-widget + .model-widget {
+    border-top-width: 0;                                    /* remove top border because previous widget's bottom border will act as this one's top border */
+}

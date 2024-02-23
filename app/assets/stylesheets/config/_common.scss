@@ -21,6 +21,7 @@
 }
 
 /* actions are usually buttons/CTAs located within a row or form */
+/*todo isolate and see where this is used */ 
 .actions {
     display: flex;                                                  /* display in a even row/column */
     flex: 0 0 auto;                                                 /* harmonize if part of a flex display */

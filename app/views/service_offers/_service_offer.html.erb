@@ -1,10 +1,10 @@
-<%= tag.div class: "service-offer", id: service_offer do %>
-    <%= tag.div class: "service-offer__service", service_offer.service.label %>
+<%= tag.div class: "service-offer model-widget", id: dom_id(service_offer) do %>
+    <%= tag.div service_offer.service.label, class: "service-offer__service" %>
 
     <% price_is_free = service_offer.min_price.nil? || service_offer.min_price == 0 %>
-    <%= tag.div class: "service-offer__min-price", price_is_free ? t('keywords.free') : number_to_currency(service_offer.min_price) %>
+    <%= tag.div (price_is_free ? t('keywords.free') : number_to_currency(service_offer.min_price)), class: "service-offer__min-price" %>
 
-    <%= tag.div class: "service-offer__description", service_offer.description %>
+    <%= tag.div service_offer.description, class: "service-offer__description" %>
 
     <%= tag.div class: "actions" do %>
         <% if local_assigns[:can_edit] %>

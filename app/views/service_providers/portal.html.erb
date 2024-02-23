@@ -7,13 +7,16 @@
             <%= link_to t('cta.find_service_requests'), browse_service_requests_as_service_provider_path(@service_provider), class: "button" %>
         <% end %>
     <% end %>
+
     <%= tag.section class: "card service-provider-info", id: "#{dom_id(@service_provider)}-info", data: { test_id: "info" } do %>
-        <%= render partial: "service_providers/portal/info", locals: { service_provider: @service_provider} %>
+        <%= render "service_providers/portal/info", service_provider: @service_provider %>
     <% end %>
+
     <%= tag.section data: { test_id: "service-offers" } do %>
-        <%= render partial: "service_providers/portal/service_offers", locals: { service_provider: @service_provider } %>
+        <%= render "service_providers/portal/service_offers", service_provider: @service_provider %>
     <% end %>
+
     <% if current_user.is_service_provider_admin? @service_provider %>
-        <%= render partial: 'service_providers/portal/admin_panel/admin_panel', locals: { service_provider: @service_provider } %>
+        <%= render 'service_providers/portal/admin_panel/admin_panel', service_provider: @service_provider %>
     <% end %>
 <% end %>

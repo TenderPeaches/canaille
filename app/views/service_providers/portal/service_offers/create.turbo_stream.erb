@@ -1,7 +1,7 @@
 <%# add created row to the list %>
 <%= turbo_stream.append "service-offers" do %>
     <%# is_admin = true because it must be true to have gotten to this point %>
-    <%= render partial: "service_offers/row", locals: { service_offer: @service_offer, is_admin: true } %>
+    <%= render @service_offer, is_admin: true %>
 <% end %>
 <%# clear the form %>
 <%# todo have an option to create more so the form stays %>

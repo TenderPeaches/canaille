@@ -1,0 +1,14 @@
+.service-offer.model-widget {
+    /* 
+    grid layout:
+        service.name            min_price               actions
+        description             description             actions
+    */
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: auto;
+
+    .service-offer__description {
+        grid-column: 1 / 3;
+    }
+}

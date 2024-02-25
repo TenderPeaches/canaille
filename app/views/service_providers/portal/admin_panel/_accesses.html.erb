@@ -6,7 +6,7 @@
     <%= tag.div class: "section__form", id: "user-service-provider-access-form" %>
     <%= tag.div id: "user-service-provider-accesses" do %>
         <% service_provider.active_accesses.each do |access| %>
-            <%= access, can_edit: (current_user.is_service_provider_admin? service_provider) «%>
+            <%= render "user_service_provider_accesses/user_service_provider_access", user_service_provider_access: access, can_edit: (current_user.is_service_provider_admin? service_provider) %>
         <% end %>
     <% end %>
 <% end %>

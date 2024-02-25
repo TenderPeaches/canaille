@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :quote_history, controller: "service_providers/quote_history", only: %i[ index ]
   end
 
+  resources :service_quotes
 
   # /users
   resources :users do

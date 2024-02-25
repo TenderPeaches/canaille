@@ -1,6 +1,6 @@
 <%= turbo_stream.update @user_service_provider_access do %>
     <%# is_admin = true because it must be true to have gotten to this point %>
-    <%= render partial: "user_service_provider_accesses/row", locals: { access: @user_service_provider_access } %>
+    <%= render "user_service_provider_accesses/user_service_provider_access", can_edit: true, user_service_provider_access: @user_service_provider_access %>
 <% end %>
 <%# clear the form %>
 <%= turbo_stream.update "user-service-provider-access-form" %>

@@ -1,0 +1,15 @@
+<%= tag.div class: "service-quote model-widget", id: dom_id(service_quote) do %>
+    <%= tag.div service_quote.service.label, class: "service-quote__service" %>
+
+    <%= tag.div currency(service_quote.price), class: "service-quote__price" %>
+
+    <%= tag.div datetime_format(service_quote.created_at), class: "service-quote__created-at" %>
+
+    <%= tag.div service_quote.notes, class: "service-quote__notes" %>
+
+    <%= tag.div class: "actions" do %>
+        <% if local_assigns[:can_edit] %>
+            <%= model_edit_delete_actions service_quote_path(service_quote) %>
+        <% end %>
+    <% end %>
+<% end %>

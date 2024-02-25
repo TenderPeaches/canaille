@@ -1,15 +1,13 @@
 <%= tag.div class: "service-offer model-widget", id: dom_id(service_offer) do %>
     <%= tag.div service_offer.service.label, class: "service-offer__service" %>
 
-    <% price_is_free = service_offer.min_price.nil? || service_offer.min_price == 0 %>
-    <%= tag.div (price_is_free ? t('keywords.free') : number_to_currency(service_offer.min_price)), class: "service-offer__min-price" %>
+    <%= tag.div currency(service_offer.min_price), class: "service-offer__min-price" %>
 
     <%= tag.div service_offer.description, class: "service-offer__description" %>
 
     <%= tag.div class: "actions" do %>
         <% if local_assigns[:can_edit] %>
-            <%= link_to t('keywords.edit'), edit_service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_stream: true } %>
-            <%= link_to t('keywords.delete'), service_provider_service_offer_path(service_offer.service_provider, service_offer), class: "button", data: { turbo_method: :delete } %>
+            <%= model_edit_delete_actions service_provider_service_offer_path(service_offer.service_provider, service_offer) %>
         <% end %>
         <% if local_assigns[:can_request_quotes] %>
             <%= link_to t("models.service_provider.ask_quote"), service_provider_service_offer_ask_quote(service_offer) %>

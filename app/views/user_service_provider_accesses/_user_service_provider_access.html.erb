@@ -1,0 +1,13 @@
+<%= tag.div class: "user-service-provider-access model-widget", id: dom_id(user_service_provider_access) do %>
+    <%= tag.div user_service_provider_access.user.username, class: "user-service-provider-access__username" %>
+
+    <%= tag.div user_service_provider_access.user_role.name, class: "user-service-provider-access__user-role" %>
+
+    <%= tag.div currency(user_service_provider_access.user.email), class: "user-service-provider-access__email" %>
+
+    <%= tag.div class: "actions" do %>
+        <% if local_assigns[:can_edit] %>
+            <%= model_edit_delete_actions user_service_provider_access_path(user_service_provider_access) %>
+        <% end %>
+    <% end %>
+<% end %>

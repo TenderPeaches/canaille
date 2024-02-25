@@ -1,23 +1,6 @@
 <%= link_to t('cta.back'), client_service_request_path(@service_request) %>
-<%= tag.table do %>
-    <%= tag.thead do %>
-        <%= tag.tr do %>
-            <%= tag.th t('models.service_provider.name') %>
-            <%= tag.th t('models.service_provider.phone_number') %>
-            <%= tag.th t('models.service_provider.email_address') %>
-            <%= tag.th t('models.service_offer.price_range') %>
-        <% end %>
-    <% end %>
-    <%= tag.tbody do %>
         <% @service_request.find_service_offers.each do |service_offer| %>
-            <%= tag.tr do %>
-                <%= tag.td do %>
-                    <%= link_to service_offer.service_provider.name, service_provider_path(service_offer.service_provider_id) %>
-                <% end %>
-                <%= tag.td service_offer.service_provider.phone_number %>
-                <%= tag.td service_offer.service_provider.email_address %>
-                <%= tag.td price_range(service_offer.min_price, service_offer.max_price) %>
-            <% end %>
+            <%= service_offer, can_request_quotes: true %>
         <% end %>
     <% end %>
 <% end %>

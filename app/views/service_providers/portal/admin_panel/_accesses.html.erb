@@ -4,21 +4,9 @@
         <%= link_to t('models.user_service_provider_access.create_title'), new_service_provider_access_path(service_provider), class: "button", data: { turbo_stream: true } %>
     <% end %>
     <%= tag.div class: "section__form", id: "user-service-provider-access-form" %>
-    <%= tag.table do %>
-        <%= tag.thead do %>
-            <%= tag.tr do %>
-                <%= tag.th t('models.user.username') %>
-                <%= tag.th t('models.user.email') %>
-                <%= tag.th t('models.user_role.name') %>
-                <%= tag.th %>
-            <% end %>
-        <% end %>
-        <%= tag.tbody id: "user-service-provider-accesses" do %>
-            <% service_provider.active_accesses.each do |access| %>
-                <%= tag.tr id: dom_id(access) do %>
-                    <%= render partial: "user_service_provider_accesses/row", locals: { service_provider: service_provider, access: access } %>
-                <% end %>
-            <% end %>
+    <%= tag.div id: "user-service-provider-accesses" do %>
+        <% service_provider.active_accesses.each do |access| %>
+            <%= access, can_edit: (current_user.is_service_provider_admin? service_provider) «%>
         <% end %>
     <% end %>
 <% end %>

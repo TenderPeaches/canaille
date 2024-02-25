@@ -57,4 +57,12 @@ module ApplicationHelper
     def raise_hell
       raise 'hell'
     end
+
+    def currency(amount)
+      if amount.nil? || amount == 0
+        t('keywords.free')
+      else
+        number_to_currency(amount)
+      end
+    end
 end

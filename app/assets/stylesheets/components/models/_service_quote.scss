@@ -1,0 +1,12 @@
+.service-quote.model-widget {
+    /* 
+        service         price
+        created_at      created_at
+        notes           notes
+    */ 
+
+    .service-quote__created-at,
+    .service-quote__notes {
+        grid-column: 1 / 3;
+    }
+}

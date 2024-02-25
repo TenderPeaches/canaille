@@ -1,5 +1,20 @@
-<%= turbo_frame_tag service_provider do %>
-    <%= content_tag :div, class: "service-provider" do %>
-        <%= link_to "#{service_provider.name}", service_provider_path(service_provider), data: { turbo_frame: "_top" }, class: "text--big" %>
+<%= tag.div class: "service-provider model-widget", id: dom_id(service_provider) do %>
+    <%= tag.div service_provider.name, class: "service-provider__name" %>
+
+    <%= tag.div service_provider.phone_number, class: "service-provider__phone-number" %>
+
+    <%= tag.div service_provider.email_address, class: "service-provider__email-address" %>
+
+    <% if local_assigns[:service_offer] %>
+        <%= tag.div price_range(service_offer.min_price, service_offer.max_price) %>
+    <% end %>
+
+    <%= tag.div class: "actions" do %>
+        <% if local_assigns[:can_edit] %>
+            <%= link_to t('keywords.edit'), service_provider_portal(service_portal) %>
+        <% end %>
+        <% if local_assigns[:service_offer] %>
+            <%= link_to 'request_quote', 'request_quote_path', class: "button" %>
+        <% end %>
     <% end %>
 <% end %>

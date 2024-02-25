@@ -1,18 +1,4 @@
-<%= tag.table do %>
-    <%= tag.thead do %>
-        <%= tag.tr do %>
-            <%= tag.th t('models.service_provider.name') %>
-            <%= tag.th t('models.user_role.name') %>
-        <% end %>
-    <% end %>
-    <%= tag.tbody do %>
-        <% @service_providers.each do |service_provider| %>
-            <%= tag.tr do %>
-                <%= tag.td do %>
-                    <%= link_to service_provider.name, service_provider_portal_path, class: "button" %>
-                <% end %>
-                <%= tag.td service_provider.user_service_provider_accesses.where(user: current_user).first.user_role.name %>
-            <% end %>
-        <% end %>
-    <% end %>
+
+<% @service_providers.each do |service_provider| %>
+    <%= render service_provider, can_edit: (current_user.is_service_provider_admin? service_provider) %>
 <% end %>

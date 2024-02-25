@@ -1,0 +1,10 @@
+.user-service-provider-access.model-widget {
+    /* 
+        username        user_role           actions
+        email           email               actions
+    */
+
+    .user-service-provider-access__email {
+        grid-column: 1 / 3;
+    } 
+}

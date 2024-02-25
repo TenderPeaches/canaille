@@ -28,28 +28,8 @@
 <% end %>
 <%= turbo_frame_tag "service-provider-services" do %>
     <%= tag.div class: "service-provider-services" do %>
-        <% if @service_provider.service_offers %>
-            <%= content_tag :h3, t('models.service.list_title') %>
-            <%= tag.table do %>
-                <%= tag.thead do %>
-                    <%= tag.tr do %>
-                        <%= tag.th t('models.service_category.model_name') %>
-                        <%= tag.th t('models.service.model_name') %>
-                        <%= tag.th t('models.service_offer.price_range') %>
-                        <%= tag.th t('models.service_offer.description') %>
-                    <% end %>
-                <% end %>
-                <%= tag.tbody do %>
-                    <% @service_provider.service_offers.each do |service_offer| %>
-                        <%= tag.tr do %>
-                            <%= tag.td service_offer.service.service_category.label %>
-                            <%= tag.td service_offer.service.label %>
-                            <%= tag.td price_range(service_offer.min_price, service_offer.max_price) %>
-                            <%= tag.td service_offer.description %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-            <% end %>
+        <% @service_provider.service_offers.each do |service_offer| %>
+            <%= service_offer, can_request_quotes: true %>
         <% else %>
             <%= t('feedback.service_provider.no_service_offers') %>
         <% end %>

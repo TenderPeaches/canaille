@@ -1,5 +1,9 @@
 .model-widget {
 
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 2fr 2fr 1fr;                     /* default layout */
+
     border-style: var(--default-border-style);              /* standard */
     border-width: var(--thick-border-width);                /* highlight the content within */ 
     border-color: var(--color-primary);                     /* mesh with background */

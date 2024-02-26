@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resource :quote_history, controller: "service_providers/quote_history", only: %i[ index ]
   end
 
-  resources :service_quotes
+  resources :service_quotes, only: %i[ new create destroy ]
 
   # /users
   resources :users do
@@ -36,7 +36,8 @@ Rails.application.routes.draw do
 
   resource :service_request_coordinate_choice, only: %i[ new ]
 
-  # todo resouces :prospective_service_requests # for when a service_provider interacts with a service_request to consider making a quote > unless this branches off at the controller?
+  # when service providers search for service requests that they might be able to fulfill
+  resources :service_request_searches, only: %i[ new ]
 
   resources :service_provider_portals, only: %i[ show ]
   resources :client_portals, only: %i[ show ]
@@ -54,7 +55,6 @@ Rails.application.routes.draw do
 
   namespace :client do
     resource :coordinate, only: %i[new create edit update destroy]
-    # resources :service_requests
     resources :service_request_activations, only: %i[ new destroy ]
     resource :service_provider_search
   end

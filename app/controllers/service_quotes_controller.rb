@@ -14,8 +14,9 @@ class ServiceQuotesController < ApplicationController
     # service provider withdraws a quote
     def destroy
         set_service_quote
+    end
 
-    private 
+    private
     def set_service_provider
         @service_provider = ServiceProvider.find(params[:service_provider_id])
     end

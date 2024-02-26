@@ -9,6 +9,7 @@ en:
     back_to_portal: "Back to portal"
     back: "Back"
     find_service_requests: "Browse service requests"
+    submit_quote: "Submit a quote"
   keywords:
     optional: "Optional"
     welcome: "Welcome, %{name}"

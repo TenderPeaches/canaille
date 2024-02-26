@@ -1,0 +1,8 @@
+<%= link_to t("cta.back_to_portal"), service_provider_portal_path(@service_provider), class: "button" %>
+<%= tag.section class: "service-requests-search-results" do %>
+    <%= render "service_request_searches/results", results: @service_requests, service_provider: @service_provider %>
+<% end %>
+<%# over an arbitary size, display another "back" button to prevent user from having to scroll all the way back up %>
+<% if results.size > 4 %>
+    <%= link_to t("cta.back_to_portal"), service_provider_portal_path(@service_provider), class: "button" %>
+<% end %>

@@ -1,0 +1,7 @@
+<% if local_assigns[:results] && results.any? %>
+    <%# results should contain service requests %>
+    <% results.each do |service_request| %>
+        <%= render "service_requests/service_request", service_request: service_request, can_submit_quote: service_provider.id %>
+        <%= tag.div class: "quote-form", id: "quote-form_#{service_request.id.to_s}" %>
+    <% end %>
+<% end %>

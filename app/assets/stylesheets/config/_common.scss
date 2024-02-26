@@ -13,6 +13,7 @@
     flex-direction: column;                                         /* vertical flex */
     align-content: center;                                          /* align items along center axis */
     width: calc(min(100vw, var(--max-content-width--screen)));      /* set upper boundary on content width */ 
+    margin: auto;                                                   /* center elements */
 }
 
 /* force-hidden elements */

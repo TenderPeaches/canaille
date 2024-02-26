@@ -3,8 +3,8 @@
     <%= tag.section class: "card v-flex", data: { test_id: "active-quotes"} do %>
         <%= tag.h3 t('models.service_quote.list_title') %>
         <%= render partial: "service_providers/active_quotes", locals: { service_provider: @service_provider } %>
-        <%= turbo_frame_tag 'browse-service-requests' do %>
-            <%= link_to t('cta.find_service_requests'), browse_service_requests_as_service_provider_path(@service_provider), class: "button" %>
+        <%= tag.div 'service-requests-search' do %>
+            <%= link_to t('cta.find_service_requests'), new_service_request_search_path(id: @service_provider.id), class: "button" %>
         <% end %>
     <% end %>
 

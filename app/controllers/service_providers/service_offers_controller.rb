@@ -1,6 +1,6 @@
 class ServiceProviders::ServiceOffersController < ApplicationController
     # called from service_provider/:id/offers
-    def index 
+    def index
         set_service_provider
         @service_offers = ServiceOffer.where(service_provider: @service_provider)
     end
@@ -8,7 +8,7 @@ class ServiceProviders::ServiceOffersController < ApplicationController
     def new
         set_service_provider
         @service_offer = ServiceOffer.new(service_provider_id: @service_provider.id)
-        render filepath(:new)
+
     end
 
     def create
@@ -17,8 +17,7 @@ class ServiceProviders::ServiceOffersController < ApplicationController
         @service_offer.service_provider = @service_provider
 
         respond_to do |format|
-            if @service_offer.save 
-                format.turbo_stream { render filepath(:create) }
+            if @service_offer.save
             else
                 puts @service_offer.errors.full_messages
                 format.html { render 'service_providers/portal', status: :unprocessable_entity}
@@ -29,20 +28,20 @@ class ServiceProviders::ServiceOffersController < ApplicationController
     def update
         set_service_offer
         if @service_offer.update(service_offer_params)
-            render filepath(:update)
+
         end
     end
 
     # for edit, :id is service_offer.id
     def edit
         set_service_offer
-        render filepath(:edit)
+
     end
 
     def destroy
         set_service_offer
         @service_offer.destroy
-        render filepath(:destroy)
+
     end
 
     private

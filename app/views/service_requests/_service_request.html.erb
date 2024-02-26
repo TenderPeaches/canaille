@@ -3,7 +3,7 @@
 
     <%= tag.div service_request.created_at.strftime(Settings::Time::Format), class: "service-request__created-at" %>
 
-    <%= tag.div service_request.service_request_status, class: "service-request__status" %>
+    <%= tag.div service_request.service_request_status.label, class: "service-request__status" %>
 
     <%= tag.div service_request.notes, class: "service-request__notes" %>
 
@@ -11,8 +11,9 @@
         <% if local_assigns[:can_edit] %>
             <%= model_edit_delete_actions service_request_path(service_request) %>
         <% end %>
+        <%#! if set, can_submit_quote should be the service_provider.id of whoever it is that is able to submit the quote %>
         <% if local_assigns[:can_submit_quote] %>
-
+            <%= link_to t('cta.submit_quote'), new_service_quote_path(service_request_id: service_request.id, service_provider_id: can_submit_quote), class: "button", data: { turbo_stream: true } %>
         <% end %>
     <% end %>
 <% end %>

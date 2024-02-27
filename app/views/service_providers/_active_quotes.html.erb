@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'active-service-quotes' do %>    
     <% unless service_provider.active_quotes.empty? %>
         <% service_provider.active_quotes.each do |quote| %>
-            <%= render quote, can_edit: true %>
+            <%= render quote, can_edit: true, link_to_service_request: true %>
         <% end %>
     <% else %>
         <%= t('feedback.service_provider.no_active_quotes') %>

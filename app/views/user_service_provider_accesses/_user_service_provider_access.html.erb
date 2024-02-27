@@ -7,7 +7,7 @@
 
     <%= tag.div class: "actions" do %>
         <% if local_assigns[:can_edit] %>
-            <%= model_edit_delete_actions user_service_provider_access_path(user_service_provider_access) %>
+            <%= model_edit_delete_actions service_provider_access_path(user_service_provider_access.service_provider, user_service_provider_access) %>
         <% end %>
     <% end %>
 <% end %>

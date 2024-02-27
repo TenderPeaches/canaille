@@ -34,28 +34,18 @@ module ApplicationHelper
     end
 
     # hint to give direct, immediate feedback to user
-    def hint(text)
-      tag.div class: "hint" do
+    def hint(text, id = nil)
+      tag.div class: "hint", id: (id ? id : nil) do
         text
       end
     end
 
-    # table helpers, to help minimize keystrokes when reproducing table-like layouts
-    def table_td(key = "", value = "")
-      key_part = tag.div key, class: "table__th table__th--inline"
-      value_part = tag.div value, class: "table__td"
-      #tag.div class: "table__pair" do
-      key_part.concat(value_part).html_safe
-      #end
-    end
-
-    def table_th(text = "")
-      tag.div text, class: "table__th table__th--head"
-    end
-
-    # debugging
-    def raise_hell
-      raise 'hell'
+    def label_value(label, value)
+        label_part = tag.h5 label
+        value_part = tag.span value
+        tag.div class: "binome" do
+            label_part.concat(value_part).html_safe
+        end
     end
 
     def currency(amount)

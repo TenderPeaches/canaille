@@ -15,6 +15,10 @@ RSpec.describe "Client portal", type: :system do
         @client = @user.client
     end
 
+    before(:each, no_coordinate: true) do
+        @client.coordinate = nil
+    end
+
     # client has no active service requests
     before(:each, :no_service_requests => true) do
         @client.service_requests.destroy_all
@@ -48,6 +52,15 @@ RSpec.describe "Client portal", type: :system do
 
         it "allows to modify client information, coordinates, etc." do
             expect(page).to have_link_to(edit_client(@client))
+            expect(page).to have_link_to(edit_coordinate)
+        end
+
+        it "lets user create a coordinate to set as their client's", no_coordinate: true do
+            expect(page).to have_link_to(new_coordinate)
+
+            click_link_to(new_coordinate)
+
+            fill_in("client[coordinate]")
         end
 
         it "links to nearby service providers" do

@@ -1,4 +1,14 @@
-<%= form_for(resource, as: resource_name, url: url ||= session_path(resource_name), html: { class: "form" }, data: { test_id: "log-in", turbo: !local_assigns[:embedded].nil? }) do |form| %>
+<% if local_assigns[:url] %>
+    <% if local_assigns[:id] %>
+        <% url = session_path(resource_name, id: id, source_url: url) %>
+    <% else %>
+        <% url = session_path(resource_name, source_url: url) %>
+    <% end %>
+<% else %>
+    <% url = session_path(resource_name) %>
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: url, html: { class: "form" }, data: { test_id: "log-in", turbo: !local_assigns[:embedded].nil? }) do |form| %>
     <%= render "devise/sessions/fields", form: form %>
     <%= tag.div class: "form__actions" do %>
         <%= form.submit t('models.session.create_title') %>

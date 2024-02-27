@@ -26,7 +26,7 @@ module ServiceRequests
 
       # unless the user specified coordinates, use the client's coordinates and create them if necessary
       unless service_request_params[:coordinate_attributes]
-          @service_request.coordinate = set_client_coordinates(@service_request, service_request_params)
+          @service_request.coordinate = set_client_coordinate(@service_request, service_request_params)
       end
 
       # set default service

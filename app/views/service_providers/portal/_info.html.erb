@@ -1,10 +1,17 @@
-<%= service_provider.schedule %>
-<%= service_provider.phone_number %>
+<%# schedule %>
+<%= label_value t('models.service_provider.schedule'), service_provider.schedule %>
+<%# phone number %>
+<%= label_value t('models.service_provider.phone_number'), service_provider.phone_number %>
+<%# coordinates %>
+<%# if the coordinates exist, render them as is %>
 <% if service_provider.coordinate %>
     <%= render partial: "coordinates/card", locals: { coordinate: service_provider.coordinate } %>
+<%# otherwise the service provider has no coordinates set, provide a form to enter them so long as the user has admin rights %>
 <% elsif current_user.is_service_provider_admin? service_provider %>
     <%= render partial: "coordinates/form", locals: { coordinate: Coordinate.new } %>
 <% end %>
+
+<%# link to edit service provider info if user has admin rights %>
 <% if current_user.is_service_provider_admin? service_provider %>
     <%= link_to "#{t('keywords.edit')} #{t('models.service_provider.model_name')}", edit_service_provider_path(service_provider), class: "button", data: { turbo_stream: true } %>
 <% end %>

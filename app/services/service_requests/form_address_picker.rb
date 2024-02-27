@@ -2,9 +2,9 @@
 
 module ServiceRequests
     class FormAddressPicker
-        def initialize(current_user, service_request)
+        def initialize(current_user, service_request_id = nil)
             @current_user = current_user
-            @service_request = service_request
+            @service_request_id = @service_request_id
         end
 
         def use_client_address
@@ -25,27 +25,18 @@ module ServiceRequests
             # use the user's client account's coordinates as the service_request coordinates
             @coordinate = @client.coordinate
 
-            set_service_request
-
-            # set the service request's client to be the user's client account
-            @service_request.client = @client
-
-            Result.new(@service_request, @coordinate)
+            Result.new(@coordinate)
         end
 
         def use_unique_address
-
             set_service_request
             # initialize the coordinate here so fields_for can pick it up and display the form
-            @service_request.coordinate ||= Coordinate.new
-
-            Result.new(@service_request, @service_request.coordinate)
+            Result.new(@service_request.coordinate || Coordinate.new)
         end
 
         class Result
             attr_reader :service_request, :coordinate
-            def initialize(service_request, coordinate)
-                @service_request = service_request
+            def initialize(coordinate)
                 @coordinate = coordinate
             end
         end
@@ -53,7 +44,9 @@ module ServiceRequests
         private
         # if no service_request provided, initialize a new one. It doesn't matter what its values are, it is only used to generate the proper form by the turbo_stream response
         def set_service_request
-            unless @service_request
+            if @service_request_id
+                @service_request = ServiceRequest.find_by_id(service_request_id)
+            else
                 @service_request = ServiceRequest.new
             end
         end

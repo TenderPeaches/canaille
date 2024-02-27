@@ -1,8 +1,8 @@
 <%= content_tag :div, class: "form__group" do %>
     <%# link_to t('models.service_request.use_client_address'), use_client_address_service_requests_path, class: "button", data: { turbo_stream: true } %>
-    <%= link_to t('models.service_request.use_client_address'), new_service_request_coordinate_choice_path(use_client_address: true, service_request_id: service_request_id), class: "button", data: { turbo_stream: true } %>
+    <%= link_to t('models.service_request.use_client_address'), new_service_request_coordinate_choice_path(use_client_address: true), class: "button", data: { turbo_stream: true } %>
     <%# link_to t('models.service_request.use_unique_address'), use_unique_address_service_requests_path, class: "button", data: { turbo_stream: true } %>
-    <%= link_to t('models.service_request.use_unique_address'), new_service_request_coordinate_choice_path(use_unique_address: true, service_request_id: service_request_id), class: "button", data: { turbo_stream: true } %>
+    <%= link_to t('models.service_request.use_unique_address'), new_service_request_coordinate_choice_path(use_unique_address: true, service_request_id: local_assigns[:service_request_id] ? service_request_id : nil), class: "button", data: { turbo_stream: true } %>
 <% end %>
 <%= tag.h4 id: "coordinate-choice-label" do %>
     <% if current_user&.client %>

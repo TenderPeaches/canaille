@@ -39,6 +39,6 @@
 <%# other options included redirecting when submitting the service_request, but this implies either creating the service_request without a user or storing the service request in the session, both of which don't seem ideal. Instead, we choose to streamline the process so that if anything goes wrong, at least it will be simple to retain the service_request information without having to deal with redirections and concurrency %>
 <% unless user_signed_in? %>
     <%= tag.section id: "auth" do %>
-        <%= render "service_requests/auth" %>
+        <%= render "service_requests/auth", service_request: service_request %>
     <% end %>
 <% end %>

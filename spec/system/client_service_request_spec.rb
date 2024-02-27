@@ -4,20 +4,20 @@ RSpec.describe "create_service_request", type: :system do
 
     def submit_form
       # fill in the fields
-      select 1, from: 'service_request[service]'
+      first('#service-picker option', minimum: 1).select_option
       fill_in 'service_request[notes]', with: 'some notes'
       fill_in 'service_request[max_price]', with: '5'
       # click the submit button
-      find_submit_button(service_request_path).click
+      find_submit_button(service_requests_path).click
     end
 
     def log_in_from_embedded_form
-      # create dummy user for UI login
-      user = create(:user)
+      # create dummy user for UI lop tgin
+      @user = create(:user)
       # log in using the embedded form
       within_test_id 'log-in' do
-        fill_in "user[email]", with: "#{user.email}"
-        fill_in "user[password]", with: "#{user.password}"
+        fill_in "user[email]", with: "#{@user.email}"
+        fill_in "user[password]", with: "#{@user.password}"
       end
       find_submit_button(user_session_path).click
     end
@@ -34,6 +34,9 @@ RSpec.describe "create_service_request", type: :system do
     end
 
     before(:each) do
+      2.times do
+        create(:service)
+      end
       visit new_service_request_path
     end
 
@@ -51,10 +54,10 @@ RSpec.describe "create_service_request", type: :system do
       end
 
       it "requires to sign up/login in order to process the service request" do
-        # once form is submitted, expect to be able to sign up ...
-        expect(page).to have_text(I18n.t('models.user.create_title'))
+        # have an embedded option to sign_up ...
+        expect(page).to have_link_to(new_user_registration_path)
         # ... or to log in
-        expect(page).to have_text(I18n.t('models.session.create_title'))
+        expect(page).to have_link_to(new_user_session_path)
       end
 
       # auth process is embedded in the page so once completed, the page should remain as is, minus the auth part
@@ -104,9 +107,15 @@ RSpec.describe "create_service_request", type: :system do
       end
 
       it "switches to service request-specific coordinates when prompted by user" do
-        click_link(I18n.t('models.use_unique_address'))
+        click_link(I18n.t('models.service_request.use_unique_address'))
 
         expect(page).to have_field("service_request[coordinate][street_name]")
+      end
+
+      it "creates the service request when prompted" do
+          submit_form.click
+
+          expect(@user.client.service_requests.count).to eq(1)
       end
     end
 end

@@ -12,13 +12,20 @@ class ApplicationController < ActionController::Base
 
     protected
 
-    # use the user's last location to assess where the embedded log-in request was made and return the appropriate response
-    def embedded_auth_request_response_path(successful = true)
-        turbo_filename = successful ? "successful_auth" : "failed_auth"
-        # logins embedded within new service request path
-        if stored_location_for(:user) == new_service_request_path
-        "service_requests/#{turbo_filename}"
+    def embedded_auth_data(url, id = nil)
+        if url == new_service_request_path
+            {
+                var_name: 'service_request',
+                record: ServiceRequest.find_by_id(id),
+                path: "service_requests",
+            }
         end
+    end
+
+    # use the user's last location to assess where the embedded log-in request was made and return the appropriate response
+    def embedded_auth_request_response_path(url, successful = true)
+        turbo_filename = successful ? "successful_auth" : "failed_auth"
+        "#{embedded_auth_data(url)[:path]}/#{turbo_filename}"
     end
 
     private

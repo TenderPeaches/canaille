@@ -1,6 +1,8 @@
 <%# upon successful embedded login, remove the authentication forms %>
 <%= turbo_stream.remove 'log-in' %>
 <%= turbo_stream.remove 'sign-up' %>
+<%# remove hint about auth required %>
+<%= turbo_stream.remove 'no-user-address' %>
 
 <%# re-render the header to account for the user being signed in %>
 <%= turbo_stream.update_all "header" do %>

@@ -41,26 +41,12 @@ RSpec.describe "registration", type: :system do
     it "submits the user form and creates a new user", js: true do
         sign_up
 
-      # by default, user should be a client
-      # with no previous activity, assume user needs a service performed so redirect to service request form
-      expect(page).to have_test_id('service-request-form')
+        # don't make assumptions about user intent, just give them the options to create a new service request or a new service provider
+        expect(page).to have_link_to(new_service_request_path)
+        expect(page).to have_link_to(new_service_provider_path)
 
-      # confirm user has been created
-      expect(User.find_by_username(@username)).to be_truthy
-    end
-  end
-
-  context "new user, placed a service request" do
-    it "submits the user form, creates a new user and the service request", js: true do
-      sign_up
-
-      user = User.find_by_username(@username)
-
-      expect(user).to be_truthy
-      expect(user.client.service_requests.count).to be > 0
-
-      # the request has been created, redirect to the portal
-      expect(page).to have_test_id('client-portal')
+        # confirm user has been created
+        expect(User.find_by_username(@username)).to be_truthy
     end
   end
 

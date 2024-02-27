@@ -1,6 +1,6 @@
 <%= turbo_stream.update @service_offer do %>
     <%# is_admin = true because it must be true to have gotten to this point %>
-    <%= render @service_offer, is_admin: true %>
+    <%= render "service_offers/service_offer", service_offer: @service_offer, is_admin: true %>
 <% end %>
 <%# clear the form %>
 <%= turbo_stream.update "service-offer-form" %>

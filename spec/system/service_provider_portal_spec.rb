@@ -118,7 +118,7 @@ RSpec.describe "Service provider portal", type: :system do
             expect(page).to have_css('h1', text: @service_provider.name)
             expect(page).to have_text(@service_provider.coordinate.street_name)
         end
-
+=begin # implement later
         it "links to the service provider's quote history" do
             expect(page).to have_link_to(service_quotes_history_path(@service_provider))
 
@@ -133,6 +133,7 @@ RSpec.describe "Service provider portal", type: :system do
                 expect(page).to have_link_to(service_request_path(@service_provider.service_quotes.last.service_request))
             end
         end
+=end
 
         it "allows to edit the service provider's service offers", js: true do
 

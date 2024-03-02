@@ -14,26 +14,33 @@ class ServiceRequestsController < ApplicationController
 
     def new
         @service_request = ServiceRequest.new
+        if user_signed_in?
+            @service_request.client = current_user.client
+        end
     end
 
     # creates the service_request
     def create
         create_result = ServiceRequests::Creator.new(current_user).create(service_request_params)
 
+
         # if service request was created without a user assigned to it, the user wasn't logged in
+        #? maybe not called
         if create_result.no_user?
             # store the service request info in session
             session[:service_request] = create_result.to_json
         end
 
+        @service_request = create_result.created
+
         respond_to do |format|
-            if create_result.created?
+            if @service_request.valid?
                 # redirect to portal
                 #? could do service_providers that offer services matching this request's service
-                format.html { redirect_to client_portal_path, notice: I18n.t('models.service_request.create_success', id: @service_request.id )}
+                format.html { redirect_to client_portal_path(current_user.client), notice: I18n.t('models.service_request.create_success', id: @service_request.id )}
                 format.turbo_stream
             else
-                format.html { render :new, status: :unprocessable_entity, alert: create_results.created.errors.full_messages }
+                format.html { render :new, status: :unprocessable_entity, alert: @service_request.errors.full_messages }
                 format.turbo_stream
             end
         end

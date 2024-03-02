@@ -28,14 +28,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
             respond_to do |format|
               # redirect to service provider create form, assuming that joining an existing provider is an unlikely scenario in the beginning
               format.html { redirect_to new_service_provider_path(@user.id), notice: I18n.t('models.user.created_success'), user: @user }
-              format.turbo_stream { render embedded_auth_request_response_path }
+              format.turbo_stream { render embedded_auth_request_response_path(params[:source_url], user_signed_in?) }
             end
         # otherwise, user is (or is not a client, but doesn't really matter either way; it's just not a service provider)
         else
             respond_to do |format|
               # redirect to the service requests page
               format.html { redirect_to root_url, notice: I18n.t('models.user.created_success')}
-              format.turbo_stream { render embedded_auth_request_response_path }
+              format.turbo_stream { render embedded_auth_request_response_path(params[:source_url], user_signed_in?) }
             end
         end
     else

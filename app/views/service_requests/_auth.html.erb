@@ -5,5 +5,5 @@
 
 <%= tag.section id: 'sign-up' do %> 
     <%= tag.h2 t('models.user.create_title') %>
-    <%= render "users/form", user: User.new, embedded: true, is_client: true %>
+    <%= render "users/form", user: User.new, embedded: true, is_client: true, url: new_service_request_path %>
 <% end %>

@@ -31,8 +31,9 @@ module ServiceRequests
 
       # set default service
       @service_request.service ||= Service.unknown
+      @service_request.save
 
-      Result.new(@service_request.save, @current_user.nil?)
+      Result.new(@service_request, @current_user.nil?)
     end
 
     class Result
@@ -44,7 +45,7 @@ module ServiceRequests
       end
 
       def created?
-        @service_request&.valid?
+        @service_request && @service_request.valid?
       end
 
       def created

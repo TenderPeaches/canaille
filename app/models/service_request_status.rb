@@ -6,7 +6,12 @@ class ServiceRequestStatus < ApplicationRecord
     validates :label, uniqueness: true
 
     def self.default
-        ServiceRequestStatus.first # refer to the seed file, whichever service request status is first declare will be default
+        if Rails.env.production?
+            ServiceRequestStatus.first # refer to the seed file, whichever service request status is first declare will be default
+        # mainly for test environment, instead of using factories to create them when needed
+        else
+            ServiceRequestStatus.first || ServiceRequestStatus.new(label: "Test Status")
+        end
     end
 
     def self.created

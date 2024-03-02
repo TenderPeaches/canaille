@@ -31,13 +31,14 @@ module ServiceRequests
         def use_unique_address
             set_service_request
             # initialize the coordinate here so fields_for can pick it up and display the form
-            Result.new(@service_request.coordinate || Coordinate.new)
+            Result.new(@service_request.coordinate || Coordinate.new, @service_request)
         end
 
         class Result
             attr_reader :service_request, :coordinate
-            def initialize(coordinate)
+            def initialize(coordinate, service_request = nil)
                 @coordinate = coordinate
+                @service_request = service_request
             end
         end
 
@@ -48,6 +49,7 @@ module ServiceRequests
                 @service_request = ServiceRequest.find_by_id(service_request_id)
             else
                 @service_request = ServiceRequest.new
+                @service_request.coordinate = Coordinate.new
             end
         end
     end

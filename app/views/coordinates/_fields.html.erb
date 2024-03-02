@@ -2,29 +2,29 @@
     <%= content_tag :div, class: "form__group" do %>
         <%# civic number %>
         <%= content_tag :div, class: "field field--civic-number" do %>
-            <%= form.label t('models.coordinate.civic_number') %>
+            <%= form.label :civic_number, t('models.coordinate.civic_number') %>
             <%= form.text_field :civic_number %>                
         <% end %>
         <%# street name %>
         <%= content_tag :div, class: "field field--street-name" do %>
-            <%= form.label t('models.coordinate.street_name') %>
+            <%= form.label :street_name, t('models.coordinate.street_name') %>
             <%= form.text_field :street_name %>                
         <% end %>
         <%# door number (appt/office #) %>
         <%= content_tag :div, class: "field field--door-number" do %>
-            <%= form.label t('models.coordinate.door_number') %>
+            <%= form.label :door_number, t('models.coordinate.door_number') %>
             <%= form.text_field :door_number %>                
         <% end %>
     <% end %>
     <%= content_tag :div, class: "form__group" do %>
         <%# postal/zip code %>
         <%= content_tag :div, class: "field field--postal-code" do %>
-            <%= form.label t('models.coordinate.postal_code') %>
+            <%= form.label :postal_code, t('models.coordinate.postal_code') %>
             <%= form.text_field :postal_code %>                
         <% end %>
         <%= content_tag :div, class: "field field--city", id: "city-select" do %>
             <%# search field %>
-            <%= form.label t('models.coordinate.city') %>
+            <%= form.label :city_id, t('models.coordinate.city') %>
             <%= form.collection_select :city_id, City.all, :id, :name %>                
         <% end %>
     <% end %>

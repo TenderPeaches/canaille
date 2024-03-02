@@ -2,15 +2,15 @@
 <%= content_tag :div, class: "form__section" do %>
     <%# if client exists %>
     <% if user_signed_in? %>
-        <%= render "service_requests/coordinates_choice", service_request_id: @service_request.id %>
+        <%= render "service_requests/coordinates_choice", service_request_id: service_request.id %>
     <% else %>
         <%= hint t('feedback.service_request.no_user_address'), "no-user-address" %>
     <% end %>
     <%= turbo_frame_tag "service-request-coordinate" do %>
-        <% if @service_request.coordinate %>
-            <% coordinate = @service_request.coordinate %>
-        <% elsif @service_request.client&.coordinate %>
-            <% coordinate = @service_request.client.coordinate %>
+        <% if service_request.coordinate %>
+            <% coordinate = service_request.coordinate %>
+        <% elsif service_request.client&.coordinate %>
+            <% coordinate = service_request.client.coordinate %>
         <% else %>
             <% coordinate = Coordinate.new %>
         <% end %>

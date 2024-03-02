@@ -24,7 +24,7 @@
             <%= t('models.service_request.coordinate') %>
         <% end %>
         <%= turbo_frame_tag "coordinates-fields" do %>
-            <%= render "service_requests/coordinates", form: form %>
+            <%= render "service_requests/coordinates", service_request: service_request, form: form %>
         <% end %>
         
         <%# submit button %>

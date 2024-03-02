@@ -1,3 +1,4 @@
+<%# to allow embedded login requests %>
 <% if local_assigns[:url] %>
     <% if local_assigns[:id] %>
         <% url = session_path(resource_name, id: id, source_url: url) %>

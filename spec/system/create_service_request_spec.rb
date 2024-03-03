@@ -84,6 +84,7 @@ RSpec.describe "create_service_request", type: :system do
         expect(page).to have_field("service_request[notes]", with: "super duper more test notes")
       end
 
+      # necessary?
       it "offers to use the coordinate as client coordinates" do
         true
       end
@@ -121,6 +122,10 @@ RSpec.describe "create_service_request", type: :system do
           submit_form
 
           expect(@user.client.service_requests.count).to eq(1)
+      end
+
+      it "lets the user create a new service if it's not in the list", js: true do
+
       end
     end
 end

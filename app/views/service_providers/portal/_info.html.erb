@@ -1,7 +1,12 @@
+<%# description%>
+<%= label_value t('models.service_provider.description'), service_provider.description %>
 <%# schedule %>
 <%= label_value t('models.service_provider.schedule'), service_provider.schedule %>
 <%# phone number %>
 <%= label_value t('models.service_provider.phone_number'), service_provider.phone_number %>
+<%# email address %>
+<%= label_value t('models.service_provider.email_address'), service_provider.email_address %>
+
 <%# coordinates %>
 <%# if the coordinates exist, render them as is %>
 <% if service_provider.coordinate %>

@@ -1,0 +1,13 @@
+<%= content_tag :div, class: "server-request-fields" do %>
+    <%= content_tag :div, class: "field field--service-category" do %>
+        <%= render partial: 'service_categories/pick', locals: { carousel_categories: service ? service.service_category.subcategories : ServiceCategory.top_level, selected_category_id: service ? service.service_category.id : 0.to_s } %>
+    <% end %>
+    <%= content_tag :div, class: "field field--label" do %>
+        <%= form.label :label %>
+        <%= form.text_field :label %>
+    <% end %>
+    <%= content_tag :div, class: "field field--description" do %>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    <% end %>
+<% end %>

@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-  namespace :clients do
-    get 'coordinates/new'
-    get 'coordinates/create'
-    get 'coordinates/edit'
-    get 'coordinates/update'
-    get 'coordinates/destroy'
-  end
-  get 'service_provider_searches/new'
-  get 'service_provider_searches/create'
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
@@ -22,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :service_quotes, only: %i[ new create destroy index ]
+  resources :services, only: %i[ new create ]
 
   # /users
   resources :users do

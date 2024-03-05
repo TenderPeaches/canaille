@@ -38,6 +38,8 @@ en:
     need_set_client_coordinates: "Set your client address to proceed"
     wrong_client: "You are not authorized to view this clients' data"
     no_user_found: "No user has been found for %{user}"
+  prompts:
+    select_service: "Select a service"
   feedback:
     confirm_delete: "Are you sure you wish to delete %{deleted}"
     client:

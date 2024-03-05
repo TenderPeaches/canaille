@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_01_010015) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_05_154026) do
   create_table "cities", force: :cascade do |t|
     t.string "name", null: false
     t.string "province_code", default: "QC"
@@ -126,14 +126,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_010015) do
     t.check_constraint "min_price >= 0", name: "min_price_cannot_be_negative"
   end
 
+  create_table "service_statuses", force: :cascade do |t|
+    t.string "label"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "label", null: false
     t.string "description"
     t.integer "service_category_id"
+    t.integer "service_status_id", default: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label"], name: "unique_service_labels", unique: true
     t.index ["service_category_id"], name: "index_services_on_service_category_id"
+    t.index ["service_status_id"], name: "index_services_on_service_status_id"
   end
 
   create_table "transportation_services", force: :cascade do |t|
@@ -217,6 +226,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_010015) do
   add_foreign_key "service_requests", "service_request_statuses"
   add_foreign_key "service_requests", "services"
   add_foreign_key "services", "service_categories"
+  add_foreign_key "services", "service_statuses"
   add_foreign_key "transportation_services", "cities", column: "arrival_city_id"
   add_foreign_key "transportation_services", "cities", column: "departure_city_id"
   add_foreign_key "transportation_services", "services"

@@ -1,9 +1,0 @@
-<%= turbo_frame_tag service do %>
-    <%= content_tag :div, class: "service" do %>
-        <%= link_to service.label, service_path(service), data: { turbo_frame: "_top" } %>
-        <%= content_tag :div, class: "actions" do %>
-            <%= button_to "Delete", service_path(service), method: :delete %>
-            <%= link_to "Edit", edit_service_path(service), class: "button" %>
-        <% end %>
-    <% end %>
-<% end %>

@@ -11,9 +11,5 @@
     <% end %>
 <% end %>
 <%= turbo_stream.update_all "#services-picker-select select" do %>
-    <% if service_category && service_category.services %>
-        <% service_category.services.each do |service| %>
-            <option value="<%= service.id %>"><%= service.label %></option>
-        <% end %>
-    <% end %>
+    <%= service_picker_services_select_options(service_category) %>
 <% end %>

@@ -1,6 +1,0 @@
-<%= content_tag :h2 do %>
-    <%= t('models.service.create_title') %>
-<% end %>
-<%= turbo_frame_tag @service do %>
-    <%= render 'form', service: @service %>
-<% end %>

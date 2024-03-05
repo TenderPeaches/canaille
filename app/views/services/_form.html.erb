@@ -1,32 +1,21 @@
-<%= turbo_frame_tag @service do %>
-    <%= form_with model: @service do |form| %>
-        <% if @service.errors.any? %>
+<%= turbo_frame_tag service do %>
+    <%= form_with model: service do |form| %>
+        <% if service.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>
                 <ul>
-                    <% @service.errors.full_messages.each do |message| %>
+                    <% service.errors.full_messages.each do |message| %>
                         <li><%= message %></li>
                     <% end %>
                 </ul>
             </div>
         <% end %>
 
-        <%= content_tag :div, class: "server-request-fields" do %>
-            <%= content_tag :div, class: "field field--service-category" do %>
-                <%= render partial: 'service_categories/pick', locals: { carousel_categories: service ? service.service_category.subcategories : ServiceCategory.top_level, selected_category_id: service ? service.service_category.id : 0.to_s } %>
-            <% end %>
-            <%= content_tag :div, class: "field field--label" do %>
-                <%= form.label :label %>
-                <%= form.text_field :label %>
-            <% end %>
-            <%= content_tag :div, class: "field field--description" do %>
-                <%= form.label :description %>
-                <%= form.text_area :description %>
-            <% end %>
-            <%# submit button %>
-            <%= content_tag :div, class: "actions" do %>
-                <%= form.submit t('models.register') %>
-            <% end %>
-        <% end %>
+        <%= render "services/fields", form: form, service: service  %>
+
+        <%# submit button %>
+        <%= content_tag :div, class: "actions" do %>
+            <%= form.submit t('models.register') %>
+        <% end %>        
     <% end %>
 <% end %>

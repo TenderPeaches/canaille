@@ -4,14 +4,9 @@
     <%= render partial: 'service_categories/pick', locals: { category: service ? service.service_category : nil } %>
 
     <%= turbo_frame_tag "services-picker-select" do %>
-        <% if service %>
-            <%= tag.label do %>
-                <%= t('models.service.model_name') %>
-            <% end %>
-            <%= form.collection_select :service_id, service.service_category.services, :id, :label, {}, { id: 'service-picker' }%>
-        <% else %>
-            <%= tag.label %>
-            <%= form.collection_select :service_id, Service.all, :id, :label, {}, { id: 'service-picker' } %>
-        <% end %>
+        <%= service_picker_services_select(form, service_category: service_category, selected_service: service) %>
     <% end %>
+    <%= link_to "#{t('keywords.new')} #{t('models.service.model_name')}", new_service_path, class: "button", data: { turbo_stream: true } %>
+
+    <%= tag.div id: "new-service" %>
 <% end %>

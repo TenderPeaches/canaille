@@ -1,3 +1,9 @@
+# Service statuses
+
+service_status__active = ServiceStatus.create(label: "Active", description: "Service approved for current use")
+service_status__pending = ServiceStatus.create(label: "Pending", description: "Pending approval for use")
+service_status__inactive = ServiceStatus.create(label: "Inactive", description: "Temporarily or permanently inactive")
+
 # List of service categories and related services
 
 category__mechanic = ServiceCategory.create(label: "Mechanic", description: "", parent: nil)
@@ -25,29 +31,29 @@ category__catering = ServiceCategory.create(label: "Catering", description: "", 
 category__leftovers = ServiceCategory.create(label: "Leftovers", description: "", parent: category__food)
 category__other = ServiceCategory.create(label: "Other", description: "", parent: nil)
 
-Service.create(label: "Custom", description: "Catch-all service", service_category: category__other)
-Service.create(label: "Unknown", description: "Unknown service", service_category: category__other)
+Service.create(label: "Custom", description: "Catch-all service", service_category: category__other, service_status: service_status__active)
+Service.create(label: "Unknown", description: "Unknown service", service_category: category__other, service_status: service_status__active)
 
-Service.create(label: "Car inspection", description: "", service_category: category__mechanic__car_maintenance)
-Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__car_maintenance)
-Service.create(label: "Tire change", description: "", service_category: category__mechanic__car_maintenance)
-Service.create(label: "Oil change", description: "", service_category: category__mechanic__car_maintenance)
-Service.create(label: "Exterior wash", description: "", service_category: category__mechanic__car_maintenance)
-Service.create(label: "Interior wash", description: "", service_category: category__mechanic__car_maintenance)
-Service.create(label: "Headlight change", description: "", service_category: category__mechanic__car_maintenance)
+Service.create(label: "Car inspection", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
+Service.create(label: "Tire change", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
+Service.create(label: "Oil change", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
+Service.create(label: "Exterior wash", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
+Service.create(label: "Interior wash", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
+Service.create(label: "Headlight change", description: "", service_category: category__mechanic__car_maintenance, service_status: service_status__active)
 
-Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__appliance_maintenance)
-Service.create(label: "Fridge repair", description: "", service_category: category__mechanic__appliance_maintenance)
-Service.create(label: "Washing machine repair", description: "", service_category: category__mechanic__appliance_maintenance)
-Service.create(label: "Drying machine repair", description: "", service_category: category__mechanic__appliance_maintenance)
-Service.create(label: "Stove repair", description: "", service_category: category__mechanic__appliance_maintenance)
-Service.create(label: "Dishwasher repair", description: "", service_category: category__mechanic__appliance_maintenance)
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__appliance_maintenance, service_status: service_status__active)
+Service.create(label: "Fridge repair", description: "", service_category: category__mechanic__appliance_maintenance, service_status: service_status__active)
+Service.create(label: "Washing machine repair", description: "", service_category: category__mechanic__appliance_maintenance, service_status: service_status__active)
+Service.create(label: "Drying machine repair", description: "", service_category: category__mechanic__appliance_maintenance, service_status: service_status__active)
+Service.create(label: "Stove repair", description: "", service_category: category__mechanic__appliance_maintenance, service_status: service_status__active)
+Service.create(label: "Dishwasher repair", description: "", service_category: category__mechanic__appliance_maintenance, service_status: service_status__active)
 
-Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__hvac_maintenance)
-Service.create(label: "AC repair", description: "", service_category: category__mechanic__hvac_maintenance)
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__hvac_maintenance, service_status: service_status__active)
+Service.create(label: "AC repair", description: "", service_category: category__mechanic__hvac_maintenance, service_status: service_status__active)
 
-Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__bicycle_maintenance)
-Service.create(label: "Yearly check-up", description: "", service_category: category__mechanic__bicycle_maintenance)
-Service.create(label: "Flat tire fix", description: "", service_category: category__mechanic__bicycle_maintenance)
-Service.create(label: "Tire change", description: "", service_category: category__mechanic__bicycle_maintenance)
-Service.create(label: "Hub overhaul", description: "", service_category: category__mechanic__bicycle_maintenance)
+Service.create(label: "Expert assessment", description: "", service_category: category__mechanic__bicycle_maintenance, service_status: service_status__active)
+Service.create(label: "Yearly check-up", description: "", service_category: category__mechanic__bicycle_maintenance, service_status: service_status__active)
+Service.create(label: "Flat tire fix", description: "", service_category: category__mechanic__bicycle_maintenance, service_status: service_status__active)
+Service.create(label: "Tire change", description: "", service_category: category__mechanic__bicycle_maintenance, service_status: service_status__active)
+Service.create(label: "Hub overhaul", description: "", service_category: category__mechanic__bicycle_maintenance, service_status: service_status__active)

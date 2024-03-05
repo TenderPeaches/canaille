@@ -1,4 +1,4 @@
-<%= service_picker(form, form.object&.service) %>
+<%= service_picker(form, form.object&.service.service_category, form.object&.service) %>
 <%= tag.div class: "field field--min-price" do %>
     <%= form.label :min_price, t('models.service_offer.min_price') %>
     <%= tag.span class: "form__group" do %>

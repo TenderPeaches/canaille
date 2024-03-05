@@ -163,6 +163,7 @@ en:
       create_success: "Service offer %{id} successfully created"
       update_title: "Update service offer"
       update_success: "Service offer %{id} successfully updated"
+      destroy_title: "Cancel"
       destroy_success: "Service offer successfully destroyed"
       description: "Description"
       min_price: "Minimum price"

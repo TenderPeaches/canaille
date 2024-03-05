@@ -1,6 +1,6 @@
-FactoryBot.define do 
+FactoryBot.define do
     factory :service_provider do
-        name { Faker::Company.name } 
+        name { Faker::Company.name }
         coordinate
         phone_number { Faker::PhoneNumber.phone_number }
         email_address { Faker::Internet.email }
@@ -10,7 +10,7 @@ FactoryBot.define do
                 grantor = service_provider.user_service_provider_accesses&.first&.user || create(:user)
                 # make quotes
                 3.times {
-                    service_provider.service_quotes << create(:service_quote, service_provider: service_provider, status: ServiceQuoteStatus.open || create(:service_quote_status_open), user: grantor)
+                    service_provider.service_quotes << create(:service_quote, service_provider: service_provider, status: ServiceQuoteStatus.open || create(:service_quote_status, :open), user: grantor)
                 }
 
                 # make service offers
@@ -21,7 +21,7 @@ FactoryBot.define do
         end
     end
 
-    factory :service_offer do 
+    factory :service_offer do
         service
         min_price { 10.0 + rand(500.0) }
     end

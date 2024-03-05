@@ -23,7 +23,7 @@ RSpec.describe "Service provider portal", type: :system do
 
     # service provider has one active quote
     before(:each, :one_quote => true) do
-        @service_provider.service_quotes << create(:service_quote, service_provider: @service_provider, status: ServiceQuoteStatus.open || create(:service_quote_status_open), user: @service_provider.user_service_provider_accesses.first.user)
+        @service_provider.service_quotes << create(:service_quote, service_provider: @service_provider, status: ServiceQuoteStatus.open || create(:service_quote_status, :open), user: @service_provider.user_service_provider_accesses.first.user)
     end
 
     before do

@@ -5,7 +5,7 @@
     <%= content_tag :div, class: "client-data" do %>
         <%= render partial: "clients/portal/data", locals: { client: @user.client, allow_edit: true } %>
     <% end %>
-    <%= tag.div id: "service-requests-list" do %>
+    <%= tag.div id: "active-service-requests" do %>
         <% if not @user.client.active_service_requests.empty? %>
             <%= render partial: "clients/portal/service_requests_list", locals: { service_requests: @user.client.active_service_requests } %>
         <% else %>

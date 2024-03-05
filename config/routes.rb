@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :clients do
+    get 'coordinates/new'
+    get 'coordinates/create'
+    get 'coordinates/edit'
+    get 'coordinates/update'
+    get 'coordinates/destroy'
+  end
+  get 'service_provider_searches/new'
+  get 'service_provider_searches/create'
   # sign_up, sign_in, sign out, etc.
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
@@ -12,7 +21,7 @@ Rails.application.routes.draw do
     resource :quote_history, controller: "service_providers/quote_history", only: %i[ index ]
   end
 
-  resources :service_quotes, only: %i[ new create destroy ]
+  resources :service_quotes, only: %i[ new create destroy index ]
 
   # /users
   resources :users do
@@ -45,19 +54,23 @@ Rails.application.routes.draw do
   # /clients
   resources :clients do
     resources :quote_requests, only: %i[ new create index ]
+    resource :coordinate, only: %i[ new create edit update destroy ], controller: "clients/coordinates"
+=begin
     member do
       #! to be obsoleted x3
       get :edit_coordinate, to: "clients#edit_coordinate", as: :edit_coordinate
       get :cancel_edit_coordinate, to: "clients#cancel_edit_coordinate", as: :cancel_edit_coordinate
       patch :edit_coordinate, to: "clients#update_coordinate", as: :update_coordinate
     end
+=end
   end
 
   namespace :client do
     resource :coordinate, only: %i[new create edit update destroy]
     resources :service_request_activations, only: %i[ new destroy ]
-    resource :service_provider_search
   end
+
+  resources :service_provider_searches, only: %i[ new create ]
 
   #! to be obsoleted
   scope module: :clients do
@@ -77,9 +90,10 @@ Rails.application.routes.draw do
   resources :cities
 
   # /coordinates
-  #! this probably shouldn't exist, should be through the other resources
+  #! this probably shouldn't exist, should be through the other resources? or maybe only new/create
   resources :coordinates do
     # coordinate form actions
+    # probably should use a resource, coordinate_city_choice or sth
     # /coordinates/use_new_city
     post :use_new_city, on: :collection
     # /coordinates/use_existing_city
@@ -90,7 +104,7 @@ Rails.application.routes.draw do
   resources :service_categories do
     member do
       # picker actions
-      # todo how to turn into resource?
+      # todo how to turn into resource? => service_category_choice
       get :pick, as: :pick
     end
     # /service_categories/[:service_category_id]/services

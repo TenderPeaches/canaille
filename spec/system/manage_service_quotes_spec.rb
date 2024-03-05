@@ -48,7 +48,7 @@ RSpec.describe "bid quotes on service requests and manage those quotes", type: :
 
             visit service_provider_portal
 
-            within 'active-quotes' do
+            within '#active-quotes' do
                 expect(page).to have_link_to edit_service_quote(ServiceQuote.first)
             end
         end

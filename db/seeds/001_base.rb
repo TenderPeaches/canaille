@@ -15,7 +15,8 @@ ServiceRequestStatus.create(label: "Closed", description: "The requested service
 ServiceQuoteStatus.create(label: "Open", description: "The quote has been submitted and may be chosen by the client")
 ServiceQuoteStatus.create(label: "Closed", description: "The client has chosen another quote for their service request")
 ServiceQuoteStatus.create(label: "Cancelled", description: "The service provider cancelled the quote before the client could choose it")
+ServiceQuoteStatus.create(label: "Accepted", description: "The client has chosen this quote for their service request")
 
-# None values 
+# None values
 City.create(name: "N/A", province_code: "N/A")
 Coordinate.create(civic_number: "No location")

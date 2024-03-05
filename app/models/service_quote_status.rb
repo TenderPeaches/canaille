@@ -11,4 +11,12 @@ class ServiceQuoteStatus < ApplicationRecord
     def self.closed
         ServiceQuoteStatus.where(label: "Closed").first
     end
+
+    def self.cancelled
+        ServiceQuoteStatus.where(label: "Cancelled").first
+    end
+
+    def self.accepted
+        ServiceQuoteStatus.where(label: "Accepted").first
+    end
 end

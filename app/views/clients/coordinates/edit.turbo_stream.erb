@@ -1,9 +1,9 @@
-<%= turbo_stream.replace "client-coordinate" do %>
-    <%= form_with model: @client, url: update_coordinate_client_path do |form| %>
+<%= turbo_stream.update "client-coordinate" do %>
+    <%= form_with model: @client, url: client_coordinate_path(@client.id) do |form| %>
         <%= form.fields_for :coordinate do |coordinate_form| %>
             <%= render partial: "coordinates/fields", locals: { form: coordinate_form } %>
             <%= form.submit t('keywords.update_blank', updated: t('models.coordinate.model_name')) %>
-            <%= link_to t('keywords.cancel'), cancel_edit_coordinate_client_path(@client.id), class: "button", data: { turbo_stream: true } %>
+            <%= link_to t('keywords.cancel'), new_client_coordinate_edit_cancellation_path(@client.id), class: "button", data: { turbo_stream: true } %>
         <% end %>
     <% end %>
 <% end %>

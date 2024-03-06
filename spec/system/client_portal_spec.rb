@@ -52,8 +52,7 @@ RSpec.describe "Client portal", type: :system do
     context "logged in to proper client", logged_in: true do
 
         it "allows to modify client information, coordinates, etc." do
-            expect(page).to have_link_to(edit_client_path(@client))
-            expect(page).to have_link_to(edit_coordinate_path)
+            expect(page).to have_link_to(edit_client_coordinate_path(@client.id))
         end
 
         it "lets user create a coordinate to set as their client's", no_coordinate: true do

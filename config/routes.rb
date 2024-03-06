@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :clients do
     resources :quote_requests, only: %i[ new create index ]
     resource :coordinate, only: %i[ new create edit update destroy ], controller: "clients/coordinates"
+    resource :coordinate_edit_cancellation, only: %i[ new ], controller: "clients/coordinate_edit_cancellations"
 =begin
     member do
       #! to be obsoleted x3

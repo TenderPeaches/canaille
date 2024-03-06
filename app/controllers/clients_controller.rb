@@ -1,13 +1,13 @@
 class ClientsController < ApplicationController
     before_action :set_client, only: %i[ show edit update destroy edit_coordinate cancel_edit_coordinate update_coordinate ]
 
-    def show 
+    def show
 
-    end 
+    end
 
-    def index 
+    def index
         @clients = Client.all
-    end 
+    end
 
     def new
         if user_signed_in?
@@ -21,23 +21,6 @@ class ClientsController < ApplicationController
         end
     end
 
-    def new_coordinate
-
-    end
-
-    def edit_coordinate
-        @coordinate = @client.coordinate || Coordinate.new
-        respond_to do |format|
-            format.turbo_stream { render 'clients/portal/edit_coordinate' }
-        end
-    end
-
-    def cancel_edit_coordinate
-        respond_to do |format|
-            format.turbo_stream { render 'clients/portal/cancel_edit_coordinate' }
-        end
-    end
-    
     # creates a new client for the current user, or updates it if that user's client has already been set
     def create
         # create/update depending on if current user's client already exists
@@ -78,10 +61,10 @@ class ClientsController < ApplicationController
         end
         respond_to do |format|
             if @client.save
-                format.turbo_stream 
+                format.turbo_stream
             end
         end
-    end 
+    end
 
     def destroy
         @client.destroy
@@ -90,8 +73,8 @@ class ClientsController < ApplicationController
             format.html { redirect_to clients_path, notice: I18n.t('models.client.destroy_success') }
             format.turbo_stream
         end
-    end  
-    
+    end
+
     def portal
         @user = current_user
         respond_to do |format|
@@ -100,11 +83,11 @@ class ClientsController < ApplicationController
             else
                 format.html { render "clients/portal" }
             end
-        end            
+        end
     end
-    
-    private 
-    def set_client 
+
+    private
+    def set_client
         @client = Client.find(params[:id])
     end
 

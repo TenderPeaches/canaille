@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby.exe
+#!/usr/bin/env ruby
 
 require "fileutils"
 # path to your application root.
@@ -10,7 +10,7 @@ end
 
 FileUtils.chdir APP_ROOT do
     puts "Dropping current db"
-    # this just always sort of worked 
+    # this just always sort of worked
     system! "rails db:drop:_unsafe"
 
     puts "Re-migrating"

@@ -3,7 +3,7 @@
         <%= form.fields_for :coordinate do |coordinate_form| %>
             <%= render partial: "coordinates/fields", locals: { form: coordinate_form } %>
             <%= form.submit coordinate_form.object.new_record? ? t('keywords.set_blank', set: t('models.coordinate.model_name')) : t('keywords.update_blank', updated: t('models.coordinate.model_name')) %>
-            <%= link_to t('keywords.cancel'), new_client_coordinate_edit_cancellation_path(client.id), class: "button", data: { turbo_stream: true } %>
+            <%= turbo_link_button t('keywords.cancel'), new_client_coordinate_edit_cancellation_path(client) %>
         <% end %>
     <% end %>
 <% end %>

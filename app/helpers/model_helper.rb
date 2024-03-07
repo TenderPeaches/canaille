@@ -11,10 +11,10 @@ module ModelHelper
 
     def model_edit_action(base_path)
         #! maybe there's a safer way to do the route but this works as long as rails routing naming conventions hold
-        link_to(t('keywords.edit'), "#{base_path}/edit", class: "button", data: { turbo_stream: true })
+        turbo_link_button(t('keywords.edit'), "#{base_path}/edit")
     end
 
     def model_delete_action(base_path)
-        link_to(t('keywords.delete'), base_path, class: "button", data: { turbo_method: :delete })
+        turbo_link_button(t('keywords.delete'), base_path)
     end
 end

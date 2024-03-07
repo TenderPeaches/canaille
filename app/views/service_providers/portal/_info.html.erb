@@ -18,5 +18,5 @@
 
 <%# link to edit service provider info if user has admin rights %>
 <% if current_user.is_service_provider_admin? service_provider %>
-    <%= link_to "#{t('keywords.edit')} #{t('models.service_provider.model_name')}", edit_service_provider_path(service_provider), class: "button", data: { turbo_stream: true } %>
+    <%= turbo_link_button "#{t('keywords.edit')} #{t('models.service_provider.model_name')}", edit_service_provider_path(service_provider) %>
 <% end %>

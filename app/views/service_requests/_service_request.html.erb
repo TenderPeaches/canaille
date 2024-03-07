@@ -13,7 +13,7 @@
         <% end %>
         <%#! if set, can_submit_quote should be the service_provider.id of whoever it is that is able to submit the quote %>
         <% if local_assigns[:can_submit_quote] %>
-            <%= link_to t('cta.submit_quote'), new_service_quote_path(service_request_id: service_request.id, service_provider_id: can_submit_quote), class: "button", data: { turbo_stream: true } %>
+            <%= turbo_link_button t('cta.submit_quote'), new_service_quote_path(service_request_id: service_request.id, service_provider_id: can_submit_quote) %>
         <% end %>
     <% end %>
 <% end %>

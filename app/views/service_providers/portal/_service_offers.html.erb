@@ -1,7 +1,7 @@
 <%= tag.h3 t('models.service_offer.list_title') %>
 
 <%= tag.div class: "section__actions" do %>
-    <%= link_to t('models.service_offer.create_title'), new_service_provider_service_offer_path(service_provider), class: "button", data: { turbo_stream: true } %>
+    <%= turbo_link_button t('models.service_offer.create_title'), new_service_provider_service_offer_path(service_provider) %>
 <% end %>
 <%= tag.div id: "service-offer-form", class: "section__form" %>
 <%= tag.div id: "service-offers" do %>

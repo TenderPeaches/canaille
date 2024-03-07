@@ -15,27 +15,28 @@ class ServiceRequestStatus < ApplicationRecord
     end
 
     def self.created
-        ServiceRequestStatus.where(label: "Created").first
+        ServiceRequestStatus.find_by_label("Created")
     end
 
     def self.posted
-        ServiceRequestStatus.where(label: "Posted").first
+        ServiceRequestStatus.find_by_label("Posted")
     end
 
     def self.cancelled
-        ServiceRequestStatus.where(label: "Cancelled").first
+        ServiceRequestStatus.find_by_label("Cancelled")
     end
 
     def self.accepted
-        ServiceRequestStatus.where(label: "Quote Accepted").first
+        ServiceRequestStatus.find_by_label("Quote Accepted")
     end
 
     def self.closed
-        ServiceRequestStatus.where(label: "Closed").first
+        ServiceRequestStatus.find_by_label("Closed")
     end
 
     def self.actives
-        [self.posted, self.accepted]
+        # use nil-safe because test factories might not have all status instanciated
+        [self.posted&.id, self.accepted&.id]
     end
 
 end

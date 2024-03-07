@@ -35,7 +35,11 @@ RSpec.describe "Client portal", type: :system do
     # client has one service request
 
     before(:each, :one_request => true) do
-        @client.service_requests = [create(:service_request, client: @client)]
+        @service_request = build(:service_request)
+        @service_request.client = @client
+        puts @service_request.inspect
+
+        @service_request.save
     end
 
     before(:each) do
@@ -74,16 +78,14 @@ RSpec.describe "Client portal", type: :system do
 
         it "shows active service requests" do
             within '#active-service-requests' do
-                puts @client.inspect
-                puts @client.service_requests.inspect
-                puts @client.active_service_requests.inspect
-                service_request = @client.active_service_requests.first
+
                 # should show the request status, have a link to it to see quotes and stuff
-                expect(page).to have_text(service_request.service_request_status.label)
-                expect(page).to have_link_to(edit_service_request_path(service_request))
+                expect(page).to have_text(@service_request.service_request_status.label)
+                expect(page).to have_link_to(edit_service_request_path(@service_request))
+
 
                 # should offer to look for service provider
-                expect(page).to have_link_to(new_service_provider_search(service_request_id: service_request))
+                expect(page).to have_link_to(new_service_provider_search(service_request_id: @service_request.id))
             end
         end
     end

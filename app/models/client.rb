@@ -11,6 +11,6 @@ class Client < ApplicationRecord
 
     #! business logic
     def active_service_requests
-        service_requests.where(service_request_status: ServiceRequestStatus.actives)
+        service_requests.where(service_request_status_id: ServiceRequestStatus.actives)
     end
 end

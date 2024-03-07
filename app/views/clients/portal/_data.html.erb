@@ -1,13 +1,16 @@
-<%= turbo_frame_tag "clients-data" do %>
-    <% if client %>
-        <%= content_tag :div, class: "card" do %>  
-            <%= content_tag :h4, t('models.client.coordinate') %>
-            <%= turbo_frame_tag "client-coordinate" do %>
-                <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate, allow_edit: allow_edit } %>
-                <%= link_to t("keywords.edit"), edit_client_coordinate_path(client.id), class: "button", data: { turbo_stream: true } %>
+<%= tag.div id: "clients-data" do %>
+    <%= content_tag :div, class: "card" do %>  
+        <%= content_tag :h4, t('models.client.coordinate') %>
+        <%= tag.div id: "client-coordinate" do %>
+            <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate } %>
+            <%= tag.div class: "actions" do %>
+                <% if client.coordinate %>
+                    <%= link_to t("keywords.edit"), edit_client_coordinate_path(client), class: "button", data: { turbo_stream: true } %>
+                    <%= link_to t("keywords.remove"), client_coordinate_path(client), class: "button", data: { turbo_stream: true, turbo_method: :delete } %>
+                <% else %>
+                    <%= link_to t('keywords.add_blank', thing: t('models.coordinate.model_name')), new_client_coordinate_path(client), class: "button", data: { turbo_stream: true } %>
+                <% end %>
             <% end %>
         <% end %>
-    <% else %>  
-        <%= t('keyword.no_blank', t('models.client.model_name')) %>
     <% end %>
 <% end %>

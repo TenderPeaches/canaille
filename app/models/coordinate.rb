@@ -9,12 +9,12 @@ class Coordinate < ApplicationRecord
     belongs_to :city
 
     attr_accessor :use_new_city
-    
+
     accepts_nested_attributes_for :city
 
     def address_line
         line = "#{civic_number} #{street_name}"
-        if door_number
+        if door_number && !door_number.empty?
             line << " ##{door_number}"
         end
     end

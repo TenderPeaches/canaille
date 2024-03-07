@@ -13,10 +13,6 @@
             <%= coordinate.notes %>
         <% end %>
     <% else %>
-        <% if allow_edit %>
-            <%= link_to t('keywords.add_blank', thing: t('models.coordinate.model_name')), new_coordinate_path, class: "button" %>
-        <% else %>
-            <%= t('keywords.no_blank', thing: t('models.coordinate.model_name').downcase) %>
-        <% end %>
+        <%= t('keywords.no_blank', thing: t('models.coordinate.model_name').downcase) %>
     <% end %>
 <% end %>

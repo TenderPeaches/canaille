@@ -1,8 +1,12 @@
 class Clients::CoordinatesController < ApplicationController
   def new
+      set_client
+      @client.coordinate = Coordinate.new
   end
 
   def create
+      set_client
+      @client.coordinate = Coordinate.new(client_params[:coordinate_attributes])
   end
 
   def edit
@@ -21,6 +25,11 @@ class Clients::CoordinatesController < ApplicationController
   end
 
   def destroy
+      set_client
+      @coordinate = @client.coordinate
+      @client.coordinate = nil
+      @client.save
+      @coordinate.destroy
   end
 
   private

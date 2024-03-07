@@ -1,0 +1,11 @@
+<%= turbo_stream.update "client-coordinate" do %>
+    <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate } %>
+    <%= tag.div class: "actions" do %>
+        <% if client.coordinate %>
+            <%= link_to t("keywords.edit"), edit_client_coordinate_path(client.id), class: "button", data: { turbo_stream: true } %>
+            <%= link_to t("keywords.remove"), client_coordinate_path(client), class: "button", data: { turbo_stream: true, turbo_method: :delete } %>
+        <% else %>
+            <%= link_to t('keywords.create'), new_client_coordinate_path(client.id), class: "button", data: { turbo_stream: true } %>
+        <% end %>
+    <% end %>
+<% end %>

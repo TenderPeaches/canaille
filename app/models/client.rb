@@ -4,10 +4,10 @@
 class Client < ApplicationRecord
     belongs_to :user
     has_many :service_requests
-    has_many :service_quotes, through: :service_requests
+    has_many :service_quotes, through: :service_requests, dependent: :destroy
     belongs_to :coordinate, optional: true
 
-    accepts_nested_attributes_for :coordinate
+    accepts_nested_attributes_for :coordinate, allow_destroy: true
 
     #! business logic
     def active_service_requests

@@ -1,6 +1,0 @@
-<%= content_tag :h2 do %>
-    <%= t('models.coordinate.create_title') %>
-<% end %>
-<%= turbo_frame_tag @coordinate do %>
-    <%= render 'form', coordinate: @coordinate %>
-<% end %>

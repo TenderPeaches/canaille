@@ -3,10 +3,9 @@
     <%# using a service-category picker to filter down services %>
     <%= render partial: 'service_categories/pick', locals: { category: service ? service.service_category : nil } %>
 
-    <%= turbo_frame_tag "services-picker-select" do %>
+    <%= tag.div id: "services-picker-select" do %>
         <%= service_picker_services_select(form, service_category: service_category, selected_service: service) %>
     <% end %>
+    
     <%= turbo_link_button "#{t('keywords.new')} #{t('models.service.model_name')}", new_service_path %>
-
-    <%= tag.div id: "new-service" %>
 <% end %>

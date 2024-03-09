@@ -21,7 +21,7 @@ module ServicesHelper
         tag.label label
         # only show the select widget if there are any categories
         if services.any?
-            form.collection_select :service_id, services, :id, :label, { selected: selected_service&.id || services.first }, { id: 'service-picker' }
+            form.collection_select :service_id, services, :id, :name, { selected: selected_service&.id || services.first }, { id: 'service-picker' }
         end
     end
 

@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "service-category-picker" do %>
     <%= content_tag :div, class: "service-category-picker" do %>
-        <input type="hidden" name="service-category" value="<%= (category ? category.id : 0).to_s %>">
-        <%= render partial: "service_categories/breadcrumbs", locals: { breadcrumbs_categories: category ? category.breadcrumbs : [] } %>
-        <%= render partial: "service_categories/carousel", locals: { carousel_categories: category ? category.subcategories : ServiceCategory.top_level } %>
+        <%= hidden_field_tag :service_category, local_assigns[:service_category]&.id || 0 %>
+        <%= render partial: "service_categories/breadcrumbs", locals: { breadcrumbs_categories: local_assigns[:service_category]&.breadcrumbs || [] } %>
+        <%= render partial: "service_categories/carousel", locals: { carousel_categories: local_assigns[:service_category]&.subcategories || ServiceCategory.top_level } %>
     <% end %>
 <% end %>

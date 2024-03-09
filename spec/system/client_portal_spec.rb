@@ -90,10 +90,4 @@ RSpec.describe "Client portal", type: :system do
             expect(page).to have_link_to(new_service_provider_search_path(service_request_id: @service_request.id))
         end
     end
-
-    context "logged in to another client", wrong_log_in: true do
-        it "redirects to the proper client portal" do
-            expect(page).to have_current_path(client_portal_path(@auth_client))
-        end
-    end
 end

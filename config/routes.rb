@@ -40,8 +40,10 @@ Rails.application.routes.draw do
   # when service providers search for service requests that they might be able to fulfill
   resources :service_request_searches, only: %i[ new ]
 
+  # there are many possible service providders for which a user might want to access their portals, so service provider portal is a plural resource
   resources :service_provider_portals, only: %i[ show ]
-  resources :client_portals, only: %i[ show ]
+  # the client portal always redirects to the user's client account, so it is a singular resource
+  resource :client_portal, only: [ :show ]
 
   # /clients
   resources :clients do

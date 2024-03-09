@@ -37,7 +37,7 @@ class ServiceRequestsController < ApplicationController
             if @service_request.valid?
                 # redirect to portal
                 #? could do service_providers that offer services matching this request's service
-                format.html { redirect_to client_portal_path(current_user.client), notice: I18n.t('models.service_request.create_success', id: @service_request.id )}
+                format.html { redirect_to client_portal_path, notice: I18n.t('models.service_request.create_success', id: @service_request.id )}
                 format.turbo_stream
             else
                 format.html { render :new, status: :unprocessable_entity, alert: @service_request.errors.full_messages }
@@ -64,7 +64,7 @@ class ServiceRequestsController < ApplicationController
         @remaining_requests_count = current_user.client.active_service_requests
 
         respond_to do |format|
-            format.html { redirect_to client_portal_path(current_user.id), notice: I18n.t('models.service_request.destroy_success') }
+            format.html { redirect_to client_portal_path, notice: I18n.t('models.service_request.destroy_success') }
             format.turbo_stream
         end
     end

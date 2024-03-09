@@ -36,7 +36,7 @@ module ServicesHelper
 
         if category
             category.services.each do |service|
-                output << tag.option(service.label, value: service.id)
+                output << tag.option(service.name, value: service.id)
             end
         end
 

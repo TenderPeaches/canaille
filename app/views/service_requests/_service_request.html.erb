@@ -1,5 +1,5 @@
 <%= tag.div class: "service-request model-widget", id: dom_id(service_request) do %>
-    <%= tag.div service_request.service.label, class: "service-request__service" %>
+    <%= tag.div service_request.service.name, class: "service-request__service" %>
 
     <%= tag.div service_request.created_at.strftime(Settings::Time::Format), class: "service-request__created-at" %>
 

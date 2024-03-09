@@ -4,7 +4,7 @@
     <% end %>
     <% if user_signed_in? # if logged in %>
         <% if current_user.client %>
-            <%= link_to t('models.client.model_name'), client_portal_path(current_user.client) %>
+            <%= link_to t('models.client.model_name'), client_portal_path %>
         <% end %>
         <% if current_user.has_service_provider_access? %>
             <%= link_to user_service_provider_nav_label, user_service_providers_path %>

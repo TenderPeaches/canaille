@@ -1,5 +1,5 @@
 <%= tag.div class: "service-quote model-widget", id: dom_id(service_quote) do %>
-    <%= tag.div service_quote.service.label, class: "service-quote__service" %>
+    <%= tag.div service_quote.service.name, class: "service-quote__service" %>
 
     <%= tag.div currency(service_quote.price), class: "service-quote__price" %>
 

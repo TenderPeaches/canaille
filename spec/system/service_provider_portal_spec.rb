@@ -53,7 +53,7 @@ RSpec.describe "Service provider portal", type: :system do
         # employee should see service offers
         it "shows service offers" do
             within_test_id('service-offers') do
-                expect(page).to have_text(@service_provider.service_offers.first.service.label)
+                expect(page).to have_text(@service_provider.service_offers.first.service.name)
             end
         end
 

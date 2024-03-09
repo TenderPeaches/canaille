@@ -3,7 +3,7 @@
     <%= tag.div class: "binome" do %>
         <%= content_tag :div, class: "field" do %>
             <%= tag.span "#{t('models.service_request.service')}", class: "label" %>
-            <%= tag.span @service_request.service.label %>
+            <%= tag.span @service_request.service.name %>
         <% end %>
         <%= content_tag :div, class: "field" do %>
             <%= tag.span "#{t('models.service_request.coordinate')}", class: "label" %>

@@ -1,6 +1,6 @@
 <%= content_tag :tr, class: "service-request", id: dom_id(service_request) do %>
     <%= content_tag :td do %>
-        <%= link_to service_request.service.label, client_service_request_path(service_request), data: { turbo_frame: "_top" } %>
+        <%= link_to service_request.service.name, client_service_request_path(service_request), data: { turbo_frame: "_top" } %>
     <% end %>
     <%= content_tag :td, service_request.service_request_status.label %>
     <%= content_tag :td, service_request.created_at.strftime(Settings::Time::Format) %>

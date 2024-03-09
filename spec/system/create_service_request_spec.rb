@@ -125,6 +125,10 @@ RSpec.describe "create_service_request", type: :system do
       end
 
       it "lets the user create a new service if it's not in the list", js: true do
+          click_link_to(new_service_path)
+
+          fill_in('service[]')
+
 
       end
     end

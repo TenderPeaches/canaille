@@ -8,11 +8,6 @@ class ClientPortalsController < ApplicationController
 
   private
   def set_client_user
-    # use cilent from GET param or default to current user's client
-    @user = Client.find_by_id(params[:id])&.user || current_user.client
-    # if current user has no client, it's created here since client model doesn't have any required fields
-    unless @user.client
-      @user.client = Client.create(user: @user)
-    end
+    @user = current_user
   end
 end

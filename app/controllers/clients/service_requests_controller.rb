@@ -1,7 +1,7 @@
 class Clients::ServiceRequestsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_service_request
-    
+
     def show
         render 'clients/service_requests/service_request' if assert_user
     end
@@ -12,7 +12,7 @@ class Clients::ServiceRequestsController < ApplicationController
         end
     end
 
-    def activate 
+    def activate
         if assert_user
             @service_request.service_request_status = ServiceRequestStatus.created
         end
@@ -33,7 +33,7 @@ class Clients::ServiceRequestsController < ApplicationController
         if current_user.client and current_user.client == @service_request.client
             return true
         else
-            redirect_to client_portal_path(current_user.client), alert: t('alerts.wrong_client')
+            redirect_to client_portal_path, alert: t('alerts.wrong_client')
         end
     end
 end

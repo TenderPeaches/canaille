@@ -134,13 +134,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_05_154026) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string "label", null: false
+    t.string "name", null: false
     t.string "description"
     t.integer "service_category_id"
     t.integer "service_status_id", default: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["label"], name: "unique_service_labels", unique: true
+    t.index ["name"], name: "unique_service_labels", unique: true
     t.index ["service_category_id"], name: "index_services_on_service_category_id"
     t.index ["service_status_id"], name: "index_services_on_service_status_id"
   end

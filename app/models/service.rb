@@ -11,11 +11,11 @@ class Service < ApplicationRecord
     has_many :service_offers
     has_many :service_quotes, through: :service_requests
 
-    validates :label, uniqueness: true
+    validates :name, uniqueness: true
 
     scope :active, -> { where(service_status: ServiceStatus.active) }
 
     def self.unknown
-        Service.find_by_label("Unknown") || Service.first
+        Service.find_by_name("Unknown") || Service.first
     end
 end

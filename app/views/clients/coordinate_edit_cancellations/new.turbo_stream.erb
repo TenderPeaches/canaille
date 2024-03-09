@@ -1,5 +1,11 @@
 <%= turbo_stream.update "client-coordinate" do %>
     <% %>
     <%= render partial: "coordinates/data", locals: { coordinate: @client.coordinate } %>
-    <%= turbo_link_button t("keywords.edit"), edit_client_coordinate_path(@client) %>
+    <%= tag.div class: "actions" do %>
+        <% if @client.coordinate %>
+            <%= model_edit_delete_actions client_coordinate_path(@client) %>
+        <% else %>
+            <%= turbo_link_button t('keywords.add_blank', thing: t('models.coordinate.model_name')), new_client_coordinate_path(@client) %>
+        <% end %>
+    <% end %>
 <% end %>

@@ -1,5 +1,5 @@
 <%= turbo_stream.update "client-coordinate" do %>
-    <%= form_with model: client, url: client_coordinate_path(client.id) do |form| %>
+    <%= form_with model: client, url: client_coordinate_path(client.id), class: "form" do |form| %>
         <%= form.fields_for :coordinate do |coordinate_form| %>
             <%= render partial: "coordinates/fields", locals: { form: coordinate_form } %>
             <%= form.submit coordinate_form.object.new_record? ? t('keywords.set_blank', set: t('models.coordinate.model_name')) : t('keywords.update_blank', updated: t('models.coordinate.model_name')) %>

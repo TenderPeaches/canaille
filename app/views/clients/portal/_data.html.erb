@@ -5,8 +5,7 @@
             <%= render partial: "coordinates/data", locals: { coordinate: client.coordinate } %>
             <%= tag.div class: "actions" do %>
                 <% if client.coordinate %>
-                    <%= turbo_link_button t("keywords.edit"), edit_client_coordinate_path(client) %>
-                    <%= turbo_link_button t("keywords.remove"), client_coordinate_path(client), :delete %>
+                    <%= model_edit_delete_actions client_coordinate_path(client) %>
                 <% else %>
                     <%= turbo_link_button t('keywords.add_blank', thing: t('models.coordinate.model_name')), new_client_coordinate_path(client) %>
                 <% end %>

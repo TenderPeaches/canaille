@@ -13,11 +13,14 @@
         <% end %>
     <% end %>
     <%= tag.div class: "menu" do %>
-        <%= turbo_frame_tag "new-service-request" do %>
-            <%= link_to t('models.service_request.create_title'), new_service_request_path, class: "button", data: { turbo: false } %>
+        <%= tag.div id: "new-service-request" do %>
+            <%= link_to t('models.service_request.create_title'), new_service_request_path, class: "button" %>  
         <% end %>
-        <%= turbo_frame_tag "new-service-provider" do %>
-            <%= link_to t('models.service_provider.create_title'), new_service_provider_path, class: "button", data: { turbo: false } %>
+        <%= tag.div id: "new-service-provider-searches" do %>
+            <%= link_to "#{t('keywords.search')} #{t('models.service_provider.list_title')}", new_service_provider_search_path(client_id: @user.client.id), class: "button" %>
+        <% end %>
+        <%= tag.div id: "new-service-provider" do %>
+            <%= link_to t('models.service_provider.create_title'), new_service_provider_path, class: "button" %>
         <% end %>
     <% end %>
 <% end %>

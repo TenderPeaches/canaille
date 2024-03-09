@@ -10,6 +10,9 @@
     <%= tag.div class: "actions" do %>
         <% if local_assigns[:can_edit] %>
             <%= model_edit_delete_actions service_request_path(service_request) %>
+            <% if [:posted, :created].include? service_request.status %>
+                <%= turbo_link_button "#{t('cta.find_service_providers')}", new_service_provider_search_path(service_request_id: service_request.id) %>
+            <% end %>
         <% end %>
         <%#! if set, can_submit_quote should be the service_provider.id of whoever it is that is able to submit the quote %>
         <% if local_assigns[:can_submit_quote] %>

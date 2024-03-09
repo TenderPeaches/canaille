@@ -33,14 +33,14 @@ class ServiceRequest < ApplicationRecord
     end
 
     def status
-        service_request_status&.label
+        service_request_status&.label.downcase.to_sym
     end
 
     def quotes
         service_quotes.where(status: [ServiceQuoteStatus.open, ServiceQuoteStatus.closed])
     end
 
-    def cancellable 
+    def cancellable
         [ServiceRequestStatus.created, ServiceRequestStatus.posted, ServiceRequestStatus.accepted].include? service_request_status
     end
 

@@ -14,9 +14,10 @@ class Coordinate < ApplicationRecord
 
     def address_line
         line = "#{civic_number} #{street_name}"
-        if door_number && !door_number.empty?
+        unless door_number.nil? || door_number.empty?
             line << " ##{door_number}"
         end
+        line
     end
 
     def city_line

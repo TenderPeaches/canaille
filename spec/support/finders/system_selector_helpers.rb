@@ -8,7 +8,7 @@ module SystemSelectorHelpers
     end
 
     def find_submit_button(form_action)
-        find('.form[action="' + form_action.to_s + '"]').find('input[name="commit"]')
+        button = find('.form[action="' + form_action.to_s + '"]').find('input[name="commit"]')
     end
 
 end

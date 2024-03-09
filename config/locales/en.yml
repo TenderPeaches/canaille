@@ -30,6 +30,7 @@ en:
     delete: "Delete"
     update: "Update"
     set: "Set"
+    search: "Search"
     remove: "Remove"
     remove_access: "Remove access"
     change_role: "Change role"

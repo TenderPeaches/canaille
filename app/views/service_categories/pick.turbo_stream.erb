@@ -1,15 +1,24 @@
+<%# replace the shown subcategories in the button carousel by the picked category's own subcategories, default to show top-level categories %>
 <%= turbo_stream.replace "service-category-picker__carousel" do %>
     <%= render partial: 'service_categories/carousel', locals: { carousel_categories: service_category ? service_category.subcategories : ServiceCategory.top_level } %>
 <% end %>
+
+<%# update the breadcrumbs showing the currently picked subcategory and each of its parent categories %>
 <%= turbo_stream.replace "service-category-picker__breadcrumbs" do %>
     <%= render partial: 'service_categories/breadcrumbs', locals: { breadcrumbs_categories: service_category ? service_category.breadcrumbs : [] } %>
 <% end %>
 
+<%# only show the "service" label if there are any services to show %>
 <%= turbo_stream.update_all "#services-picker-select label" do %>
     <% if service_category && service_category.services.count > 0 %>
         <%= tag.label t('models.service.model_name') %>
     <% end %>
 <% end %>
+
+<%# update the service select options to show the picked category's services %>
 <%= turbo_stream.update_all "#services-picker-select select" do %>
     <%= service_picker_services_select_options(service_category) %>
 <% end %>
+
+<%# keep track of the service category in a hidden form, in case the service needs to be creted %>
+<%= turbo_stream.update_input "service-picker-category", service_category&.id || 0 %>

@@ -25,7 +25,7 @@ module ServicesHelper
         end
     end
 
-    def service_picker_services_select_option(service_category = nil, selected_service = nil)
+    def service_picker_services_select_options(service_category = nil, selected_service = nil)
         if service_category
             category = service_category
         elsif selected_service

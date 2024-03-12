@@ -3,9 +3,15 @@
     <%# using a service-category picker to filter down services %>
     <%= render partial: 'service_categories/pick', locals: { category: service ? service.service_category : nil } %>
 
+    <% form.fields_for :service do |service_form| %>
+        <%= form.hidden_field :service_category_id, local_assigns[:service_category]&.id || 0, id: "service-picker-category" %>
+    <% end %>
+
     <%= tag.div id: "services-picker-select" do %>
         <%= service_picker_services_select(form, service_category: service_category, selected_service: service) %>
     <% end %>
-    
-    <%= turbo_link_button "#{t('keywords.new')} #{t('models.service.model_name')}", new_service_path %>
+
+    <%= tag.div id: "new-service" do %>
+        <%= turbo_link_button "#{t('keywords.new')} #{t('models.service.model_name')}", new_service_path(input_name: :service_request) %>
+    <% end %>
 <% end %>

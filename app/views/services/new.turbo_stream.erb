@@ -1,3 +1,4 @@
 <%= turbo_stream.update "new-service" do %>
-    <%= render "services/form", service: @service %>
+    <%= render "services/fields", service: @service, form: @form %>
+    <%= turbo_link_button t('keywords.cancel'), new_service_form_cancellation_path %>
 <% end %>

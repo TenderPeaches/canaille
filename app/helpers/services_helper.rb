@@ -1,4 +1,6 @@
 module ServicesHelper
+    ##
+    # acts as a select input with category filters
     def service_picker(form, selected_category = nil, selected_service = nil)
         # services come in many subcategories, better to use a custom picker
         render partial: "services/form_picker", locals: { service: selected_service, service_category: selected_category, form: form }

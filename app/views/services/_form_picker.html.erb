@@ -4,7 +4,7 @@
     <%= render partial: 'service_categories/pick', locals: { category: service ? service.service_category : nil } %>
 
     <% form.fields_for :service do |service_form| %>
-        <%= form.hidden_field :service_category_id, local_assigns[:service_category]&.id || 0, id: "service-picker-category" %>
+        <%= form.hidden_field :service_category_id, { value: local_assigns[:service_category]&.id || 0, id: "service-picker-category" } %>
     <% end %>
 
     <%= tag.div id: "services-picker-select" do %>

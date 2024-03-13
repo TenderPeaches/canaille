@@ -1,20 +1,5 @@
 <%= turbo_stream.update "service-request-coordinate" do %>
-    <% if @coordinate.nil? || @coordinate.id.nil? %>
-        <%= tag.div class: "hint" do %>
-            <%= t('alerts.need_set_client_coordinates') %>
-        <% end %>
-        <%= turbo_frame_tag "client-coordinates" do %>
-            <% form_with model: @service_request do |form| %>
-                <%= form.fields_for :client do |client_form| %>
-                    <%= client_form.fields_for :coordinate do |client_coordinate_form| %>
-                        <%= render partial: "coordinates/fields", locals: { form: client_coordinate_form } %>
-                    <% end %>
-                <% end %>
-            <% end %>
-        <% end %>
-    <% else %>
-        <%= render partial: "coordinates/data", locals: { coordinate: @coordinate } %>
-    <% end %>
+    <%= render "service_requests/client_coordinate", coordinate: @coordinate, service_request: @service_request %>
 <% end %>
 <%= turbo_stream.update "coordinate-choice-label" do %>
     <%= t('feedback.service_request.using_client_address') %>

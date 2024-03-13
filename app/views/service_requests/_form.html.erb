@@ -30,7 +30,7 @@
         <%# submit button %>
         <%= content_tag :div, class: "actions" do %>
             <% if user_signed_in? && current_user.client %>
-                <%= form.submit t('models.create'), data: { turbo: false } %>
+                <%= form.submit t('models.create') %>
             <% end %>
         <% end %>
     <% end %>

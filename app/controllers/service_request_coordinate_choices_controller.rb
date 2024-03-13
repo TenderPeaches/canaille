@@ -7,6 +7,7 @@ class ServiceRequestCoordinateChoicesController < ApplicationController
             choice_result = ServiceRequests::FormAddressPicker.new(current_user).use_client_address
 
             @service_request = choice_result.service_request
+            @coordinate = choice_result.coordinate
 
             render "service_requests/use_client_address"
         elsif params[:use_unique_address]

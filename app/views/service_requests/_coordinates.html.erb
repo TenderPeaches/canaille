@@ -7,17 +7,16 @@
         <%= hint t('feedback.service_request.no_user_address'), "no-user-address" %>
     <% end %>
     <%= turbo_frame_tag "service-request-coordinate" do %>
-        <% if service_request.coordinate %>
-            <% coordinate = service_request.coordinate %>
-        <% elsif service_request.client&.coordinate %>
-            <% coordinate = service_request.client.coordinate %>
-        <% else %>
-            <% coordinate = Coordinate.new %>
-        <% end %>
-        <% if coordinate %>
-            <%= form.fields_for coordinate do |coordinate_form| %>
+        <% using_service_request_coordinate = service_request.coordinate || (service_request.client && service_request.client.coordinate.nil?) %>
+        <% if using_service_request_coordinate %>
+            <% unless service_request.coordinate %>
+                <% service_request.coordinate = Coordinate.new %>
+            <% end %>
+            <%= form.fields_for :coordinate do |coordinate_form| %>
                 <%= render partial: "coordinates/fields", locals: { form: coordinate_form } %>
             <% end %>
+        <% else %>
+            <%= render "service_requests/client_coordinate", coordinate: service_request.client.coordinate, service_request: service_request %>
         <% end %>
     <% end %>
 <% end %>

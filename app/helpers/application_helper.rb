@@ -55,8 +55,4 @@ module ApplicationHelper
         number_to_currency(amount)
       end
     end
-
-    def turbo_link_button(text, target, method = :get)
-        link_to text, target, class: "button", data: { turbo_stream: true, turbo_method: method }
-    end
 end

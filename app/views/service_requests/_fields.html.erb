@@ -1,11 +1,7 @@
 <%# service %>
 <%= service_picker(form, @service_request.service&.service_category, @service_request.service) %>
 <%= content_tag :div, class: "form__group" do %>
-    <%# notes %>
-    <%= content_tag :div, class: "field field--notes" do %>
-        <%= form.label :notes %>
-        <%= form.text_area :notes %>
-    <% end %>
+    <%= form.field :notes, as: :text %>
     <%# price range %>
     <%= content_tag :div, class: "field field--price-range" do %>
         <%= form.label t('models.service_request.expected_price_range') %>

@@ -1,12 +1,9 @@
 <%= content_tag :div, class: "form__group" do %>
     <%# city name %>
-    <%= content_tag :div, class: "field field--name" do %>
-        <%= form.label t('models.city.name') %>
-        <%= form.text_field :name %>
-    <% end %>
+    <%= form.field :name %>
     <%# province %>
-    <%= content_tag :div, class: "field field--province-code" do %>
-        <%= form.label t('models.city.province_code') %>
+    <%= content_tag :div, class: "field" do %>
+        <%= form.label :province_code %>
         <%= form.select :province_code, options_for_select(City.province_codes_for_select) %>
     <% end %>
 <% end %>

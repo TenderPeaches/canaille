@@ -6,7 +6,4 @@
         <%= tag.span class:"field__suffix" do %>$<% end %>
     <% end %>
 <% end %>
-<%= tag.div class: "field field--description" do %>
-    <%= form.label :description, t('models.service_offer.description') %>
-    <%= form.text_area :description %>
-<% end %>
+<%= form.field :description, as: :text %>

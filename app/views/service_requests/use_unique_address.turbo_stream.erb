@@ -1,6 +1,6 @@
 <%= turbo_stream.update "service-request-coordinate" do %>
     <%= content_tag :div, class: "service-request-unique-coordinate" do %>
-        <% form_with model: @service_request do |form| %>
+        <% model_form_with model: @service_request do |form| %>
             <%= form.fields_for @service_request.coordinate do |coordinate_form| %>
                 <%= render partial: 'coordinates/fields', locals: { form: coordinate_form } %>
             <% end %>

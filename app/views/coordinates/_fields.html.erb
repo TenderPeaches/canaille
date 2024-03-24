@@ -1,34 +1,12 @@
 <%= content_tag :div, class: "coordinate-fields", data: { controller: "coordinates" } do %>
     <%= content_tag :div, class: "form__group" do %>
-        <%# civic number %>
-        <%= content_tag :div, class: "field field--civic-number" do %>
-            <%= form.label :civic_number, t('models.coordinate.civic_number') %>
-            <%= form.text_field :civic_number %>                
-        <% end %>
-        <%# street name %>
-        <%= content_tag :div, class: "field field--street-name" do %>
-            <%= form.label :street_name, t('models.coordinate.street_name') %>
-            <%= form.text_field :street_name %>                
-        <% end %>
-        <%# door number (appt/office #) %>
-        <%= content_tag :div, class: "field field--door-number" do %>
-            <%= form.label :door_number, t('models.coordinate.door_number') %>
-            <%= form.text_field :door_number %>                
-        <% end %>
+        <%= form.field :civic_number %>
+        <%= form.field :street_name %>
+        <%= form.field :door_number %>
     <% end %>
     <%= content_tag :div, class: "form__group" do %>
-        <%# postal/zip code %>
-        <%= content_tag :div, class: "field field--postal-code" do %>
-            <%= form.label :postal_code, t('models.coordinate.postal_code') %>
-            <%= form.text_field :postal_code %>                
-        <% end %>
-        <%= content_tag :div, class: "field field--city", id: "city-select" do %>
-            <%# search field %>
-            <%= form.label :city_id, t('models.coordinate.city') %>
-            <%# use id="city-select" to target this element when picking a new city %>
-            <%= form.collection_select :city_id, City.all, :id, :name, 
-            {}, id: "city-select" %>                
-        <% end %>
+        <%= form.field :postal_code %>
+        <%= form.field :city_id, field_id: "city-select", collection: City.all %>
     <% end %>
     <%= content_tag :div, class: "form__checkbox" do %>
         <%= form.check_box :use_new_city, { class: "use-new-city" }, 1, false %>
@@ -42,9 +20,6 @@
     <% end %>
     <%= content_tag :div, class: "form__group" do %>
         <%# additional notes %>
-        <%= content_tag :div, class: "field field--notes" do %>
-            <%= form.label t('models.coordinate.notes') %>
-            <%= form.text_area :notes %>
-        <% end %>
+        <%= form.field :notes, as: :text %>
     <% end %>
 <% end %>

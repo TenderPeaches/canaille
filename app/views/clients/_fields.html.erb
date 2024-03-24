@@ -5,12 +5,6 @@
     <%= render partial: "coordinates/fields", locals: { form: form } %>
 <% end %>
 <%= tag.div class: "form__group" do %>
-    <%= tag.div class: "field field--phone-number" do %>
-        <%= form.label :phone_number %>
-        <%= form.phone_field :phone_number %>
-    <% end %>
-    <%= tag.div class: "field field--email" do %>
-        <%= form.label :email %>
-        <%= form.email_field :email %>
-    <% end %>
+    <%= form.field :phone_number %>
+    <%= form.field :email %>
 <% end %>

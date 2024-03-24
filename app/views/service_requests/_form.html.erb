@@ -1,5 +1,5 @@
 <%= tag.section service_request do %>
-    <%= form_with model: service_request, url: service_requests_path, class: "form", data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
+    <%= model_form_with model: service_request, url: service_requests_path, data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
         <%# error messages %>
         <% if service_request.errors.any? %>
             <div class="error_messages">
@@ -11,7 +11,6 @@
                 </ul>
             </div>
         <% end %>
-
         <%# service request-specific fields %>
         <%= turbo_frame_tag "service-request-fields" do %>
             <%= content_tag :div, class: "service-request-fields" do %>

@@ -1,4 +1,4 @@
-<%= form_with model: coordinate, class: "form", data: { controller: "coordinates", turbo: "false" } do |form| %>
+<%= model_form_with model: coordinate, data: { turbo: "false" } do |form| %>
     <% if coordinate.errors.any? %>
         <div class="error_messages">
             <h2>Form is invalid</h2>

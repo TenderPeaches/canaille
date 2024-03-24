@@ -1,5 +1,5 @@
 <%= turbo_frame_tag service do %>
-    <%= form_with model: service do |form| %>
+    <%= model_form_with model: service do |form| %>
         <% if service.errors.any? %>
             <div class="error_messages">
                 <h2>Form is invalid</h2>

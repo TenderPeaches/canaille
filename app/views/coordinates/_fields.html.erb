@@ -25,14 +25,20 @@
         <%= content_tag :div, class: "field field--city", id: "city-select" do %>
             <%# search field %>
             <%= form.label :city_id, t('models.coordinate.city') %>
-            <%= form.collection_select :city_id, City.all, :id, :name %>                
+            <%# use id="city-select" to target this element when picking a new city %>
+            <%= form.collection_select :city_id, City.all, :id, :name, 
+            {}, id: "city-select" %>                
         <% end %>
     <% end %>
     <%= content_tag :div, class: "form__checkbox" do %>
         <%= form.check_box :use_new_city, { class: "use-new-city" }, 1, false %>
         <%= form.label t('models.coordinate.use_new_city') %>
     <% end %>
-    <%= content_tag :div, class: "form__group", id: "city-form" do %>
+    <%# hide the city form initially using class="hidden", as its only used when/if the user realizes that the city they intend to use doesn't exist in the DB yet %>
+    <%= content_tag :div, class: "form__group hidden", id: "city-form" do %>
+        <%= form.fields_for :city_id do |city_form| %>
+            <%= render "cities/fields", form: city_form %>
+        <% end %>
     <% end %>
     <%= content_tag :div, class: "form__group" do %>
         <%# additional notes %>

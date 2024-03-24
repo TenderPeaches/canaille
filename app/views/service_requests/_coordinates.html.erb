@@ -15,8 +15,8 @@
             <%= form.fields_for :coordinate do |coordinate_form| %>
                 <%= render partial: "coordinates/fields", locals: { form: coordinate_form } %>
             <% end %>
-        <% else %>
-            <%= render "service_requests/client_coordinate", coordinate: service_request.client.coordinate, service_request: service_request %>
+        <% elsif user_signed_in? %>
+            <%= render "service_requests/client_coordinate", coordinate: service_request.client&.coordinate || Coordinate.new, service_request: service_request %>
         <% end %>
     <% end %>
 <% end %>

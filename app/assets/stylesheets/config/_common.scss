@@ -18,7 +18,7 @@
 
 /* force-hidden elements */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* actions are usually buttons/CTAs located within a row or form */

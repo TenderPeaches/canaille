@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   resource :service_request_coordinate_choice, only: %i[ new ]
   resource :service_form_cancellation, only: %i[ new ]
 
+  resource :coordinate_city_choice, only: %i[ new ]
+
   # when service providers search for service requests that they might be able to fulfill
   resources :service_request_searches, only: %i[ new ]
 

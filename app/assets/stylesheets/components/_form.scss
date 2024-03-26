@@ -54,14 +54,15 @@
     }
 
     .field {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: space-between;
+        display: flex;                          /* vertical flex */
+        flex-direction: column;                 /* vertical flex */
+        align-items: stretch;                   /* stretch vertically */
+        justify-content: space-between;         /* space between */ 
         margin: var(--size-m) var(--size-l);
 
         @include media(tabletAndUp) {
             align-items: flex-start;
+            justify-content: flex-start;
         }
     }
 

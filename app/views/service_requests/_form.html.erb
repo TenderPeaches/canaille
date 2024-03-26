@@ -30,6 +30,8 @@
         <%= content_tag :div, class: "actions" do %>
             <% if user_signed_in? && current_user.client %>
                 <%= form.submit t('models.create') %>
+            <% else %>
+                <%= form.submit t('models.create'), class: "hidden", id: "submit-service-request" %>
             <% end %>
         <% end %>
     <% end %>

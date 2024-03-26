@@ -1,6 +1,7 @@
 <%= turbo_stream.update "service-request-coordinate" do %>
     <%= render "service_requests/client_coordinate", coordinate: @coordinate, service_request: @service_request %>
 <% end %>
+
 <%= turbo_stream.update "coordinate-choice-label" do %>
     <%= t('feedback.service_request.using_client_address') %>
 <% end %>

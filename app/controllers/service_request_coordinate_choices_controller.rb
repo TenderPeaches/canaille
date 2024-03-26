@@ -9,14 +9,15 @@ class ServiceRequestCoordinateChoicesController < ApplicationController
             @service_request = choice_result.service_request
             @coordinate = choice_result.coordinate
 
-            render "service_requests/use_client_address"
+            render "service_request_coordinate_choices/use_client_address"
+
         elsif params[:use_unique_address]
 
             choice_result = ServiceRequests::FormAddressPicker.new(current_user).use_unique_address
 
             @service_request = choice_result.service_request
 
-            render "service_requests/use_unique_address"
+            render "service_request_coordinate_choices/use_unique_address"
         else
             raise 'Wrong param for ServiceRequest::CoordinateChoice'
         end

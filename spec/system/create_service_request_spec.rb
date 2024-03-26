@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "create_service_request", type: :system do
+RSpec.describe "create service request", type: :system do
 
     def submit_form
       # fill in the fields
@@ -14,7 +14,7 @@ RSpec.describe "create_service_request", type: :system do
 
     def log_in_from_embedded_form
       # create dummy user for UI login
-      @user = create(:user)
+      @user = create(:client).user
       # log in using the embedded form
       within_test_id 'log-in' do
         fill_in "user[email]", with: "#{@user.email}"
@@ -35,7 +35,7 @@ RSpec.describe "create_service_request", type: :system do
     end
 
     before(logged_in: true) do
-      @user = login_client
+        @user = login_client
     end
 
     before(:each) do
@@ -48,10 +48,6 @@ RSpec.describe "create_service_request", type: :system do
     context "logged out" do
       it "shows the service request form" do
         expect(page).to have_test_id("service-request-form")
-      end
-
-      it "shows a coordinate form specific to the request" do
-        expect(page).to have_field("service_request[coordinate][street_name]")
       end
 
       it "requires to sign up/login in order to process the service request" do
@@ -84,38 +80,42 @@ RSpec.describe "create_service_request", type: :system do
         expect(page).to have_field("service_request[notes]", with: "super duper more test notes")
       end
 
-      # necessary?
-      it "offers to use the coordinate as client coordinates" do
-        true
-      end
-
       it "after log-in, offers to use unique or client coordinates", js: true do
         # force login from embedded form to make sure the reactive components are working without needing to reload the page
         log_in_from_embedded_form
 
+        # show coordinate choice buttons
         expect(page).to have_link_to(new_service_request_coordinate_choice_path(use_client_address: true))
         expect(page).to have_link_to(new_service_request_coordinate_choice_path(use_unique_address: true))
+
+        # the client address is displayed
+        expect(page).to have_content(@user.client.coordinate.street_name)
       end
     end
 
     context "logged in", logged_in: true do
 
       it "uses client coordinates by default" do
-        expect(page).to have_field('service_request[coordinate][street_name]', with: @user.client.coordinate.street_name)
-        expect(page).to have_field('service_request[coordinate][postal_code]', with: @user.client.coordinate.postal_code)
+        expect(page).to have_text(@user.client.coordinate.street_name)
+        expect(page).to have_text(@user.client.coordinate.postal_code)
       end
 
-      it "shows a coordinate form for client coordinates if they aren't set" do
+      # if the client creates a service request without having their coordinate set, it is assumed to be a conscious choice; otherwise, the user would be prompted to set their client coordinate with each new service request
+      # therefore, show the service request-specific coordinate form
+      it "shows a coordinate form for the service request coordinates if the client's coordinates aren't set" do
         @user.client.coordinate = nil
+        @user.client.save
         visit new_service_request_path
 
-        expect(page).to have_field(I18n.t('models.coordinate.street_name'))
+        expect(page).to have_field('service_request[coordinate_attributes][street_name]')
       end
 
+      # default to client coordinates if set, but allow using service request-specific coordinates
       it "switches to service request-specific coordinates when prompted by user", js: true do
         click_link(I18n.t('models.service_request.use_unique_address'))
 
-        expect(page).to have_field("service_request[coordinate][street_name]")
+        # coordinate is a direct attribute of service_request, rather than an attribute of the service request's client
+        expect(page).to have_field("service_request[coordinate_attributes][street_name]")
       end
 
       it "creates the service request when prompted" do

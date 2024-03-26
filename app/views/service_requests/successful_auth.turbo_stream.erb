@@ -1,6 +1,7 @@
 <%# upon successful embedded login, remove the authentication forms %>
 <%= turbo_stream.remove 'log-in' %>
 <%= turbo_stream.remove 'sign-up' %>
+
 <%# remove hint about auth required %>
 <%= turbo_stream.remove 'no-user-address' %>
 
@@ -9,9 +10,16 @@
     <%= render "layouts/header" %>
 <% end %>
 
-<%# adjust the service request form's coordinate options, see views/service_requests/_coordinates.html.erb for the exact placement %>
-<%= turbo_stream.prepend "service-request-coordinate" do %>
+<%# show the service request coordinate prompt: %>
+<%# prepend the coordinate choice to the service-request-coordinate widget %>
+<%= turbo_stream.before "service-request-coordinate" do %>
     <%= render "service_requests/coordinates_choice" %>
 <% end %>
 
+<%# update the widget to show the client's coordinates %>
+<%= turbo_stream.update "service-request-coordinate" do %>
+    <%= render "service_requests/client_coordinate", coordinate: current_user.client&.coordinate || Coordinate.new, service_request: ServiceRequest.new %>
+<% end %>
+
 <%# show the form's submit button %>
+<%= turbo_stream.show "submit-service-request" %>

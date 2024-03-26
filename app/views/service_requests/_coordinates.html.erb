@@ -1,9 +1,10 @@
 <%# coordinate %>
 <%= content_tag :div, class: "form__section" do %>
-    <%# if client exists %>
     <% if user_signed_in? %>
+        <%# show user choice of using their client coordinate or to set a service-request-specific coordinate %>
         <%= render "service_requests/coordinates_choice", service_request_id: service_request.id %>
     <% else %>
+        <%# warn user that they have no address %>
         <%= hint t('feedback.service_request.no_user_address'), "no-user-address" %>
     <% end %>
     <%= turbo_frame_tag "service-request-coordinate" do %>

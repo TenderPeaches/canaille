@@ -17,12 +17,14 @@ module SpecTestHelper
     def login_client
         client = create(:client)
         login(client.user)
+        client.user
     end
 
     # single service provider
     def login_service_provider
         user = create(:user_with_service_provider)
         login(user)
+        user
     end
 
     # user that is both a client and a service provider

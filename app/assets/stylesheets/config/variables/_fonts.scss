@@ -1,7 +1,8 @@
 /* global fonts */
 :root, input, select {
 
-    --default-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /*--default-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;*/
+    --default-font: 'Consolas', 'Courier New', Courier, monospace;
     --font-headers: var(--default-font);
     --font-content: var(--default-font);
 

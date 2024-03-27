@@ -25,10 +25,11 @@ class ServicesController < ApplicationController
         @input_name = params[:input_name].to_sym
 
         if [:service_request, :service_offer].include? @input_name
+            @form_object = @input_name.to_s.camelize.constantize
+
             # transform input name from a symbol like :service_request to a proper class name like ServiceRequest, create an instance of it and use it as a basis for a FormBuilder object that will be used to create the input fields that will be added to the form
-            ActionController::Base.helpers.fields model: @input_name.to_s.camelize.constantize.new do |form|
-                form.object.service = Service.new
-                form.fields_for :service do |service_form|
+            helpers.model_form_with model: @input_name.to_s.camelize.constantize.new do |form|
+                form.fields_for :service, Service.new do |service_form|
                     @form = service_form
                 end
             end

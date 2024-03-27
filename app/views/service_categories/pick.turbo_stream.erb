@@ -9,16 +9,16 @@
 <% end %>
 
 <%# only show the "service" label if there are any services to show %>
-<%= turbo_stream.update_all "#services-picker-select label" do %>
+<%= turbo_stream.update_all "#service-picker-select label" do %>
     <% if service_category && service_category.services.count > 0 %>
         <%= tag.label t('models.service.model_name') %>
     <% end %>
 <% end %>
 
 <%# update the service select options to show the picked category's services %>
-<%= turbo_stream.update_all "#services-picker-select select" do %>
+<%= turbo_stream.update_all "#service-picker-select select" do %>
     <%= service_picker_services_select_options(service_category) %>
 <% end %>
 
-<%# keep track of the service category in a hidden form, in case the service needs to be creted %>
+<%# keep track of the service category in a hidden form, in case the service needs to be created %>
 <%= turbo_stream.update_input "service-picker-category", service_category&.id || 0 %>

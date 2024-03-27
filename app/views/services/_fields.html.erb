@@ -1,6 +1,5 @@
 <%= content_tag :div, class: "service-fields" do %>
     <%# don't place the service category picker here: services are never directly created, instead whichever form is used to create them must have its own service picker and hidden input to store the picked category ID %>
-
     <%= form.field :name %>
     <%= form.field :description, as: :text %>
 <% end %>

@@ -17,8 +17,28 @@ module ServiceRequests
           service_request_params[:client_id] = @current_user.client.id
       end
 
+      # if the user has defined a new service, ignore any service_id attribute and instead use the new service information to create the new service
+      # the user is known to have defined a new service if the ":name" attribute exists under the :service_attributes; it does not suffice to only check for the existence of :service_attributes because of the service_category hidden field, which is present at all times
+      if (service_request_params.has_key? :service_attributes) && service_request_params[:service_attributes][:name]
+          # if the user has created a service whose name is already in use, use that service instead
+          service = Service.find_by_name(service_request_params[:service_attributes][:name])
+
+          # only create the service if the name isn't in use
+          unless service
+              service = Service.create(service_request_params[:service_attributes].merge!(service_status_id: ServiceStatus.default_id))
+          end
+      else
+          service = Service.find_by_id(service_request_params[:service_id])
+      end
+
+      # set default service to unkonwn if somehow nil
+      service = Service.unknown unless service
+
       # create the request, in_session: true if user not logged in
       @service_request = ServiceRequest.new(service_request_params)
+
+      # overwrite the service
+      @service_request.service = service
 
       # set the default status
       #! could be made as a default value in the DB, or placed here, out of the model
@@ -29,8 +49,6 @@ module ServiceRequests
           @service_request.coordinate = set_client_coordinate(@service_request, service_request_params)
       end
 
-      # set default service
-      @service_request.service ||= Service.unknown
       @service_request.save
 
       Result.new(@service_request, @current_user.nil?)

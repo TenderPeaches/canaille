@@ -1,4 +1,11 @@
-<%= turbo_stream.update "new-service" do %>
-    <%= render "services/fields", service: @service, form: @form %>
-    <%= turbo_link_button t('keywords.cancel'), new_service_form_cancellation_path %>
+<%# not exactly necesssary to test @form_object here; there should be no situation where @form_object isn't defined (see ServicesController.new) %>
+<% if @form_object %>
+    <%# show the services form %>
+    <%= turbo_stream.update "new-service" do %>
+        <%= render "services/fields", service: @service, form: @form %>
+        <%= turbo_link_button t('keywords.cancel'), new_service_form_cancellation_path %>
+    <% end %>
+
+    <%# hide the services selection input %>
+    <%= turbo_stream.hide "service-picker-select" %>
 <% end %>

@@ -23,15 +23,6 @@ class ServiceRequestsController < ApplicationController
     def create
         create_result = ServiceRequests::Creator.new(current_user).create(service_request_params)
 
-        # if service request was created without a user assigned to it, the user wasn't logged in
-        #? maybe not called, comment out and see
-=begin
-        if create_result.no_user?
-            # store the service request info in session
-            session[:service_request] = create_result.to_json
-        end
-=end
-
         @service_request = create_result.created
 
         respond_to do |format|

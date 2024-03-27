@@ -7,6 +7,10 @@ class ServiceStatus < ApplicationRecord
         2
     end
 
+    def self.default
+        self.pending || ServiceStatus.first
+    end
+
     def self.active
         ServiceStatus.find_by_label("Active")
     end

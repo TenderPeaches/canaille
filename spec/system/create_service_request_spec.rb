@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "create service request", type: :system do
 
+    # submit the service request form
     def submit_form
       # fill in the fields
       first('#service-picker option', minimum: 1).select_option
@@ -12,6 +13,7 @@ RSpec.describe "create service request", type: :system do
       find_submit_button(service_requests_path).click
     end
 
+    # log in through the authentication forms embedded in the new service request page
     def log_in_from_embedded_form
       # create dummy user for UI login
       @user = create(:client).user
@@ -23,6 +25,7 @@ RSpec.describe "create service request", type: :system do
       find_test_id('log-in').find('input[name="commit"]').click
     end
 
+    # sign up from the authentication forms embedded in the service request page
     def sign_up_from_embedded_form
       within_test_id 'sign-up' do
         fill_in "user[email]", with: "sr_test_2@gmail.com"
@@ -34,10 +37,12 @@ RSpec.describe "create service request", type: :system do
       find_test_id('sign-up').find('input[name="commit"]').click
     end
 
+    # logged in as a client
     before(logged_in: true) do
         @user = login_client
     end
 
+    # create dummy services
     before(:each) do
       2.times do
         create(:service)
@@ -45,11 +50,14 @@ RSpec.describe "create service request", type: :system do
       visit new_service_request_path
     end
 
+    # when logged out
     context "logged out" do
+      # the service request form is visible to any visitor, regardless of auth
       it "shows the service request form" do
         expect(page).to have_test_id("service-request-form")
       end
 
+      # however, to submit a service request, the user must log in or sign up beccause it is assumed that a follow-up will be necessary
       it "requires to sign up/login in order to process the service request" do
         # have an embedded option to sign_up ...
         expect(page).to have_link_to(new_user_registration_path)
@@ -70,7 +78,7 @@ RSpec.describe "create service request", type: :system do
         expect(page).to have_field("service_request[notes]", with: "super duper test notes")
       end
 
-      # see login test, same logic
+      # page retains service request information after signing up through the embedded form
       it "signing up keeps the form's info", js: true do
         fill_in 'service_request[notes]', with: 'super duper more test notes'
 
@@ -80,6 +88,7 @@ RSpec.describe "create service request", type: :system do
         expect(page).to have_field("service_request[notes]", with: "super duper more test notes")
       end
 
+      # user can choose to set request-specific coordinates or use their own client coordinates
       it "after log-in, offers to use unique or client coordinates", js: true do
         # force login from embedded form to make sure the reactive components are working without needing to reload the page
         log_in_from_embedded_form
@@ -93,8 +102,10 @@ RSpec.describe "create service request", type: :system do
       end
     end
 
+    # when logged in (as a user with a client account)
     context "logged in", logged_in: true do
 
+      # default to client coordinates - it is assumed that services should be rendered there
       it "uses client coordinates by default" do
         expect(page).to have_text(@user.client.coordinate.street_name)
         expect(page).to have_text(@user.client.coordinate.postal_code)
@@ -124,14 +135,22 @@ RSpec.describe "create service request", type: :system do
           expect(@user.client.service_requests.count).to eq(1)
       end
 
+      # clients can immediately create services; it's up to the site's administrator to ensure proper spelling, no duplication, etc.
       it "lets the user create a new service if it's not in the list", js: true do
-          click_link_to(new_service_path)
+          # since the service is created through the form, make sure the pending service status exists
+          create(:service_status, :pending)
 
+          # because services can be defined both when requesting them or when offering them, the link must contain the source so that the controller can have the view create the form fields accordingly
+          click_link_to(new_service_path(input_name: :service_request))
+
+          # create a new service
           service_name = 'some service'
+          fill_in('service_request[service_attributes][name]', with: service_name)
+          find_submit_button(service_requests_path).click
 
-          fill_in('service[name]', with: service_name)
-
-          find_submit_button(service_path).click
+          # the service immediately exists and can be selected
+          expect(Service.last.name).to eq(service_name)
+          expect(ServiceRequest.last.service.name).to eq(service_name)
       end
     end
 end

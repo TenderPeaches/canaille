@@ -1,3 +1,7 @@
+<%# replace the service form with a "New Service" button %>
 <%= turbo_stream.update "new-service" do %>
     <%= turbo_link_button "#{t('keywords.new')} #{t('models.service.model_name')}", new_service_path(input_name: :service_request) %>
 <% end %>
+
+<%# show the service selection input %>
+<%= turbo_stream.show "service-picker-select" %>

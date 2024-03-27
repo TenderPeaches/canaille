@@ -1,5 +1,5 @@
 <%= tag.section service_request do %>
-    <%= model_form_with model: service_request, url: service_requests_path, data: { turbo_stream: true, test_id: "service-request-form" } do |form| %>
+    <%= model_form_with model: service_request, url: service_requests_path, data: { test_id: "service-request-form" } do |form| %>
         <%# error messages %>
         <% if service_request.errors.any? %>
             <div class="error_messages">
